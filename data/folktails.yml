@@ -13,33 +13,57 @@ faction_data:
     food: 2.75
     water: 2.25
   production:
-    crop:
-      - name: "Berries"
-        growth_time: 12
-        harvest_yield: 3
-      - name: "Carrots"
-        growth_time: 4
-        harvest_yield: 3
-      - name: "Sunflower seeds"
-        growth_time: 5
-        harvest_yield: 2
-      - name: "Potatoes"
-        growth_time: 6
-        harvest_yield: 1
-      - name: "Wheat"
-        growth_time: 10
-        harvest_yield: 3
-      - name: "Cattail Roots"
-        growth_time: 8
-        harvest_yield: 3
-      - name: "Spadderdocks"
-        growth_time: 12
-        harvest_yield: 3
-      - name: "Chestnuts"
-        growth_time: 8
-        harvest_yield: 3
     beehive:
       modifier: 1.43
+    crop:
+      - name: "Berry Bush"
+        growth_time: 12
+        harvest:
+          - name: "Berries"
+            time: 12
+            yield: 3
+      - name: "Dandelion Bush"
+        growth_time: 3
+        harvest:
+          - name: "Dandelions"
+            time: 3
+            yield: 1
+      - name: "Carrot Crop"
+        growth_time: null
+        harvest:
+          - name: "Carrots"
+            time: 4
+            yield: 3
+      - name: "Sunflower Crop"
+        growth_time: null
+        harvest:
+          - name: "Sunflower Seeds"
+            time: 5
+            yield: 2
+      - name: "Potato Crop"
+        growth_time: null
+        harvest:
+          - name: "Potatoes"
+            time: 6
+            yield: 1
+      - name: "Wheat Crop"
+        growth_time: null
+        harvest:
+          - name: "Wheat"
+            time: 10
+            yield: 3
+      - name: "Cattail Crop"
+        growth_time: null
+        harvest:
+          - name: "Cattail Roots"
+            time: 8
+            yield: 3
+      - name: "Spadderdock Crop"
+        growth_time: null
+        harvest:
+          - name: "Spadderdocks"
+            time: 12
+            yield: 3
     trees:
       - name: "Birch"
         growth_time: 7
@@ -66,13 +90,6 @@ faction_data:
           - name: "Chestnuts"
             harvest_time: 8
             harvest_yield: 3
-      - name: "Mangrove Tree"
-        growth_time: 10
-        log_output: 2
-        harvest:
-          - name: "Mangroves Fruit"
-            harvest_time: 10
-            harvest_yield: 4
       - name: "Oak"
         growth_time: 30
         log_output: 8
@@ -80,23 +97,23 @@ faction_data:
     water:
       - name: "Water Pump"
         workers: 1
-        production_time: 0.33
         recipes:
           - name: "Water"
+            production_time: 0.33
             inputs: null
             output_quantity: 1
       - name: "Large Water Pump"
         workers: 3
-        production_time: 0.33
         recipes:
           - name: "Water"
+            production_time: 0.33
             inputs: null
             output_quantity: 3
       - name: "Badwater Pump"
         workers: 1
-        production_time: 0.33
         recipes:
           - name: "Badwater"
+            production_time: 0.33
             inputs: null
             output_quantity: 1
     food_processing:

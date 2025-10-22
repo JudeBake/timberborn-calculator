@@ -1,0 +1,361 @@
+# Folktails Data Files
+# Source: Timberborn official wiki https://timberborn.wiki.gg/ and in-game data.
+faction_data:
+  name: "Folktails"
+  difficulty:
+    - name: "easy"
+      modifier: 1.1
+    - name: "normal"
+      modifier: 1.0
+    - name: "hard"
+      modifier: 0.9
+  consumption:
+    food: 2.75
+    water: 2.25
+  production:
+    crop:
+      - name: "Berries"
+        growth_time: 12
+        harvest_yield: 3
+      - name: "Carrots"
+        growth_time: 4
+        harvest_yield: 3
+      - name: "Sunflower seeds"
+        growth_time: 5
+        harvest_yield: 2
+      - name: "Potatoes"
+        growth_time: 6
+        harvest_yield: 1
+      - name: "Wheat"
+        growth_time: 10
+        harvest_yield: 3
+      - name: "Cattail Roots"
+        growth_time: 8
+        harvest_yield: 3
+      - name: "Spadderdocks"
+        growth_time: 12
+        harvest_yield: 3
+      - name: "Chestnuts"
+        growth_time: 8
+        harvest_yield: 3
+    beehive:
+      modifier: 1.43
+    trees:
+      - name: "Birch"
+        growth_time: 7
+        log_output: 1
+        harvest: null
+      - name: "Pine"
+        growth_time: 12
+        log_output: 2
+        harvest:
+          - name: "Pine Resin"
+            harvest_time: 7
+            harvest_yield: 2
+      - name: "Maple"
+        growth_time: 28
+        log_output: 6
+        harvest:
+          - name: "Maple Syrup"
+            harvest_time: 12
+            harvest_yield: 3
+      - name: "Chestnut Tree"
+        growth_time: 24
+        log_output: 4
+        harvest:
+          - name: "Chestnuts"
+            harvest_time: 8
+            harvest_yield: 3
+      - name: "Mangrove Tree"
+        growth_time: 10
+        log_output: 2
+        harvest:
+          - name: "Mangroves Fruit"
+            harvest_time: 10
+            harvest_yield: 4
+      - name: "Oak"
+        growth_time: 30
+        log_output: 8
+        harvest: null
+    water:
+      - name: "Water Pump"
+        workers: 1
+        production_time: 0.33
+        recipes:
+          - name: "Water"
+            inputs: null
+            output_quantity: 1
+      - name: "Large Water Pump"
+        workers: 3
+        production_time: 0.33
+        recipes:
+          - name: "Water"
+            inputs: null
+            output_quantity: 3
+      - name: "Badwater Pump"
+        workers: 1
+        production_time: 0.33
+        recipes:
+          - name: "Badwater"
+            inputs: null
+            output_quantity: 1
+    food_processing:
+      - name: "Grill"
+        workers: 1
+        recipes:
+          - name: "Grilled Potatoes"
+            production_time: 0.52
+            inputs:
+              - name: "Potatoes"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 4
+          - name: "Grilled Chestnuts"
+            production_time: 0.33
+            inputs:
+              - name: "Chestnuts"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 2
+          - name: "Grilled Spadderdocks"
+            production_time: 0.4
+            inputs:
+              - name: "Spadderdocks"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 3
+      - name: "Gristmill"
+        workers: 1
+        recipes:
+          - name: "Wheat Flour"
+            production_time: 0.5
+            inputs:
+              - name: "Wheat"
+                quantity: 1
+            output_quantity: 1
+          - name: "Cattail Flour"
+            production_time: 0.25
+            inputs:
+              - name: "Cattail Roots"
+                quantity: 1
+            output_quantity: 1
+      - name: "Bakery"
+        workers: 1
+        recipes:
+          - name: "Breads"
+            production_time: 0.42
+            inputs:
+              - name: "Wheat Flour"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 5
+          - name: "Cattail Crackers"
+            production_time: 0.5
+            inputs:
+              - name: "Cattail Flour"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 4
+          - name: "Maple Pastries"
+            production_time: 0.55
+            inputs:
+              - name: "Wheat Flour"
+                quantity: 1
+              - name: "Maple Syrup"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 3
+    goods:
+      - name: "Lumber Mill"
+        workers: 1
+        recipes:
+          - name: "Planks"
+            production_time: 1.3
+            inputs:
+              - name: "Logs"
+                quantity: 1
+            output_quantity: 1
+      - name: "Gear Workshop"
+        workers: 1
+        recipes:
+          - name: "Gears"
+            production_time: 3.0
+            inputs:
+              - name: "Planks"
+                quantity: 1
+            output_quantity: 1
+      - name: "Paper Mill"
+        workers: 1
+        recipes:
+          - name: "Paper"
+            production_time: 1.6
+            inputs:
+              - name: "Logs"
+                quantity: 1
+            output_quantity: 2
+      - name: "Printing Press"
+        workers: 2
+        recipes:
+          - name: "Books"
+            production_time: 1.5
+            inputs:
+              - name: "Paper"
+                quantity: 2
+            output_quantity: 1
+          - name: "Punchcards"
+            production_time: 0.75
+            inputs:
+              - name: "Paper"
+                quantity: 2
+              - name: "Planks"
+                quantity: 1
+            output_quantity: 2
+      - name: "Wood Workshop"
+        workers: 2
+        recipes:
+          - name: "Treated Planks"
+            production_time: 3.0
+            inputs:
+              - name: "Pine Resin"
+                quantity: 1
+              - name: "Planks"
+                quantity: 1
+            output_quantity: 1
+      - name: "Smelter"
+        workers: 1
+        recipes:
+          - name: "Metal Blocks"
+            production_time: 2.0
+            inputs:
+              - name: "Scrap Metal"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.2
+            output_quantity: 1
+      - name: "Mine"
+        workers: 10
+        recipes:
+          - name: "Scrap Metal"
+            production_time: 1.8
+            inputs:
+              - name: "Treated Planks"
+                quantity: 1
+            output_quantity: 5
+      - name: "Rafinery"
+        workers: 2
+        recipes:
+          - name: "Biofuel"
+            production_time: 3.0
+            inputs:
+              - name: "Water"
+                quantity: 2
+              - name: "Carrots"
+                quantity: 2
+            output_quantity: 5
+          - name: "Biofuel"
+            production_time: 3.0
+            inputs:
+              - name: "Water"
+                quantity: 2
+              - name: "Potatoes"
+                quantity: 2
+            output_quantity: 30
+          - name: "Biofuel"
+            production_time: 3.0
+            inputs:
+              - name: "Water"
+                quantity: 2
+              - name: "Sappeddocks"
+                quantity: 2
+            output_quantity: 25
+          - name: "Catalyst"
+            production_time: 3.0
+            inputs:
+              - name: "Maple Syrup"
+                quantity: 1
+              - name: "Extract"
+                quantity: 1
+            output_quantity: 3
+      - name: "Bot Part Factory"
+        workers: 1
+        recipes:
+          - name: "Bot Chassis"
+            production_time: 18.0
+            inputs:
+              - name: "Planks"
+                quantity: 5
+              - name: "Metal Blocks"
+                quantity: 1
+              - name: "Biofuel"
+                quantity: 1
+            output_quantity: 1
+          - name: "Bot Heads"
+            production_time: 18.0
+            inputs:
+              - name: "Gears"
+                quantity: 3
+              - name: "Metal Blocks"
+                quantity: 1
+              - name: "Planks"
+                quantity: 1
+            output_quantity: 1
+          - name: "Bot Limbs"
+            production_time: 18.0
+            inputs:
+              - name: "Gears"
+                quantity: 3
+              - name: "Planks"
+                quantity: 1
+            output_quantity: 1
+      - name: "Bot Assembler"
+        workers: 2
+        recipes:
+          - name: "Bot"
+            production_time: 36.0
+            inputs:
+              - name: "Bot Chassis"
+                quantity: 1
+              - name: "Bot Heads"
+                quantity: 1
+              - name: "Bot Limbs"
+                quantity: 4
+            output_quantity: 1
+      - name: "Explosives Factory"
+        workers: 1
+        recipes:
+          - name: "Explosives"
+            production_time: 3.0
+            inputs:
+              - name: "Badwater"
+                quantity: 5
+            output_quantity: 1
+      - name: "Centrifuge"
+        workers: 1
+        recipes:
+          - name: "Extract"
+            production_time: 0.75
+            inputs:
+              - name: "Badwater"
+                quantity: 4
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 1
+      - name: "Herbalist"
+        workers: 1
+        recipes:
+          - name: "Antidote"
+            production_time: 2.0
+            inputs:
+              - name: "Dandelions"
+                quantity: 1
+              - name: "Berries"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.2
+            output_quantity: 2

@@ -61,6 +61,44 @@ class HarvestName(Enum):
     MANGROVE_FRUITS = 'Mangrove Fruits'
 
 
+class WaterBuildingName(Enum):
+    WATER_PUMP = 'Water Pump'
+    LARGE_WATER_PUMP = 'Large Water Pump'
+    BADWATER_PUMP = 'Badwater Pump'
+    DEEP_WATER_PUMP = 'Deep Water Pump'
+    DEEP_BADWATER_PUMP = 'Deep Badwater Pump'
+
+
+class FoodProcessingBuildingName(Enum):
+    GRILL = 'Grill'
+    GRISTMILL = 'Gristmill'
+    BAKERY = 'Bakery'
+    COFFEE_BREWERY = 'Coffee Brewery'
+    FERMENTER = 'Fermenter'
+    FOOD_FACTORY = 'Food Factory'
+    HYDROPONIC_GARDEN = 'Hydroponic Garden'
+    OIL_PRESS = 'Oil Press'
+
+
+class GoodsBuildingName(Enum):
+    LUMBER_MILL = 'Lumber Mill'
+    INDUSTRIAL_LUMBER_MILL = 'Industrial Lumber Mill'
+    GEAR_WORKSHOP = 'Gear Workshop'
+    PAPER_MILL = 'Paper Mill'
+    PRINTING_PRESS = 'Printing Press'
+    WOOD_WORKSHOP = 'Wood Workshop'
+    SMELTER = 'Smelter'
+    MINE = 'Mine'
+    EFFICIENT_MINE = 'Efficient Mine'
+    RAFINERY = 'Rafinery'
+    GREASE_FACTORY = 'Grease Factory'
+    BOT_PART_FACTORY = 'Bot Part Factory'
+    BOT_ASSEMBLER = 'Bot Assembler'
+    EXPLOSIVES_FACTORY = 'Explosives Factory'
+    CENTRIFUGE = 'Centrifuge'
+    HERBALIST = 'Herbalist'
+
+
 class DataKeys:
     FACTION_DATA = 'faction_data'
     NAME = 'name'

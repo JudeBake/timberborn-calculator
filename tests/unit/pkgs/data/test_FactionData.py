@@ -10,7 +10,8 @@ sys.path.append(os.path.abspath('./src'))
 
 from pkgs.data.factionData import FactionData                   # noqa: E402
 from pkgs.data.emunerators import ConsumptionType, CropName, \
-    DifficultyLevel, HarvestName, TreeName                      # noqa: E402
+    DifficultyLevel, FoodProcessingBuildingName, GoodsBuildingName, \
+    HarvestName, TreeName, WaterBuildingName                    # noqa: E402
 
 
 class TestFolktails(TestCase):
@@ -537,3 +538,556 @@ class TestFolktails(TestCase):
             harvestYield = self.uut.getTreeHarvestYield(treeName)
             mockedGetTree.assert_called_once_with(treeName)
             self.assertEqual(2, harvestYield)
+
+    def test_getWaterValueError(self) -> None:
+        """
+        The _getWater private method must raise a ValueError when the
+        requested water building is not found.
+        """
+        # Test with Iron Teeth water building on Folktails faction
+        waterBuildingName = WaterBuildingName.DEEP_WATER_PUMP
+        with self.assertRaises(ValueError) as context:
+            self.uut._getWater(waterBuildingName)
+        self.assertEqual(f"Water building '{waterBuildingName.value}' not "
+                         f"found.",
+                         str(context.exception))
+
+    def test_getWaterSuccess(self) -> None:
+        """
+        The _getWater private method must return the correct water building
+        dictionary for a given water building name.
+        """
+        # Map of water building names from test data to WaterBuildingName enum
+        waterBuildingNameMap = {
+            'Water Pump': WaterBuildingName.WATER_PUMP,
+            'Large Water Pump': WaterBuildingName.LARGE_WATER_PUMP,
+            'Badwater Pump': WaterBuildingName.BADWATER_PUMP,
+        }
+
+        for waterBuilding in self.testData['production']['water']:
+            waterBuildingNameStr = waterBuilding['name']
+            waterBuildingNameEnum = waterBuildingNameMap[waterBuildingNameStr]
+            waterBuildingDict = self.uut._getWater(waterBuildingNameEnum)
+            self.assertEqual(waterBuilding, waterBuildingDict)
+
+    def test_getWaterWorkersValueError(self) -> None:
+        """
+        The getWaterWorkers method must raise a ValueError when the
+        requested water building is not found (via _getWater).
+        """
+        waterBuildingName = WaterBuildingName.DEEP_WATER_PUMP
+        with patch.object(self.uut, '_getWater') as mockedGetWater, \
+                self.assertRaises(ValueError) as context:
+            mockedGetWater.side_effect = ValueError(
+                f"Water building '{waterBuildingName.value}' not found.")
+            self.uut.getWaterWorkers(waterBuildingName)
+            mockedGetWater.assert_called_once_with(waterBuildingName)
+        self.assertEqual(f"Water building '{waterBuildingName.value}' not "
+                         f"found.",
+                         str(context.exception))
+
+    def test_getWaterWorkersSuccess(self) -> None:
+        """
+        The getWaterWorkers method must return the correct number of workers
+        for a given water building.
+        """
+        waterBuildingName = WaterBuildingName.WATER_PUMP
+        mockWaterDict = {'workers': 1}
+        with patch.object(self.uut, '_getWater') as mockedGetWater:
+            mockedGetWater.return_value = mockWaterDict
+            workers = self.uut.getWaterWorkers(waterBuildingName)
+            mockedGetWater.assert_called_once_with(waterBuildingName)
+            self.assertEqual(1, workers)
+
+    def test_getWaterRecipeNameValueError(self) -> None:
+        """
+        The getWaterRecipeName method must raise a ValueError when the
+        requested water building is not found (via _getWater).
+        """
+        waterBuildingName = WaterBuildingName.DEEP_WATER_PUMP
+        with patch.object(self.uut, '_getWater') as mockedGetWater, \
+                self.assertRaises(ValueError) as context:
+            mockedGetWater.side_effect = ValueError(
+                f"Water building '{waterBuildingName.value}' not found.")
+            self.uut.getWaterRecipeName(waterBuildingName)
+            mockedGetWater.assert_called_once_with(waterBuildingName)
+        self.assertEqual(f"Water building '{waterBuildingName.value}' not "
+                         f"found.",
+                         str(context.exception))
+
+    def test_getWaterRecipeNameSuccess(self) -> None:
+        """
+        The getWaterRecipeName method must return the correct recipe name
+        for a given water building.
+        """
+        waterBuildingName = WaterBuildingName.WATER_PUMP
+        mockWaterDict = {'recipes': [{'name': 'Water'}]}
+        with patch.object(self.uut, '_getWater') as mockedGetWater:
+            mockedGetWater.return_value = mockWaterDict
+            recipeName = self.uut.getWaterRecipeName(waterBuildingName)
+            mockedGetWater.assert_called_once_with(waterBuildingName)
+            self.assertEqual('Water', recipeName)
+
+    def test_getWaterProductionTimeValueError(self) -> None:
+        """
+        The getWaterProductionTime method must raise a ValueError when the
+        requested water building is not found (via _getWater).
+        """
+        waterBuildingName = WaterBuildingName.DEEP_WATER_PUMP
+        with patch.object(self.uut, '_getWater') as mockedGetWater, \
+                self.assertRaises(ValueError) as context:
+            mockedGetWater.side_effect = ValueError(
+                f"Water building '{waterBuildingName.value}' not found.")
+            self.uut.getWaterProductionTime(waterBuildingName)
+            mockedGetWater.assert_called_once_with(waterBuildingName)
+        self.assertEqual(f"Water building '{waterBuildingName.value}' not "
+                         f"found.",
+                         str(context.exception))
+
+    def test_getWaterProductionTimeSuccess(self) -> None:
+        """
+        The getWaterProductionTime method must return the correct production
+        time for a given water building.
+        """
+        waterBuildingName = WaterBuildingName.WATER_PUMP
+        mockWaterDict = {'recipes': [{'production_time': 0.33}]}
+        with patch.object(self.uut, '_getWater') as mockedGetWater:
+            mockedGetWater.return_value = mockWaterDict
+            productionTime = self.uut.getWaterProductionTime(
+                waterBuildingName)
+            mockedGetWater.assert_called_once_with(waterBuildingName)
+            self.assertEqual(0.33, productionTime)
+
+    def test_getWaterOutputQuantityValueError(self) -> None:
+        """
+        The getWaterOutputQuantity method must raise a ValueError when the
+        requested water building is not found (via _getWater).
+        """
+        waterBuildingName = WaterBuildingName.DEEP_WATER_PUMP
+        with patch.object(self.uut, '_getWater') as mockedGetWater, \
+                self.assertRaises(ValueError) as context:
+            mockedGetWater.side_effect = ValueError(
+                f"Water building '{waterBuildingName.value}' not found.")
+            self.uut.getWaterOutputQuantity(waterBuildingName)
+            mockedGetWater.assert_called_once_with(waterBuildingName)
+        self.assertEqual(f"Water building '{waterBuildingName.value}' not "
+                         f"found.",
+                         str(context.exception))
+
+    def test_getWaterOutputQuantitySuccess(self) -> None:
+        """
+        The getWaterOutputQuantity method must return the correct output
+        quantity for a given water building.
+        """
+        waterBuildingName = WaterBuildingName.WATER_PUMP
+        mockWaterDict = {'recipes': [{'output_quantity': 1}]}
+        with patch.object(self.uut, '_getWater') as mockedGetWater:
+            mockedGetWater.return_value = mockWaterDict
+            outputQuantity = self.uut.getWaterOutputQuantity(
+                waterBuildingName)
+            mockedGetWater.assert_called_once_with(waterBuildingName)
+            self.assertEqual(1, outputQuantity)
+
+    def test_getFoodProcessingValueError(self) -> None:
+        """
+        The _getFoodProcessing private method must raise a ValueError when
+        the requested food processing building is not found.
+        """
+        # Test with Iron Teeth building on Folktails faction
+        buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        with self.assertRaises(ValueError) as context:
+            self.uut._getFoodProcessing(buildingName)
+        self.assertEqual(f"Food processing building '{buildingName.value}' "
+                         f"not found.",
+                         str(context.exception))
+
+    def test_getFoodProcessingSuccess(self) -> None:
+        """
+        The _getFoodProcessing private method must return the correct food
+        processing building dictionary for a given building name.
+        """
+        # Map of building names from test data to FoodProcessingBuildingName
+        buildingNameMap = {
+            'Grill': FoodProcessingBuildingName.GRILL,
+            'Gristmill': FoodProcessingBuildingName.GRISTMILL,
+            'Bakery': FoodProcessingBuildingName.BAKERY,
+        }
+
+        for building in self.testData['production']['food_processing']:
+            buildingNameStr = building['name']
+            buildingNameEnum = buildingNameMap[buildingNameStr]
+            buildingDict = self.uut._getFoodProcessing(buildingNameEnum)
+            self.assertEqual(building, buildingDict)
+
+    def test_getFoodProcessingWorkersValueError(self) -> None:
+        """
+        The getFoodProcessingWorkers method must raise a ValueError when the
+        requested food processing building is not found (via
+        _getFoodProcessing).
+        """
+        buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
+                self.assertRaises(ValueError) as context:
+            mockedGet.side_effect = ValueError(
+                f"Food processing building '{buildingName.value}' not found.")
+            self.uut.getFoodProcessingWorkers(buildingName)
+            mockedGet.assert_called_once_with(buildingName)
+        self.assertEqual(f"Food processing building '{buildingName.value}' "
+                         f"not found.",
+                         str(context.exception))
+
+    def test_getFoodProcessingWorkersSuccess(self) -> None:
+        """
+        The getFoodProcessingWorkers method must return the correct number
+        of workers for a given food processing building.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        mockBuildingDict = {'workers': 1}
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet:
+            mockedGet.return_value = mockBuildingDict
+            workers = self.uut.getFoodProcessingWorkers(buildingName)
+            mockedGet.assert_called_once_with(buildingName)
+            self.assertEqual(1, workers)
+
+    def test_getFoodProcessingRecipeCountValueError(self) -> None:
+        """
+        The getFoodProcessingRecipeCount method must raise a ValueError when
+        the requested food processing building is not found (via
+        _getFoodProcessing).
+        """
+        buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
+                self.assertRaises(ValueError) as context:
+            mockedGet.side_effect = ValueError(
+                f"Food processing building '{buildingName.value}' not found.")
+            self.uut.getFoodProcessingRecipeCount(buildingName)
+            mockedGet.assert_called_once_with(buildingName)
+        self.assertEqual(f"Food processing building '{buildingName.value}' "
+                         f"not found.",
+                         str(context.exception))
+
+    def test_getFoodProcessingRecipeCountSuccess(self) -> None:
+        """
+        The getFoodProcessingRecipeCount method must return the correct
+        number of recipes for a given food processing building.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        mockBuildingDict = {'recipes': [{}, {}, {}]}
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet:
+            mockedGet.return_value = mockBuildingDict
+            recipeCount = self.uut.getFoodProcessingRecipeCount(buildingName)
+            mockedGet.assert_called_once_with(buildingName)
+            self.assertEqual(3, recipeCount)
+
+    def test_getFoodProcessingRecipeNameValueError(self) -> None:
+        """
+        The getFoodProcessingRecipeName method must raise a ValueError when
+        the requested food processing building is not found (via
+        _getFoodProcessing).
+        """
+        buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
+                self.assertRaises(ValueError) as context:
+            mockedGet.side_effect = ValueError(
+                f"Food processing building '{buildingName.value}' not found.")
+            self.uut.getFoodProcessingRecipeName(buildingName, 0)
+            mockedGet.assert_called_once_with(buildingName)
+        self.assertEqual(f"Food processing building '{buildingName.value}' "
+                         f"not found.",
+                         str(context.exception))
+
+    def test_getFoodProcessingRecipeNameSuccess(self) -> None:
+        """
+        The getFoodProcessingRecipeName method must return the correct recipe
+        name for a given food processing building and recipe index.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        mockBuildingDict = {'recipes': [{'name': 'Grilled Potatoes'}]}
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet:
+            mockedGet.return_value = mockBuildingDict
+            recipeName = self.uut.getFoodProcessingRecipeName(buildingName, 0)
+            mockedGet.assert_called_once_with(buildingName)
+            self.assertEqual('Grilled Potatoes', recipeName)
+
+    def test_getFoodProcessingProductionTimeValueError(self) -> None:
+        """
+        The getFoodProcessingProductionTime method must raise a ValueError
+        when the requested food processing building is not found (via
+        _getFoodProcessing).
+        """
+        buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
+                self.assertRaises(ValueError) as context:
+            mockedGet.side_effect = ValueError(
+                f"Food processing building '{buildingName.value}' not found.")
+            self.uut.getFoodProcessingProductionTime(buildingName, 0)
+            mockedGet.assert_called_once_with(buildingName)
+        self.assertEqual(f"Food processing building '{buildingName.value}' "
+                         f"not found.",
+                         str(context.exception))
+
+    def test_getFoodProcessingProductionTimeSuccess(self) -> None:
+        """
+        The getFoodProcessingProductionTime method must return the correct
+        production time for a given food processing building and recipe index.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        mockBuildingDict = {'recipes': [{'production_time': 0.52}]}
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet:
+            mockedGet.return_value = mockBuildingDict
+            productionTime = self.uut.getFoodProcessingProductionTime(
+                buildingName, 0)
+            mockedGet.assert_called_once_with(buildingName)
+            self.assertEqual(0.52, productionTime)
+
+    def test_getFoodProcessingInputsValueError(self) -> None:
+        """
+        The getFoodProcessingInputs method must raise a ValueError when the
+        requested food processing building is not found (via
+        _getFoodProcessing).
+        """
+        buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
+                self.assertRaises(ValueError) as context:
+            mockedGet.side_effect = ValueError(
+                f"Food processing building '{buildingName.value}' not found.")
+            self.uut.getFoodProcessingInputs(buildingName, 0)
+            mockedGet.assert_called_once_with(buildingName)
+        self.assertEqual(f"Food processing building '{buildingName.value}' "
+                         f"not found.",
+                         str(context.exception))
+
+    def test_getFoodProcessingInputsSuccess(self) -> None:
+        """
+        The getFoodProcessingInputs method must return the correct inputs
+        for a given food processing building and recipe index.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        mockInputs = [{'name': 'Potatoes', 'quantity': 1}]
+        mockBuildingDict = {'recipes': [{'inputs': mockInputs}]}
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet:
+            mockedGet.return_value = mockBuildingDict
+            inputs = self.uut.getFoodProcessingInputs(buildingName, 0)
+            mockedGet.assert_called_once_with(buildingName)
+            self.assertEqual(mockInputs, inputs)
+
+    def test_getFoodProcessingOutputQuantityValueError(self) -> None:
+        """
+        The getFoodProcessingOutputQuantity method must raise a ValueError
+        when the requested food processing building is not found (via
+        _getFoodProcessing).
+        """
+        buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
+                self.assertRaises(ValueError) as context:
+            mockedGet.side_effect = ValueError(
+                f"Food processing building '{buildingName.value}' not found.")
+            self.uut.getFoodProcessingOutputQuantity(buildingName, 0)
+            mockedGet.assert_called_once_with(buildingName)
+        self.assertEqual(f"Food processing building '{buildingName.value}' "
+                         f"not found.",
+                         str(context.exception))
+
+    def test_getFoodProcessingOutputQuantitySuccess(self) -> None:
+        """
+        The getFoodProcessingOutputQuantity method must return the correct
+        output quantity for a given food processing building and recipe index.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        mockBuildingDict = {'recipes': [{'output_quantity': 4}]}
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet:
+            mockedGet.return_value = mockBuildingDict
+            outputQuantity = self.uut.getFoodProcessingOutputQuantity(
+                buildingName, 0)
+            mockedGet.assert_called_once_with(buildingName)
+            self.assertEqual(4, outputQuantity)
+
+    def test_getGoodsValueError(self) -> None:
+        """
+        The _getGoods method must raise a ValueError when the requested
+        goods building is not found in the faction data.
+        """
+        buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        with self.assertRaises(ValueError) as context:
+            self.uut._getGoods(buildingName)
+        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
+                         str(context.exception))
+
+    def test_getGoodsSuccess(self) -> None:
+        """
+        The _getGoods method must return the correct goods building dictionary
+        for a given goods building name.
+        """
+        buildingName = GoodsBuildingName.LUMBER_MILL
+        building = self.uut._getGoods(buildingName)
+        self.assertEqual('Lumber Mill', building['name'])
+        self.assertEqual(1, building['workers'])
+
+    def test_getGoodsWorkersValueError(self) -> None:
+        """
+        The getGoodsWorkers method must raise a ValueError when the requested
+        goods building is not found (via _getGoods).
+        """
+        buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
+                self.assertRaises(ValueError) as context:
+            mockedGetGoods.side_effect = ValueError(
+                f"Goods building '{buildingName.value}' not found.")
+            self.uut.getGoodsWorkers(buildingName)
+            mockedGetGoods.assert_called_once_with(buildingName)
+        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
+                         str(context.exception))
+
+    def test_getGoodsWorkersSuccess(self) -> None:
+        """
+        The getGoodsWorkers method must return the correct number of workers
+        for a given goods building.
+        """
+        buildingName = GoodsBuildingName.LUMBER_MILL
+        mockBuildingDict = {'workers': 1}
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods:
+            mockedGetGoods.return_value = mockBuildingDict
+            workers = self.uut.getGoodsWorkers(buildingName)
+            mockedGetGoods.assert_called_once_with(buildingName)
+            self.assertEqual(1, workers)
+
+    def test_getGoodsRecipeCountValueError(self) -> None:
+        """
+        The getGoodsRecipeCount method must raise a ValueError when the
+        requested goods building is not found (via _getGoods).
+        """
+        buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
+                self.assertRaises(ValueError) as context:
+            mockedGetGoods.side_effect = ValueError(
+                f"Goods building '{buildingName.value}' not found.")
+            self.uut.getGoodsRecipeCount(buildingName)
+            mockedGetGoods.assert_called_once_with(buildingName)
+        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
+                         str(context.exception))
+
+    def test_getGoodsRecipeCountSuccess(self) -> None:
+        """
+        The getGoodsRecipeCount method must return the correct number of
+        recipes for a given goods building.
+        """
+        buildingName = GoodsBuildingName.LUMBER_MILL
+        mockBuildingDict = {'recipes': [{'name': 'Planks'}]}
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods:
+            mockedGetGoods.return_value = mockBuildingDict
+            recipeCount = self.uut.getGoodsRecipeCount(buildingName)
+            mockedGetGoods.assert_called_once_with(buildingName)
+            self.assertEqual(1, recipeCount)
+
+    def test_getGoodsRecipeNameValueError(self) -> None:
+        """
+        The getGoodsRecipeName method must raise a ValueError when the
+        requested goods building is not found (via _getGoods).
+        """
+        buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
+                self.assertRaises(ValueError) as context:
+            mockedGetGoods.side_effect = ValueError(
+                f"Goods building '{buildingName.value}' not found.")
+            self.uut.getGoodsRecipeName(buildingName, 0)
+            mockedGetGoods.assert_called_once_with(buildingName)
+        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
+                         str(context.exception))
+
+    def test_getGoodsRecipeNameSuccess(self) -> None:
+        """
+        The getGoodsRecipeName method must return the correct recipe name
+        for a given goods building and recipe index.
+        """
+        buildingName = GoodsBuildingName.LUMBER_MILL
+        mockBuildingDict = {'recipes': [{'name': 'Planks'}]}
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods:
+            mockedGetGoods.return_value = mockBuildingDict
+            recipeName = self.uut.getGoodsRecipeName(buildingName, 0)
+            mockedGetGoods.assert_called_once_with(buildingName)
+            self.assertEqual('Planks', recipeName)
+
+    def test_getGoodsProductionTimeValueError(self) -> None:
+        """
+        The getGoodsProductionTime method must raise a ValueError when the
+        requested goods building is not found (via _getGoods).
+        """
+        buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
+                self.assertRaises(ValueError) as context:
+            mockedGetGoods.side_effect = ValueError(
+                f"Goods building '{buildingName.value}' not found.")
+            self.uut.getGoodsProductionTime(buildingName, 0)
+            mockedGetGoods.assert_called_once_with(buildingName)
+        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
+                         str(context.exception))
+
+    def test_getGoodsProductionTimeSuccess(self) -> None:
+        """
+        The getGoodsProductionTime method must return the correct production
+        time for a given goods building and recipe index.
+        """
+        buildingName = GoodsBuildingName.LUMBER_MILL
+        mockBuildingDict = {'recipes': [{'production_time': 1.3}]}
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods:
+            mockedGetGoods.return_value = mockBuildingDict
+            productionTime = self.uut.getGoodsProductionTime(buildingName, 0)
+            mockedGetGoods.assert_called_once_with(buildingName)
+            self.assertEqual(1.3, productionTime)
+
+    def test_getGoodsInputsValueError(self) -> None:
+        """
+        The getGoodsInputs method must raise a ValueError when the requested
+        goods building is not found (via _getGoods).
+        """
+        buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
+                self.assertRaises(ValueError) as context:
+            mockedGetGoods.side_effect = ValueError(
+                f"Goods building '{buildingName.value}' not found.")
+            self.uut.getGoodsInputs(buildingName, 0)
+            mockedGetGoods.assert_called_once_with(buildingName)
+        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
+                         str(context.exception))
+
+    def test_getGoodsInputsSuccess(self) -> None:
+        """
+        The getGoodsInputs method must return the correct inputs for a given
+        goods building and recipe index.
+        """
+        buildingName = GoodsBuildingName.LUMBER_MILL
+        mockInputs = [{'name': 'Logs', 'quantity': 1}]
+        mockBuildingDict = {'recipes': [{'inputs': mockInputs}]}
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods:
+            mockedGetGoods.return_value = mockBuildingDict
+            inputs = self.uut.getGoodsInputs(buildingName, 0)
+            mockedGetGoods.assert_called_once_with(buildingName)
+            self.assertEqual(mockInputs, inputs)
+
+    def test_getGoodsOutputQuantityValueError(self) -> None:
+        """
+        The getGoodsOutputQuantity method must raise a ValueError when the
+        requested goods building is not found (via _getGoods).
+        """
+        buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
+                self.assertRaises(ValueError) as context:
+            mockedGetGoods.side_effect = ValueError(
+                f"Goods building '{buildingName.value}' not found.")
+            self.uut.getGoodsOutputQuantity(buildingName, 0)
+            mockedGetGoods.assert_called_once_with(buildingName)
+        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
+                         str(context.exception))
+
+    def test_getGoodsOutputQuantitySuccess(self) -> None:
+        """
+        The getGoodsOutputQuantity method must return the correct output
+        quantity for a given goods building and recipe index.
+        """
+        buildingName = GoodsBuildingName.LUMBER_MILL
+        mockBuildingDict = {'recipes': [{'output_quantity': 1}]}
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods:
+            mockedGetGoods.return_value = mockBuildingDict
+            outputQuantity = self.uut.getGoodsOutputQuantity(buildingName, 0)
+            mockedGetGoods.assert_called_once_with(buildingName)
+            self.assertEqual(1, outputQuantity)

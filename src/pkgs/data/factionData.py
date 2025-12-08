@@ -3,7 +3,8 @@ from typing import Any
 import yaml as yaml
 
 from .emunerators import ConsumptionType, CropName, DifficultyLevel
-from .emunerators import HarvestName, TreeName
+from .emunerators import FoodProcessingBuildingName, GoodsBuildingName
+from .emunerators import HarvestName, TreeName, WaterBuildingName
 from .emunerators import DataKeys
 
 
@@ -286,6 +287,383 @@ class FactionData:
             raise ValueError(f"Tree '{treeName.value}' does not produce a "
                              f"harvestable item.")
         return tree[DataKeys.HARVEST][0][DataKeys.YIELD]
+
+    def _getWater(self, waterBuildingName: WaterBuildingName) -> dict[str, Any]:
+        """
+        Private helper method to retrieve the water building dictionary.
+
+        :param waterBuildingName: The water building to retrieve.
+        :type waterBuildingName: WaterBuildingName
+
+        :return: Dictionary containing all water building information.
+        :rtype: dict[str, Any]
+
+        :raises ValueError: If the specified water building is not found in
+                            faction data.
+        """
+        for waterBuilding in self.water:
+            if waterBuilding[DataKeys.NAME] == waterBuildingName.value:
+                return waterBuilding
+        raise ValueError(f"Water building '{waterBuildingName.value}' not "
+                         f"found.")
+
+    def getWaterWorkers(self, waterBuildingName: WaterBuildingName) -> int:
+        """
+        Get the number of workers for a specified water building.
+
+        :param waterBuildingName: The water building to retrieve workers for.
+        :type waterBuildingName: WaterBuildingName
+
+        :return: Number of workers.
+        :rtype: int
+
+        :raises ValueError: If the specified water building is not found in
+                            faction data.
+        """
+        waterBuilding = self._getWater(waterBuildingName)
+        return waterBuilding[DataKeys.WORKERS]
+
+    def getWaterRecipeName(self, waterBuildingName: WaterBuildingName) -> str:
+        """
+        Get the recipe name for a specified water building.
+
+        :param waterBuildingName: The water building to retrieve recipe name
+                                  for.
+        :type waterBuildingName: WaterBuildingName
+
+        :return: Recipe name.
+        :rtype: str
+
+        :raises ValueError: If the specified water building is not found in
+                            faction data.
+        """
+        waterBuilding = self._getWater(waterBuildingName)
+        return waterBuilding[DataKeys.RECIPES][0][DataKeys.NAME]
+
+    def getWaterProductionTime(self,
+                               waterBuildingName: WaterBuildingName) -> float:
+        """
+        Get the production time for a specified water building.
+
+        :param waterBuildingName: The water building to retrieve production
+                                  time for.
+        :type waterBuildingName: WaterBuildingName
+
+        :return: Production time.
+        :rtype: float
+
+        :raises ValueError: If the specified water building is not found in
+                            faction data.
+        """
+        waterBuilding = self._getWater(waterBuildingName)
+        return waterBuilding[DataKeys.RECIPES][0][DataKeys.PROD_TIME]
+
+    def getWaterOutputQuantity(self,
+                               waterBuildingName: WaterBuildingName) -> int:
+        """
+        Get the output quantity for a specified water building.
+
+        :param waterBuildingName: The water building to retrieve output
+                                  quantity for.
+        :type waterBuildingName: WaterBuildingName
+
+        :return: Output quantity.
+        :rtype: int
+
+        :raises ValueError: If the specified water building is not found in
+                            faction data.
+        """
+        waterBuilding = self._getWater(waterBuildingName)
+        return waterBuilding[DataKeys.RECIPES][0][DataKeys.OUT_QUANTITY]
+
+    def _getFoodProcessing(self,
+                           buildingName: FoodProcessingBuildingName
+                           ) -> dict[str, Any]:
+        """
+        Private helper method to retrieve the food processing building
+        dictionary.
+
+        :param buildingName: The food processing building to retrieve.
+        :type buildingName: FoodProcessingBuildingName
+
+        :return: Dictionary containing all food processing building
+                 information.
+        :rtype: dict[str, Any]
+
+        :raises ValueError: If the specified food processing building is not
+                            found in faction data.
+        """
+        for building in self.foodProcessing:
+            if building[DataKeys.NAME] == buildingName.value:
+                return building
+        raise ValueError(f"Food processing building '{buildingName.value}' "
+                         f"not found.")
+
+    def getFoodProcessingWorkers(self,
+                                 buildingName: FoodProcessingBuildingName
+                                 ) -> int:
+        """
+        Get the number of workers for a specified food processing building.
+
+        :param buildingName: The food processing building to retrieve workers
+                             for.
+        :type buildingName: FoodProcessingBuildingName
+
+        :return: Number of workers.
+        :rtype: int
+
+        :raises ValueError: If the specified food processing building is not
+                            found in faction data.
+        """
+        building = self._getFoodProcessing(buildingName)
+        return building[DataKeys.WORKERS]
+
+    def getFoodProcessingRecipeCount(self,
+                                     buildingName: FoodProcessingBuildingName
+                                     ) -> int:
+        """
+        Get the number of recipes for a specified food processing building.
+
+        :param buildingName: The food processing building to retrieve recipe
+                             count for.
+        :type buildingName: FoodProcessingBuildingName
+
+        :return: Number of recipes.
+        :rtype: int
+
+        :raises ValueError: If the specified food processing building is not
+                            found in faction data.
+        """
+        building = self._getFoodProcessing(buildingName)
+        return len(building[DataKeys.RECIPES])
+
+    def getFoodProcessingRecipeName(self,
+                                    buildingName: FoodProcessingBuildingName,
+                                    recipeIndex: int) -> str:
+        """
+        Get the recipe name for a specified food processing building and
+        recipe index.
+
+        :param buildingName: The food processing building to retrieve recipe
+                             name for.
+        :type buildingName: FoodProcessingBuildingName
+        :param recipeIndex: The index of the recipe.
+        :type recipeIndex: int
+
+        :return: Recipe name.
+        :rtype: str
+
+        :raises ValueError: If the specified food processing building is not
+                            found in faction data.
+        :raises IndexError: If the recipe index is out of range.
+        """
+        building = self._getFoodProcessing(buildingName)
+        return building[DataKeys.RECIPES][recipeIndex][DataKeys.NAME]
+
+    def getFoodProcessingProductionTime(self,
+                                        buildingName:
+                                        FoodProcessingBuildingName,
+                                        recipeIndex: int) -> float:
+        """
+        Get the production time for a specified food processing building and
+        recipe index.
+
+        :param buildingName: The food processing building to retrieve
+                             production time for.
+        :type buildingName: FoodProcessingBuildingName
+        :param recipeIndex: The index of the recipe.
+        :type recipeIndex: int
+
+        :return: Production time.
+        :rtype: float
+
+        :raises ValueError: If the specified food processing building is not
+                            found in faction data.
+        :raises IndexError: If the recipe index is out of range.
+        """
+        building = self._getFoodProcessing(buildingName)
+        return building[DataKeys.RECIPES][recipeIndex][DataKeys.PROD_TIME]
+
+    def getFoodProcessingInputs(self,
+                                buildingName: FoodProcessingBuildingName,
+                                recipeIndex: int) -> list[dict[str, Any]] | None:
+        """
+        Get the inputs for a specified food processing building and recipe
+        index.
+
+        :param buildingName: The food processing building to retrieve inputs
+                             for.
+        :type buildingName: FoodProcessingBuildingName
+        :param recipeIndex: The index of the recipe.
+        :type recipeIndex: int
+
+        :return: List of input dictionaries or None if no inputs required.
+        :rtype: list[dict[str, Any]] | None
+
+        :raises ValueError: If the specified food processing building is not
+                            found in faction data.
+        :raises IndexError: If the recipe index is out of range.
+        """
+        building = self._getFoodProcessing(buildingName)
+        return building[DataKeys.RECIPES][recipeIndex][DataKeys.INPUTS]
+
+    def getFoodProcessingOutputQuantity(self,
+                                        buildingName:
+                                        FoodProcessingBuildingName,
+                                        recipeIndex: int) -> int:
+        """
+        Get the output quantity for a specified food processing building and
+        recipe index.
+
+        :param buildingName: The food processing building to retrieve output
+                             quantity for.
+        :type buildingName: FoodProcessingBuildingName
+        :param recipeIndex: The index of the recipe.
+        :type recipeIndex: int
+
+        :return: Output quantity.
+        :rtype: int
+
+        :raises ValueError: If the specified food processing building is not
+                            found in faction data.
+        :raises IndexError: If the recipe index is out of range.
+        """
+        building = self._getFoodProcessing(buildingName)
+        return building[DataKeys.RECIPES][recipeIndex][DataKeys.OUT_QUANTITY]
+
+    def _getGoods(self, buildingName: GoodsBuildingName) -> dict[str, Any]:
+        """
+        Private helper method to retrieve the goods building dictionary.
+
+        :param buildingName: The goods building to retrieve.
+        :type buildingName: GoodsBuildingName
+
+        :return: Dictionary containing all goods building information.
+        :rtype: dict[str, Any]
+
+        :raises ValueError: If the specified goods building is not found in
+                            faction data.
+        """
+        for building in self.goods:
+            if building[DataKeys.NAME] == buildingName.value:
+                return building
+        raise ValueError(f"Goods building '{buildingName.value}' not found.")
+
+    def getGoodsWorkers(self, buildingName: GoodsBuildingName) -> int:
+        """
+        Get the number of workers for a specified goods building.
+
+        :param buildingName: The goods building to retrieve workers for.
+        :type buildingName: GoodsBuildingName
+
+        :return: Number of workers.
+        :rtype: int
+
+        :raises ValueError: If the specified goods building is not found in
+                            faction data.
+        """
+        building = self._getGoods(buildingName)
+        return building[DataKeys.WORKERS]
+
+    def getGoodsRecipeCount(self, buildingName: GoodsBuildingName) -> int:
+        """
+        Get the number of recipes for a specified goods building.
+
+        :param buildingName: The goods building to retrieve recipe count for.
+        :type buildingName: GoodsBuildingName
+
+        :return: Number of recipes.
+        :rtype: int
+
+        :raises ValueError: If the specified goods building is not found in
+                            faction data.
+        """
+        building = self._getGoods(buildingName)
+        return len(building[DataKeys.RECIPES])
+
+    def getGoodsRecipeName(self, buildingName: GoodsBuildingName,
+                           recipeIndex: int) -> str:
+        """
+        Get the recipe name for a specified goods building and recipe index.
+
+        :param buildingName: The goods building to retrieve recipe name for.
+        :type buildingName: GoodsBuildingName
+        :param recipeIndex: The index of the recipe.
+        :type recipeIndex: int
+
+        :return: Recipe name.
+        :rtype: str
+
+        :raises ValueError: If the specified goods building is not found in
+                            faction data.
+        :raises IndexError: If the recipe index is out of range.
+        """
+        building = self._getGoods(buildingName)
+        return building[DataKeys.RECIPES][recipeIndex][DataKeys.NAME]
+
+    def getGoodsProductionTime(self, buildingName: GoodsBuildingName,
+                               recipeIndex: int) -> float:
+        """
+        Get the production time for a specified goods building and recipe
+        index.
+
+        :param buildingName: The goods building to retrieve production time
+                             for.
+        :type buildingName: GoodsBuildingName
+        :param recipeIndex: The index of the recipe.
+        :type recipeIndex: int
+
+        :return: Production time.
+        :rtype: float
+
+        :raises ValueError: If the specified goods building is not found in
+                            faction data.
+        :raises IndexError: If the recipe index is out of range.
+        """
+        building = self._getGoods(buildingName)
+        return building[DataKeys.RECIPES][recipeIndex][DataKeys.PROD_TIME]
+
+    def getGoodsInputs(self, buildingName: GoodsBuildingName,
+                       recipeIndex: int) -> list[dict[str, Any]] | None:
+        """
+        Get the inputs for a specified goods building and recipe index.
+
+        :param buildingName: The goods building to retrieve inputs for.
+        :type buildingName: GoodsBuildingName
+        :param recipeIndex: The index of the recipe.
+        :type recipeIndex: int
+
+        :return: List of input dictionaries or None if no inputs required.
+        :rtype: list[dict[str, Any]] | None
+
+        :raises ValueError: If the specified goods building is not found in
+                            faction data.
+        :raises IndexError: If the recipe index is out of range.
+        """
+        building = self._getGoods(buildingName)
+        return building[DataKeys.RECIPES][recipeIndex][DataKeys.INPUTS]
+
+    def getGoodsOutputQuantity(self, buildingName: GoodsBuildingName,
+                               recipeIndex: int) -> int:
+        """
+        Get the output quantity for a specified goods building and recipe
+        index.
+
+        :param buildingName: The goods building to retrieve output quantity
+                             for.
+        :type buildingName: GoodsBuildingName
+        :param recipeIndex: The index of the recipe.
+        :type recipeIndex: int
+
+        :return: Output quantity.
+        :rtype: int
+
+        :raises ValueError: If the specified goods building is not found in
+                            faction data.
+        :raises IndexError: If the recipe index is out of range.
+        """
+        building = self._getGoods(buildingName)
+        return building[DataKeys.RECIPES][recipeIndex][DataKeys.OUT_QUANTITY]
 
 
 if __name__ == '__main__':

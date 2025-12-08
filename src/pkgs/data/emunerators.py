@@ -1,0 +1,88 @@
+from enum import Enum
+
+
+class DifficultyLevel(Enum):
+    EASY = 'easy'
+    NORMAL = 'normal'
+    HARD = 'hard'
+
+
+class ConsumptionType(Enum):
+    FOOD = 'food'
+    WATER = 'water'
+
+
+class CropName(Enum):
+    BERRY_BUSH = 'Berry Bush'
+    DANDELION_BUSH = 'Dandelion Bush'
+    CARROT_CROP = 'Carrot Crop'
+    SUNFLOWER_CROP = 'Sunflower Crop'
+    POTATO_CROP = 'Potato Crop'
+    WHEAT_CROP = 'Wheat Crop'
+    CATTAIL_CROP = 'Cattail Crop'
+    SPADDERDOCK_CROP = 'Spadderdock Crop'
+    COFFEE_BUSH = 'Coffee Bush'
+    KOHLRABI_CROP = 'Kohlrabi Crop'
+    CASSAVA_CROP = 'Cassava Crop'
+    SOYBEAN_CROP = 'Soybean Crop'
+    CANOLA_CROP = 'Canola Crop'
+    CORN_CROP = 'Corn Crop'
+    EGGPLANT_CROP = 'Eggplant Crop'
+
+
+class TreeName(Enum):
+    BIRCH = 'Birch'
+    PINE = 'Pine'
+    MAPLE = 'Maple'
+    CHESTNUT_TREE = 'Chestnut Tree'
+    OAK = 'Oak'
+    MANGROVE_TREE = 'Mangrove Tree'
+
+
+class HarvestName(Enum):
+    BERRIES = 'Berries'
+    DANDELIONS = 'Dandelions'
+    CARROTS = 'Carrots'
+    SUNFLOWER_SEEDS = 'Sunflower Seeds'
+    POTATOES = 'Potatoes'
+    WHEAT = 'Wheat'
+    CATTAIL_ROOTS = 'Cattail Roots'
+    SPADDERDOCKS = 'Spadderdocks'
+    COFFEE_BEANS = 'Coffee Beans'
+    KOHLRABIES = 'Kohlrabies'
+    CASSAVAS = 'Cassavas'
+    SOYBEANS = 'Soybeans'
+    CANOLA_SEEDS = 'Canola Seeds'
+    CORN = 'Corn'
+    EGGPLANTS = 'Eggplants'
+    PINE_RESIN = 'Pine Resin'
+    MAPLE_SYRUP = 'Maple Syrup'
+    CHESTNUTS = 'Chestnuts'
+    MANGROVE_FRUITS = 'Mangrove Fruits'
+
+
+class DataKeys:
+    FACTION_DATA = 'faction_data'
+    NAME = 'name'
+    DIFFICULTY = 'difficulty'
+    MODIFIER = 'modifier'
+    CONSUMPTION = 'consumption'
+    FOOD = 'food'
+    WATER = 'water'
+    PRODUCTION = 'production'
+    BEEHIVE = 'beehive'
+    CROPS = 'crops'
+    GROWTH_TIME = 'growth_time'
+    HARVEST = 'harvest'
+    TIME = 'time'
+    YIELD = 'yield'
+    TREES = 'trees'
+    LOG_OUTPUT = 'log_output'
+    RECIPES = 'recipes'
+    PROD_TIME = 'production_time'
+    INPUTS = 'inputs'
+    QUANTITY = 'quantity'
+    OUT_QUANTITY = 'output_quantity'
+    FOOD_PROCESSING = 'food_processing'
+    WORKERS = 'workers'
+    GOODS = 'goods'

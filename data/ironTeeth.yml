@@ -13,7 +13,8 @@ faction_data:
     food: 2.75
     water: 2.25
   production:
-    crop:
+    beehive: null
+    crops:
       - name: "Berry Bush"
         growth_time: 12
         harvest:

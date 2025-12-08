@@ -9,7 +9,11 @@
     "dist",
     ".git"
   ],
-  "ignore": [],
+  "ignore": [
+    "tests/**",
+    "**/test_*.py",
+    "**/*_test.py"
+  ],
   "reportMissingImports": true,
   "reportMissingTypeStubs": false,
   "pythonVersion": "3.12"

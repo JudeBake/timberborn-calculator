@@ -1,0 +1,328 @@
+# Iron Teeth Data Files
+# Source: Timberborn official wiki https://timberborn.wiki.gg/ and in-game data.
+faction_data:
+  name: "Iron Teeth"
+  difficulty:
+    - name: "easy"
+      modifier: 1.1
+    - name: "normal"
+      modifier: 1.0
+    - name: "hard"
+      modifier: 0.9
+  consumption:
+    food: 2.75
+    water: 2.25
+  production:
+    beehive: null
+    crops:
+      - name: "Berry Bush"
+        growth_time: 12
+        harvest:
+          - name: "Berries"
+            time: 12
+            yield: 3
+      - name: "Coffee Bush"
+        growth_time: 9
+        harvest:
+          - name: "Coffee Beans"
+            time: 3
+            yield: 1
+      - name: "Kohlrabi Crop"
+        growth_time: null
+        harvest:
+          - name: "Kohlrabies"
+            time: 3
+            yield: 2
+      - name: "Cassava Crop"
+        growth_time: null
+        harvest:
+          - name: "Cassavas"
+            time: 5
+            yield: 1
+      - name: "Soybean Crop"
+        growth_time: null
+        harvest:
+          - name: "Soybeans"
+            time: 8
+            yield: 2
+      - name: "Canola Crop"
+        growth_time: null
+        harvest:
+          - name: "Canola Seeds"
+            time: 9
+            yield: 3
+      - name: "Corn Crop"
+        growth_time: null
+        harvest:
+          - name: "Corn"
+            time: 10
+            yield: 2
+      - name: "Eggplant Crop"
+        growth_time: null
+        harvest:
+          - name: "Eggplants"
+            time: 12
+            yield: 2
+    trees:
+      - name: "Birch"
+        growth_time: 7
+        log_output: 1
+        harvest: null
+      - name: "Pine"
+        growth_time: 12
+        log_output: 2
+        harvest:
+          - name: "Pine Resin"
+            time: 7
+            yield: 2
+      - name: "Mangrove Tree"
+        growth_time: 10
+        log_output: 2
+        harvest:
+          - name: "Mangrove Fruits"
+            time: 10
+            yield: 4
+      - name: "Oak"
+        growth_time: 30
+        log_output: 8
+        harvest: null
+    water:
+      - name: "Deep Water Pump"
+        workers: 1
+        recipes:
+          - name: "Water"
+            production_time: 0.33
+            inputs: null
+            output_quantity: 1
+      - name: "Deep Badwater Pump"
+        workers: 1
+        recipes:
+          - name: "Badwater"
+            production_time: 0.33
+            inputs: null
+            output_quantity: 1
+    food_processing:
+      - name: "Coffee Brewery"
+        workers: 1
+        recipes:
+          - name: "Coffee"
+            production_time: 1
+            inputs:
+              - name: "Coffee"
+                quantity: 1
+              - name: "Water"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 1
+      - name: "Fermenter"
+        workers: 1
+        recipes:
+          - name: "Fermented Cassava"
+            production_time: 2
+            inputs:
+              - name: "Cassavas"
+                quantity: 4
+            output_quantity: 10
+          - name: "Fermented Soybean"
+            production_time: 3
+            inputs:
+              - name: "Soybeans"
+                quantity: 6
+              - name: "Canola Oil"
+                quantity: 1
+            output_quantity: 20
+          - name: "Fermented Mushroom"
+            production_time: 2
+            inputs:
+              - name: "Mushrooms"
+                quantity: 4
+            output_quantity: 16
+      - name: "Food Factory"
+        workers: 1
+        recipes:
+          - name: "Corn Rations"
+            production_time: 0.5
+            inputs:
+              - name: "Corn"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 5
+          - name: "Eggplant Rations"
+            production_time: 0.5
+            inputs:
+              - name: "Eggplants"
+                quantity: 1
+              - name: "Canola Oil"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 6
+          - name: "Algae Rations"
+            production_time: 0.25
+            inputs:
+              - name: "Algae"
+                quantity: 1
+              - name: "Canola Oil"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 6
+      - name: "Hydroponic Garden"
+        workers: 1
+        recipes:
+          - name: "Mushrooms"
+            production_time: 192
+            inputs:
+              - name: "Water"
+                quantity: 40
+            output_quantity: 45
+          - name: "Algae"
+            production_time: 288
+            inputs:
+              - name: "Water"
+                quantity: 60
+            output_quantity: 70
+      - name: "Oil Press"
+        workers: 1
+        recipes:
+          - name: "Canola Oil"
+            production_time: 1.3
+            inputs:
+              - name: "Canola Seeds"
+                quantity: 1
+            output_quantity: 1
+    goods:
+      - name: "Industrial Lumber Mill"
+        workers: 2
+        recipes:
+          - name: "Planks"
+            production_time: 0.63
+            inputs:
+              - name: "Logs"
+                quantity: 1
+            output_quantity: 1
+      - name: "Gear Workshop"
+        workers: 1
+        recipes:
+          - name: "Gears"
+            production_time: 3.0
+            inputs:
+              - name: "Planks"
+                quantity: 1
+            output_quantity: 1
+      - name: "Wood Workshop"
+        workers: 2
+        recipes:
+          - name: "Treated Planks"
+            production_time: 3.0
+            inputs:
+              - name: "Pine Resin"
+                quantity: 1
+              - name: "Planks"
+                quantity: 1
+            output_quantity: 1
+      - name: "Smelter"
+        workers: 1
+        recipes:
+          - name: "Metal Blocks"
+            production_time: 2.0
+            inputs:
+              - name: "Scrap Metal"
+                quantity: 1
+              - name: "Logs"
+                quantity: 0.2
+            output_quantity: 1
+      - name: "Efficient Mine"
+        workers: 10
+        recipes:
+          - name: "Scrap Metal"
+            production_time: 1.8
+            inputs:
+              - name: "Treated Planks"
+                quantity: 1
+            output_quantity: 5
+          - name: "Scrap Metal"
+            production_time: 1.8
+            inputs:
+              - name: "Treated Planks"
+                quantity: 1
+              - name: "Extract"
+                quantity: 2
+            output_quantity: 10
+      - name: "Grease Factory"
+        workers: 2
+        recipes:
+          - name: "Grease"
+            production_time: 2.0
+            inputs:
+              - name: "Extract"
+                quantity: 1
+              - name: "Canola Oil"
+                quantity: 1
+            output_quantity: 2
+      - name: "Bot Part Factory"
+        workers: 1
+        recipes:
+          - name: "Bot Chassis"
+            production_time: 18.0
+            inputs:
+              - name: "Planks"
+                quantity: 5
+              - name: "Metal Blocks"
+                quantity: 1
+              - name: "Biofuel"
+                quantity: 1
+            output_quantity: 1
+          - name: "Bot Heads"
+            production_time: 18.0
+            inputs:
+              - name: "Gears"
+                quantity: 3
+              - name: "Metal Blocks"
+                quantity: 1
+              - name: "Planks"
+                quantity: 1
+            output_quantity: 1
+          - name: "Bot Limbs"
+            production_time: 18.0
+            inputs:
+              - name: "Gears"
+                quantity: 3
+              - name: "Planks"
+                quantity: 1
+            output_quantity: 1
+      - name: "Bot Assembler"
+        workers: 2
+        recipes:
+          - name: "Bot"
+            production_time: 36.0
+            inputs:
+              - name: "Bot Chassis"
+                quantity: 1
+              - name: "Bot Heads"
+                quantity: 1
+              - name: "Bot Limbs"
+                quantity: 4
+            output_quantity: 1
+      - name: "Explosives Factory"
+        workers: 1
+        recipes:
+          - name: "Explosives"
+            production_time: 3.0
+            inputs:
+              - name: "Badwater"
+                quantity: 5
+            output_quantity: 1
+      - name: "Centrifuge"
+        workers: 1
+        recipes:
+          - name: "Extract"
+            production_time: 0.75
+            inputs:
+              - name: "Badwater"
+                quantity: 4
+              - name: "Logs"
+                quantity: 0.1
+            output_quantity: 1

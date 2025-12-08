@@ -1,0 +1,14 @@
+# .coveragerc to control coverage.py
+[run]
+omit =
+    */site-packages/*
+    */distutils/*
+    tests/*
+    src/pkgs/messages/*
+    src/mqttClient/*
+    src/ui/assets/resources_auto.py
+    src/ui/windows/appWindow_auto.py
+
+[report]
+exclude_lines =
+    if __name__ == .__main__.:

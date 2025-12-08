@@ -1,0 +1,9 @@
+# Dev dependencies
+pytest==8.4.2
+pytest-cov==7.0.0
+coverage==7.11.0
+rope==1.14.0
+flake8==7.3.0
+
+# App dependencies
+pyyaml==6.0.3

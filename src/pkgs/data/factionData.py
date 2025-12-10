@@ -484,9 +484,8 @@ class FactionData:
         building = self._getFoodProcessing(buildingName)
         return building[DataKeys.RECIPES][recipeIndex][DataKeys.PROD_TIME]
 
-    def getFoodProcessingInputs(self,
-                                buildingName: FoodProcessingBuildingName,
-                                recipeIndex: int) -> list[dict[str, Any]] | None:
+    def getFoodProcessingInputs(self, buildingName: FoodProcessingBuildingName,
+                                recipeIndex: int) -> list[dict[str, Any]] | None:   # noqa: E501
         """
         Get the inputs for a specified food processing building and recipe
         index.

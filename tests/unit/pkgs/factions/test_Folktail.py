@@ -167,8 +167,8 @@ class TestFolktail(TestCase):
             folktail = Folktail()
             result = folktail.getFoodPerType(100, 5, DifficultyLevel.NORMAL)
 
-            # 100 * 2.75 * 1.0 = 275.0 / 5 = 55.0
-            self.assertEqual(55.0, result)
+            # 100 * 2.75 * 1.0 = 275.0 / 5 = ceil(55.0) = 55
+            self.assertEqual(55, result)
 
     def test_getBerryTilesNeededNegativeAmount(self) -> None:
         """
@@ -197,8 +197,8 @@ class TestFolktail(TestCase):
             result = folktail.getBerryTilesNeeded(30.0)
 
             # Production per tile = 3 / 12 = 0.25
-            # Tiles needed = 30.0 / 0.25 = 120.0
-            self.assertEqual(120.0, result)
+            # Tiles needed = ceil(30.0 / 0.25) = 120
+            self.assertEqual(120, result)
 
     def test_getCarrotTilesNeededNegativeAmount(self) -> None:
         """
@@ -227,8 +227,8 @@ class TestFolktail(TestCase):
             result = folktail.getCarrotTilesNeeded(30.0, False)
 
             # Production per tile = 3 / 4 = 0.75
-            # Tiles needed = 30.0 / 0.75 = 40.0
-            self.assertEqual(40.0, result)
+            # Tiles needed = ceil(30.0 / 0.75) = 40
+            self.assertEqual(40, result)
 
     def test_getCarrotTilesNeededWithBeehive(self) -> None:
         """
@@ -247,8 +247,8 @@ class TestFolktail(TestCase):
 
             # Production per tile = 3 / 4 = 0.75
             # With beehive = 0.75 * 1.43 = 1.0725
-            # Tiles needed = 30.0 / 1.0725 = 27.972027972027973
-            self.assertAlmostEqual(27.972027972027973, result)
+            # Tiles needed = ceil(30.0 / 1.0725) = ceil(27.972...) = 28
+            self.assertEqual(28, result)
             mockFactionDataInstance.getBeehiveModifier.assert_called_once()
 
     def test_getSunflowerTilesNeededNegativeAmount(self) -> None:
@@ -278,8 +278,8 @@ class TestFolktail(TestCase):
             result = folktail.getSunflowerTilesNeeded(20.0, False)
 
             # Production per tile = 2 / 5 = 0.4
-            # Tiles needed = 20.0 / 0.4 = 50.0
-            self.assertEqual(50.0, result)
+            # Tiles needed = ceil(20.0 / 0.4) = 50
+            self.assertEqual(50, result)
 
     def test_getSunflowerTilesNeededWithBeehive(self) -> None:
         """
@@ -298,8 +298,8 @@ class TestFolktail(TestCase):
 
             # Production per tile = 2 / 5 = 0.4
             # With beehive = 0.4 * 1.43 = 0.572
-            # Tiles needed = 20.0 / 0.572 = 34.965034965034967
-            self.assertAlmostEqual(34.965034965034967, result)
+            # Tiles needed = ceil(20.0 / 0.572) = ceil(34.965...) = 35
+            self.assertEqual(35, result)
             mockFactionDataInstance.getBeehiveModifier.assert_called_once()
 
     def test_getPotatoTilesNeededNegativeAmount(self) -> None:
@@ -329,8 +329,8 @@ class TestFolktail(TestCase):
             result = folktail.getPotatoTilesNeeded(30.0, False)
 
             # Production per tile = 1 / 6 = 0.16666...
-            # Tiles needed = 30.0 / 0.16666... = 180.0
-            self.assertEqual(180.0, result)
+            # Tiles needed = ceil(30.0 / 0.16666...) = 180
+            self.assertEqual(180, result)
 
     def test_getPotatoTilesNeededWithBeehive(self) -> None:
         """
@@ -349,8 +349,8 @@ class TestFolktail(TestCase):
 
             # Production per tile = 1 / 6 = 0.16666...
             # With beehive = 0.16666... * 1.43 = 0.238333...
-            # Tiles needed = 30.0 / 0.238333... = 125.87412587412588
-            self.assertAlmostEqual(125.87412587412588, result)
+            # Tiles needed = ceil(30.0 / 0.238333...) = ceil(125.874...) = 126
+            self.assertEqual(126, result)
             mockFactionDataInstance.getBeehiveModifier.assert_called_once()
 
     def test_getWheatTilesNeededNegativeAmount(self) -> None:
@@ -380,8 +380,8 @@ class TestFolktail(TestCase):
             result = folktail.getWheatTilesNeeded(30.0, False)
 
             # Production per tile = 3 / 10 = 0.3
-            # Tiles needed = 30.0 / 0.3 = 100.0
-            self.assertEqual(100.0, result)
+            # Tiles needed = ceil(30.0 / 0.3) = 100
+            self.assertEqual(100, result)
 
     def test_getWheatTilesNeededWithBeehive(self) -> None:
         """
@@ -400,8 +400,8 @@ class TestFolktail(TestCase):
 
             # Production per tile = 3 / 10 = 0.3
             # With beehive = 0.3 * 1.43 = 0.429
-            # Tiles needed = 30.0 / 0.429 = 69.93006993006993
-            self.assertAlmostEqual(69.93006993006993, result)
+            # Tiles needed = ceil(30.0 / 0.429) = ceil(69.930...) = 70
+            self.assertEqual(70, result)
             mockFactionDataInstance.getBeehiveModifier.assert_called_once()
 
     def test_getCattailTilesNeededNegativeAmount(self) -> None:
@@ -431,8 +431,8 @@ class TestFolktail(TestCase):
             result = folktail.getCattailTilesNeeded(30.0, False)
 
             # Production per tile = 3 / 8 = 0.375
-            # Tiles needed = 30.0 / 0.375 = 80.0
-            self.assertEqual(80.0, result)
+            # Tiles needed = ceil(30.0 / 0.375) = 80
+            self.assertEqual(80, result)
 
     def test_getCattailTilesNeededWithBeehive(self) -> None:
         """
@@ -451,8 +451,8 @@ class TestFolktail(TestCase):
 
             # Production per tile = 3 / 8 = 0.375
             # With beehive = 0.375 * 1.43 = 0.53625
-            # Tiles needed = 30.0 / 0.53625 = 55.94405594405594
-            self.assertAlmostEqual(55.94405594405594, result)
+            # Tiles needed = ceil(30.0 / 0.53625) = ceil(55.944...) = 56
+            self.assertEqual(56, result)
             mockFactionDataInstance.getBeehiveModifier.assert_called_once()
 
     def test_getSpadderdockTilesNeededNegativeAmount(self) -> None:
@@ -482,8 +482,8 @@ class TestFolktail(TestCase):
             result = folktail.getSpadderdockTilesNeeded(30.0, False)
 
             # Production per tile = 3 / 12 = 0.25
-            # Tiles needed = 30.0 / 0.25 = 120.0
-            self.assertEqual(120.0, result)
+            # Tiles needed = ceil(30.0 / 0.25) = 120
+            self.assertEqual(120, result)
 
     def test_getSpadderdockTilesNeededWithBeehive(self) -> None:
         """
@@ -502,9 +502,40 @@ class TestFolktail(TestCase):
 
             # Production per tile = 3 / 12 = 0.25
             # With beehive = 0.25 * 1.43 = 0.3575
-            # Tiles needed = 30.0 / 0.3575 = 83.91608391608392
-            self.assertAlmostEqual(83.91608391608392, result)
+            # Tiles needed = ceil(30.0 / 0.3575) = ceil(83.916...) = 84
+            self.assertEqual(84, result)
             mockFactionDataInstance.getBeehiveModifier.assert_called_once()
+
+
+    def test_getMapleSyrupTilesNeededNegativeAmount(self) -> None:
+        """
+        The getMapleSyrupTilesNeeded method must raise ValueError if maple
+        syrup amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getMapleSyrupTilesNeeded(-10.0)
+        self.assertEqual("Maple syrup amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getMapleSyrupTilesNeededSuccess(self) -> None:
+        """
+        The getMapleSyrupTilesNeeded method must correctly calculate tiles
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getTreeHarvestTime.return_value = 10
+            mockFactionDataInstance.getTreeHarvestYield.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getMapleSyrupTilesNeeded(30.0)
+
+            # Production per tile = 2 / 10 = 0.2
+            # Tiles needed = ceil(30.0 / 0.2) = 150
+            self.assertEqual(150, result)
 
     def test_getChestnutTilesNeededNegativeAmount(self) -> None:
         """
@@ -533,5 +564,6 @@ class TestFolktail(TestCase):
             result = folktail.getChestnutTilesNeeded(30.0)
 
             # Production per tile = 3 / 8 = 0.375
-            # Tiles needed = 30.0 / 0.375 = 80.0
-            self.assertEqual(80.0, result)
+            # Tiles needed = ceil(30.0 / 0.375) = 80
+            self.assertEqual(80, result)
+

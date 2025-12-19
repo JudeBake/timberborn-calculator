@@ -1,3 +1,5 @@
+import math
+
 from ..data.emunerators import ConsumptionType, CropName, DifficultyLevel
 from ..data.emunerators import TreeName
 from ..data.factionData import FactionData
@@ -66,7 +68,7 @@ class Folktail:
         return population * baseConsumption * difficultyModifier
 
     def getFoodPerType(self, population: int, foodTypeCount: int,
-                       difficulty: DifficultyLevel) -> float:
+                       difficulty: DifficultyLevel) -> int:
         """
         Calculate the amount of food needed per food type to support a
         given population, assuming equal distribution across the specified
@@ -81,7 +83,7 @@ class Folktail:
         :type difficulty: DifficultyLevel
 
         :return: Daily food amount needed per food type.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If population is negative or foodTypeCount is
                             not positive.
@@ -93,9 +95,9 @@ class Folktail:
 
         totalFoodConsumption = self.getDailyFoodConsumption(population,
                                                             difficulty)
-        return totalFoodConsumption / foodTypeCount
+        return math.ceil(totalFoodConsumption / foodTypeCount)
 
-    def getBerryTilesNeeded(self, berryAmount: float) -> float:
+    def getBerryTilesNeeded(self, berryAmount: float) -> int:
         """
         Calculate the number of berry tiles needed to produce a given
         amount of berries per day.
@@ -104,7 +106,7 @@ class Folktail:
         :type berryAmount: float
 
         :return: Number of berry tiles needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If berry amount is negative.
         """
@@ -116,10 +118,10 @@ class Folktail:
             .getCropHarvestYield(CropName.BERRY_BUSH)
         productionPerTile = harvestYield / harvestTime
 
-        return berryAmount / productionPerTile
+        return math.ceil(berryAmount / productionPerTile)
 
     def getCarrotTilesNeeded(self, carrotAmount: float,
-                             useBeehive: bool) -> float:
+                             useBeehive: bool) -> int:
         """
         Calculate the number of carrot tiles needed to produce a given
         amount of carrots per day.
@@ -130,7 +132,7 @@ class Folktail:
         :type useBeehive: bool
 
         :return: Number of carrot tiles needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If carrot amount is negative.
         """
@@ -138,18 +140,18 @@ class Folktail:
             raise ValueError("Carrot amount cannot be negative.")
 
         harvestTime = self.factionData.getCropHarvestTime(CropName.CARROT_CROP)
-        harvestYield = self.factionData.getCropHarvestYield(
-            CropName.CARROT_CROP)
+        harvestYield = self.factionData \
+            .getCropHarvestYield(CropName.CARROT_CROP)
         productionPerTile = harvestYield / harvestTime
 
         if useBeehive:
             beehiveModifier = self.factionData.getBeehiveModifier()
             productionPerTile *= beehiveModifier
 
-        return carrotAmount / productionPerTile
+        return math.ceil(carrotAmount / productionPerTile)
 
     def getSunflowerTilesNeeded(self, sunflowerSeedAmount: float,
-                                useBeehive: bool) -> float:
+                                useBeehive: bool) -> int:
         """
         Calculate the number of sunflower tiles needed to produce a given
         amount of sunflower seeds per day.
@@ -160,27 +162,27 @@ class Folktail:
         :type useBeehive: bool
 
         :return: Number of sunflower tiles needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If sunflower seed amount is negative.
         """
         if sunflowerSeedAmount < 0:
             raise ValueError("Sunflower seed amount cannot be negative.")
 
-        harvestTime = self.factionData.getCropHarvestTime(
-            CropName.SUNFLOWER_CROP)
-        harvestYield = self.factionData.getCropHarvestYield(
-            CropName.SUNFLOWER_CROP)
+        harvestTime = self.factionData \
+            .getCropHarvestTime(CropName.SUNFLOWER_CROP)
+        harvestYield = self.factionData \
+            .getCropHarvestYield(CropName.SUNFLOWER_CROP)
         productionPerTile = harvestYield / harvestTime
 
         if useBeehive:
             beehiveModifier = self.factionData.getBeehiveModifier()
             productionPerTile *= beehiveModifier
 
-        return sunflowerSeedAmount / productionPerTile
+        return math.ceil(sunflowerSeedAmount / productionPerTile)
 
     def getPotatoTilesNeeded(self, potatoAmount: float,
-                             useBeehive: bool) -> float:
+                             useBeehive: bool) -> int:
         """
         Calculate the number of potato tiles needed to produce a given
         amount of potatoes per day.
@@ -191,27 +193,26 @@ class Folktail:
         :type useBeehive: bool
 
         :return: Number of potato tiles needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If potato amount is negative.
         """
         if potatoAmount < 0:
             raise ValueError("Potato amount cannot be negative.")
 
-        harvestTime = self.factionData.getCropHarvestTime(
-            CropName.POTATO_CROP)
-        harvestYield = self.factionData.getCropHarvestYield(
-            CropName.POTATO_CROP)
+        harvestTime = self.factionData.getCropHarvestTime(CropName.POTATO_CROP)
+        harvestYield = self.factionData \
+            .getCropHarvestYield(CropName.POTATO_CROP)
         productionPerTile = harvestYield / harvestTime
 
         if useBeehive:
             beehiveModifier = self.factionData.getBeehiveModifier()
             productionPerTile *= beehiveModifier
 
-        return potatoAmount / productionPerTile
+        return math.ceil(potatoAmount / productionPerTile)
 
     def getWheatTilesNeeded(self, wheatAmount: float,
-                            useBeehive: bool) -> float:
+                            useBeehive: bool) -> int:
         """
         Calculate the number of wheat tiles needed to produce a given
         amount of wheat per day.
@@ -222,26 +223,27 @@ class Folktail:
         :type useBeehive: bool
 
         :return: Number of wheat tiles needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If wheat amount is negative.
         """
         if wheatAmount < 0:
             raise ValueError("Wheat amount cannot be negative.")
 
-        harvestTime = self.factionData.getCropHarvestTime(CropName.WHEAT_CROP)
-        harvestYield = self.factionData.getCropHarvestYield(
-            CropName.WHEAT_CROP)
+        harvestTime = self.factionData \
+            .getCropHarvestTime(CropName.WHEAT_CROP)
+        harvestYield = self.factionData \
+            .getCropHarvestYield(CropName.WHEAT_CROP)
         productionPerTile = harvestYield / harvestTime
 
         if useBeehive:
             beehiveModifier = self.factionData.getBeehiveModifier()
             productionPerTile *= beehiveModifier
 
-        return wheatAmount / productionPerTile
+        return math.ceil(wheatAmount / productionPerTile)
 
     def getCattailTilesNeeded(self, cattailRootAmount: float,
-                              useBeehive: bool) -> float:
+                              useBeehive: bool) -> int:
         """
         Calculate the number of cattail tiles needed to produce a given
         amount of cattail roots per day.
@@ -252,27 +254,27 @@ class Folktail:
         :type useBeehive: bool
 
         :return: Number of cattail tiles needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If cattail root amount is negative.
         """
         if cattailRootAmount < 0:
             raise ValueError("Cattail root amount cannot be negative.")
 
-        harvestTime = self.factionData.getCropHarvestTime(
-            CropName.CATTAIL_CROP)
-        harvestYield = self.factionData.getCropHarvestYield(
-            CropName.CATTAIL_CROP)
+        harvestTime = self.factionData \
+            .getCropHarvestTime(CropName.CATTAIL_CROP)
+        harvestYield = self.factionData \
+            .getCropHarvestYield(CropName.CATTAIL_CROP)
         productionPerTile = harvestYield / harvestTime
 
         if useBeehive:
             beehiveModifier = self.factionData.getBeehiveModifier()
             productionPerTile *= beehiveModifier
 
-        return cattailRootAmount / productionPerTile
+        return math.ceil(cattailRootAmount / productionPerTile)
 
     def getSpadderdockTilesNeeded(self, spadderdockAmount: float,
-                                  useBeehive: bool) -> float:
+                                  useBeehive: bool) -> int:
         """
         Calculate the number of spadderdock tiles needed to produce a given
         amount of spadderdocks per day.
@@ -283,26 +285,48 @@ class Folktail:
         :type useBeehive: bool
 
         :return: Number of spadderdock tiles needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If spadderdock amount is negative.
         """
         if spadderdockAmount < 0:
             raise ValueError("Spadderdock amount cannot be negative.")
 
-        harvestTime = self.factionData.getCropHarvestTime(
-            CropName.SPADDERDOCK_CROP)
-        harvestYield = self.factionData.getCropHarvestYield(
-            CropName.SPADDERDOCK_CROP)
+        harvestTime = self.factionData \
+            .getCropHarvestTime(CropName.SPADDERDOCK_CROP)
+        harvestYield = self.factionData \
+            .getCropHarvestYield(CropName.SPADDERDOCK_CROP)
         productionPerTile = harvestYield / harvestTime
 
         if useBeehive:
             beehiveModifier = self.factionData.getBeehiveModifier()
             productionPerTile *= beehiveModifier
 
-        return spadderdockAmount / productionPerTile
+        return math.ceil(spadderdockAmount / productionPerTile)
 
-    def getChestnutTilesNeeded(self, chestnutAmount: float) -> float:
+    def getMapleSyrupTilesNeeded(self, mapleSyrupAmount: float) -> int:
+        """
+        Calculate the number of maple tree tiles needed to produce a given
+        amount of maple syrup per day.
+
+        :param mapleSyrupAmount: Daily amount of maple syrup needed.
+        :type mapleSyrupAmount: float
+
+        :return: Number of maple tree tiles needed.
+        :rtype: int
+
+        :raises ValueError: If maple syrup amount is negative.
+        """
+        if mapleSyrupAmount < 0:
+            raise ValueError("Maple syrup amount cannot be negative.")
+
+        harvestTime = self.factionData.getTreeHarvestTime(TreeName.MAPLE)
+        harvestYield = self.factionData.getTreeHarvestYield(TreeName.MAPLE)
+        productionPerTile = harvestYield / harvestTime
+
+        return math.ceil(mapleSyrupAmount / productionPerTile)
+
+    def getChestnutTilesNeeded(self, chestnutAmount: float) -> int:
         """
         Calculate the number of chestnut tree tiles needed to produce a given
         amount of chestnuts per day.
@@ -311,17 +335,17 @@ class Folktail:
         :type chestnutAmount: float
 
         :return: Number of chestnut tree tiles needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If chestnut amount is negative.
         """
         if chestnutAmount < 0:
             raise ValueError("Chestnut amount cannot be negative.")
 
-        harvestTime = self.factionData.getTreeHarvestTime(
-            TreeName.CHESTNUT_TREE)
-        harvestYield = self.factionData.getTreeHarvestYield(
-            TreeName.CHESTNUT_TREE)
+        harvestTime = self.factionData \
+            .getTreeHarvestTime(TreeName.CHESTNUT_TREE)
+        harvestYield = self.factionData \
+            .getTreeHarvestYield(TreeName.CHESTNUT_TREE)
         productionPerTile = harvestYield / harvestTime
 
-        return chestnutAmount / productionPerTile
+        return math.ceil(chestnutAmount / productionPerTile)

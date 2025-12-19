@@ -288,7 +288,8 @@ class FactionData:
                              f"harvestable item.")
         return tree[DataKeys.HARVEST][0][DataKeys.YIELD]
 
-    def _getWater(self, waterBuildingName: WaterBuildingName) -> dict[str, Any]:
+    def _getWater(self,
+                  waterBuildingName: WaterBuildingName) -> dict[str, Any]:
         """
         Private helper method to retrieve the water building dictionary.
 

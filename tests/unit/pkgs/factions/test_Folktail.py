@@ -506,6 +506,173 @@ class TestFolktail(TestCase):
             self.assertEqual(84, result)
             mockFactionDataInstance.getBeehiveModifier.assert_called_once()
 
+    def test_getLogPerTypeNegativeTotalLogAmount(self) -> None:
+        """
+        The getLogPerType method must raise ValueError if total log amount
+        is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLogPerType(-100.0, 3)
+        self.assertEqual("Total log amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getLogPerTypeZeroTreeTypeCount(self) -> None:
+        """
+        The getLogPerType method must raise ValueError if tree type count
+        is zero.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLogPerType(100.0, 0)
+        self.assertEqual("Tree type count must be positive.",
+                         str(context.exception))
+
+    def test_getLogPerTypeNegativeTreeTypeCount(self) -> None:
+        """
+        The getLogPerType method must raise ValueError if tree type count
+        is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLogPerType(100.0, -3)
+        self.assertEqual("Tree type count must be positive.",
+                         str(context.exception))
+
+    def test_getLogPerTypeSuccess(self) -> None:
+        """
+        The getLogPerType method must correctly calculate logs per tree type
+        by dividing total log amount by the number of tree types.
+        """
+        with patch('pkgs.factions.folktail.FactionData'):
+            folktail = Folktail()
+            result = folktail.getLogPerType(100.0, 3)
+
+            # Logs per type = ceil(100.0 / 3) = ceil(33.333...) = 34
+            self.assertEqual(34, result)
+
+    def test_getBirchLogTilesNeededNegativeAmount(self) -> None:
+        """
+        The getBirchLogTilesNeeded method must raise ValueError if log
+        amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBirchLogTilesNeeded(-10.0)
+        self.assertEqual("Log amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getBirchLogTilesNeededSuccess(self) -> None:
+        """
+        The getBirchLogTilesNeeded method must correctly calculate tiles
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getTreeGrowthTime.return_value = 15
+            mockFactionDataInstance.getTreeLogOutput.return_value = 5
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBirchLogTilesNeeded(30.0)
+
+            # Production per tile = 5 / 15 = 0.333...
+            # Tiles needed = ceil(30.0 / 0.333...) = ceil(90.0) = 90
+            self.assertEqual(90, result)
+
+    def test_getPineLogTilesNeededNegativeAmount(self) -> None:
+        """
+        The getPineLogTilesNeeded method must raise ValueError if log
+        amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getPineLogTilesNeeded(-10.0)
+        self.assertEqual("Log amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getPineLogTilesNeededSuccess(self) -> None:
+        """
+        The getPineLogTilesNeeded method must correctly calculate tiles
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getTreeGrowthTime.return_value = 12
+            mockFactionDataInstance.getTreeLogOutput.return_value = 4
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getPineLogTilesNeeded(30.0)
+
+            # Production per tile = 4 / 12 = 0.333...
+            # Tiles needed = ceil(30.0 / 0.333...) = ceil(90.0) = 90
+            self.assertEqual(90, result)
+
+    def test_getPineResinTilesNeededNegativeAmount(self) -> None:
+        """
+        The getPineResinTilesNeeded method must raise ValueError if pine
+        resin amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getPineResinTilesNeeded(-10.0)
+        self.assertEqual("Pine resin amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getPineResinTilesNeededSuccess(self) -> None:
+        """
+        The getPineResinTilesNeeded method must correctly calculate tiles
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getTreeHarvestTime.return_value = 8
+            mockFactionDataInstance.getTreeHarvestYield.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getPineResinTilesNeeded(30.0)
+
+            # Production per tile = 2 / 8 = 0.25
+            # Tiles needed = ceil(30.0 / 0.25) = 120
+            self.assertEqual(120, result)
+
+    def test_getMapleLogTilesNeededNegativeAmount(self) -> None:
+        """
+        The getMapleLogTilesNeeded method must raise ValueError if log
+        amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getMapleLogTilesNeeded(-10.0)
+        self.assertEqual("Log amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getMapleLogTilesNeededSuccess(self) -> None:
+        """
+        The getMapleLogTilesNeeded method must correctly calculate tiles
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getTreeGrowthTime.return_value = 18
+            mockFactionDataInstance.getTreeLogOutput.return_value = 6
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getMapleLogTilesNeeded(30.0)
+
+            # Production per tile = 6 / 18 = 0.333...
+            # Tiles needed = ceil(30.0 / 0.333...) = ceil(90.0) = 90
+            self.assertEqual(90, result)
 
     def test_getMapleSyrupTilesNeededNegativeAmount(self) -> None:
         """
@@ -537,6 +704,36 @@ class TestFolktail(TestCase):
             # Tiles needed = ceil(30.0 / 0.2) = 150
             self.assertEqual(150, result)
 
+    def test_getChestnutLogTilesNeededNegativeAmount(self) -> None:
+        """
+        The getChestnutLogTilesNeeded method must raise ValueError if log
+        amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getChestnutLogTilesNeeded(-10.0)
+        self.assertEqual("Log amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getChestnutLogTilesNeededSuccess(self) -> None:
+        """
+        The getChestnutLogTilesNeeded method must correctly calculate tiles
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getTreeGrowthTime.return_value = 20
+            mockFactionDataInstance.getTreeLogOutput.return_value = 5
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getChestnutLogTilesNeeded(30.0)
+
+            # Production per tile = 5 / 20 = 0.25
+            # Tiles needed = ceil(30.0 / 0.25) = 120
+            self.assertEqual(120, result)
+
     def test_getChestnutTilesNeededNegativeAmount(self) -> None:
         """
         The getChestnutTilesNeeded method must raise ValueError if chestnut
@@ -567,3 +764,142 @@ class TestFolktail(TestCase):
             # Tiles needed = ceil(30.0 / 0.375) = 80
             self.assertEqual(80, result)
 
+    def test_getOakLogTilesNeededNegativeAmount(self) -> None:
+        """
+        The getOakLogTilesNeeded method must raise ValueError if log
+        amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getOakLogTilesNeeded(-10.0)
+        self.assertEqual("Log amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getOakLogTilesNeededSuccess(self) -> None:
+        """
+        The getOakLogTilesNeeded method must correctly calculate tiles
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getTreeGrowthTime.return_value = 25
+            mockFactionDataInstance.getTreeLogOutput.return_value = 8
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getOakLogTilesNeeded(30.0)
+
+            # Production per tile = 8 / 25 = 0.32
+            # Tiles needed = ceil(30.0 / 0.32) = ceil(93.75) = 94
+            self.assertEqual(94, result)
+
+    def test_getWaterPumpsNeededNegativeAmount(self) -> None:
+        """
+        The getWaterPumpsNeeded method must raise ValueError if water
+        amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getWaterPumpsNeeded(-10.0)
+        self.assertEqual("Water amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getWaterPumpsNeededSuccess(self) -> None:
+        """
+        The getWaterPumpsNeeded method must correctly calculate water pumps
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getWaterProductionTime.return_value = 2.0
+            mockFactionDataInstance.getWaterOutputQuantity.return_value = 24
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getWaterPumpsNeeded(50.0)
+
+            # Production per pump = 24 / 2.0 = 12.0
+            # Pumps needed = ceil(50.0 / 12.0) = ceil(4.166...) = 5
+            self.assertEqual(5, result)
+
+    def test_getLargeWaterPumpsNeededNegativeWaterAmount(self) -> None:
+        """
+        The getLargeWaterPumpsNeeded method must raise ValueError if water
+        amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLargeWaterPumpsNeeded(-10.0, 2)
+        self.assertEqual("Water amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getLargeWaterPumpsNeededNegativeWorkersCount(self) -> None:
+        """
+        The getLargeWaterPumpsNeeded method must raise ValueError if workers
+        count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLargeWaterPumpsNeeded(50.0, -1)
+        self.assertEqual("Workers count cannot be negative.",
+                         str(context.exception))
+
+    def test_getLargeWaterPumpsNeededExceedsMaxWorkers(self) -> None:
+        """
+        The getLargeWaterPumpsNeeded method must raise ValueError if workers
+        count exceeds maximum.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getWaterWorkers.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            with self.assertRaises(ValueError) as context:
+                folktail.getLargeWaterPumpsNeeded(50.0, 5)
+            self.assertEqual("Workers count cannot exceed 2.",
+                             str(context.exception))
+
+    def test_getLargeWaterPumpsNeededSuccessFullWorkers(self) -> None:
+        """
+        The getLargeWaterPumpsNeeded method must correctly calculate pumps
+        needed with full workers.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getWaterWorkers.return_value = 2
+            mockFactionDataInstance.getWaterProductionTime.return_value = 2.0
+            mockFactionDataInstance.getWaterOutputQuantity.return_value = 48
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getLargeWaterPumpsNeeded(50.0, 2)
+
+            # Effective output = 48 * (2 / 2) = 48
+            # Production per pump = 48 / 2.0 = 24.0
+            # Pumps needed = ceil(50.0 / 24.0) = ceil(2.083...) = 3
+            self.assertEqual(3, result)
+
+    def test_getLargeWaterPumpsNeededSuccessReducedWorkers(self) -> None:
+        """
+        The getLargeWaterPumpsNeeded method must correctly calculate pumps
+        needed with reduced workers.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getWaterWorkers.return_value = 2
+            mockFactionDataInstance.getWaterProductionTime.return_value = 2.0
+            mockFactionDataInstance.getWaterOutputQuantity.return_value = 48
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getLargeWaterPumpsNeeded(50.0, 1)
+
+            # Effective output = 48 * (1 / 2) = 24
+            # Production per pump = 24 / 2.0 = 12.0
+            # Pumps needed = ceil(50.0 / 12.0) = ceil(4.166...) = 5
+            self.assertEqual(5, result)

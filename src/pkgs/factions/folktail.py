@@ -1,7 +1,7 @@
 import math
 
 from ..data.emunerators import ConsumptionType, CropName, DifficultyLevel
-from ..data.emunerators import TreeName
+from ..data.emunerators import TreeName, WaterBuildingName
 from ..data.factionData import FactionData
 
 
@@ -304,6 +304,116 @@ class Folktail:
 
         return math.ceil(spadderdockAmount / productionPerTile)
 
+    def getLogPerType(self, totalLogAmount: float, treeTypeCount: int) -> int:
+        """
+        Calculate the amount of logs needed per tree type.
+
+        :param totalLogAmount: Total amount of logs needed.
+        :type totalLogAmount: float
+        :param treeTypeCount: Number of tree types.
+        :type treeTypeCount: int
+
+        :return: Amount of logs per tree type.
+        :rtype: int
+
+        :raises ValueError: If total log amount is negative or tree type count
+                            is not positive.
+        """
+        if totalLogAmount < 0:
+            raise ValueError("Total log amount cannot be negative.")
+        if treeTypeCount <= 0:
+            raise ValueError("Tree type count must be positive.")
+
+        return math.ceil(totalLogAmount / treeTypeCount)
+
+    def getBirchLogTilesNeeded(self, logAmount: float) -> int:
+        """
+        Calculate the number of birch tree tiles needed to produce a given
+        amount of logs per day.
+
+        :param logAmount: Daily amount of logs needed.
+        :type logAmount: float
+
+        :return: Number of birch tree tiles needed.
+        :rtype: int
+
+        :raises ValueError: If log amount is negative.
+        """
+        if logAmount < 0:
+            raise ValueError("Log amount cannot be negative.")
+
+        growthTime = self.factionData.getTreeGrowthTime(TreeName.BIRCH)
+        logOutput = self.factionData.getTreeLogOutput(TreeName.BIRCH)
+        productionPerTile = logOutput / growthTime
+
+        return math.ceil(logAmount / productionPerTile)
+
+    def getPineLogTilesNeeded(self, logAmount: float) -> int:
+        """
+        Calculate the number of pine tree tiles needed to produce a given
+        amount of logs per day.
+
+        :param logAmount: Daily amount of logs needed.
+        :type logAmount: float
+
+        :return: Number of pine tree tiles needed.
+        :rtype: int
+
+        :raises ValueError: If log amount is negative.
+        """
+        if logAmount < 0:
+            raise ValueError("Log amount cannot be negative.")
+
+        growthTime = self.factionData.getTreeGrowthTime(TreeName.PINE)
+        logOutput = self.factionData.getTreeLogOutput(TreeName.PINE)
+        productionPerTile = logOutput / growthTime
+
+        return math.ceil(logAmount / productionPerTile)
+
+    def getPineResinTilesNeeded(self, pineResinAmount: float) -> int:
+        """
+        Calculate the number of pine tree tiles needed to produce a given
+        amount of pine resin per day.
+
+        :param pineResinAmount: Daily amount of pine resin needed.
+        :type pineResinAmount: float
+
+        :return: Number of pine tree tiles needed.
+        :rtype: int
+
+        :raises ValueError: If pine resin amount is negative.
+        """
+        if pineResinAmount < 0:
+            raise ValueError("Pine resin amount cannot be negative.")
+
+        harvestTime = self.factionData.getTreeHarvestTime(TreeName.PINE)
+        harvestYield = self.factionData.getTreeHarvestYield(TreeName.PINE)
+        productionPerTile = harvestYield / harvestTime
+
+        return math.ceil(pineResinAmount / productionPerTile)
+
+    def getMapleLogTilesNeeded(self, logAmount: float) -> int:
+        """
+        Calculate the number of maple tree tiles needed to produce a given
+        amount of logs per day.
+
+        :param logAmount: Daily amount of logs needed.
+        :type logAmount: float
+
+        :return: Number of maple tree tiles needed.
+        :rtype: int
+
+        :raises ValueError: If log amount is negative.
+        """
+        if logAmount < 0:
+            raise ValueError("Log amount cannot be negative.")
+
+        growthTime = self.factionData.getTreeGrowthTime(TreeName.MAPLE)
+        logOutput = self.factionData.getTreeLogOutput(TreeName.MAPLE)
+        productionPerTile = logOutput / growthTime
+
+        return math.ceil(logAmount / productionPerTile)
+
     def getMapleSyrupTilesNeeded(self, mapleSyrupAmount: float) -> int:
         """
         Calculate the number of maple tree tiles needed to produce a given
@@ -325,6 +435,29 @@ class Folktail:
         productionPerTile = harvestYield / harvestTime
 
         return math.ceil(mapleSyrupAmount / productionPerTile)
+
+    def getChestnutLogTilesNeeded(self, logAmount: float) -> int:
+        """
+        Calculate the number of chestnut tree tiles needed to produce a given
+        amount of logs per day.
+
+        :param logAmount: Daily amount of logs needed.
+        :type logAmount: float
+
+        :return: Number of chestnut tree tiles needed.
+        :rtype: int
+
+        :raises ValueError: If log amount is negative.
+        """
+        if logAmount < 0:
+            raise ValueError("Log amount cannot be negative.")
+
+        growthTime = self.factionData.getTreeGrowthTime(
+            TreeName.CHESTNUT_TREE)
+        logOutput = self.factionData.getTreeLogOutput(TreeName.CHESTNUT_TREE)
+        productionPerTile = logOutput / growthTime
+
+        return math.ceil(logAmount / productionPerTile)
 
     def getChestnutTilesNeeded(self, chestnutAmount: float) -> int:
         """
@@ -349,3 +482,87 @@ class Folktail:
         productionPerTile = harvestYield / harvestTime
 
         return math.ceil(chestnutAmount / productionPerTile)
+
+    def getOakLogTilesNeeded(self, logAmount: float) -> int:
+        """
+        Calculate the number of oak tree tiles needed to produce a given
+        amount of logs per day.
+
+        :param logAmount: Daily amount of logs needed.
+        :type logAmount: float
+
+        :return: Number of oak tree tiles needed.
+        :rtype: int
+
+        :raises ValueError: If log amount is negative.
+        """
+        if logAmount < 0:
+            raise ValueError("Log amount cannot be negative.")
+
+        growthTime = self.factionData.getTreeGrowthTime(TreeName.OAK)
+        logOutput = self.factionData.getTreeLogOutput(TreeName.OAK)
+        productionPerTile = logOutput / growthTime
+
+        return math.ceil(logAmount / productionPerTile)
+
+    def getWaterPumpsNeeded(self, waterAmount: float) -> int:
+        """
+        Calculate the number of water pumps needed to produce a given
+        amount of water per day.
+
+        :param waterAmount: Daily amount of water needed.
+        :type waterAmount: float
+
+        :return: Number of water pumps needed.
+        :rtype: int
+
+        :raises ValueError: If water amount is negative.
+        """
+        if waterAmount < 0:
+            raise ValueError("Water amount cannot be negative.")
+
+        productionTime = self.factionData \
+            .getWaterProductionTime(WaterBuildingName.WATER_PUMP)
+        outputQuantity = self.factionData \
+            .getWaterOutputQuantity(WaterBuildingName.WATER_PUMP)
+        productionPerPump = outputQuantity / productionTime
+
+        return math.ceil(waterAmount / productionPerPump)
+
+    def getLargeWaterPumpsNeeded(self, waterAmount: float,
+                                 workersCount: int) -> int:
+        """
+        Calculate the number of large water pumps needed to produce a given
+        amount of water per day with a specified number of workers per pump.
+
+        :param waterAmount: Daily amount of water needed.
+        :type waterAmount: float
+        :param workersCount: Number of workers assigned per pump.
+        :type workersCount: int
+
+        :return: Number of large water pumps needed.
+        :rtype: int
+
+        :raises ValueError: If water amount is negative, workers count is
+                            negative, or workers count exceeds maximum.
+        """
+        if waterAmount < 0:
+            raise ValueError("Water amount cannot be negative.")
+        if workersCount < 0:
+            raise ValueError("Workers count cannot be negative.")
+
+        maxWorkers = self.factionData \
+            .getWaterWorkers(WaterBuildingName.LARGE_WATER_PUMP)
+        if workersCount > maxWorkers:
+            raise ValueError(f"Workers count cannot exceed {maxWorkers}.")
+
+        productionTime = self.factionData \
+            .getWaterProductionTime(WaterBuildingName.LARGE_WATER_PUMP)
+        outputQuantity = self.factionData \
+            .getWaterOutputQuantity(WaterBuildingName.LARGE_WATER_PUMP)
+
+        # Reduce output based on workers assigned
+        effectiveOutput = outputQuantity * (workersCount / maxWorkers)
+        productionPerPump = effectiveOutput / productionTime
+
+        return math.ceil(waterAmount / productionPerPump)

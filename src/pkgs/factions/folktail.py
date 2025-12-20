@@ -2,6 +2,7 @@ import math
 
 from ..data.emunerators import ConsumptionType, CropName, DifficultyLevel
 from ..data.emunerators import FoodProcessingBuildingName, FoodRecipeName
+from ..data.emunerators import GoodsBuildingName, GoodsRecipeName
 from ..data.emunerators import HarvestName, TreeName, WaterBuildingName
 from ..data.factionData import FactionData
 
@@ -120,6 +121,30 @@ class Folktail:
         productionPerTile = harvestYield / harvestTime
 
         return math.ceil(berryAmount / productionPerTile)
+
+    def getDandelionTilesNeeded(self, dandelionAmount: float) -> int:
+        """
+        Calculate the number of dandelion tiles needed to produce a given
+        amount of dandelions per day.
+
+        :param dandelionAmount: Daily amount of dandelions needed.
+        :type dandelionAmount: float
+
+        :return: Number of dandelion tiles needed.
+        :rtype: int
+
+        :raises ValueError: If dandelion amount is negative.
+        """
+        if dandelionAmount < 0:
+            raise ValueError("Dandelion amount cannot be negative.")
+
+        harvestTime = self.factionData.getCropHarvestTime(
+            CropName.DANDELION_BUSH)
+        harvestYield = self.factionData \
+            .getCropHarvestYield(CropName.DANDELION_BUSH)
+        productionPerTile = harvestYield / harvestTime
+
+        return math.ceil(dandelionAmount / productionPerTile)
 
     def getCarrotTilesNeeded(self, carrotAmount: float,
                              useBeehive: bool) -> int:
@@ -1335,3 +1360,1728 @@ class Folktail:
         logsPerBakeryPerDay = logInput * cyclesPerDay
 
         return bakeriesCount * logsPerBakeryPerDay
+
+    def getLumberMillsNeededForPlanks(self, planksAmount: float) -> int:
+        """
+        Calculate the number of lumber mills needed to produce a given amount
+        of planks per day.
+
+        :param planksAmount: Daily amount of planks needed.
+        :type planksAmount: float
+
+        :return: Number of lumber mills needed.
+        :rtype: int
+
+        :raises ValueError: If planks amount is negative.
+        """
+        if planksAmount < 0:
+            raise ValueError("Planks amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.LUMBER_MILL,
+            GoodsRecipeName.PLANKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.LUMBER_MILL, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.LUMBER_MILL, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerLumberMill = (outputQuantity / productionTime) * 24
+
+        return math.ceil(planksAmount / productionPerLumberMill)
+
+    def getLogsNeededForLumberMills(self, lumberMillsCount: int) -> int:
+        """
+        Calculate the number of logs needed per day to keep a given number of
+        lumber mills running producing planks.
+
+        :param lumberMillsCount: Number of lumber mills.
+        :type lumberMillsCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: int
+
+        :raises ValueError: If lumber mills count is negative.
+        """
+        if lumberMillsCount < 0:
+            raise ValueError("Lumber mills count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.LUMBER_MILL,
+            GoodsRecipeName.PLANKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.LUMBER_MILL, recipeIndex)
+        logsInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.LUMBER_MILL,
+            GoodsRecipeName.PLANKS,
+            "Logs")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerLumberMillPerDay = logsInput * cyclesPerDay
+
+        return math.ceil(lumberMillsCount * logsPerLumberMillPerDay)
+
+    def getGearWorkshopsNeededForGears(self, gearsAmount: float) -> int:
+        """
+        Calculate the number of gear workshops needed to produce a given
+        amount of gears per day.
+
+        :param gearsAmount: Daily amount of gears needed.
+        :type gearsAmount: float
+
+        :return: Number of gear workshops needed.
+        :rtype: int
+
+        :raises ValueError: If gears amount is negative.
+        """
+        if gearsAmount < 0:
+            raise ValueError("Gears amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.GEAR_WORKSHOP,
+            GoodsRecipeName.GEARS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.GEAR_WORKSHOP, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.GEAR_WORKSHOP, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerGearWorkshop = (outputQuantity / productionTime) * 24
+
+        return math.ceil(gearsAmount / productionPerGearWorkshop)
+
+    def getPlanksNeededForGearWorkshops(self, gearWorkshopsCount: int) -> int:
+        """
+        Calculate the number of planks needed per day to keep a given number
+        of gear workshops running producing gears.
+
+        :param gearWorkshopsCount: Number of gear workshops.
+        :type gearWorkshopsCount: int
+
+        :return: Daily amount of planks needed.
+        :rtype: int
+
+        :raises ValueError: If gear workshops count is negative.
+        """
+        if gearWorkshopsCount < 0:
+            raise ValueError("Gear workshops count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.GEAR_WORKSHOP,
+            GoodsRecipeName.GEARS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.GEAR_WORKSHOP, recipeIndex)
+        planksInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.GEAR_WORKSHOP,
+            GoodsRecipeName.GEARS,
+            "Planks")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        planksPerGearWorkshopPerDay = planksInput * cyclesPerDay
+
+        return math.ceil(gearWorkshopsCount * planksPerGearWorkshopPerDay)
+
+    def getPaperMillsNeededForPaper(self, paperAmount: float) -> int:
+        """
+        Calculate the number of paper mills needed to produce a given amount
+        of paper per day.
+
+        :param paperAmount: Daily amount of paper needed.
+        :type paperAmount: float
+
+        :return: Number of paper mills needed.
+        :rtype: int
+
+        :raises ValueError: If paper amount is negative.
+        """
+        if paperAmount < 0:
+            raise ValueError("Paper amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.PAPER_MILL,
+            GoodsRecipeName.PAPER)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.PAPER_MILL, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.PAPER_MILL, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerPaperMill = (outputQuantity / productionTime) * 24
+
+        return math.ceil(paperAmount / productionPerPaperMill)
+
+    def getLogsNeededForPaperMills(self, paperMillsCount: int) -> int:
+        """
+        Calculate the number of logs needed per day to keep a given number of
+        paper mills running producing paper.
+
+        :param paperMillsCount: Number of paper mills.
+        :type paperMillsCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: int
+
+        :raises ValueError: If paper mills count is negative.
+        """
+        if paperMillsCount < 0:
+            raise ValueError("Paper mills count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.PAPER_MILL,
+            GoodsRecipeName.PAPER)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.PAPER_MILL, recipeIndex)
+        logsInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.PAPER_MILL,
+            GoodsRecipeName.PAPER,
+            "Logs")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerPaperMillPerDay = logsInput * cyclesPerDay
+
+        return math.ceil(paperMillsCount * logsPerPaperMillPerDay)
+
+    def getPrintingPressesNeededForBooks(self, booksAmount: float) -> int:
+        """
+        Calculate the number of printing presses needed to produce a given
+        amount of books per day.
+
+        :param booksAmount: Daily amount of books needed.
+        :type booksAmount: float
+
+        :return: Number of printing presses needed.
+        :rtype: int
+
+        :raises ValueError: If books amount is negative.
+        """
+        if booksAmount < 0:
+            raise ValueError("Books amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.BOOKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerPrintingPress = (outputQuantity / productionTime) * 24
+
+        return math.ceil(booksAmount / productionPerPrintingPress)
+
+    def getPaperNeededForPrintingPressesWithBooks(
+            self, printingPressesCount: int) -> int:
+        """
+        Calculate the number of paper needed per day to keep a given number of
+        printing presses running producing books.
+
+        :param printingPressesCount: Number of printing presses.
+        :type printingPressesCount: int
+
+        :return: Daily amount of paper needed.
+        :rtype: int
+
+        :raises ValueError: If printing presses count is negative.
+        """
+        if printingPressesCount < 0:
+            raise ValueError("Printing presses count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.BOOKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
+        paperInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.BOOKS,
+            "Paper")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        paperPerPrintingPressPerDay = paperInput * cyclesPerDay
+
+        return math.ceil(printingPressesCount * paperPerPrintingPressPerDay)
+
+    def getPrintingPressesNeededForPunchcards(
+            self, punchcardsAmount: float) -> int:
+        """
+        Calculate the number of printing presses needed to produce a given
+        amount of punchcards per day.
+
+        :param punchcardsAmount: Daily amount of punchcards needed.
+        :type punchcardsAmount: float
+
+        :return: Number of printing presses needed.
+        :rtype: int
+
+        :raises ValueError: If punchcards amount is negative.
+        """
+        if punchcardsAmount < 0:
+            raise ValueError("Punchcards amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.PUNCHCARDS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerPrintingPress = (outputQuantity / productionTime) * 24
+
+        return math.ceil(punchcardsAmount / productionPerPrintingPress)
+
+    def getPaperNeededForPrintingPressesWithPunchcards(
+            self, printingPressesCount: int) -> int:
+        """
+        Calculate the number of paper needed per day to keep a given number of
+        printing presses running producing punchcards.
+
+        :param printingPressesCount: Number of printing presses.
+        :type printingPressesCount: int
+
+        :return: Daily amount of paper needed.
+        :rtype: int
+
+        :raises ValueError: If printing presses count is negative.
+        """
+        if printingPressesCount < 0:
+            raise ValueError("Printing presses count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.PUNCHCARDS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
+        paperInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.PUNCHCARDS,
+            "Paper")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        paperPerPrintingPressPerDay = paperInput * cyclesPerDay
+
+        return math.ceil(printingPressesCount * paperPerPrintingPressPerDay)
+
+    def getPlanksNeededForPrintingPressesWithPunchcards(
+            self, printingPressesCount: int) -> int:
+        """
+        Calculate the number of planks needed per day to keep a given number
+        of printing presses running producing punchcards.
+
+        :param printingPressesCount: Number of printing presses.
+        :type printingPressesCount: int
+
+        :return: Daily amount of planks needed.
+        :rtype: int
+
+        :raises ValueError: If printing presses count is negative.
+        """
+        if printingPressesCount < 0:
+            raise ValueError("Printing presses count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.PUNCHCARDS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
+        planksInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.PUNCHCARDS,
+            "Planks")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        planksPerPrintingPressPerDay = planksInput * cyclesPerDay
+
+        return math.ceil(printingPressesCount * planksPerPrintingPressPerDay)
+
+    def getWoodWorkshopsNeededForTreatedPlanks(
+            self, treatedPlanksAmount: float) -> int:
+        """
+        Calculate the number of wood workshops needed to produce a given
+        amount of treated planks per day.
+
+        :param treatedPlanksAmount: Daily amount of treated planks needed.
+        :type treatedPlanksAmount: float
+
+        :return: Number of wood workshops needed.
+        :rtype: int
+
+        :raises ValueError: If treated planks amount is negative.
+        """
+        if treatedPlanksAmount < 0:
+            raise ValueError("Treated planks amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            GoodsRecipeName.TREATED_PLANKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.WOOD_WORKSHOP, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.WOOD_WORKSHOP, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerWoodWorkshop = (outputQuantity / productionTime) * 24
+
+        return math.ceil(treatedPlanksAmount / productionPerWoodWorkshop)
+
+    def getPineResinNeededForWoodWorkshops(
+            self, woodWorkshopsCount: int) -> int:
+        """
+        Calculate the number of pine resin needed per day to keep a given
+        number of wood workshops running producing treated planks.
+
+        :param woodWorkshopsCount: Number of wood workshops.
+        :type woodWorkshopsCount: int
+
+        :return: Daily amount of pine resin needed.
+        :rtype: int
+
+        :raises ValueError: If wood workshops count is negative.
+        """
+        if woodWorkshopsCount < 0:
+            raise ValueError("Wood workshops count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            GoodsRecipeName.TREATED_PLANKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.WOOD_WORKSHOP, recipeIndex)
+        pineResinInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            GoodsRecipeName.TREATED_PLANKS,
+            HarvestName.PINE_RESIN.value)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        pineResinPerWoodWorkshopPerDay = pineResinInput * cyclesPerDay
+
+        return math.ceil(woodWorkshopsCount * pineResinPerWoodWorkshopPerDay)
+
+    def getPlanksNeededForWoodWorkshops(self, woodWorkshopsCount: int) -> int:
+        """
+        Calculate the number of planks needed per day to keep a given number
+        of wood workshops running producing treated planks.
+
+        :param woodWorkshopsCount: Number of wood workshops.
+        :type woodWorkshopsCount: int
+
+        :return: Daily amount of planks needed.
+        :rtype: int
+
+        :raises ValueError: If wood workshops count is negative.
+        """
+        if woodWorkshopsCount < 0:
+            raise ValueError("Wood workshops count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            GoodsRecipeName.TREATED_PLANKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.WOOD_WORKSHOP, recipeIndex)
+        planksInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            GoodsRecipeName.TREATED_PLANKS,
+            "Planks")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        planksPerWoodWorkshopPerDay = planksInput * cyclesPerDay
+
+        return math.ceil(woodWorkshopsCount * planksPerWoodWorkshopPerDay)
+
+    def getSmeltersNeededForMetalBlocks(
+            self, metalBlocksAmount: float) -> int:
+        """
+        Calculate the number of smelters needed to produce a given amount of
+        metal blocks per day.
+
+        :param metalBlocksAmount: Daily amount of metal blocks needed.
+        :type metalBlocksAmount: float
+
+        :return: Number of smelters needed.
+        :rtype: int
+
+        :raises ValueError: If metal blocks amount is negative.
+        """
+        if metalBlocksAmount < 0:
+            raise ValueError("Metal blocks amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.SMELTER,
+            GoodsRecipeName.METAL_BLOCKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.SMELTER, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.SMELTER, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerSmelter = (outputQuantity / productionTime) * 24
+
+        return math.ceil(metalBlocksAmount / productionPerSmelter)
+
+    def getScrapMetalNeededForSmelters(self, smeltersCount: int) -> int:
+        """
+        Calculate the number of scrap metal needed per day to keep a given
+        number of smelters running producing metal blocks.
+
+        :param smeltersCount: Number of smelters.
+        :type smeltersCount: int
+
+        :return: Daily amount of scrap metal needed.
+        :rtype: int
+
+        :raises ValueError: If smelters count is negative.
+        """
+        if smeltersCount < 0:
+            raise ValueError("Smelters count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.SMELTER,
+            GoodsRecipeName.METAL_BLOCKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.SMELTER, recipeIndex)
+        scrapMetalInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.SMELTER,
+            GoodsRecipeName.METAL_BLOCKS,
+            "Scrap Metal")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        scrapMetalPerSmelterPerDay = scrapMetalInput * cyclesPerDay
+
+        return math.ceil(smeltersCount * scrapMetalPerSmelterPerDay)
+
+    def getLogsNeededForSmelters(self, smeltersCount: int) -> float:
+        """
+        Calculate the number of logs needed per day to keep a given number of
+        smelters running producing metal blocks.
+
+        :param smeltersCount: Number of smelters.
+        :type smeltersCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: float
+
+        :raises ValueError: If smelters count is negative.
+        """
+        if smeltersCount < 0:
+            raise ValueError("Smelters count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.SMELTER,
+            GoodsRecipeName.METAL_BLOCKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.SMELTER, recipeIndex)
+        logsInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.SMELTER,
+            GoodsRecipeName.METAL_BLOCKS,
+            "Logs")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerSmelterPerDay = logsInput * cyclesPerDay
+
+        return smeltersCount * logsPerSmelterPerDay
+
+    def getMinesNeededForScrapMetal(self, scrapMetalAmount: float) -> int:
+        """
+        Calculate the number of mines needed to produce a given amount of
+        scrap metal per day.
+
+        :param scrapMetalAmount: Daily amount of scrap metal needed.
+        :type scrapMetalAmount: float
+
+        :return: Number of mines needed.
+        :rtype: int
+
+        :raises ValueError: If scrap metal amount is negative.
+        """
+        if scrapMetalAmount < 0:
+            raise ValueError("Scrap metal amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.MINE,
+            GoodsRecipeName.SCRAP_METAL)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.MINE, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.MINE, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerMine = (outputQuantity / productionTime) * 24
+
+        return math.ceil(scrapMetalAmount / productionPerMine)
+
+    def getTreatedPlanksNeededForMines(self, minesCount: int) -> int:
+        """
+        Calculate the number of treated planks needed per day to keep a given
+        number of mines running producing scrap metal.
+
+        :param minesCount: Number of mines.
+        :type minesCount: int
+
+        :return: Daily amount of treated planks needed.
+        :rtype: int
+
+        :raises ValueError: If mines count is negative.
+        """
+        if minesCount < 0:
+            raise ValueError("Mines count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.MINE,
+            GoodsRecipeName.SCRAP_METAL)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.MINE, recipeIndex)
+        treatedPlanksInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.MINE,
+            GoodsRecipeName.SCRAP_METAL,
+            "Treated Planks")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        treatedPlanksPerMinePerDay = treatedPlanksInput * cyclesPerDay
+
+        return math.ceil(minesCount * treatedPlanksPerMinePerDay)
+
+    def getRafineriesNeededForBiofuelCarrots(
+            self, biofuelCarrotsAmount: float) -> int:
+        """
+        Calculate the number of rafineries needed to produce a given amount of
+        biofuel per day using carrots.
+
+        :param biofuelCarrotsAmount: Daily amount of biofuel needed.
+        :type biofuelCarrotsAmount: float
+
+        :return: Number of rafineries needed.
+        :rtype: int
+
+        :raises ValueError: If biofuel carrots amount is negative.
+        """
+        if biofuelCarrotsAmount < 0:
+            raise ValueError("Biofuel Carrots amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_CARROTS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerRafinery = (outputQuantity / productionTime) * 24
+
+        return math.ceil(biofuelCarrotsAmount / productionPerRafinery)
+
+    def getCarrotsNeededForRafineriesWithBiofuelCarrots(
+            self, rafineriesCount: int) -> int:
+        """
+        Calculate the number of carrots needed per day to keep a given number
+        of rafineries running producing biofuel with carrots.
+
+        :param rafineriesCount: Number of rafineries.
+        :type rafineriesCount: int
+
+        :return: Daily amount of carrots needed.
+        :rtype: int
+
+        :raises ValueError: If rafineries count is negative.
+        """
+        if rafineriesCount < 0:
+            raise ValueError("Rafineries count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_CARROTS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        carrotsInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_CARROTS,
+            "Carrots")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        carrotsPerRafineryPerDay = carrotsInput * cyclesPerDay
+
+        return math.ceil(rafineriesCount * carrotsPerRafineryPerDay)
+
+    def getWaterNeededForRafineriesWithBiofuelCarrots(
+            self, rafineriesCount: int) -> int:
+        """
+        Calculate the number of water needed per day to keep a given number of
+        rafineries running producing biofuel with carrots.
+
+        :param rafineriesCount: Number of rafineries.
+        :type rafineriesCount: int
+
+        :return: Daily amount of water needed.
+        :rtype: int
+
+        :raises ValueError: If rafineries count is negative.
+        """
+        if rafineriesCount < 0:
+            raise ValueError("Rafineries count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_CARROTS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        waterInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_CARROTS,
+            "Water")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        waterPerRafineryPerDay = waterInput * cyclesPerDay
+
+        return math.ceil(rafineriesCount * waterPerRafineryPerDay)
+
+    def getRafineriesNeededForBiofuelPotatoes(
+            self, biofuelPotatoesAmount: float) -> int:
+        """
+        Calculate the number of rafineries needed to produce a given amount of
+        biofuel per day using potatoes.
+
+        :param biofuelPotatoesAmount: Daily amount of biofuel needed.
+        :type biofuelPotatoesAmount: float
+
+        :return: Number of rafineries needed.
+        :rtype: int
+
+        :raises ValueError: If biofuel potatoes amount is negative.
+        """
+        if biofuelPotatoesAmount < 0:
+            raise ValueError("Biofuel Potatoes amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_POTATOES)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerRafinery = (outputQuantity / productionTime) * 24
+
+        return math.ceil(biofuelPotatoesAmount / productionPerRafinery)
+
+    def getPotatoesNeededForRafineriesWithBiofuelPotatoes(
+            self, rafineriesCount: int) -> int:
+        """
+        Calculate the number of potatoes needed per day to keep a given number
+        of rafineries running producing biofuel with potatoes.
+
+        :param rafineriesCount: Number of rafineries.
+        :type rafineriesCount: int
+
+        :return: Daily amount of potatoes needed.
+        :rtype: int
+
+        :raises ValueError: If rafineries count is negative.
+        """
+        if rafineriesCount < 0:
+            raise ValueError("Rafineries count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_POTATOES)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        potatoesInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_POTATOES,
+            "Potatoes")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        potatoesPerRafineryPerDay = potatoesInput * cyclesPerDay
+
+        return math.ceil(rafineriesCount * potatoesPerRafineryPerDay)
+
+    def getWaterNeededForRafineriesWithBiofuelPotatoes(
+            self, rafineriesCount: int) -> int:
+        """
+        Calculate the number of water needed per day to keep a given number of
+        rafineries running producing biofuel with potatoes.
+
+        :param rafineriesCount: Number of rafineries.
+        :type rafineriesCount: int
+
+        :return: Daily amount of water needed.
+        :rtype: int
+
+        :raises ValueError: If rafineries count is negative.
+        """
+        if rafineriesCount < 0:
+            raise ValueError("Rafineries count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_POTATOES)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        waterInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_POTATOES,
+            "Water")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        waterPerRafineryPerDay = waterInput * cyclesPerDay
+
+        return math.ceil(rafineriesCount * waterPerRafineryPerDay)
+
+    def getRafineriesNeededForBiofuelSpadderdocks(
+            self, biofuelSpadderdocksAmount: float) -> int:
+        """
+        Calculate the number of rafineries needed to produce a given amount of
+        biofuel per day using spadderdocks.
+
+        :param biofuelSpadderdocksAmount: Daily amount of biofuel needed.
+        :type biofuelSpadderdocksAmount: float
+
+        :return: Number of rafineries needed.
+        :rtype: int
+
+        :raises ValueError: If biofuel spadderdocks amount is negative.
+        """
+        if biofuelSpadderdocksAmount < 0:
+            raise ValueError("Biofuel Spadderdocks amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerRafinery = (outputQuantity / productionTime) * 24
+
+        return math.ceil(biofuelSpadderdocksAmount / productionPerRafinery)
+
+    def getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocks(
+            self, rafineriesCount: int) -> int:
+        """
+        Calculate the number of spadderdocks needed per day to keep a given
+        number of rafineries running producing biofuel with spadderdocks.
+
+        :param rafineriesCount: Number of rafineries.
+        :type rafineriesCount: int
+
+        :return: Daily amount of spadderdocks needed.
+        :rtype: int
+
+        :raises ValueError: If rafineries count is negative.
+        """
+        if rafineriesCount < 0:
+            raise ValueError("Rafineries count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        # Note: YAML has typo "Sappeddocks" instead of "Spadderdocks"
+        spadderdocksInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_SPADDERDOCKS,
+            "Sappeddocks")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        spadderdocksPerRafineryPerDay = spadderdocksInput * cyclesPerDay
+
+        return math.ceil(rafineriesCount * spadderdocksPerRafineryPerDay)
+
+    def getWaterNeededForRafineriesWithBiofuelSpadderdocks(
+            self, rafineriesCount: int) -> int:
+        """
+        Calculate the number of water needed per day to keep a given number of
+        rafineries running producing biofuel with spadderdocks.
+
+        :param rafineriesCount: Number of rafineries.
+        :type rafineriesCount: int
+
+        :return: Daily amount of water needed.
+        :rtype: int
+
+        :raises ValueError: If rafineries count is negative.
+        """
+        if rafineriesCount < 0:
+            raise ValueError("Rafineries count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        waterInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.BIOFUEL_SPADDERDOCKS,
+            "Water")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        waterPerRafineryPerDay = waterInput * cyclesPerDay
+
+        return math.ceil(rafineriesCount * waterPerRafineryPerDay)
+
+    def getRafineriesNeededForCatalyst(self, catalystAmount: float) -> int:
+        """
+        Calculate the number of rafineries needed to produce a given amount of
+        catalyst per day.
+
+        :param catalystAmount: Daily amount of catalyst needed.
+        :type catalystAmount: float
+
+        :return: Number of rafineries needed.
+        :rtype: int
+
+        :raises ValueError: If catalyst amount is negative.
+        """
+        if catalystAmount < 0:
+            raise ValueError("Catalyst amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.CATALYST)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerRafinery = (outputQuantity / productionTime) * 24
+
+        return math.ceil(catalystAmount / productionPerRafinery)
+
+    def getMapleSyrupNeededForRafineriesWithCatalyst(
+            self, rafineriesCount: int) -> int:
+        """
+        Calculate the number of maple syrup needed per day to keep a given
+        number of rafineries running producing catalyst.
+
+        :param rafineriesCount: Number of rafineries.
+        :type rafineriesCount: int
+
+        :return: Daily amount of maple syrup needed.
+        :rtype: int
+
+        :raises ValueError: If rafineries count is negative.
+        """
+        if rafineriesCount < 0:
+            raise ValueError("Rafineries count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.CATALYST)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        mapleSyrupInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.CATALYST,
+            "Maple Syrup")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        mapleSyrupPerRafineryPerDay = mapleSyrupInput * cyclesPerDay
+
+        return math.ceil(rafineriesCount * mapleSyrupPerRafineryPerDay)
+
+    def getExtractNeededForRafineriesWithCatalyst(
+            self, rafineriesCount: int) -> int:
+        """
+        Calculate the number of extract needed per day to keep a given number
+        of rafineries running producing catalyst.
+
+        :param rafineriesCount: Number of rafineries.
+        :type rafineriesCount: int
+
+        :return: Daily amount of extract needed.
+        :rtype: int
+
+        :raises ValueError: If rafineries count is negative.
+        """
+        if rafineriesCount < 0:
+            raise ValueError("Rafineries count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.CATALYST)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.RAFINERY, recipeIndex)
+        extractInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.RAFINERY,
+            GoodsRecipeName.CATALYST,
+            "Extract")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        extractPerRafineryPerDay = extractInput * cyclesPerDay
+
+        return math.ceil(rafineriesCount * extractPerRafineryPerDay)
+
+    def getBotPartFactoriesNeededForBotChassis(
+            self, botChassisAmount: float) -> int:
+        """
+        Calculate the number of bot part factories needed to produce a given
+        amount of bot chassis per day.
+
+        :param botChassisAmount: Daily amount of bot chassis needed.
+        :type botChassisAmount: float
+
+        :return: Number of bot part factories needed.
+        :rtype: int
+
+        :raises ValueError: If bot chassis amount is negative.
+        """
+        if botChassisAmount < 0:
+            raise ValueError("Bot Chassis amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerBotPartFactory = (outputQuantity / productionTime) * 24
+
+        return math.ceil(botChassisAmount / productionPerBotPartFactory)
+
+    def getPlanksNeededForBotPartFactoriesWithBotChassis(
+            self, botPartFactoriesCount: int) -> int:
+        """
+        Calculate the number of planks needed per day to keep a given number
+        of bot part factories running producing bot chassis.
+
+        :param botPartFactoriesCount: Number of bot part factories.
+        :type botPartFactoriesCount: int
+
+        :return: Daily amount of planks needed.
+        :rtype: int
+
+        :raises ValueError: If bot part factories count is negative.
+        """
+        if botPartFactoriesCount < 0:
+            raise ValueError("Bot part factories count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        planksInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS,
+            "Planks")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        planksPerBotPartFactoryPerDay = planksInput * cyclesPerDay
+
+        return math.ceil(botPartFactoriesCount * planksPerBotPartFactoryPerDay)
+
+    def getMetalBlocksNeededForBotPartFactoriesWithBotChassis(
+            self, botPartFactoriesCount: int) -> int:
+        """
+        Calculate the number of metal blocks needed per day to keep a given
+        number of bot part factories running producing bot chassis.
+
+        :param botPartFactoriesCount: Number of bot part factories.
+        :type botPartFactoriesCount: int
+
+        :return: Daily amount of metal blocks needed.
+        :rtype: int
+
+        :raises ValueError: If bot part factories count is negative.
+        """
+        if botPartFactoriesCount < 0:
+            raise ValueError("Bot part factories count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        metalBlocksInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS,
+            "Metal Blocks")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        metalBlocksPerBotPartFactoryPerDay = metalBlocksInput * cyclesPerDay
+
+        return math.ceil(botPartFactoriesCount *
+                         metalBlocksPerBotPartFactoryPerDay)
+
+    def getBiofuelNeededForBotPartFactoriesWithBotChassis(
+            self, botPartFactoriesCount: int) -> int:
+        """
+        Calculate the number of biofuel needed per day to keep a given number
+        of bot part factories running producing bot chassis.
+
+        :param botPartFactoriesCount: Number of bot part factories.
+        :type botPartFactoriesCount: int
+
+        :return: Daily amount of biofuel needed.
+        :rtype: int
+
+        :raises ValueError: If bot part factories count is negative.
+        """
+        if botPartFactoriesCount < 0:
+            raise ValueError("Bot part factories count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        biofuelInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS,
+            "Biofuel")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        biofuelPerBotPartFactoryPerDay = biofuelInput * cyclesPerDay
+
+        return math.ceil(botPartFactoriesCount *
+                         biofuelPerBotPartFactoryPerDay)
+
+    def getBotPartFactoriesNeededForBotHeads(
+            self, botHeadsAmount: float) -> int:
+        """
+        Calculate the number of bot part factories needed to produce a given
+        amount of bot heads per day.
+
+        :param botHeadsAmount: Daily amount of bot heads needed.
+        :type botHeadsAmount: float
+
+        :return: Number of bot part factories needed.
+        :rtype: int
+
+        :raises ValueError: If bot heads amount is negative.
+        """
+        if botHeadsAmount < 0:
+            raise ValueError("Bot Heads amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerBotPartFactory = (outputQuantity / productionTime) * 24
+
+        return math.ceil(botHeadsAmount / productionPerBotPartFactory)
+
+    def getGearsNeededForBotPartFactoriesWithBotHeads(
+            self, botPartFactoriesCount: int) -> int:
+        """
+        Calculate the number of gears needed per day to keep a given number of
+        bot part factories running producing bot heads.
+
+        :param botPartFactoriesCount: Number of bot part factories.
+        :type botPartFactoriesCount: int
+
+        :return: Daily amount of gears needed.
+        :rtype: int
+
+        :raises ValueError: If bot part factories count is negative.
+        """
+        if botPartFactoriesCount < 0:
+            raise ValueError("Bot part factories count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        gearsInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS,
+            "Gears")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        gearsPerBotPartFactoryPerDay = gearsInput * cyclesPerDay
+
+        return math.ceil(botPartFactoriesCount * gearsPerBotPartFactoryPerDay)
+
+    def getMetalBlocksNeededForBotPartFactoriesWithBotHeads(
+            self, botPartFactoriesCount: int) -> int:
+        """
+        Calculate the number of metal blocks needed per day to keep a given
+        number of bot part factories running producing bot heads.
+
+        :param botPartFactoriesCount: Number of bot part factories.
+        :type botPartFactoriesCount: int
+
+        :return: Daily amount of metal blocks needed.
+        :rtype: int
+
+        :raises ValueError: If bot part factories count is negative.
+        """
+        if botPartFactoriesCount < 0:
+            raise ValueError("Bot part factories count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        metalBlocksInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS,
+            "Metal Blocks")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        metalBlocksPerBotPartFactoryPerDay = metalBlocksInput * cyclesPerDay
+
+        return math.ceil(botPartFactoriesCount *
+                         metalBlocksPerBotPartFactoryPerDay)
+
+    def getPlanksNeededForBotPartFactoriesWithBotHeads(
+            self, botPartFactoriesCount: int) -> int:
+        """
+        Calculate the number of planks needed per day to keep a given number
+        of bot part factories running producing bot heads.
+
+        :param botPartFactoriesCount: Number of bot part factories.
+        :type botPartFactoriesCount: int
+
+        :return: Daily amount of planks needed.
+        :rtype: int
+
+        :raises ValueError: If bot part factories count is negative.
+        """
+        if botPartFactoriesCount < 0:
+            raise ValueError("Bot part factories count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        planksInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS,
+            "Planks")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        planksPerBotPartFactoryPerDay = planksInput * cyclesPerDay
+
+        return math.ceil(botPartFactoriesCount * planksPerBotPartFactoryPerDay)
+
+    def getBotPartFactoriesNeededForBotLimbs(
+            self, botLimbsAmount: float) -> int:
+        """
+        Calculate the number of bot part factories needed to produce a given
+        amount of bot limbs per day.
+
+        :param botLimbsAmount: Daily amount of bot limbs needed.
+        :type botLimbsAmount: float
+
+        :return: Number of bot part factories needed.
+        :rtype: int
+
+        :raises ValueError: If bot limbs amount is negative.
+        """
+        if botLimbsAmount < 0:
+            raise ValueError("Bot Limbs amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_LIMBS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerBotPartFactory = (outputQuantity / productionTime) * 24
+
+        return math.ceil(botLimbsAmount / productionPerBotPartFactory)
+
+    def getGearsNeededForBotPartFactoriesWithBotLimbs(
+            self, botPartFactoriesCount: int) -> int:
+        """
+        Calculate the number of gears needed per day to keep a given number of
+        bot part factories running producing bot limbs.
+
+        :param botPartFactoriesCount: Number of bot part factories.
+        :type botPartFactoriesCount: int
+
+        :return: Daily amount of gears needed.
+        :rtype: int
+
+        :raises ValueError: If bot part factories count is negative.
+        """
+        if botPartFactoriesCount < 0:
+            raise ValueError("Bot part factories count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_LIMBS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        gearsInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_LIMBS,
+            "Gears")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        gearsPerBotPartFactoryPerDay = gearsInput * cyclesPerDay
+
+        return math.ceil(botPartFactoriesCount * gearsPerBotPartFactoryPerDay)
+
+    def getPlanksNeededForBotPartFactoriesWithBotLimbs(
+            self, botPartFactoriesCount: int) -> int:
+        """
+        Calculate the number of planks needed per day to keep a given number
+        of bot part factories running producing bot limbs.
+
+        :param botPartFactoriesCount: Number of bot part factories.
+        :type botPartFactoriesCount: int
+
+        :return: Daily amount of planks needed.
+        :rtype: int
+
+        :raises ValueError: If bot part factories count is negative.
+        """
+        if botPartFactoriesCount < 0:
+            raise ValueError("Bot part factories count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_LIMBS)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        planksInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_LIMBS,
+            "Planks")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        planksPerBotPartFactoryPerDay = planksInput * cyclesPerDay
+
+        return math.ceil(botPartFactoriesCount * planksPerBotPartFactoryPerDay)
+
+    def getBotAssemblersNeededForBots(self, botsAmount: float) -> int:
+        """
+        Calculate the number of bot assemblers needed to produce a given
+        amount of bots per day.
+
+        :param botsAmount: Daily amount of bots needed.
+        :type botsAmount: float
+
+        :return: Number of bot assemblers needed.
+        :rtype: int
+
+        :raises ValueError: If bots amount is negative.
+        """
+        if botsAmount < 0:
+            raise ValueError("Bots amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_ASSEMBLER, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.BOT_ASSEMBLER, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerBotAssembler = (outputQuantity / productionTime) * 24
+
+        return math.ceil(botsAmount / productionPerBotAssembler)
+
+    def getBotChassisNeededForBotAssemblers(
+            self, botAssemblersCount: int) -> int:
+        """
+        Calculate the number of bot chassis needed per day to keep a given
+        number of bot assemblers running.
+
+        :param botAssemblersCount: Number of bot assemblers.
+        :type botAssemblersCount: int
+
+        :return: Daily amount of bot chassis needed.
+        :rtype: int
+
+        :raises ValueError: If bot assemblers count is negative.
+        """
+        if botAssemblersCount < 0:
+            raise ValueError("Bot assemblers count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_ASSEMBLER, recipeIndex)
+        botChassisInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT,
+            "Bot Chassis")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        botChassisPerBotAssemblerPerDay = botChassisInput * cyclesPerDay
+
+        return math.ceil(botAssemblersCount * botChassisPerBotAssemblerPerDay)
+
+    def getBotHeadsNeededForBotAssemblers(
+            self, botAssemblersCount: int) -> int:
+        """
+        Calculate the number of bot heads needed per day to keep a given
+        number of bot assemblers running.
+
+        :param botAssemblersCount: Number of bot assemblers.
+        :type botAssemblersCount: int
+
+        :return: Daily amount of bot heads needed.
+        :rtype: int
+
+        :raises ValueError: If bot assemblers count is negative.
+        """
+        if botAssemblersCount < 0:
+            raise ValueError("Bot assemblers count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_ASSEMBLER, recipeIndex)
+        botHeadsInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT,
+            "Bot Heads")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        botHeadsPerBotAssemblerPerDay = botHeadsInput * cyclesPerDay
+
+        return math.ceil(botAssemblersCount * botHeadsPerBotAssemblerPerDay)
+
+    def getBotLimbsNeededForBotAssemblers(
+            self, botAssemblersCount: int) -> int:
+        """
+        Calculate the number of bot limbs needed per day to keep a given
+        number of bot assemblers running.
+
+        :param botAssemblersCount: Number of bot assemblers.
+        :type botAssemblersCount: int
+
+        :return: Daily amount of bot limbs needed.
+        :rtype: int
+
+        :raises ValueError: If bot assemblers count is negative.
+        """
+        if botAssemblersCount < 0:
+            raise ValueError("Bot assemblers count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.BOT_ASSEMBLER, recipeIndex)
+        botLimbsInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT,
+            "Bot Limbs")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        botLimbsPerBotAssemblerPerDay = botLimbsInput * cyclesPerDay
+
+        return math.ceil(botAssemblersCount * botLimbsPerBotAssemblerPerDay)
+
+    def getExplosivesFactoriesNeededForExplosives(
+            self, explosivesAmount: float) -> int:
+        """
+        Calculate the number of explosives factories needed to produce a given
+        amount of explosives per day.
+
+        :param explosivesAmount: Daily amount of explosives needed.
+        :type explosivesAmount: float
+
+        :return: Number of explosives factories needed.
+        :rtype: int
+
+        :raises ValueError: If explosives amount is negative.
+        """
+        if explosivesAmount < 0:
+            raise ValueError("Explosives amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.EXPLOSIVES_FACTORY,
+            GoodsRecipeName.EXPLOSIVES)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.EXPLOSIVES_FACTORY, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.EXPLOSIVES_FACTORY, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerExplosivesFactory = (outputQuantity / productionTime) * 24
+
+        return math.ceil(explosivesAmount / productionPerExplosivesFactory)
+
+    def getBadwaterNeededForExplosivesFactories(
+            self, explosivesFactoriesCount: int) -> int:
+        """
+        Calculate the number of badwater needed per day to keep a given number
+        of explosives factories running.
+
+        :param explosivesFactoriesCount: Number of explosives factories.
+        :type explosivesFactoriesCount: int
+
+        :return: Daily amount of badwater needed.
+        :rtype: int
+
+        :raises ValueError: If explosives factories count is negative.
+        """
+        if explosivesFactoriesCount < 0:
+            raise ValueError("Explosives factories count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.EXPLOSIVES_FACTORY,
+            GoodsRecipeName.EXPLOSIVES)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.EXPLOSIVES_FACTORY, recipeIndex)
+        badwaterInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.EXPLOSIVES_FACTORY,
+            GoodsRecipeName.EXPLOSIVES,
+            "Badwater")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        badwaterPerExplosivesFactoryPerDay = badwaterInput * cyclesPerDay
+
+        return math.ceil(explosivesFactoriesCount *
+                         badwaterPerExplosivesFactoryPerDay)
+
+    def getCentrifugesNeededForExtract(self, extractAmount: float) -> int:
+        """
+        Calculate the number of centrifuges needed to produce a given amount
+        of extract per day.
+
+        :param extractAmount: Daily amount of extract needed.
+        :type extractAmount: float
+
+        :return: Number of centrifuges needed.
+        :rtype: int
+
+        :raises ValueError: If extract amount is negative.
+        """
+        if extractAmount < 0:
+            raise ValueError("Extract amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.CENTRIFUGE,
+            GoodsRecipeName.EXTRACT)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.CENTRIFUGE, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.CENTRIFUGE, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerCentrifuge = (outputQuantity / productionTime) * 24
+
+        return math.ceil(extractAmount / productionPerCentrifuge)
+
+    def getBadwaterNeededForCentrifuges(
+            self, centrifugesCount: int) -> int:
+        """
+        Calculate the number of badwater needed per day to keep a given number
+        of centrifuges running.
+
+        :param centrifugesCount: Number of centrifuges.
+        :type centrifugesCount: int
+
+        :return: Daily amount of badwater needed.
+        :rtype: int
+
+        :raises ValueError: If centrifuges count is negative.
+        """
+        if centrifugesCount < 0:
+            raise ValueError("Centrifuges count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.CENTRIFUGE,
+            GoodsRecipeName.EXTRACT)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.CENTRIFUGE, recipeIndex)
+        badwaterInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.CENTRIFUGE,
+            GoodsRecipeName.EXTRACT,
+            "Badwater")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        badwaterPerCentrifugePerDay = badwaterInput * cyclesPerDay
+
+        return math.ceil(centrifugesCount * badwaterPerCentrifugePerDay)
+
+    def getLogsNeededForCentrifuges(self, centrifugesCount: int) -> float:
+        """
+        Calculate the number of logs needed per day to keep a given number of
+        centrifuges running.
+
+        :param centrifugesCount: Number of centrifuges.
+        :type centrifugesCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: float
+
+        :raises ValueError: If centrifuges count is negative.
+        """
+        if centrifugesCount < 0:
+            raise ValueError("Centrifuges count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.CENTRIFUGE,
+            GoodsRecipeName.EXTRACT)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.CENTRIFUGE, recipeIndex)
+        logsInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.CENTRIFUGE,
+            GoodsRecipeName.EXTRACT,
+            "Logs")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerCentrifugePerDay = logsInput * cyclesPerDay
+
+        return centrifugesCount * logsPerCentrifugePerDay
+
+    def getHerbalistsNeededForAntidote(self, antidoteAmount: float) -> int:
+        """
+        Calculate the number of herbalists needed to produce a given amount of
+        antidote per day.
+
+        :param antidoteAmount: Daily amount of antidote needed.
+        :type antidoteAmount: float
+
+        :return: Number of herbalists needed.
+        :rtype: int
+
+        :raises ValueError: If antidote amount is negative.
+        """
+        if antidoteAmount < 0:
+            raise ValueError("Antidote amount cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.HERBALIST, recipeIndex)
+        outputQuantity = self.factionData.getGoodsOutputQuantity(
+            GoodsBuildingName.HERBALIST, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerHerbalist = (outputQuantity / productionTime) * 24
+
+        return math.ceil(antidoteAmount / productionPerHerbalist)
+
+    def getDandelionsNeededForHerbalists(
+            self, herbalistsCount: int) -> int:
+        """
+        Calculate the number of dandelions needed per day to keep a given
+        number of herbalists running.
+
+        :param herbalistsCount: Number of herbalists.
+        :type herbalistsCount: int
+
+        :return: Daily amount of dandelions needed.
+        :rtype: int
+
+        :raises ValueError: If herbalists count is negative.
+        """
+        if herbalistsCount < 0:
+            raise ValueError("Herbalists count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.HERBALIST, recipeIndex)
+        dandelionsInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE,
+            "Dandelions")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        dandelionsPerHerbalistPerDay = dandelionsInput * cyclesPerDay
+
+        return math.ceil(herbalistsCount * dandelionsPerHerbalistPerDay)
+
+    def getBerriesNeededForHerbalists(self, herbalistsCount: int) -> int:
+        """
+        Calculate the number of berries needed per day to keep a given number
+        of herbalists running.
+
+        :param herbalistsCount: Number of herbalists.
+        :type herbalistsCount: int
+
+        :return: Daily amount of berries needed.
+        :rtype: int
+
+        :raises ValueError: If herbalists count is negative.
+        """
+        if herbalistsCount < 0:
+            raise ValueError("Herbalists count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.HERBALIST, recipeIndex)
+        berriesInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE,
+            "Berries")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        berriesPerHerbalistPerDay = berriesInput * cyclesPerDay
+
+        return math.ceil(herbalistsCount * berriesPerHerbalistPerDay)
+
+    def getLogsNeededForHerbalists(self, herbalistsCount: int) -> float:
+        """
+        Calculate the number of logs needed per day to keep a given number of
+        herbalists running.
+
+        :param herbalistsCount: Number of herbalists.
+        :type herbalistsCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: float
+
+        :raises ValueError: If herbalists count is negative.
+        """
+        if herbalistsCount < 0:
+            raise ValueError("Herbalists count cannot be negative.")
+
+        recipeIndex = self.factionData.getGoodsRecipeIndex(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE)
+        productionTime = self.factionData.getGoodsProductionTime(
+            GoodsBuildingName.HERBALIST, recipeIndex)
+        logsInput = self.factionData.getGoodsInputQuantity(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE,
+            "Logs")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerHerbalistPerDay = logsInput * cyclesPerDay
+
+        return herbalistsCount * logsPerHerbalistPerDay

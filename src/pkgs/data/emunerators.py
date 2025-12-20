@@ -110,6 +110,28 @@ class GoodsBuildingName(Enum):
     HERBALIST = 'Herbalist'
 
 
+class GoodsRecipeName(Enum):
+    PLANKS = 'Planks'
+    GEARS = 'Gears'
+    PAPER = 'Paper'
+    BOOKS = 'Books'
+    PUNCHCARDS = 'Punchcards'
+    TREATED_PLANKS = 'Treated Planks'
+    METAL_BLOCKS = 'Metal Blocks'
+    SCRAP_METAL = 'Scrap Metal'
+    BIOFUEL_CARROTS = 'Biofuel Carrots'
+    BIOFUEL_POTATOES = 'Biofuel Potatoes'
+    BIOFUEL_SPADDERDOCKS = 'Biofuel Spadderdocks'
+    CATALYST = 'Catalyst'
+    BOT_CHASSIS = 'Bot Chassis'
+    BOT_HEADS = 'Bot Heads'
+    BOT_LIMBS = 'Bot Limbs'
+    BOT = 'Bot'
+    EXPLOSIVES = 'Explosives'
+    EXTRACT = 'Extract'
+    ANTIDOTE = 'Antidote'
+
+
 class DataKeys:
     FACTION_DATA = 'faction_data'
     NAME = 'name'

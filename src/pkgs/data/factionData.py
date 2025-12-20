@@ -736,6 +736,68 @@ class FactionData:
         building = self._getGoods(buildingName)
         return building[DataKeys.RECIPES][recipeIndex][DataKeys.OUT_QUANTITY]
 
+    def getGoodsRecipeIndex(self, buildingName: GoodsBuildingName,
+                            recipeName: 'GoodsRecipeName') -> int:
+        """
+        Find the recipe index for a given goods building and recipe name.
+
+        :param buildingName: The goods building.
+        :type buildingName: GoodsBuildingName
+        :param recipeName: The recipe name to search for.
+        :type recipeName: GoodsRecipeName
+
+        :return: The index of the recipe.
+        :rtype: int
+
+        :raises ValueError: If the specified goods building is not found
+                            or if the recipe is not found in the building.
+        """
+        from pkgs.data.emunerators import GoodsRecipeName
+
+        building = self._getGoods(buildingName)
+        recipes = building[DataKeys.RECIPES]
+
+        for index, recipe in enumerate(recipes):
+            if recipe[DataKeys.NAME] == recipeName.value:
+                return index
+
+        raise ValueError(f"Recipe '{recipeName.value}' not found in "
+                         f"building '{buildingName.value}'.")
+
+    def getGoodsInputQuantity(self, buildingName: GoodsBuildingName,
+                              recipeName: 'GoodsRecipeName',
+                              inputName: str) -> float:
+        """
+        Get the quantity of a specific input for a goods recipe.
+
+        :param buildingName: The goods building.
+        :type buildingName: GoodsBuildingName
+        :param recipeName: The recipe name.
+        :type recipeName: GoodsRecipeName
+        :param inputName: The name of the input to get quantity for.
+        :type inputName: str
+
+        :return: The quantity of the specified input.
+        :rtype: float
+
+        :raises ValueError: If the specified building or recipe is not found,
+                            or if the input is not found in the recipe.
+        """
+        recipeIndex = self.getGoodsRecipeIndex(buildingName, recipeName)
+        inputs = self.getGoodsInputs(buildingName, recipeIndex)
+
+        if inputs is None:
+            raise ValueError(f"Recipe '{recipeName.value}' in building "
+                             f"'{buildingName.value}' has no inputs.")
+
+        for input_item in inputs:
+            if input_item[DataKeys.NAME] == inputName:
+                return input_item[DataKeys.QUANTITY]
+
+        raise ValueError(f"Input '{inputName}' not found in recipe "
+                         f"'{recipeName.value}' for building "
+                         f"'{buildingName.value}'.")
+
 
 if __name__ == '__main__':
     folktails = FactionData('./data/factions/folktails.yml')

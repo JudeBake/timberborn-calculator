@@ -267,7 +267,7 @@ faction_data:
       - name: "Rafinery"
         workers: 2
         recipes:
-          - name: "Biofuel"
+          - name: "Biofuel Carrots"
             production_time: 3.0
             inputs:
               - name: "Water"
@@ -275,7 +275,7 @@ faction_data:
               - name: "Carrots"
                 quantity: 2
             output_quantity: 5
-          - name: "Biofuel"
+          - name: "Biofuel Potatoes"
             production_time: 3.0
             inputs:
               - name: "Water"
@@ -283,7 +283,7 @@ faction_data:
               - name: "Potatoes"
                 quantity: 2
             output_quantity: 30
-          - name: "Biofuel"
+          - name: "Biofuel Spadderdocks"
             production_time: 3.0
             inputs:
               - name: "Water"

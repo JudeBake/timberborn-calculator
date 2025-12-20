@@ -1109,3 +1109,109 @@ class TestFolktail(TestCase):
             # Logs per grill per day = 0.1 * 72.727... = 7.272...
             # Total logs = 3 * 7.272... = 21.818...
             self.assertAlmostEqual(21.818181818181817, result, places=10)
+
+    def test_getGrillsNeededForSpadderdocksNegativeAmount(self) -> None:
+        """
+        The getGrillsNeededForSpadderdocks method must raise ValueError if
+        grilled spadderdock amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getGrillsNeededForSpadderdocks(-10.0)
+        self.assertEqual("Grilled spadderdock amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getGrillsNeededForSpadderdocksSuccess(self) -> None:
+        """
+        The getGrillsNeededForSpadderdocks method must correctly calculate
+        grills needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 2
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.25
+            mockFactionDataInstance.getFoodProcessingOutputQuantity \
+                .return_value = 3
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getGrillsNeededForSpadderdocks(300.0)
+
+            # Production per grill per day = (3 / 0.25) * 24 = 288.0
+            # Grills needed = ceil(300.0 / 288.0) = ceil(1.041...) = 2
+            self.assertEqual(2, result)
+
+    def test_getSpadderdocksNeededForGrillsNegativeCount(self) -> None:
+        """
+        The getSpadderdocksNeededForGrills method must raise ValueError if
+        grills count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getSpadderdocksNeededForGrills(-1)
+        self.assertEqual("Grills count cannot be negative.",
+                         str(context.exception))
+
+    def test_getSpadderdocksNeededForGrillsSuccess(self) -> None:
+        """
+        The getSpadderdocksNeededForGrills method must correctly calculate
+        spadderdocks needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 2
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.25
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getSpadderdocksNeededForGrills(3)
+
+            # Cycles per day = 24 / 0.25 = 96.0
+            # Spadderdocks per grill per day = 2 * 96.0 = 192.0
+            # Total spadderdocks = 3 * 192.0 = 576.0
+            # Ceiling = 576
+            self.assertEqual(576, result)
+
+    def test_getLogsNeededForGrillsWithSpadderdocksNegativeCount(self) -> None:
+        """
+        The getLogsNeededForGrillsWithSpadderdocks method must raise
+        ValueError if grills count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLogsNeededForGrillsWithSpadderdocks(-1)
+        self.assertEqual("Grills count cannot be negative.",
+                         str(context.exception))
+
+    def test_getLogsNeededForGrillsWithSpadderdocksSuccess(self) -> None:
+        """
+        The getLogsNeededForGrillsWithSpadderdocks method must correctly
+        calculate logs needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 2
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.25
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 0.15
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getLogsNeededForGrillsWithSpadderdocks(3)
+
+            # Cycles per day = 24 / 0.25 = 96.0
+            # Logs per grill per day = 0.15 * 96.0 = 14.4
+            # Total logs = 3 * 14.4 = 43.2
+            self.assertAlmostEqual(43.2, result, places=10)
+

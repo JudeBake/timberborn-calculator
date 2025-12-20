@@ -1256,3 +1256,116 @@ class TestFolktails(TestCase):
             outputQuantity = self.uut.getGoodsOutputQuantity(buildingName, 0)
             mockedGetGoods.assert_called_once_with(buildingName)
             self.assertEqual(1, outputQuantity)
+
+    def test_getGoodsRecipeIndexRecipeNotFound(self) -> None:
+        """
+        The getGoodsRecipeIndex method must raise ValueError if the
+        specified recipe is not found in the building.
+        """
+        buildingName = GoodsBuildingName.LUMBER_MILL
+        recipeName = GoodsRecipeName.GEARS
+        mockBuildingDict = {
+            'recipes': [
+                {'name': 'Planks'},
+                {'name': 'Paper'}
+            ]
+        }
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods:
+            mockedGetGoods.return_value = mockBuildingDict
+            with self.assertRaises(ValueError) as context:
+                self.uut.getGoodsRecipeIndex(buildingName, recipeName)
+            self.assertEqual(
+                "Recipe 'Gears' not found in building 'Lumber Mill'.",
+                str(context.exception))
+
+    def test_getGoodsRecipeIndexSuccess(self) -> None:
+        """
+        The getGoodsRecipeIndex method must return the correct recipe index
+        for a given goods building and recipe name.
+        """
+        buildingName = GoodsBuildingName.PRINTING_PRESS
+        recipeName = GoodsRecipeName.PUNCHCARDS
+        mockBuildingDict = {
+            'recipes': [
+                {'name': 'Books'},
+                {'name': 'Punchcards'}
+            ]
+        }
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods:
+            mockedGetGoods.return_value = mockBuildingDict
+            recipeIndex = self.uut.getGoodsRecipeIndex(buildingName, recipeName)
+            mockedGetGoods.assert_called_once_with(buildingName)
+            self.assertEqual(1, recipeIndex)
+
+    def test_getGoodsInputQuantityNoInputs(self) -> None:
+        """
+        The getGoodsInputQuantity method must raise ValueError if the
+        recipe has no inputs.
+        """
+        buildingName = GoodsBuildingName.LUMBER_MILL
+        recipeName = GoodsRecipeName.PLANKS
+        inputName = "Logs"
+        mockBuildingDict = {
+            'recipes': [
+                {'name': 'Planks', 'inputs': None}
+            ]
+        }
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods:
+            mockedGetGoods.return_value = mockBuildingDict
+            with self.assertRaises(ValueError) as context:
+                self.uut.getGoodsInputQuantity(buildingName, recipeName, inputName)
+            self.assertEqual(
+                "Recipe 'Planks' in building 'Lumber Mill' has no inputs.",
+                str(context.exception))
+
+    def test_getGoodsInputQuantityInputNotFound(self) -> None:
+        """
+        The getGoodsInputQuantity method must raise ValueError if the
+        specified input is not found in the recipe.
+        """
+        buildingName = GoodsBuildingName.GEAR_WORKSHOP
+        recipeName = GoodsRecipeName.GEARS
+        inputName = "Logs"
+        mockBuildingDict = {
+            'recipes': [
+                {
+                    'name': 'Gears',
+                    'inputs': [
+                        {'name': 'Planks', 'quantity': 1}
+                    ]
+                }
+            ]
+        }
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods:
+            mockedGetGoods.return_value = mockBuildingDict
+            with self.assertRaises(ValueError) as context:
+                self.uut.getGoodsInputQuantity(buildingName, recipeName, inputName)
+            self.assertEqual(
+                "Input 'Logs' not found in recipe 'Gears' for building 'Gear Workshop'.",
+                str(context.exception))
+
+    def test_getGoodsInputQuantitySuccess(self) -> None:
+        """
+        The getGoodsInputQuantity method must return the correct input
+        quantity for a given goods building, recipe, and input name.
+        """
+        buildingName = GoodsBuildingName.SMELTER
+        recipeName = GoodsRecipeName.METAL_BLOCKS
+        inputName = "Logs"
+        mockBuildingDict = {
+            'recipes': [
+                {
+                    'name': 'Metal Blocks',
+                    'inputs': [
+                        {'name': 'Scrap Metal', 'quantity': 1},
+                        {'name': 'Logs', 'quantity': 0.2}
+                    ]
+                }
+            ]
+        }
+        with patch.object(self.uut, '_getGoods') as mockedGetGoods:
+            mockedGetGoods.return_value = mockBuildingDict
+            inputQuantity = self.uut.getGoodsInputQuantity(
+                buildingName, recipeName, inputName)
+            mockedGetGoods.assert_called_once_with(buildingName)
+            self.assertEqual(0.2, inputQuantity)

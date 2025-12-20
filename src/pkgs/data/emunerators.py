@@ -80,6 +80,12 @@ class FoodProcessingBuildingName(Enum):
     OIL_PRESS = 'Oil Press'
 
 
+class FoodRecipeName(Enum):
+    GRILLED_POTATOES = 'Grilled Potatoes'
+    GRILLED_CHESTNUTS = 'Grilled Chestnuts'
+    GRILLED_SPADDERDOCKS = 'Grilled Spadderdocks'
+
+
 class GoodsBuildingName(Enum):
     LUMBER_MILL = 'Lumber Mill'
     INDUSTRIAL_LUMBER_MILL = 'Industrial Lumber Mill'

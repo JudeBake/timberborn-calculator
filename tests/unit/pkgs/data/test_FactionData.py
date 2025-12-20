@@ -10,8 +10,8 @@ sys.path.append(os.path.abspath('./src'))
 
 from pkgs.data.factionData import FactionData                   # noqa: E402
 from pkgs.data.emunerators import ConsumptionType, CropName, \
-    DifficultyLevel, FoodProcessingBuildingName, GoodsBuildingName, \
-    HarvestName, TreeName, WaterBuildingName                    # noqa: E402
+    DifficultyLevel, FoodProcessingBuildingName, FoodRecipeName, \
+    GoodsBuildingName, HarvestName, TreeName, WaterBuildingName # noqa: E402
 
 
 class TestFolktails(TestCase):
@@ -840,37 +840,6 @@ class TestFolktails(TestCase):
             mockedGet.assert_called_once_with(buildingName)
             self.assertEqual(0.52, productionTime)
 
-    def test_getFoodProcessingInputsValueError(self) -> None:
-        """
-        The getFoodProcessingInputs method must raise a ValueError when the
-        requested food processing building is not found (via
-        _getFoodProcessing).
-        """
-        buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
-        with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
-                self.assertRaises(ValueError) as context:
-            mockedGet.side_effect = ValueError(
-                f"Food processing building '{buildingName.value}' not found.")
-            self.uut.getFoodProcessingInputs(buildingName, 0)
-            mockedGet.assert_called_once_with(buildingName)
-        self.assertEqual(f"Food processing building '{buildingName.value}' "
-                         f"not found.",
-                         str(context.exception))
-
-    def test_getFoodProcessingInputsSuccess(self) -> None:
-        """
-        The getFoodProcessingInputs method must return the correct inputs
-        for a given food processing building and recipe index.
-        """
-        buildingName = FoodProcessingBuildingName.GRILL
-        mockInputs = [{'name': 'Potatoes', 'quantity': 1}]
-        mockBuildingDict = {'recipes': [{'inputs': mockInputs}]}
-        with patch.object(self.uut, '_getFoodProcessing') as mockedGet:
-            mockedGet.return_value = mockBuildingDict
-            inputs = self.uut.getFoodProcessingInputs(buildingName, 0)
-            mockedGet.assert_called_once_with(buildingName)
-            self.assertEqual(mockInputs, inputs)
-
     def test_getFoodProcessingOutputQuantityValueError(self) -> None:
         """
         The getFoodProcessingOutputQuantity method must raise a ValueError
@@ -901,6 +870,202 @@ class TestFolktails(TestCase):
                 buildingName, 0)
             mockedGet.assert_called_once_with(buildingName)
             self.assertEqual(4, outputQuantity)
+
+    def test_getFoodProcessingRecipeIndexBuildingNotFound(self) -> None:
+        """
+        The getFoodProcessingRecipeIndex method must raise a ValueError when
+        the requested food processing building is not found (via
+        _getFoodProcessing).
+        """
+        buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        recipeName = FoodRecipeName.GRILLED_POTATOES
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
+                self.assertRaises(ValueError) as context:
+            mockedGet.side_effect = ValueError(
+                f"Food processing building '{buildingName.value}' not found.")
+            self.uut.getFoodProcessingRecipeIndex(buildingName, recipeName)
+            mockedGet.assert_called_once_with(buildingName)
+        self.assertEqual(f"Food processing building '{buildingName.value}' "
+                         f"not found.",
+                         str(context.exception))
+
+    def test_getFoodProcessingRecipeIndexRecipeNotFound(self) -> None:
+        """
+        The getFoodProcessingRecipeIndex method must raise a ValueError when
+        the requested recipe is not found.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        recipeName = FoodRecipeName.GRILLED_POTATOES
+        mockBuildingDict = {
+            'recipes': [
+                {'name': 'Grilled Chestnuts'},
+                {'name': 'Grilled Spadderdocks'}
+            ]
+        }
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
+                self.assertRaises(ValueError) as context:
+            mockedGet.return_value = mockBuildingDict
+            self.uut.getFoodProcessingRecipeIndex(buildingName, recipeName)
+            mockedGet.assert_called_once_with(buildingName)
+        self.assertEqual(f"Recipe '{recipeName.value}' not found in "
+                         f"'{buildingName.value}'.",
+                         str(context.exception))
+
+    def test_getFoodProcessingRecipeIndexSuccess(self) -> None:
+        """
+        The getFoodProcessingRecipeIndex method must return the correct recipe
+        index for a given food processing building and recipe name.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        recipeName = FoodRecipeName.GRILLED_POTATOES
+        mockBuildingDict = {
+            'recipes': [
+                {'name': 'Grilled Potatoes'},
+                {'name': 'Grilled Chestnuts'},
+                {'name': 'Grilled Spadderdocks'}
+            ]
+        }
+        with patch.object(self.uut, '_getFoodProcessing') as mockedGet:
+            mockedGet.return_value = mockBuildingDict
+            recipeIndex = self.uut.getFoodProcessingRecipeIndex(
+                buildingName, recipeName)
+            mockedGet.assert_called_once_with(buildingName)
+            self.assertEqual(0, recipeIndex)
+
+    def test_getFoodProcessingInputIndexRecipeNotFound(self) -> None:
+        """
+        The getFoodProcessingInputIndex method must raise a ValueError when
+        the recipe is not found (via getFoodProcessingRecipeIndex).
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        recipeName = FoodRecipeName.GRILLED_POTATOES
+        inputName = "Potatoes"
+        with patch.object(self.uut, 'getFoodProcessingRecipeIndex') \
+                as mockedGet, self.assertRaises(ValueError) as context:
+            mockedGet.side_effect = ValueError(
+                f"Recipe '{recipeName.value}' not found in "
+                f"'{buildingName.value}'.")
+            self.uut.getFoodProcessingInputIndex(buildingName, recipeName,
+                                                 inputName)
+            mockedGet.assert_called_once_with(buildingName, recipeName)
+        self.assertEqual(f"Recipe '{recipeName.value}' not found in "
+                         f"'{buildingName.value}'.",
+                         str(context.exception))
+
+    def test_getFoodProcessingInputIndexNoInputs(self) -> None:
+        """
+        The getFoodProcessingInputIndex method must raise a ValueError when
+        the recipe has no inputs.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        recipeName = FoodRecipeName.GRILLED_POTATOES
+        inputName = "Potatoes"
+        mockBuildingDict = {
+            'recipes': [
+                {'name': 'Grilled Potatoes', 'inputs': None}
+            ]
+        }
+        with patch.object(self.uut, 'getFoodProcessingRecipeIndex') \
+                as mockedGetRecipe, \
+                patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
+                self.assertRaises(ValueError) as context:
+            mockedGetRecipe.return_value = 0
+            mockedGet.return_value = mockBuildingDict
+            self.uut.getFoodProcessingInputIndex(buildingName, recipeName,
+                                                 inputName)
+        self.assertEqual(f"Recipe '{recipeName.value}' in "
+                         f"'{buildingName.value}' has no inputs.",
+                         str(context.exception))
+
+    def test_getFoodProcessingInputIndexInputNotFound(self) -> None:
+        """
+        The getFoodProcessingInputIndex method must raise a ValueError when
+        the input is not found.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        recipeName = FoodRecipeName.GRILLED_POTATOES
+        inputName = "Carrots"
+        mockBuildingDict = {
+            'recipes': [
+                {
+                    'name': 'Grilled Potatoes',
+                    'inputs': [
+                        {'name': 'Potatoes', 'quantity': 1},
+                        {'name': 'Logs', 'quantity': 0.1}
+                    ]
+                }
+            ]
+        }
+        with patch.object(self.uut, 'getFoodProcessingRecipeIndex') \
+                as mockedGetRecipe, \
+                patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
+                self.assertRaises(ValueError) as context:
+            mockedGetRecipe.return_value = 0
+            mockedGet.return_value = mockBuildingDict
+            self.uut.getFoodProcessingInputIndex(buildingName, recipeName,
+                                                 inputName)
+        self.assertEqual(f"Input '{inputName}' not found in recipe "
+                         f"'{recipeName.value}' of '{buildingName.value}'.",
+                         str(context.exception))
+
+    def test_getFoodProcessingInputIndexSuccess(self) -> None:
+        """
+        The getFoodProcessingInputIndex method must return the correct input
+        index.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        recipeName = FoodRecipeName.GRILLED_POTATOES
+        inputName = "Logs"
+        mockBuildingDict = {
+            'recipes': [
+                {
+                    'name': 'Grilled Potatoes',
+                    'inputs': [
+                        {'name': 'Potatoes', 'quantity': 1},
+                        {'name': 'Logs', 'quantity': 0.1}
+                    ]
+                }
+            ]
+        }
+        with patch.object(self.uut, 'getFoodProcessingRecipeIndex') \
+                as mockedGetRecipe, \
+                patch.object(self.uut, '_getFoodProcessing') as mockedGet:
+            mockedGetRecipe.return_value = 0
+            mockedGet.return_value = mockBuildingDict
+            inputIndex = self.uut.getFoodProcessingInputIndex(
+                buildingName, recipeName, inputName)
+            self.assertEqual(1, inputIndex)
+
+    def test_getFoodProcessingInputQuantitySuccess(self) -> None:
+        """
+        The getFoodProcessingInputQuantity method must return the correct
+        input quantity.
+        """
+        buildingName = FoodProcessingBuildingName.GRILL
+        recipeName = FoodRecipeName.GRILLED_POTATOES
+        inputName = "Potatoes"
+        mockBuildingDict = {
+            'recipes': [
+                {
+                    'name': 'Grilled Potatoes',
+                    'inputs': [
+                        {'name': 'Potatoes', 'quantity': 1},
+                        {'name': 'Logs', 'quantity': 0.1}
+                    ]
+                }
+            ]
+        }
+        with patch.object(self.uut, 'getFoodProcessingInputIndex') \
+                as mockedGetInput, \
+                patch.object(self.uut, 'getFoodProcessingRecipeIndex') \
+                as mockedGetRecipe, \
+                patch.object(self.uut, '_getFoodProcessing') as mockedGet:
+            mockedGetInput.return_value = 0
+            mockedGetRecipe.return_value = 0
+            mockedGet.return_value = mockBuildingDict
+            quantity = self.uut.getFoodProcessingInputQuantity(
+                buildingName, recipeName, inputName)
+            self.assertEqual(1, quantity)
 
     def test_getGoodsValueError(self) -> None:
         """

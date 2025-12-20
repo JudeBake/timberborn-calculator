@@ -3,7 +3,8 @@ from typing import Any
 import yaml as yaml
 
 from .emunerators import ConsumptionType, CropName, DifficultyLevel
-from .emunerators import FoodProcessingBuildingName, GoodsBuildingName
+from .emunerators import FoodProcessingBuildingName, FoodRecipeName
+from .emunerators import GoodsBuildingName
 from .emunerators import HarvestName, TreeName, WaterBuildingName
 from .emunerators import DataKeys
 
@@ -485,28 +486,6 @@ class FactionData:
         building = self._getFoodProcessing(buildingName)
         return building[DataKeys.RECIPES][recipeIndex][DataKeys.PROD_TIME]
 
-    def getFoodProcessingInputs(self, buildingName: FoodProcessingBuildingName,
-                                recipeIndex: int) -> list[dict[str, Any]] | None:   # noqa: E501
-        """
-        Get the inputs for a specified food processing building and recipe
-        index.
-
-        :param buildingName: The food processing building to retrieve inputs
-                             for.
-        :type buildingName: FoodProcessingBuildingName
-        :param recipeIndex: The index of the recipe.
-        :type recipeIndex: int
-
-        :return: List of input dictionaries or None if no inputs required.
-        :rtype: list[dict[str, Any]] | None
-
-        :raises ValueError: If the specified food processing building is not
-                            found in faction data.
-        :raises IndexError: If the recipe index is out of range.
-        """
-        building = self._getFoodProcessing(buildingName)
-        return building[DataKeys.RECIPES][recipeIndex][DataKeys.INPUTS]
-
     def getFoodProcessingOutputQuantity(self,
                                         buildingName:
                                         FoodProcessingBuildingName,
@@ -530,6 +509,98 @@ class FactionData:
         """
         building = self._getFoodProcessing(buildingName)
         return building[DataKeys.RECIPES][recipeIndex][DataKeys.OUT_QUANTITY]
+
+    def getFoodProcessingRecipeIndex(self,
+                                     buildingName: FoodProcessingBuildingName,
+                                     recipeName: FoodRecipeName) -> int:
+        """
+        Get the recipe index for a specified food processing building and
+        recipe name.
+
+        :param buildingName: The food processing building to search in.
+        :type buildingName: FoodProcessingBuildingName
+        :param recipeName: The recipe name to find.
+        :type recipeName: FoodRecipeName
+
+        :return: Recipe index.
+        :rtype: int
+
+        :raises ValueError: If the specified food processing building is not
+                            found in faction data or if the recipe name is not
+                            found.
+        """
+        building = self._getFoodProcessing(buildingName)
+        for index, recipe in enumerate(building[DataKeys.RECIPES]):
+            if recipe[DataKeys.NAME] == recipeName.value:
+                return index
+        raise ValueError(f"Recipe '{recipeName.value}' not found in "
+                         f"'{buildingName.value}'.")
+
+    def getFoodProcessingInputIndex(self,
+                                    buildingName: FoodProcessingBuildingName,
+                                    recipeName: FoodRecipeName,
+                                    inputName: str) -> int:
+        """
+        Get the input index for a specified food processing building, recipe,
+        and input name.
+
+        :param buildingName: The food processing building to search in.
+        :type buildingName: FoodProcessingBuildingName
+        :param recipeName: The recipe to search in.
+        :type recipeName: FoodRecipeName
+        :param inputName: The input name to find.
+        :type inputName: str
+
+        :return: Input index.
+        :rtype: int
+
+        :raises ValueError: If the specified food processing building, recipe,
+                            or input is not found in faction data.
+        """
+        recipeIndex = self.getFoodProcessingRecipeIndex(buildingName,
+                                                        recipeName)
+        building = self._getFoodProcessing(buildingName)
+        inputs = building[DataKeys.RECIPES][recipeIndex][DataKeys.INPUTS]
+
+        if inputs is None:
+            raise ValueError(f"Recipe '{recipeName.value}' in "
+                             f"'{buildingName.value}' has no inputs.")
+
+        for index, input_item in enumerate(inputs):
+            if input_item[DataKeys.NAME] == inputName:
+                return index
+        raise ValueError(f"Input '{inputName}' not found in recipe "
+                         f"'{recipeName.value}' of '{buildingName.value}'.")
+
+    def getFoodProcessingInputQuantity(self,
+                                       buildingName:
+                                       FoodProcessingBuildingName,
+                                       recipeName: FoodRecipeName,
+                                       inputName: str) -> float:
+        """
+        Get the input quantity for a specified food processing building,
+        recipe, and input name.
+
+        :param buildingName: The food processing building.
+        :type buildingName: FoodProcessingBuildingName
+        :param recipeName: The recipe.
+        :type recipeName: FoodRecipeName
+        :param inputName: The input name.
+        :type inputName: str
+
+        :return: Input quantity.
+        :rtype: float
+
+        :raises ValueError: If the specified food processing building, recipe,
+                            or input is not found in faction data.
+        """
+        inputIndex = self.getFoodProcessingInputIndex(buildingName, recipeName,
+                                                       inputName)
+        recipeIndex = self.getFoodProcessingRecipeIndex(buildingName,
+                                                        recipeName)
+        building = self._getFoodProcessing(buildingName)
+        return building[DataKeys.RECIPES][recipeIndex][DataKeys.INPUTS] \
+            [inputIndex][DataKeys.QUANTITY]
 
     def _getGoods(self, buildingName: GoodsBuildingName) -> dict[str, Any]:
         """

@@ -1,7 +1,8 @@
 import math
 
 from ..data.emunerators import ConsumptionType, CropName, DifficultyLevel
-from ..data.emunerators import TreeName, WaterBuildingName
+from ..data.emunerators import FoodProcessingBuildingName, FoodRecipeName
+from ..data.emunerators import HarvestName, TreeName, WaterBuildingName
 from ..data.factionData import FactionData
 
 
@@ -593,3 +594,156 @@ class Folktail:
         productionPerPump = (outputQuantity / productionTime) * 24
 
         return math.ceil(waterAmount / productionPerPump)
+
+    def getGrillsNeededForPotatoes(self, grilledPotatoAmount: float) -> int:
+        """
+        Calculate the number of grills needed to produce a given amount of
+        grilled potatoes per day.
+
+        :param grilledPotatoAmount: Daily amount of grilled potatoes needed.
+        :type grilledPotatoAmount: float
+
+        :return: Number of grills needed.
+        :rtype: int
+
+        :raises ValueError: If grilled potato amount is negative.
+        """
+        if grilledPotatoAmount < 0:
+            raise ValueError("Grilled potato amount cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_POTATOES)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.GRILL, recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.GRILL, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerGrill = (outputQuantity / productionTime) * 24
+
+        return math.ceil(grilledPotatoAmount / productionPerGrill)
+
+    def getPotatoesNeededForGrills(self, grillsCount: int) -> int:
+        """
+        Calculate the number of potatoes needed per day to keep a given
+        number of grills running producing grilled potatoes.
+
+        :param grillsCount: Number of grills.
+        :type grillsCount: int
+
+        :return: Daily amount of potatoes needed.
+        :rtype: int
+
+        :raises ValueError: If grills count is negative.
+        """
+        if grillsCount < 0:
+            raise ValueError("Grills count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_POTATOES)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.GRILL, recipeIndex)
+        potatoInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_POTATOES,
+            HarvestName.POTATOES.value)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        potatoesPerGrillPerDay = potatoInput * cyclesPerDay
+
+        return math.ceil(grillsCount * potatoesPerGrillPerDay)
+
+    def getLogsNeededForGrillsWithPotatoes(self, grillsCount: int) -> float:
+        """
+        Calculate the number of logs needed per day to keep a given number
+        of grills running producing grilled potatoes.
+
+        :param grillsCount: Number of grills.
+        :type grillsCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: float
+
+        :raises ValueError: If grills count is negative.
+        """
+        if grillsCount < 0:
+            raise ValueError("Grills count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_POTATOES)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.GRILL, recipeIndex)
+        logInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_POTATOES,
+            "Logs")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerGrillPerDay = logInput * cyclesPerDay
+
+        return grillsCount * logsPerGrillPerDay
+
+    def getChestnutsNeededForGrills(self, grillsCount: int) -> int:
+        """
+        Calculate the number of chestnuts needed per day to keep a given
+        number of grills running producing grilled chestnuts.
+
+        :param grillsCount: Number of grills.
+        :type grillsCount: int
+
+        :return: Daily amount of chestnuts needed.
+        :rtype: int
+
+        :raises ValueError: If grills count is negative.
+        """
+        if grillsCount < 0:
+            raise ValueError("Grills count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_CHESTNUTS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.GRILL, recipeIndex)
+        chestnutInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_CHESTNUTS,
+            HarvestName.CHESTNUTS.value)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        chestnutsPerGrillPerDay = chestnutInput * cyclesPerDay
+
+        return math.ceil(grillsCount * chestnutsPerGrillPerDay)
+
+    def getLogsNeededForGrillsWithChestnuts(self, grillsCount: int) -> float:
+        """
+        Calculate the number of logs needed per day to keep a given number
+        of grills running producing grilled chestnuts.
+
+        :param grillsCount: Number of grills.
+        :type grillsCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: float
+
+        :raises ValueError: If grills count is negative.
+        """
+        if grillsCount < 0:
+            raise ValueError("Grills count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_CHESTNUTS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.GRILL, recipeIndex)
+        logInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_CHESTNUTS,
+            "Logs")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerGrillPerDay = logInput * cyclesPerDay
+
+        return grillsCount * logsPerGrillPerDay

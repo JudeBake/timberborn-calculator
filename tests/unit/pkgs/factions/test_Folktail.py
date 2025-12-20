@@ -933,3 +933,179 @@ class TestFolktail(TestCase):
             # Production per pump per day = (18 / 3.0) * 24 = 144.0
             # Pumps needed = ceil(40.0 / 144.0) = ceil(0.277...) = 1
             self.assertEqual(1, result)
+
+    def test_getGrillsNeededForPotatoesNegativeAmount(self) -> None:
+        """
+        The getGrillsNeededForPotatoes method must raise ValueError if
+        grilled potato amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getGrillsNeededForPotatoes(-10.0)
+        self.assertEqual("Grilled potato amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getGrillsNeededForPotatoesSuccess(self) -> None:
+        """
+        The getGrillsNeededForPotatoes method must correctly calculate grills
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 0
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.52
+            mockFactionDataInstance.getFoodProcessingOutputQuantity \
+                .return_value = 4
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getGrillsNeededForPotatoes(200.0)
+
+            # Production per grill per day = (4 / 0.52) * 24 = 184.615...
+            # Grills needed = ceil(200.0 / 184.615...) = ceil(1.083...) = 2
+            self.assertEqual(2, result)
+
+    def test_getPotatoesNeededForGrillsNegativeCount(self) -> None:
+        """
+        The getPotatoesNeededForGrills method must raise ValueError if
+        grills count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getPotatoesNeededForGrills(-1)
+        self.assertEqual("Grills count cannot be negative.",
+                         str(context.exception))
+
+    def test_getPotatoesNeededForGrillsSuccess(self) -> None:
+        """
+        The getPotatoesNeededForGrills method must correctly calculate
+        potatoes needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 0
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.52
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getPotatoesNeededForGrills(3)
+
+            # Cycles per day = 24 / 0.52 = 46.153...
+            # Potatoes per grill per day = 1 * 46.153... = 46.153...
+            # Total potatoes = 3 * 46.153... = 138.461...
+            # Ceiling = 139
+            self.assertEqual(139, result)
+
+    def test_getLogsNeededForGrillsWithPotatoesNegativeCount(self) -> None:
+        """
+        The getLogsNeededForGrillsWithPotatoes method must raise ValueError
+        if grills count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLogsNeededForGrillsWithPotatoes(-1)
+        self.assertEqual("Grills count cannot be negative.",
+                         str(context.exception))
+
+    def test_getLogsNeededForGrillsWithPotatoesSuccess(self) -> None:
+        """
+        The getLogsNeededForGrillsWithPotatoes method must correctly
+        calculate logs needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 0
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.52
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 0.1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getLogsNeededForGrillsWithPotatoes(3)
+
+            # Cycles per day = 24 / 0.52 = 46.153...
+            # Logs per grill per day = 0.1 * 46.153... = 4.615...
+            # Total logs = 3 * 4.615... = 13.846...
+            self.assertAlmostEqual(13.846153846153847, result, places=10)
+
+    def test_getChestnutsNeededForGrillsNegativeCount(self) -> None:
+        """
+        The getChestnutsNeededForGrills method must raise ValueError if
+        grills count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getChestnutsNeededForGrills(-1)
+        self.assertEqual("Grills count cannot be negative.",
+                         str(context.exception))
+
+    def test_getChestnutsNeededForGrillsSuccess(self) -> None:
+        """
+        The getChestnutsNeededForGrills method must correctly calculate
+        chestnuts needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 1
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.33
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getChestnutsNeededForGrills(3)
+
+            # Cycles per day = 24 / 0.33 = 72.727...
+            # Chestnuts per grill per day = 1 * 72.727... = 72.727...
+            # Total chestnuts = 3 * 72.727... = 218.181...
+            # Ceiling = 219
+            self.assertEqual(219, result)
+
+    def test_getLogsNeededForGrillsWithChestnutsNegativeCount(self) -> None:
+        """
+        The getLogsNeededForGrillsWithChestnuts method must raise ValueError
+        if grills count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLogsNeededForGrillsWithChestnuts(-1)
+        self.assertEqual("Grills count cannot be negative.",
+                         str(context.exception))
+
+    def test_getLogsNeededForGrillsWithChestnutsSuccess(self) -> None:
+        """
+        The getLogsNeededForGrillsWithChestnuts method must correctly
+        calculate logs needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 1
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.33
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 0.1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getLogsNeededForGrillsWithChestnuts(3)
+
+            # Cycles per day = 24 / 0.33 = 72.727...
+            # Logs per grill per day = 0.1 * 72.727... = 7.272...
+            # Total logs = 3 * 7.272... = 21.818...
+            self.assertAlmostEqual(21.818181818181817, result, places=10)

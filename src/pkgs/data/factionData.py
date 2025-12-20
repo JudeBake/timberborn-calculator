@@ -4,7 +4,7 @@ import yaml as yaml
 
 from .emunerators import ConsumptionType, CropName, DifficultyLevel
 from .emunerators import FoodProcessingBuildingName, FoodRecipeName
-from .emunerators import GoodsBuildingName
+from .emunerators import GoodsBuildingName, GoodsRecipeName
 from .emunerators import HarvestName, TreeName, WaterBuildingName
 from .emunerators import DataKeys
 
@@ -737,7 +737,7 @@ class FactionData:
         return building[DataKeys.RECIPES][recipeIndex][DataKeys.OUT_QUANTITY]
 
     def getGoodsRecipeIndex(self, buildingName: GoodsBuildingName,
-                            recipeName: 'GoodsRecipeName') -> int:
+                            recipeName: GoodsRecipeName) -> int:
         """
         Find the recipe index for a given goods building and recipe name.
 
@@ -752,8 +752,6 @@ class FactionData:
         :raises ValueError: If the specified goods building is not found
                             or if the recipe is not found in the building.
         """
-        from pkgs.data.emunerators import GoodsRecipeName
-
         building = self._getGoods(buildingName)
         recipes = building[DataKeys.RECIPES]
 

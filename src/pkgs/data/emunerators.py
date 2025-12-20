@@ -84,6 +84,8 @@ class FoodRecipeName(Enum):
     GRILLED_POTATOES = 'Grilled Potatoes'
     GRILLED_CHESTNUTS = 'Grilled Chestnuts'
     GRILLED_SPADDERDOCKS = 'Grilled Spadderdocks'
+    WHEAT_FLOUR = 'Wheat Flour'
+    CATTAIL_FLOUR = 'Cattail Flour'
 
 
 class GoodsBuildingName(Enum):

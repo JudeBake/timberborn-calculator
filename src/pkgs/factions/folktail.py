@@ -876,3 +876,130 @@ class Folktail:
 
         return grillsCount * logsPerGrillPerDay
 
+    def getGristmillsNeededForWheatFlour(self, wheatFlourAmount: float) -> int:
+        """
+        Calculate the number of gristmills needed to produce a given amount of
+        wheat flour per day.
+
+        :param wheatFlourAmount: Daily amount of wheat flour needed.
+        :type wheatFlourAmount: float
+
+        :return: Number of gristmills needed.
+        :rtype: int
+
+        :raises ValueError: If wheat flour amount is negative.
+        """
+        if wheatFlourAmount < 0:
+            raise ValueError("Wheat flour amount cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.GRISTMILL,
+            FoodRecipeName.WHEAT_FLOUR)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerGristmill = (outputQuantity / productionTime) * 24
+
+        return math.ceil(wheatFlourAmount / productionPerGristmill)
+
+    def getWheatNeededForGristmills(self, gristmillsCount: int) -> int:
+        """
+        Calculate the number of wheat needed per day to keep a given number of
+        gristmills running producing wheat flour.
+
+        :param gristmillsCount: Number of gristmills.
+        :type gristmillsCount: int
+
+        :return: Daily amount of wheat needed.
+        :rtype: int
+
+        :raises ValueError: If gristmills count is negative.
+        """
+        if gristmillsCount < 0:
+            raise ValueError("Gristmills count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.GRISTMILL,
+            FoodRecipeName.WHEAT_FLOUR)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
+        wheatInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.GRISTMILL,
+            FoodRecipeName.WHEAT_FLOUR,
+            HarvestName.WHEAT.value)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        wheatPerGristmillPerDay = wheatInput * cyclesPerDay
+
+        return math.ceil(gristmillsCount * wheatPerGristmillPerDay)
+
+    def getGristmillsNeededForCattailFlour(self,
+                                           cattailFlourAmount: float) -> int:
+        """
+        Calculate the number of gristmills needed to produce a given amount of
+        cattail flour per day.
+
+        :param cattailFlourAmount: Daily amount of cattail flour needed.
+        :type cattailFlourAmount: float
+
+        :return: Number of gristmills needed.
+        :rtype: int
+
+        :raises ValueError: If cattail flour amount is negative.
+        """
+        if cattailFlourAmount < 0:
+            raise ValueError("Cattail flour amount cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.GRISTMILL,
+            FoodRecipeName.CATTAIL_FLOUR)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerGristmill = (outputQuantity / productionTime) * 24
+
+        return math.ceil(cattailFlourAmount / productionPerGristmill)
+
+    def getCattailRootsNeededForGristmills(self, gristmillsCount: int) -> int:
+        """
+        Calculate the number of cattail roots needed per day to keep a given
+        number of gristmills running producing cattail flour.
+
+        :param gristmillsCount: Number of gristmills.
+        :type gristmillsCount: int
+
+        :return: Daily amount of cattail roots needed.
+        :rtype: int
+
+        :raises ValueError: If gristmills count is negative.
+        """
+        if gristmillsCount < 0:
+            raise ValueError("Gristmills count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.GRISTMILL,
+            FoodRecipeName.CATTAIL_FLOUR)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
+        cattailRootsInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.GRISTMILL,
+            FoodRecipeName.CATTAIL_FLOUR,
+            HarvestName.CATTAIL_ROOTS.value)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        cattailRootsPerGristmillPerDay = cattailRootsInput * cyclesPerDay
+
+        return math.ceil(gristmillsCount * cattailRootsPerGristmillPerDay)
+

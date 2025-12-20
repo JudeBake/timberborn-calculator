@@ -1215,3 +1215,143 @@ class TestFolktail(TestCase):
             # Total logs = 3 * 14.4 = 43.2
             self.assertAlmostEqual(43.2, result, places=10)
 
+    def test_getGristmillsNeededForWheatFlourNegativeAmount(self) -> None:
+        """
+        The getGristmillsNeededForWheatFlour method must raise ValueError if
+        wheat flour amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getGristmillsNeededForWheatFlour(-10.0)
+        self.assertEqual("Wheat flour amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getGristmillsNeededForWheatFlourSuccess(self) -> None:
+        """
+        The getGristmillsNeededForWheatFlour method must correctly calculate
+        gristmills needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 0
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.5
+            mockFactionDataInstance.getFoodProcessingOutputQuantity \
+                .return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getGristmillsNeededForWheatFlour(50.0)
+
+            # Production per gristmill per day = (1 / 0.5) * 24 = 48.0
+            # Gristmills needed = ceil(50.0 / 48.0) = ceil(1.041...) = 2
+            self.assertEqual(2, result)
+
+    def test_getWheatNeededForGristmillsNegativeCount(self) -> None:
+        """
+        The getWheatNeededForGristmills method must raise ValueError if
+        gristmills count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getWheatNeededForGristmills(-1)
+        self.assertEqual("Gristmills count cannot be negative.",
+                         str(context.exception))
+
+    def test_getWheatNeededForGristmillsSuccess(self) -> None:
+        """
+        The getWheatNeededForGristmills method must correctly calculate wheat
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 0
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.5
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getWheatNeededForGristmills(3)
+
+            # Cycles per day = 24 / 0.5 = 48.0
+            # Wheat per gristmill per day = 1 * 48.0 = 48.0
+            # Total wheat = 3 * 48.0 = 144.0
+            # Ceiling = 144
+            self.assertEqual(144, result)
+
+    def test_getGristmillsNeededForCattailFlourNegativeAmount(self) -> None:
+        """
+        The getGristmillsNeededForCattailFlour method must raise ValueError if
+        cattail flour amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getGristmillsNeededForCattailFlour(-10.0)
+        self.assertEqual("Cattail flour amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getGristmillsNeededForCattailFlourSuccess(self) -> None:
+        """
+        The getGristmillsNeededForCattailFlour method must correctly calculate
+        gristmills needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 1
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.25
+            mockFactionDataInstance.getFoodProcessingOutputQuantity \
+                .return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getGristmillsNeededForCattailFlour(100.0)
+
+            # Production per gristmill per day = (1 / 0.25) * 24 = 96.0
+            # Gristmills needed = ceil(100.0 / 96.0) = ceil(1.041...) = 2
+            self.assertEqual(2, result)
+
+    def test_getCattailRootsNeededForGristmillsNegativeCount(self) -> None:
+        """
+        The getCattailRootsNeededForGristmills method must raise ValueError if
+        gristmills count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getCattailRootsNeededForGristmills(-1)
+        self.assertEqual("Gristmills count cannot be negative.",
+                         str(context.exception))
+
+    def test_getCattailRootsNeededForGristmillsSuccess(self) -> None:
+        """
+        The getCattailRootsNeededForGristmills method must correctly calculate
+        cattail roots needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 1
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.25
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getCattailRootsNeededForGristmills(3)
+
+            # Cycles per day = 24 / 0.25 = 96.0
+            # Cattail roots per gristmill per day = 1 * 96.0 = 96.0
+            # Total cattail roots = 3 * 96.0 = 288.0
+            # Ceiling = 288
+            self.assertEqual(288, result)
+

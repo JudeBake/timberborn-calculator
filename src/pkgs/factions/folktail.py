@@ -1033,8 +1033,8 @@ class Folktail:
 
         return math.ceil(breadsAmount / productionPerBakery)
 
-    def getWheatFlourNeededForBakeriesWithBreads(
-            self, bakeriesCount: int) -> int:
+    def getWheatFlourNeededForBakeriesWithBreads(self,
+                                                 bakeriesCount: int) -> int:
         """
         Calculate the number of wheat flour needed per day to keep a given
         number of bakeries running producing breads.
@@ -1100,8 +1100,9 @@ class Folktail:
 
         return bakeriesCount * logsPerBakeryPerDay
 
-    def getBakeriesNeededForCattailCrackers(
-            self, cattailCrackersAmount: float) -> int:
+    def getBakeriesNeededForCattailCrackers(self,
+                                            cattailCrackersAmount: float
+                                            ) -> int:
         """
         Calculate the number of bakeries needed to produce a given amount of
         cattail crackers per day.
@@ -1131,8 +1132,9 @@ class Folktail:
 
         return math.ceil(cattailCrackersAmount / productionPerBakery)
 
-    def getCattailFlourNeededForBakeriesWithCattailCrackers(
-            self, bakeriesCount: int) -> int:
+    def getCattailFlourNeededForBakeriesWithCattailCrackers(self,
+                                                            bakeriesCount: int
+                                                            ) -> int:
         """
         Calculate the number of cattail flour needed per day to keep a given
         number of bakeries running producing cattail crackers.
@@ -1165,8 +1167,9 @@ class Folktail:
 
         return math.ceil(bakeriesCount * cattailFlourPerBakeryPerDay)
 
-    def getLogsNeededForBakeriesWithCattailCrackers(
-            self, bakeriesCount: int) -> float:
+    def getLogsNeededForBakeriesWithCattailCrackers(self,
+                                                    bakeriesCount: int
+                                                    ) -> float:
         """
         Calculate the number of logs needed per day to keep a given number
         of bakeries running producing cattail crackers.
@@ -1199,8 +1202,8 @@ class Folktail:
 
         return bakeriesCount * logsPerBakeryPerDay
 
-    def getBakeriesNeededForMaplePastries(
-            self, maplePastriesAmount: float) -> int:
+    def getBakeriesNeededForMaplePastries(self,
+                                          maplePastriesAmount: float) -> int:
         """
         Calculate the number of bakeries needed to produce a given amount of
         maple pastries per day.
@@ -1230,8 +1233,9 @@ class Folktail:
 
         return math.ceil(maplePastriesAmount / productionPerBakery)
 
-    def getWheatFlourNeededForBakeriesWithMaplePastries(
-            self, bakeriesCount: int) -> int:
+    def getWheatFlourNeededForBakeriesWithMaplePastries(self,
+                                                        bakeriesCount: int
+                                                        ) -> int:
         """
         Calculate the number of wheat flour needed per day to keep a given
         number of bakeries running producing maple pastries.
@@ -1298,8 +1302,8 @@ class Folktail:
 
         return math.ceil(bakeriesCount * mapleSyrupPerBakeryPerDay)
 
-    def getLogsNeededForBakeriesWithMaplePastries(
-            self, bakeriesCount: int) -> float:
+    def getLogsNeededForBakeriesWithMaplePastries(self,
+                                                  bakeriesCount: int) -> float:
         """
         Calculate the number of logs needed per day to keep a given number
         of bakeries running producing maple pastries.

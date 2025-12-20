@@ -86,6 +86,9 @@ class FoodRecipeName(Enum):
     GRILLED_SPADDERDOCKS = 'Grilled Spadderdocks'
     WHEAT_FLOUR = 'Wheat Flour'
     CATTAIL_FLOUR = 'Cattail Flour'
+    BREADS = 'Breads'
+    CATTAIL_CRACKERS = 'Cattail Crackers'
+    MAPLE_PASTRIES = 'Maple Pastries'
 
 
 class GoodsBuildingName(Enum):

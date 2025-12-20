@@ -1355,3 +1355,365 @@ class TestFolktail(TestCase):
             # Ceiling = 288
             self.assertEqual(288, result)
 
+    def test_getBakeriesNeededForBreadsNegativeAmount(self) -> None:
+        """
+        The getBakeriesNeededForBreads method must raise ValueError if breads
+        amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBakeriesNeededForBreads(-10.0)
+        self.assertEqual("Breads amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getBakeriesNeededForBreadsSuccess(self) -> None:
+        """
+        The getBakeriesNeededForBreads method must correctly calculate
+        bakeries needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 0
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.42
+            mockFactionDataInstance.getFoodProcessingOutputQuantity \
+                .return_value = 5
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBakeriesNeededForBreads(300.0)
+
+            # Production per bakery per day = (5 / 0.42) * 24 = 285.714...
+            # Bakeries needed = ceil(300.0 / 285.714...) = ceil(1.05) = 2
+            self.assertEqual(2, result)
+
+    def test_getWheatFlourNeededForBakeriesWithBreadsNegativeCount(
+            self) -> None:
+        """
+        The getWheatFlourNeededForBakeriesWithBreads method must raise
+        ValueError if bakeries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getWheatFlourNeededForBakeriesWithBreads(-1)
+        self.assertEqual("Bakeries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getWheatFlourNeededForBakeriesWithBreadsSuccess(self) -> None:
+        """
+        The getWheatFlourNeededForBakeriesWithBreads method must correctly
+        calculate wheat flour needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 0
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.42
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getWheatFlourNeededForBakeriesWithBreads(3)
+
+            # Cycles per day = 24 / 0.42 = 57.142...
+            # Wheat flour per bakery per day = 1 * 57.142... = 57.142...
+            # Total wheat flour = 3 * 57.142... = 171.428...
+            # Ceiling = 172
+            self.assertEqual(172, result)
+
+    def test_getLogsNeededForBakeriesWithBreadsNegativeCount(self) -> None:
+        """
+        The getLogsNeededForBakeriesWithBreads method must raise ValueError
+        if bakeries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLogsNeededForBakeriesWithBreads(-1)
+        self.assertEqual("Bakeries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getLogsNeededForBakeriesWithBreadsSuccess(self) -> None:
+        """
+        The getLogsNeededForBakeriesWithBreads method must correctly calculate
+        logs needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 0
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.42
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 0.1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getLogsNeededForBakeriesWithBreads(3)
+
+            # Cycles per day = 24 / 0.42 = 57.142...
+            # Logs per bakery per day = 0.1 * 57.142... = 5.714...
+            # Total logs = 3 * 5.714... = 17.142...
+            self.assertAlmostEqual(17.142857142857142, result, places=10)
+
+    def test_getBakeriesNeededForCattailCrackersNegativeAmount(self) -> None:
+        """
+        The getBakeriesNeededForCattailCrackers method must raise ValueError
+        if cattail crackers amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBakeriesNeededForCattailCrackers(-10.0)
+        self.assertEqual("Cattail crackers amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getBakeriesNeededForCattailCrackersSuccess(self) -> None:
+        """
+        The getBakeriesNeededForCattailCrackers method must correctly
+        calculate bakeries needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 1
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.5
+            mockFactionDataInstance.getFoodProcessingOutputQuantity \
+                .return_value = 4
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBakeriesNeededForCattailCrackers(200.0)
+
+            # Production per bakery per day = (4 / 0.5) * 24 = 192.0
+            # Bakeries needed = ceil(200.0 / 192.0) = ceil(1.041...) = 2
+            self.assertEqual(2, result)
+
+    def test_getCattailFlourNeededForBakeriesWithCattailCrackersNegativeCount(
+            self) -> None:
+        """
+        The getCattailFlourNeededForBakeriesWithCattailCrackers method must
+        raise ValueError if bakeries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getCattailFlourNeededForBakeriesWithCattailCrackers(-1)
+        self.assertEqual("Bakeries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getCattailFlourNeededForBakeriesWithCattailCrackersSuccess(
+            self) -> None:
+        """
+        The getCattailFlourNeededForBakeriesWithCattailCrackers method must
+        correctly calculate cattail flour needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 1
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.5
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail \
+                .getCattailFlourNeededForBakeriesWithCattailCrackers(3)
+
+            # Cycles per day = 24 / 0.5 = 48.0
+            # Cattail flour per bakery per day = 1 * 48.0 = 48.0
+            # Total cattail flour = 3 * 48.0 = 144.0
+            # Ceiling = 144
+            self.assertEqual(144, result)
+
+    def test_getLogsNeededForBakeriesWithCattailCrackersNegativeCount(
+            self) -> None:
+        """
+        The getLogsNeededForBakeriesWithCattailCrackers method must raise
+        ValueError if bakeries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLogsNeededForBakeriesWithCattailCrackers(-1)
+        self.assertEqual("Bakeries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getLogsNeededForBakeriesWithCattailCrackersSuccess(self) -> None:
+        """
+        The getLogsNeededForBakeriesWithCattailCrackers method must correctly
+        calculate logs needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 1
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.5
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 0.1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getLogsNeededForBakeriesWithCattailCrackers(3)
+
+            # Cycles per day = 24 / 0.5 = 48.0
+            # Logs per bakery per day = 0.1 * 48.0 = 4.8
+            # Total logs = 3 * 4.8 = 14.4
+            self.assertAlmostEqual(14.4, result, places=10)
+
+    def test_getBakeriesNeededForMaplePastriesNegativeAmount(self) -> None:
+        """
+        The getBakeriesNeededForMaplePastries method must raise ValueError
+        if maple pastries amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBakeriesNeededForMaplePastries(-10.0)
+        self.assertEqual("Maple pastries amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getBakeriesNeededForMaplePastriesSuccess(self) -> None:
+        """
+        The getBakeriesNeededForMaplePastries method must correctly calculate
+        bakeries needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 2
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.55
+            mockFactionDataInstance.getFoodProcessingOutputQuantity \
+                .return_value = 3
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBakeriesNeededForMaplePastries(140.0)
+
+            # Production per bakery per day = (3 / 0.55) * 24 = 130.909...
+            # Bakeries needed = ceil(140.0 / 130.909...) = ceil(1.069...) = 2
+            self.assertEqual(2, result)
+
+    def test_getWheatFlourNeededForBakeriesWithMaplePastriesNegativeCount(
+            self) -> None:
+        """
+        The getWheatFlourNeededForBakeriesWithMaplePastries method must raise
+        ValueError if bakeries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getWheatFlourNeededForBakeriesWithMaplePastries(-1)
+        self.assertEqual("Bakeries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getWheatFlourNeededForBakeriesWithMaplePastriesSuccess(
+            self) -> None:
+        """
+        The getWheatFlourNeededForBakeriesWithMaplePastries method must
+        correctly calculate wheat flour needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 2
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.55
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail \
+                .getWheatFlourNeededForBakeriesWithMaplePastries(3)
+
+            # Cycles per day = 24 / 0.55 = 43.636...
+            # Wheat flour per bakery per day = 1 * 43.636... = 43.636...
+            # Total wheat flour = 3 * 43.636... = 130.909...
+            # Ceiling = 131
+            self.assertEqual(131, result)
+
+    def test_getMapleSyrupNeededForBakeriesWithMaplePastriesNegativeCount(
+            self) -> None:
+        """
+        The getMapleSyrupNeededForBakeriesWithMaplePastries method must raise
+        ValueError if bakeries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getMapleSyrupNeededForBakeriesWithMaplePastries(-1)
+        self.assertEqual("Bakeries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getMapleSyrupNeededForBakeriesWithMaplePastriesSuccess(
+            self) -> None:
+        """
+        The getMapleSyrupNeededForBakeriesWithMaplePastries method must
+        correctly calculate maple syrup needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 2
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.55
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail \
+                .getMapleSyrupNeededForBakeriesWithMaplePastries(3)
+
+            # Cycles per day = 24 / 0.55 = 43.636...
+            # Maple syrup per bakery per day = 1 * 43.636... = 43.636...
+            # Total maple syrup = 3 * 43.636... = 130.909...
+            # Ceiling = 131
+            self.assertEqual(131, result)
+
+    def test_getLogsNeededForBakeriesWithMaplePastriesNegativeCount(
+            self) -> None:
+        """
+        The getLogsNeededForBakeriesWithMaplePastries method must raise
+        ValueError if bakeries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLogsNeededForBakeriesWithMaplePastries(-1)
+        self.assertEqual("Bakeries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getLogsNeededForBakeriesWithMaplePastriesSuccess(self) -> None:
+        """
+        The getLogsNeededForBakeriesWithMaplePastries method must correctly
+        calculate logs needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 2
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.55
+            mockFactionDataInstance.getFoodProcessingInputQuantity \
+                .return_value = 0.1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getLogsNeededForBakeriesWithMaplePastries(3)
+
+            # Cycles per day = 24 / 0.55 = 43.636...
+            # Logs per bakery per day = 0.1 * 43.636... = 4.363...
+            # Total logs = 3 * 4.363... = 13.090...
+            self.assertAlmostEqual(13.090909090909092, result, places=10)

@@ -1003,3 +1003,331 @@ class Folktail:
 
         return math.ceil(gristmillsCount * cattailRootsPerGristmillPerDay)
 
+    def getBakeriesNeededForBreads(self, breadsAmount: float) -> int:
+        """
+        Calculate the number of bakeries needed to produce a given amount of
+        breads per day.
+
+        :param breadsAmount: Daily amount of breads needed.
+        :type breadsAmount: float
+
+        :return: Number of bakeries needed.
+        :rtype: int
+
+        :raises ValueError: If breads amount is negative.
+        """
+        if breadsAmount < 0:
+            raise ValueError("Breads amount cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.BREADS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerBakery = (outputQuantity / productionTime) * 24
+
+        return math.ceil(breadsAmount / productionPerBakery)
+
+    def getWheatFlourNeededForBakeriesWithBreads(
+            self, bakeriesCount: int) -> int:
+        """
+        Calculate the number of wheat flour needed per day to keep a given
+        number of bakeries running producing breads.
+
+        :param bakeriesCount: Number of bakeries.
+        :type bakeriesCount: int
+
+        :return: Daily amount of wheat flour needed.
+        :rtype: int
+
+        :raises ValueError: If bakeries count is negative.
+        """
+        if bakeriesCount < 0:
+            raise ValueError("Bakeries count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.BREADS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        wheatFlourInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.BREADS,
+            "Wheat Flour")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        wheatFlourPerBakeryPerDay = wheatFlourInput * cyclesPerDay
+
+        return math.ceil(bakeriesCount * wheatFlourPerBakeryPerDay)
+
+    def getLogsNeededForBakeriesWithBreads(self, bakeriesCount: int) -> float:
+        """
+        Calculate the number of logs needed per day to keep a given number
+        of bakeries running producing breads.
+
+        :param bakeriesCount: Number of bakeries.
+        :type bakeriesCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: float
+
+        :raises ValueError: If bakeries count is negative.
+        """
+        if bakeriesCount < 0:
+            raise ValueError("Bakeries count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.BREADS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        logInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.BREADS,
+            "Logs")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerBakeryPerDay = logInput * cyclesPerDay
+
+        return bakeriesCount * logsPerBakeryPerDay
+
+    def getBakeriesNeededForCattailCrackers(
+            self, cattailCrackersAmount: float) -> int:
+        """
+        Calculate the number of bakeries needed to produce a given amount of
+        cattail crackers per day.
+
+        :param cattailCrackersAmount: Daily amount of cattail crackers needed.
+        :type cattailCrackersAmount: float
+
+        :return: Number of bakeries needed.
+        :rtype: int
+
+        :raises ValueError: If cattail crackers amount is negative.
+        """
+        if cattailCrackersAmount < 0:
+            raise ValueError("Cattail crackers amount cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.CATTAIL_CRACKERS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerBakery = (outputQuantity / productionTime) * 24
+
+        return math.ceil(cattailCrackersAmount / productionPerBakery)
+
+    def getCattailFlourNeededForBakeriesWithCattailCrackers(
+            self, bakeriesCount: int) -> int:
+        """
+        Calculate the number of cattail flour needed per day to keep a given
+        number of bakeries running producing cattail crackers.
+
+        :param bakeriesCount: Number of bakeries.
+        :type bakeriesCount: int
+
+        :return: Daily amount of cattail flour needed.
+        :rtype: int
+
+        :raises ValueError: If bakeries count is negative.
+        """
+        if bakeriesCount < 0:
+            raise ValueError("Bakeries count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.CATTAIL_CRACKERS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        cattailFlourInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.CATTAIL_CRACKERS,
+            "Cattail Flour")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        cattailFlourPerBakeryPerDay = cattailFlourInput * cyclesPerDay
+
+        return math.ceil(bakeriesCount * cattailFlourPerBakeryPerDay)
+
+    def getLogsNeededForBakeriesWithCattailCrackers(
+            self, bakeriesCount: int) -> float:
+        """
+        Calculate the number of logs needed per day to keep a given number
+        of bakeries running producing cattail crackers.
+
+        :param bakeriesCount: Number of bakeries.
+        :type bakeriesCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: float
+
+        :raises ValueError: If bakeries count is negative.
+        """
+        if bakeriesCount < 0:
+            raise ValueError("Bakeries count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.CATTAIL_CRACKERS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        logInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.CATTAIL_CRACKERS,
+            "Logs")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerBakeryPerDay = logInput * cyclesPerDay
+
+        return bakeriesCount * logsPerBakeryPerDay
+
+    def getBakeriesNeededForMaplePastries(
+            self, maplePastriesAmount: float) -> int:
+        """
+        Calculate the number of bakeries needed to produce a given amount of
+        maple pastries per day.
+
+        :param maplePastriesAmount: Daily amount of maple pastries needed.
+        :type maplePastriesAmount: float
+
+        :return: Number of bakeries needed.
+        :rtype: int
+
+        :raises ValueError: If maple pastries amount is negative.
+        """
+        if maplePastriesAmount < 0:
+            raise ValueError("Maple pastries amount cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.MAPLE_PASTRIES)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        # Production time is in hours, calculate daily production
+        productionPerBakery = (outputQuantity / productionTime) * 24
+
+        return math.ceil(maplePastriesAmount / productionPerBakery)
+
+    def getWheatFlourNeededForBakeriesWithMaplePastries(
+            self, bakeriesCount: int) -> int:
+        """
+        Calculate the number of wheat flour needed per day to keep a given
+        number of bakeries running producing maple pastries.
+
+        :param bakeriesCount: Number of bakeries.
+        :type bakeriesCount: int
+
+        :return: Daily amount of wheat flour needed.
+        :rtype: int
+
+        :raises ValueError: If bakeries count is negative.
+        """
+        if bakeriesCount < 0:
+            raise ValueError("Bakeries count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.MAPLE_PASTRIES)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        wheatFlourInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.MAPLE_PASTRIES,
+            "Wheat Flour")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        wheatFlourPerBakeryPerDay = wheatFlourInput * cyclesPerDay
+
+        return math.ceil(bakeriesCount * wheatFlourPerBakeryPerDay)
+
+    def getMapleSyrupNeededForBakeriesWithMaplePastries(
+            self, bakeriesCount: int) -> int:
+        """
+        Calculate the number of maple syrup needed per day to keep a given
+        number of bakeries running producing maple pastries.
+
+        :param bakeriesCount: Number of bakeries.
+        :type bakeriesCount: int
+
+        :return: Daily amount of maple syrup needed.
+        :rtype: int
+
+        :raises ValueError: If bakeries count is negative.
+        """
+        if bakeriesCount < 0:
+            raise ValueError("Bakeries count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.MAPLE_PASTRIES)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        mapleSyrupInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.MAPLE_PASTRIES,
+            HarvestName.MAPLE_SYRUP.value)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        mapleSyrupPerBakeryPerDay = mapleSyrupInput * cyclesPerDay
+
+        return math.ceil(bakeriesCount * mapleSyrupPerBakeryPerDay)
+
+    def getLogsNeededForBakeriesWithMaplePastries(
+            self, bakeriesCount: int) -> float:
+        """
+        Calculate the number of logs needed per day to keep a given number
+        of bakeries running producing maple pastries.
+
+        :param bakeriesCount: Number of bakeries.
+        :type bakeriesCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: float
+
+        :raises ValueError: If bakeries count is negative.
+        """
+        if bakeriesCount < 0:
+            raise ValueError("Bakeries count cannot be negative.")
+
+        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.MAPLE_PASTRIES)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.BAKERY, recipeIndex)
+        logInput = self.factionData.getFoodProcessingInputQuantity(
+            FoodProcessingBuildingName.BAKERY,
+            FoodRecipeName.MAPLE_PASTRIES,
+            "Logs")
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerBakeryPerDay = logInput * cyclesPerDay
+
+        return bakeriesCount * logsPerBakeryPerDay

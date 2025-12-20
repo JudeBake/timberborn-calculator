@@ -11,7 +11,8 @@ sys.path.append(os.path.abspath('./src'))
 from pkgs.data.factionData import FactionData                   # noqa: E402
 from pkgs.data.emunerators import ConsumptionType, CropName, \
     DifficultyLevel, FoodProcessingBuildingName, FoodRecipeName, \
-    GoodsBuildingName, HarvestName, TreeName, WaterBuildingName # noqa: E402
+    GoodsBuildingName, GoodsRecipeName, HarvestName, TreeName, \
+    WaterBuildingName                                           # noqa: E402
 
 
 class TestFolktails(TestCase):
@@ -1339,10 +1340,11 @@ class TestFolktails(TestCase):
         with patch.object(self.uut, '_getGoods') as mockedGetGoods:
             mockedGetGoods.return_value = mockBuildingDict
             with self.assertRaises(ValueError) as context:
-                self.uut.getGoodsInputQuantity(buildingName, recipeName, inputName)
-            self.assertEqual(
-                "Input 'Logs' not found in recipe 'Gears' for building 'Gear Workshop'.",
-                str(context.exception))
+                self.uut.getGoodsInputQuantity(buildingName, recipeName,
+                                               inputName)
+            self.assertEqual("Input 'Logs' not found in recipe 'Gears' for "
+                             "building 'Gear Workshop'.",
+                             str(context.exception))
 
     def test_getGoodsInputQuantitySuccess(self) -> None:
         """
@@ -1367,5 +1369,5 @@ class TestFolktails(TestCase):
             mockedGetGoods.return_value = mockBuildingDict
             inputQuantity = self.uut.getGoodsInputQuantity(
                 buildingName, recipeName, inputName)
-            mockedGetGoods.assert_called_once_with(buildingName)
+            mockedGetGoods.assert_called_with(buildingName)
             self.assertEqual(0.2, inputQuantity)

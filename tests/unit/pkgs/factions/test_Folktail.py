@@ -820,9 +820,9 @@ class TestFolktail(TestCase):
             folktail = Folktail()
             result = folktail.getWaterPumpsNeeded(50.0)
 
-            # Production per pump = 24 / 2.0 = 12.0
-            # Pumps needed = ceil(50.0 / 12.0) = ceil(4.166...) = 5
-            self.assertEqual(5, result)
+            # Production per pump per day = (24 / 2.0) * 24 = 288.0
+            # Pumps needed = ceil(50.0 / 288.0) = ceil(0.173...) = 1
+            self.assertEqual(1, result)
 
     def test_getLargeWaterPumpsNeededNegativeWaterAmount(self) -> None:
         """
@@ -880,9 +880,9 @@ class TestFolktail(TestCase):
             result = folktail.getLargeWaterPumpsNeeded(50.0, 2)
 
             # Effective output = 48 * (2 / 2) = 48
-            # Production per pump = 48 / 2.0 = 24.0
-            # Pumps needed = ceil(50.0 / 24.0) = ceil(2.083...) = 3
-            self.assertEqual(3, result)
+            # Production per pump per day = (48 / 2.0) * 24 = 576.0
+            # Pumps needed = ceil(50.0 / 576.0) = ceil(0.086...) = 1
+            self.assertEqual(1, result)
 
     def test_getLargeWaterPumpsNeededSuccessReducedWorkers(self) -> None:
         """
@@ -900,6 +900,36 @@ class TestFolktail(TestCase):
             result = folktail.getLargeWaterPumpsNeeded(50.0, 1)
 
             # Effective output = 48 * (1 / 2) = 24
-            # Production per pump = 24 / 2.0 = 12.0
-            # Pumps needed = ceil(50.0 / 12.0) = ceil(4.166...) = 5
-            self.assertEqual(5, result)
+            # Production per pump per day = (24 / 2.0) * 24 = 288.0
+            # Pumps needed = ceil(50.0 / 288.0) = ceil(0.173...) = 1
+            self.assertEqual(1, result)
+
+    def test_getBadwaterPumpsNeededNegativeAmount(self) -> None:
+        """
+        The getBadwaterPumpsNeeded method must raise ValueError if water
+        amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBadwaterPumpsNeeded(-10.0)
+        self.assertEqual("Water amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getBadwaterPumpsNeededSuccess(self) -> None:
+        """
+        The getBadwaterPumpsNeeded method must correctly calculate badwater
+        pumps needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getWaterProductionTime.return_value = 3.0
+            mockFactionDataInstance.getWaterOutputQuantity.return_value = 18
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBadwaterPumpsNeeded(40.0)
+
+            # Production per pump per day = (18 / 3.0) * 24 = 144.0
+            # Pumps needed = ceil(40.0 / 144.0) = ceil(0.277...) = 1
+            self.assertEqual(1, result)

@@ -525,7 +525,8 @@ class Folktail:
             .getWaterProductionTime(WaterBuildingName.WATER_PUMP)
         outputQuantity = self.factionData \
             .getWaterOutputQuantity(WaterBuildingName.WATER_PUMP)
-        productionPerPump = outputQuantity / productionTime
+        # Production time is in hours, calculate daily production
+        productionPerPump = (outputQuantity / productionTime) * 24
 
         return math.ceil(waterAmount / productionPerPump)
 
@@ -563,6 +564,32 @@ class Folktail:
 
         # Reduce output based on workers assigned
         effectiveOutput = outputQuantity * (workersCount / maxWorkers)
-        productionPerPump = effectiveOutput / productionTime
+        # Production time is in hours, calculate daily production
+        productionPerPump = (effectiveOutput / productionTime) * 24
+
+        return math.ceil(waterAmount / productionPerPump)
+
+    def getBadwaterPumpsNeeded(self, waterAmount: float) -> int:
+        """
+        Calculate the number of badwater pumps needed to produce a given
+        amount of water per day.
+
+        :param waterAmount: Daily amount of water needed.
+        :type waterAmount: float
+
+        :return: Number of badwater pumps needed.
+        :rtype: int
+
+        :raises ValueError: If water amount is negative.
+        """
+        if waterAmount < 0:
+            raise ValueError("Water amount cannot be negative.")
+
+        productionTime = self.factionData \
+            .getWaterProductionTime(WaterBuildingName.BADWATER_PUMP)
+        outputQuantity = self.factionData \
+            .getWaterOutputQuantity(WaterBuildingName.BADWATER_PUMP)
+        # Production time is in hours, calculate daily production
+        productionPerPump = (outputQuantity / productionTime) * 24
 
         return math.ceil(waterAmount / productionPerPump)

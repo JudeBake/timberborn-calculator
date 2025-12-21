@@ -1069,6 +1069,40 @@ class TestFolktail(TestCase):
             # Total logs = 3 * 4.615... = 13.846...
             self.assertAlmostEqual(13.846153846153847, result, places=10)
 
+    def test_getGrillsNeededForChestnutsNegativeAmount(self) -> None:
+        """
+        The getGrillsNeededForChestnuts method must raise ValueError if
+        grilled chestnut amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getGrillsNeededForChestnuts(-10.0)
+        self.assertEqual("Grilled chestnut amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getGrillsNeededForChestnutsSuccess(self) -> None:
+        """
+        The getGrillsNeededForChestnuts method must correctly calculate
+        grills needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getFoodProcessingRecipeIndex \
+                .return_value = 1
+            mockFactionDataInstance.getFoodProcessingProductionTime \
+                .return_value = 0.33
+            mockFactionDataInstance.getFoodProcessingOutputQuantity \
+                .return_value = 5
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getGrillsNeededForChestnuts(400.0)
+
+            # Production per grill per day = (5 / 0.33) * 24 = 363.636...
+            # Grills needed = ceil(400.0 / 363.636...) = ceil(1.1) = 2
+            self.assertEqual(2, result)
+
     def test_getChestnutsNeededForGrillsNegativeCount(self) -> None:
         """
         The getChestnutsNeededForGrills method must raise ValueError if

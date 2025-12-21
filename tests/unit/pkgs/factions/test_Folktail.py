@@ -2362,3 +2362,1183 @@ class TestFolktail(TestCase):
             # Treated planks per mine per day = 1 * 13.333... = 13.333...
             # Total treated planks = 3 * 13.333... = 40
             self.assertEqual(40, result)
+
+    # Test Cases for Rafinery
+    def test_getRafineriesNeededForBiofuelCarrotsNegativeAmount(self) -> None:
+        """
+        The getRafineriesNeededForBiofuelCarrots method must raise ValueError
+        if biofuel carrots amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getRafineriesNeededForBiofuelCarrots(-10.0)
+        self.assertEqual("Biofuel Carrots amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getRafineriesNeededForBiofuelCarrotsSuccess(self) -> None:
+        """
+        The getRafineriesNeededForBiofuelCarrots method must correctly
+        calculate rafineries needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsOutputQuantity.return_value = 5
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getRafineriesNeededForBiofuelCarrots(100.0)
+
+            # Production per rafinery per day = (5 / 3.0) * 24 = 40
+            # Rafineries needed = ceil(100.0 / 40) = ceil(2.5) = 3
+            self.assertEqual(3, result)
+
+    def test_getCarrotsNeededForRafineriesWithBiofuelCarrotsNegativeCount(
+            self) -> None:
+        """
+        The getCarrotsNeededForRafineriesWithBiofuelCarrots method must raise
+        ValueError if rafineries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getCarrotsNeededForRafineriesWithBiofuelCarrots(-1)
+        self.assertEqual("Rafineries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getCarrotsNeededForRafineriesWithBiofuelCarrotsSuccess(
+            self) -> None:
+        """
+        The getCarrotsNeededForRafineriesWithBiofuelCarrots method must
+        correctly calculate carrots needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getCarrotsNeededForRafineriesWithBiofuelCarrots(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Carrots per rafinery per day = 2 * 8 = 16
+            # Total carrots = 3 * 16 = 48
+            self.assertEqual(48, result)
+
+    def test_getWaterNeededForRafineriesWithBiofuelCarrotsNegativeCount(
+            self) -> None:
+        """
+        The getWaterNeededForRafineriesWithBiofuelCarrots method must raise
+        ValueError if rafineries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getWaterNeededForRafineriesWithBiofuelCarrots(-1)
+        self.assertEqual("Rafineries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getWaterNeededForRafineriesWithBiofuelCarrotsSuccess(
+            self) -> None:
+        """
+        The getWaterNeededForRafineriesWithBiofuelCarrots method must
+        correctly calculate water needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getWaterNeededForRafineriesWithBiofuelCarrots(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Water per rafinery per day = 2 * 8 = 16
+            # Total water = 3 * 16 = 48
+            self.assertEqual(48, result)
+
+    def test_getRafineriesNeededForBiofuelPotatoesNegativeAmount(
+            self) -> None:
+        """
+        The getRafineriesNeededForBiofuelPotatoes method must raise ValueError
+        if biofuel potatoes amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getRafineriesNeededForBiofuelPotatoes(-10.0)
+        self.assertEqual("Biofuel Potatoes amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getRafineriesNeededForBiofuelPotatoesSuccess(self) -> None:
+        """
+        The getRafineriesNeededForBiofuelPotatoes method must correctly
+        calculate rafineries needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 1
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsOutputQuantity.return_value = 30
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getRafineriesNeededForBiofuelPotatoes(250.0)
+
+            # Production per rafinery per day = (30 / 3.0) * 24 = 240
+            # Rafineries needed = ceil(250.0 / 240) = ceil(1.0416...) = 2
+            self.assertEqual(2, result)
+
+    def test_getPotatoesNeededForRafineriesWithBiofuelPotatoesNegativeCount(
+            self) -> None:
+        """
+        The getPotatoesNeededForRafineriesWithBiofuelPotatoes method must
+        raise ValueError if rafineries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getPotatoesNeededForRafineriesWithBiofuelPotatoes(-1)
+        self.assertEqual("Rafineries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getPotatoesNeededForRafineriesWithBiofuelPotatoesSuccess(
+            self) -> None:
+        """
+        The getPotatoesNeededForRafineriesWithBiofuelPotatoes method must
+        correctly calculate potatoes needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 1
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getPotatoesNeededForRafineriesWithBiofuelPotatoes(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Potatoes per rafinery per day = 2 * 8 = 16
+            # Total potatoes = 3 * 16 = 48
+            self.assertEqual(48, result)
+
+    def test_getWaterNeededForRafineriesWithBiofuelPotatoesNegativeCount(
+            self) -> None:
+        """
+        The getWaterNeededForRafineriesWithBiofuelPotatoes method must raise
+        ValueError if rafineries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getWaterNeededForRafineriesWithBiofuelPotatoes(-1)
+        self.assertEqual("Rafineries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getWaterNeededForRafineriesWithBiofuelPotatoesSuccess(
+            self) -> None:
+        """
+        The getWaterNeededForRafineriesWithBiofuelPotatoes method must
+        correctly calculate water needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 1
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getWaterNeededForRafineriesWithBiofuelPotatoes(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Water per rafinery per day = 2 * 8 = 16
+            # Total water = 3 * 16 = 48
+            self.assertEqual(48, result)
+
+    def test_getRafineriesNeededForBiofuelSpadderdocksNegativeAmount(
+            self) -> None:
+        """
+        The getRafineriesNeededForBiofuelSpadderdocks method must raise
+        ValueError if biofuel spadderdocks amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getRafineriesNeededForBiofuelSpadderdocks(-10.0)
+        self.assertEqual("Biofuel Spadderdocks amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getRafineriesNeededForBiofuelSpadderdocksSuccess(self) -> None:
+        """
+        The getRafineriesNeededForBiofuelSpadderdocks method must correctly
+        calculate rafineries needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 2
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsOutputQuantity.return_value = 25
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getRafineriesNeededForBiofuelSpadderdocks(220.0)
+
+            # Production per rafinery per day = (25 / 3.0) * 24 = 200
+            # Rafineries needed = ceil(220.0 / 200) = ceil(1.1) = 2
+            self.assertEqual(2, result)
+
+    def test_getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocksNegativeCount(
+            self) -> None:
+        """
+        The getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocks method
+        must raise ValueError if rafineries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocks(-1)
+        self.assertEqual("Rafineries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocksSuccess(
+            self) -> None:
+        """
+        The getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocks method
+        must correctly calculate spadderdocks needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 2
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocks(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Spadderdocks per rafinery per day = 2 * 8 = 16
+            # Total spadderdocks = 3 * 16 = 48
+            self.assertEqual(48, result)
+
+    def test_getWaterNeededForRafineriesWithBiofuelSpadderdocksNegativeCount(
+            self) -> None:
+        """
+        The getWaterNeededForRafineriesWithBiofuelSpadderdocks method must
+        raise ValueError if rafineries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getWaterNeededForRafineriesWithBiofuelSpadderdocks(-1)
+        self.assertEqual("Rafineries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getWaterNeededForRafineriesWithBiofuelSpadderdocksSuccess(
+            self) -> None:
+        """
+        The getWaterNeededForRafineriesWithBiofuelSpadderdocks method must
+        correctly calculate water needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 2
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getWaterNeededForRafineriesWithBiofuelSpadderdocks(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Water per rafinery per day = 2 * 8 = 16
+            # Total water = 3 * 16 = 48
+            self.assertEqual(48, result)
+
+    def test_getRafineriesNeededForCatalystNegativeAmount(self) -> None:
+        """
+        The getRafineriesNeededForCatalyst method must raise ValueError if
+        catalyst amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getRafineriesNeededForCatalyst(-10.0)
+        self.assertEqual("Catalyst amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getRafineriesNeededForCatalystSuccess(self) -> None:
+        """
+        The getRafineriesNeededForCatalyst method must correctly calculate
+        rafineries needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 3
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 2.0
+            mockFactionDataInstance.getGoodsOutputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getRafineriesNeededForCatalyst(15.0)
+
+            # Production per rafinery per day = (1 / 2.0) * 24 = 12
+            # Rafineries needed = ceil(15.0 / 12) = ceil(1.25) = 2
+            self.assertEqual(2, result)
+
+    def test_getMapleSyrupNeededForRafineriesWithCatalystNegativeCount(
+            self) -> None:
+        """
+        The getMapleSyrupNeededForRafineriesWithCatalyst method must raise
+        ValueError if rafineries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getMapleSyrupNeededForRafineriesWithCatalyst(-1)
+        self.assertEqual("Rafineries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getMapleSyrupNeededForRafineriesWithCatalystSuccess(self) -> None:
+        """
+        The getMapleSyrupNeededForRafineriesWithCatalyst method must correctly
+        calculate maple syrup needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 3
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 2.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getMapleSyrupNeededForRafineriesWithCatalyst(3)
+
+            # Cycles per day = 24 / 2.0 = 12
+            # Maple syrup per rafinery per day = 1 * 12 = 12
+            # Total maple syrup = 3 * 12 = 36
+            self.assertEqual(36, result)
+
+    def test_getExtractNeededForRafineriesWithCatalystNegativeCount(
+            self) -> None:
+        """
+        The getExtractNeededForRafineriesWithCatalyst method must raise
+        ValueError if rafineries count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getExtractNeededForRafineriesWithCatalyst(-1)
+        self.assertEqual("Rafineries count cannot be negative.",
+                         str(context.exception))
+
+    def test_getExtractNeededForRafineriesWithCatalystSuccess(self) -> None:
+        """
+        The getExtractNeededForRafineriesWithCatalyst method must correctly
+        calculate extract needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 3
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 2.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getExtractNeededForRafineriesWithCatalyst(3)
+
+            # Cycles per day = 24 / 2.0 = 12
+            # Extract per rafinery per day = 1 * 12 = 12
+            # Total extract = 3 * 12 = 36
+            self.assertEqual(36, result)
+
+    # Test Cases for Bot Part Factory
+    def test_getBotPartFactoriesNeededForBotChassisNegativeAmount(
+            self) -> None:
+        """
+        The getBotPartFactoriesNeededForBotChassis method must raise
+        ValueError if bot chassis amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBotPartFactoriesNeededForBotChassis(-10.0)
+        self.assertEqual("Bot Chassis amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getBotPartFactoriesNeededForBotChassisSuccess(self) -> None:
+        """
+        The getBotPartFactoriesNeededForBotChassis method must correctly
+        calculate bot part factories needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 4.0
+            mockFactionDataInstance.getGoodsOutputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBotPartFactoriesNeededForBotChassis(8.0)
+
+            # Production per bot part factory per day = (1 / 4.0) * 24 = 6
+            # Bot part factories needed = ceil(8.0 / 6) = ceil(1.333...) = 2
+            self.assertEqual(2, result)
+
+    def test_getPlanksNeededForBotPartFactoriesWithBotChassisNegativeCount(
+            self) -> None:
+        """
+        The getPlanksNeededForBotPartFactoriesWithBotChassis method must raise
+        ValueError if bot part factories count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getPlanksNeededForBotPartFactoriesWithBotChassis(-1)
+        self.assertEqual("Bot part factories count cannot be negative.",
+                         str(context.exception))
+
+    def test_getPlanksNeededForBotPartFactoriesWithBotChassisSuccess(
+            self) -> None:
+        """
+        The getPlanksNeededForBotPartFactoriesWithBotChassis method must
+        correctly calculate planks needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 4.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getPlanksNeededForBotPartFactoriesWithBotChassis(3)
+
+            # Cycles per day = 24 / 4.0 = 6
+            # Planks per bot part factory per day = 2 * 6 = 12
+            # Total planks = 3 * 12 = 36
+            self.assertEqual(36, result)
+
+    def test_getMetalBlocksNeededForBotPartFactoriesWithBotChassisNegativeCount(
+            self) -> None:
+        """
+        The getMetalBlocksNeededForBotPartFactoriesWithBotChassis method must
+        raise ValueError if bot part factories count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getMetalBlocksNeededForBotPartFactoriesWithBotChassis(-1)
+        self.assertEqual("Bot part factories count cannot be negative.",
+                         str(context.exception))
+
+    def test_getMetalBlocksNeededForBotPartFactoriesWithBotChassisSuccess(
+            self) -> None:
+        """
+        The getMetalBlocksNeededForBotPartFactoriesWithBotChassis method must
+        correctly calculate metal blocks needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 4.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getMetalBlocksNeededForBotPartFactoriesWithBotChassis(3)
+
+            # Cycles per day = 24 / 4.0 = 6
+            # Metal blocks per bot part factory per day = 1 * 6 = 6
+            # Total metal blocks = 3 * 6 = 18
+            self.assertEqual(18, result)
+
+    def test_getBiofuelNeededForBotPartFactoriesWithBotChassisNegativeCount(
+            self) -> None:
+        """
+        The getBiofuelNeededForBotPartFactoriesWithBotChassis method must
+        raise ValueError if bot part factories count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBiofuelNeededForBotPartFactoriesWithBotChassis(-1)
+        self.assertEqual("Bot part factories count cannot be negative.",
+                         str(context.exception))
+
+    def test_getBiofuelNeededForBotPartFactoriesWithBotChassisSuccess(
+            self) -> None:
+        """
+        The getBiofuelNeededForBotPartFactoriesWithBotChassis method must
+        correctly calculate biofuel needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 4.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBiofuelNeededForBotPartFactoriesWithBotChassis(3)
+
+            # Cycles per day = 24 / 4.0 = 6
+            # Biofuel per bot part factory per day = 1 * 6 = 6
+            # Total biofuel = 3 * 6 = 18
+            self.assertEqual(18, result)
+
+    def test_getBotPartFactoriesNeededForBotHeadsNegativeAmount(self) -> None:
+        """
+        The getBotPartFactoriesNeededForBotHeads method must raise ValueError
+        if bot heads amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBotPartFactoriesNeededForBotHeads(-10.0)
+        self.assertEqual("Bot Heads amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getBotPartFactoriesNeededForBotHeadsSuccess(self) -> None:
+        """
+        The getBotPartFactoriesNeededForBotHeads method must correctly
+        calculate bot part factories needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 1
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsOutputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBotPartFactoriesNeededForBotHeads(10.0)
+
+            # Production per bot part factory per day = (1 / 3.0) * 24 = 8
+            # Bot part factories needed = ceil(10.0 / 8) = ceil(1.25) = 2
+            self.assertEqual(2, result)
+
+    def test_getGearsNeededForBotPartFactoriesWithBotHeadsNegativeCount(
+            self) -> None:
+        """
+        The getGearsNeededForBotPartFactoriesWithBotHeads method must raise
+        ValueError if bot part factories count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getGearsNeededForBotPartFactoriesWithBotHeads(-1)
+        self.assertEqual("Bot part factories count cannot be negative.",
+                         str(context.exception))
+
+    def test_getGearsNeededForBotPartFactoriesWithBotHeadsSuccess(self) -> None:
+        """
+        The getGearsNeededForBotPartFactoriesWithBotHeads method must
+        correctly calculate gears needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 1
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getGearsNeededForBotPartFactoriesWithBotHeads(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Gears per bot part factory per day = 1 * 8 = 8
+            # Total gears = 3 * 8 = 24
+            self.assertEqual(24, result)
+
+    def test_getMetalBlocksNeededForBotPartFactoriesWithBotHeadsNegativeCount(
+            self) -> None:
+        """
+        The getMetalBlocksNeededForBotPartFactoriesWithBotHeads method must
+        raise ValueError if bot part factories count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getMetalBlocksNeededForBotPartFactoriesWithBotHeads(-1)
+        self.assertEqual("Bot part factories count cannot be negative.",
+                         str(context.exception))
+
+    def test_getMetalBlocksNeededForBotPartFactoriesWithBotHeadsSuccess(
+            self) -> None:
+        """
+        The getMetalBlocksNeededForBotPartFactoriesWithBotHeads method must
+        correctly calculate metal blocks needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 1
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getMetalBlocksNeededForBotPartFactoriesWithBotHeads(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Metal blocks per bot part factory per day = 1 * 8 = 8
+            # Total metal blocks = 3 * 8 = 24
+            self.assertEqual(24, result)
+
+    def test_getPlanksNeededForBotPartFactoriesWithBotHeadsNegativeCount(
+            self) -> None:
+        """
+        The getPlanksNeededForBotPartFactoriesWithBotHeads method must raise
+        ValueError if bot part factories count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getPlanksNeededForBotPartFactoriesWithBotHeads(-1)
+        self.assertEqual("Bot part factories count cannot be negative.",
+                         str(context.exception))
+
+    def test_getPlanksNeededForBotPartFactoriesWithBotHeadsSuccess(
+            self) -> None:
+        """
+        The getPlanksNeededForBotPartFactoriesWithBotHeads method must
+        correctly calculate planks needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 1
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getPlanksNeededForBotPartFactoriesWithBotHeads(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Planks per bot part factory per day = 1 * 8 = 8
+            # Total planks = 3 * 8 = 24
+            self.assertEqual(24, result)
+
+    def test_getBotPartFactoriesNeededForBotLimbsNegativeAmount(self) -> None:
+        """
+        The getBotPartFactoriesNeededForBotLimbs method must raise ValueError
+        if bot limbs amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBotPartFactoriesNeededForBotLimbs(-10.0)
+        self.assertEqual("Bot Limbs amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getBotPartFactoriesNeededForBotLimbsSuccess(self) -> None:
+        """
+        The getBotPartFactoriesNeededForBotLimbs method must correctly
+        calculate bot part factories needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 2
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsOutputQuantity.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBotPartFactoriesNeededForBotLimbs(20.0)
+
+            # Production per bot part factory per day = (2 / 3.0) * 24 = 16
+            # Bot part factories needed = ceil(20.0 / 16) = ceil(1.25) = 2
+            self.assertEqual(2, result)
+
+    def test_getGearsNeededForBotPartFactoriesWithBotLimbsNegativeCount(
+            self) -> None:
+        """
+        The getGearsNeededForBotPartFactoriesWithBotLimbs method must raise
+        ValueError if bot part factories count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getGearsNeededForBotPartFactoriesWithBotLimbs(-1)
+        self.assertEqual("Bot part factories count cannot be negative.",
+                         str(context.exception))
+
+    def test_getGearsNeededForBotPartFactoriesWithBotLimbsSuccess(self) -> None:
+        """
+        The getGearsNeededForBotPartFactoriesWithBotLimbs method must
+        correctly calculate gears needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 2
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getGearsNeededForBotPartFactoriesWithBotLimbs(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Gears per bot part factory per day = 2 * 8 = 16
+            # Total gears = 3 * 16 = 48
+            self.assertEqual(48, result)
+
+    def test_getPlanksNeededForBotPartFactoriesWithBotLimbsNegativeCount(
+            self) -> None:
+        """
+        The getPlanksNeededForBotPartFactoriesWithBotLimbs method must raise
+        ValueError if bot part factories count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getPlanksNeededForBotPartFactoriesWithBotLimbs(-1)
+        self.assertEqual("Bot part factories count cannot be negative.",
+                         str(context.exception))
+
+    def test_getPlanksNeededForBotPartFactoriesWithBotLimbsSuccess(
+            self) -> None:
+        """
+        The getPlanksNeededForBotPartFactoriesWithBotLimbs method must
+        correctly calculate planks needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 2
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getPlanksNeededForBotPartFactoriesWithBotLimbs(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Planks per bot part factory per day = 1 * 8 = 8
+            # Total planks = 3 * 8 = 24
+            self.assertEqual(24, result)
+
+    # Test Cases for Bot Assembler
+    def test_getBotAssemblersNeededForBotsNegativeAmount(self) -> None:
+        """
+        The getBotAssemblersNeededForBots method must raise ValueError if
+        bots amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBotAssemblersNeededForBots(-10.0)
+        self.assertEqual("Bots amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getBotAssemblersNeededForBotsSuccess(self) -> None:
+        """
+        The getBotAssemblersNeededForBots method must correctly calculate
+        bot assemblers needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 6.0
+            mockFactionDataInstance.getGoodsOutputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBotAssemblersNeededForBots(5.0)
+
+            # Production per bot assembler per day = (1 / 6.0) * 24 = 4
+            # Bot assemblers needed = ceil(5.0 / 4) = ceil(1.25) = 2
+            self.assertEqual(2, result)
+
+    def test_getBotChassisNeededForBotAssemblersNegativeCount(self) -> None:
+        """
+        The getBotChassisNeededForBotAssemblers method must raise ValueError
+        if bot assemblers count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBotChassisNeededForBotAssemblers(-1)
+        self.assertEqual("Bot assemblers count cannot be negative.",
+                         str(context.exception))
+
+    def test_getBotChassisNeededForBotAssemblersSuccess(self) -> None:
+        """
+        The getBotChassisNeededForBotAssemblers method must correctly
+        calculate bot chassis needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 6.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBotChassisNeededForBotAssemblers(3)
+
+            # Cycles per day = 24 / 6.0 = 4
+            # Bot chassis per bot assembler per day = 1 * 4 = 4
+            # Total bot chassis = 3 * 4 = 12
+            self.assertEqual(12, result)
+
+    def test_getBotHeadsNeededForBotAssemblersNegativeCount(self) -> None:
+        """
+        The getBotHeadsNeededForBotAssemblers method must raise ValueError
+        if bot assemblers count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBotHeadsNeededForBotAssemblers(-1)
+        self.assertEqual("Bot assemblers count cannot be negative.",
+                         str(context.exception))
+
+    def test_getBotHeadsNeededForBotAssemblersSuccess(self) -> None:
+        """
+        The getBotHeadsNeededForBotAssemblers method must correctly calculate
+        bot heads needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 6.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBotHeadsNeededForBotAssemblers(3)
+
+            # Cycles per day = 24 / 6.0 = 4
+            # Bot heads per bot assembler per day = 1 * 4 = 4
+            # Total bot heads = 3 * 4 = 12
+            self.assertEqual(12, result)
+
+    def test_getBotLimbsNeededForBotAssemblersNegativeCount(self) -> None:
+        """
+        The getBotLimbsNeededForBotAssemblers method must raise ValueError
+        if bot assemblers count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBotLimbsNeededForBotAssemblers(-1)
+        self.assertEqual("Bot assemblers count cannot be negative.",
+                         str(context.exception))
+
+    def test_getBotLimbsNeededForBotAssemblersSuccess(self) -> None:
+        """
+        The getBotLimbsNeededForBotAssemblers method must correctly calculate
+        bot limbs needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 6.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBotLimbsNeededForBotAssemblers(3)
+
+            # Cycles per day = 24 / 6.0 = 4
+            # Bot limbs per bot assembler per day = 1 * 4 = 4
+            # Total bot limbs = 3 * 4 = 12
+            self.assertEqual(12, result)
+
+    # Test Cases for Explosives Factory
+    def test_getExplosivesFactoriesNeededForExplosivesNegativeAmount(
+            self) -> None:
+        """
+        The getExplosivesFactoriesNeededForExplosives method must raise
+        ValueError if explosives amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getExplosivesFactoriesNeededForExplosives(-10.0)
+        self.assertEqual("Explosives amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getExplosivesFactoriesNeededForExplosivesSuccess(self) -> None:
+        """
+        The getExplosivesFactoriesNeededForExplosives method must correctly
+        calculate explosives factories needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 2.0
+            mockFactionDataInstance.getGoodsOutputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getExplosivesFactoriesNeededForExplosives(15.0)
+
+            # Production per explosives factory per day = (1 / 2.0) * 24 = 12
+            # Explosives factories needed = ceil(15.0 / 12) = ceil(1.25) = 2
+            self.assertEqual(2, result)
+
+    def test_getBadwaterNeededForExplosivesFactoriesNegativeCount(
+            self) -> None:
+        """
+        The getBadwaterNeededForExplosivesFactories method must raise
+        ValueError if explosives factories count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBadwaterNeededForExplosivesFactories(-1)
+        self.assertEqual("Explosives factories count cannot be negative.",
+                         str(context.exception))
+
+    def test_getBadwaterNeededForExplosivesFactoriesSuccess(self) -> None:
+        """
+        The getBadwaterNeededForExplosivesFactories method must correctly
+        calculate badwater needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 2.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 5
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBadwaterNeededForExplosivesFactories(3)
+
+            # Cycles per day = 24 / 2.0 = 12
+            # Badwater per explosives factory per day = 5 * 12 = 60
+            # Total badwater = 3 * 60 = 180
+            self.assertEqual(180, result)
+
+    # Test Cases for Centrifuge
+    def test_getCentrifugesNeededForExtractNegativeAmount(self) -> None:
+        """
+        The getCentrifugesNeededForExtract method must raise ValueError if
+        extract amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getCentrifugesNeededForExtract(-10.0)
+        self.assertEqual("Extract amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getCentrifugesNeededForExtractSuccess(self) -> None:
+        """
+        The getCentrifugesNeededForExtract method must correctly calculate
+        centrifuges needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsOutputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getCentrifugesNeededForExtract(10.0)
+
+            # Production per centrifuge per day = (1 / 3.0) * 24 = 8
+            # Centrifuges needed = ceil(10.0 / 8) = ceil(1.25) = 2
+            self.assertEqual(2, result)
+
+    def test_getBadwaterNeededForCentrifugesNegativeCount(self) -> None:
+        """
+        The getBadwaterNeededForCentrifuges method must raise ValueError if
+        centrifuges count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBadwaterNeededForCentrifuges(-1)
+        self.assertEqual("Centrifuges count cannot be negative.",
+                         str(context.exception))
+
+    def test_getBadwaterNeededForCentrifugesSuccess(self) -> None:
+        """
+        The getBadwaterNeededForCentrifuges method must correctly calculate
+        badwater needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 5
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBadwaterNeededForCentrifuges(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Badwater per centrifuge per day = 5 * 8 = 40
+            # Total badwater = 3 * 40 = 120
+            self.assertEqual(120, result)
+
+    def test_getLogsNeededForCentrifugesNegativeCount(self) -> None:
+        """
+        The getLogsNeededForCentrifuges method must raise ValueError if
+        centrifuges count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLogsNeededForCentrifuges(-1)
+        self.assertEqual("Centrifuges count cannot be negative.",
+                         str(context.exception))
+
+    def test_getLogsNeededForCentrifugesSuccess(self) -> None:
+        """
+        The getLogsNeededForCentrifuges method must correctly calculate logs
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 3.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getLogsNeededForCentrifuges(3)
+
+            # Cycles per day = 24 / 3.0 = 8
+            # Logs per centrifuge per day = 2 * 8 = 16
+            # Total logs = 3 * 16 = 48
+            self.assertAlmostEqual(48.0, result, places=5)
+
+    # Test Cases for Herbalist
+    def test_getHerbalistsNeededForAntidoteNegativeAmount(self) -> None:
+        """
+        The getHerbalistsNeededForAntidote method must raise ValueError if
+        antidote amount is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getHerbalistsNeededForAntidote(-10.0)
+        self.assertEqual("Antidote amount cannot be negative.",
+                         str(context.exception))
+
+    def test_getHerbalistsNeededForAntidoteSuccess(self) -> None:
+        """
+        The getHerbalistsNeededForAntidote method must correctly calculate
+        herbalists needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 2.0
+            mockFactionDataInstance.getGoodsOutputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getHerbalistsNeededForAntidote(15.0)
+
+            # Production per herbalist per day = (1 / 2.0) * 24 = 12
+            # Herbalists needed = ceil(15.0 / 12) = ceil(1.25) = 2
+            self.assertEqual(2, result)
+
+    def test_getDandelionsNeededForHerbalistsNegativeCount(self) -> None:
+        """
+        The getDandelionsNeededForHerbalists method must raise ValueError if
+        herbalists count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getDandelionsNeededForHerbalists(-1)
+        self.assertEqual("Herbalists count cannot be negative.",
+                         str(context.exception))
+
+    def test_getDandelionsNeededForHerbalistsSuccess(self) -> None:
+        """
+        The getDandelionsNeededForHerbalists method must correctly calculate
+        dandelions needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 2.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 2
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getDandelionsNeededForHerbalists(3)
+
+            # Cycles per day = 24 / 2.0 = 12
+            # Dandelions per herbalist per day = 2 * 12 = 24
+            # Total dandelions = 3 * 24 = 72
+            self.assertEqual(72, result)
+
+    def test_getBerriesNeededForHerbalistsNegativeCount(self) -> None:
+        """
+        The getBerriesNeededForHerbalists method must raise ValueError if
+        herbalists count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getBerriesNeededForHerbalists(-1)
+        self.assertEqual("Herbalists count cannot be negative.",
+                         str(context.exception))
+
+    def test_getBerriesNeededForHerbalistsSuccess(self) -> None:
+        """
+        The getBerriesNeededForHerbalists method must correctly calculate
+        berries needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 2.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 3
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getBerriesNeededForHerbalists(3)
+
+            # Cycles per day = 24 / 2.0 = 12
+            # Berries per herbalist per day = 3 * 12 = 36
+            # Total berries = 3 * 36 = 108
+            self.assertEqual(108, result)
+
+    def test_getLogsNeededForHerbalistsNegativeCount(self) -> None:
+        """
+        The getLogsNeededForHerbalists method must raise ValueError if
+        herbalists count is negative.
+        """
+        with patch('pkgs.factions.folktail.FactionData'), \
+                self.assertRaises(ValueError) as context:
+            folktail = Folktail()
+            folktail.getLogsNeededForHerbalists(-1)
+        self.assertEqual("Herbalists count cannot be negative.",
+                         str(context.exception))
+
+    def test_getLogsNeededForHerbalistsSuccess(self) -> None:
+        """
+        The getLogsNeededForHerbalists method must correctly calculate logs
+        needed.
+        """
+        with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
+            mockFactionDataInstance = Mock()
+            mockFactionDataInstance.getGoodsRecipeIndex.return_value = 0
+            mockFactionDataInstance.getGoodsProductionTime.return_value = 2.0
+            mockFactionDataInstance.getGoodsInputQuantity.return_value = 1
+            MockFactionData.return_value = mockFactionDataInstance
+
+            folktail = Folktail()
+            result = folktail.getLogsNeededForHerbalists(3)
+
+            # Cycles per day = 24 / 2.0 = 12
+            # Logs per herbalist per day = 1 * 12 = 12
+            # Total logs = 3 * 12 = 36
+            self.assertAlmostEqual(36.0, result, places=5)

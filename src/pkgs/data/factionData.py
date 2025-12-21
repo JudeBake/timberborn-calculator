@@ -3,7 +3,8 @@ from typing import Any
 import yaml as yaml
 
 from .emunerators import ConsumptionType, CropName, DifficultyLevel
-from .emunerators import FoodProcessingBuildingName, GoodsBuildingName
+from .emunerators import FoodProcessingBuildingName, FoodRecipeName
+from .emunerators import GoodsBuildingName, GoodsRecipeName
 from .emunerators import HarvestName, TreeName, WaterBuildingName
 from .emunerators import DataKeys
 
@@ -288,7 +289,8 @@ class FactionData:
                              f"harvestable item.")
         return tree[DataKeys.HARVEST][0][DataKeys.YIELD]
 
-    def _getWater(self, waterBuildingName: WaterBuildingName) -> dict[str, Any]:
+    def _getWater(self,
+                  waterBuildingName: WaterBuildingName) -> dict[str, Any]:
         """
         Private helper method to retrieve the water building dictionary.
 
@@ -484,29 +486,6 @@ class FactionData:
         building = self._getFoodProcessing(buildingName)
         return building[DataKeys.RECIPES][recipeIndex][DataKeys.PROD_TIME]
 
-    def getFoodProcessingInputs(self,
-                                buildingName: FoodProcessingBuildingName,
-                                recipeIndex: int) -> list[dict[str, Any]] | None:
-        """
-        Get the inputs for a specified food processing building and recipe
-        index.
-
-        :param buildingName: The food processing building to retrieve inputs
-                             for.
-        :type buildingName: FoodProcessingBuildingName
-        :param recipeIndex: The index of the recipe.
-        :type recipeIndex: int
-
-        :return: List of input dictionaries or None if no inputs required.
-        :rtype: list[dict[str, Any]] | None
-
-        :raises ValueError: If the specified food processing building is not
-                            found in faction data.
-        :raises IndexError: If the recipe index is out of range.
-        """
-        building = self._getFoodProcessing(buildingName)
-        return building[DataKeys.RECIPES][recipeIndex][DataKeys.INPUTS]
-
     def getFoodProcessingOutputQuantity(self,
                                         buildingName:
                                         FoodProcessingBuildingName,
@@ -530,6 +509,98 @@ class FactionData:
         """
         building = self._getFoodProcessing(buildingName)
         return building[DataKeys.RECIPES][recipeIndex][DataKeys.OUT_QUANTITY]
+
+    def getFoodProcessingRecipeIndex(self,
+                                     buildingName: FoodProcessingBuildingName,
+                                     recipeName: FoodRecipeName) -> int:
+        """
+        Get the recipe index for a specified food processing building and
+        recipe name.
+
+        :param buildingName: The food processing building to search in.
+        :type buildingName: FoodProcessingBuildingName
+        :param recipeName: The recipe name to find.
+        :type recipeName: FoodRecipeName
+
+        :return: Recipe index.
+        :rtype: int
+
+        :raises ValueError: If the specified food processing building is not
+                            found in faction data or if the recipe name is not
+                            found.
+        """
+        building = self._getFoodProcessing(buildingName)
+        for index, recipe in enumerate(building[DataKeys.RECIPES]):
+            if recipe[DataKeys.NAME] == recipeName.value:
+                return index
+        raise ValueError(f"Recipe '{recipeName.value}' not found in "
+                         f"'{buildingName.value}'.")
+
+    def getFoodProcessingInputIndex(self,
+                                    buildingName: FoodProcessingBuildingName,
+                                    recipeName: FoodRecipeName,
+                                    inputName: str) -> int:
+        """
+        Get the input index for a specified food processing building, recipe,
+        and input name.
+
+        :param buildingName: The food processing building to search in.
+        :type buildingName: FoodProcessingBuildingName
+        :param recipeName: The recipe to search in.
+        :type recipeName: FoodRecipeName
+        :param inputName: The input name to find.
+        :type inputName: str
+
+        :return: Input index.
+        :rtype: int
+
+        :raises ValueError: If the specified food processing building, recipe,
+                            or input is not found in faction data.
+        """
+        recipeIndex = self.getFoodProcessingRecipeIndex(buildingName,
+                                                        recipeName)
+        building = self._getFoodProcessing(buildingName)
+        inputs = building[DataKeys.RECIPES][recipeIndex][DataKeys.INPUTS]
+
+        if inputs is None:
+            raise ValueError(f"Recipe '{recipeName.value}' in "
+                             f"'{buildingName.value}' has no inputs.")
+
+        for index, input_item in enumerate(inputs):
+            if input_item[DataKeys.NAME] == inputName:
+                return index
+        raise ValueError(f"Input '{inputName}' not found in recipe "
+                         f"'{recipeName.value}' of '{buildingName.value}'.")
+
+    def getFoodProcessingInputQuantity(self,
+                                       buildingName:
+                                       FoodProcessingBuildingName,
+                                       recipeName: FoodRecipeName,
+                                       inputName: str) -> float:
+        """
+        Get the input quantity for a specified food processing building,
+        recipe, and input name.
+
+        :param buildingName: The food processing building.
+        :type buildingName: FoodProcessingBuildingName
+        :param recipeName: The recipe.
+        :type recipeName: FoodRecipeName
+        :param inputName: The input name.
+        :type inputName: str
+
+        :return: Input quantity.
+        :rtype: float
+
+        :raises ValueError: If the specified food processing building, recipe,
+                            or input is not found in faction data.
+        """
+        inputIndex = self.getFoodProcessingInputIndex(buildingName, recipeName,
+                                                       inputName)
+        recipeIndex = self.getFoodProcessingRecipeIndex(buildingName,
+                                                        recipeName)
+        building = self._getFoodProcessing(buildingName)
+        return building[DataKeys.RECIPES][recipeIndex][DataKeys.INPUTS] \
+            [inputIndex][DataKeys.QUANTITY]
 
     def _getGoods(self, buildingName: GoodsBuildingName) -> dict[str, Any]:
         """
@@ -664,6 +735,66 @@ class FactionData:
         """
         building = self._getGoods(buildingName)
         return building[DataKeys.RECIPES][recipeIndex][DataKeys.OUT_QUANTITY]
+
+    def getGoodsRecipeIndex(self, buildingName: GoodsBuildingName,
+                            recipeName: GoodsRecipeName) -> int:
+        """
+        Find the recipe index for a given goods building and recipe name.
+
+        :param buildingName: The goods building.
+        :type buildingName: GoodsBuildingName
+        :param recipeName: The recipe name to search for.
+        :type recipeName: GoodsRecipeName
+
+        :return: The index of the recipe.
+        :rtype: int
+
+        :raises ValueError: If the specified goods building is not found
+                            or if the recipe is not found in the building.
+        """
+        building = self._getGoods(buildingName)
+        recipes = building[DataKeys.RECIPES]
+
+        for index, recipe in enumerate(recipes):
+            if recipe[DataKeys.NAME] == recipeName.value:
+                return index
+
+        raise ValueError(f"Recipe '{recipeName.value}' not found in "
+                         f"building '{buildingName.value}'.")
+
+    def getGoodsInputQuantity(self, buildingName: GoodsBuildingName,
+                              recipeName: 'GoodsRecipeName',
+                              inputName: str) -> float:
+        """
+        Get the quantity of a specific input for a goods recipe.
+
+        :param buildingName: The goods building.
+        :type buildingName: GoodsBuildingName
+        :param recipeName: The recipe name.
+        :type recipeName: GoodsRecipeName
+        :param inputName: The name of the input to get quantity for.
+        :type inputName: str
+
+        :return: The quantity of the specified input.
+        :rtype: float
+
+        :raises ValueError: If the specified building or recipe is not found,
+                            or if the input is not found in the recipe.
+        """
+        recipeIndex = self.getGoodsRecipeIndex(buildingName, recipeName)
+        inputs = self.getGoodsInputs(buildingName, recipeIndex)
+
+        if inputs is None:
+            raise ValueError(f"Recipe '{recipeName.value}' in building "
+                             f"'{buildingName.value}' has no inputs.")
+
+        for input_item in inputs:
+            if input_item[DataKeys.NAME] == inputName:
+                return input_item[DataKeys.QUANTITY]
+
+        raise ValueError(f"Input '{inputName}' not found in recipe "
+                         f"'{recipeName.value}' for building "
+                         f"'{buildingName.value}'.")
 
 
 if __name__ == '__main__':

@@ -80,6 +80,17 @@ class FoodProcessingBuildingName(Enum):
     OIL_PRESS = 'Oil Press'
 
 
+class FoodRecipeName(Enum):
+    GRILLED_POTATOES = 'Grilled Potatoes'
+    GRILLED_CHESTNUTS = 'Grilled Chestnuts'
+    GRILLED_SPADDERDOCKS = 'Grilled Spadderdocks'
+    WHEAT_FLOUR = 'Wheat Flour'
+    CATTAIL_FLOUR = 'Cattail Flour'
+    BREADS = 'Breads'
+    CATTAIL_CRACKERS = 'Cattail Crackers'
+    MAPLE_PASTRIES = 'Maple Pastries'
+
+
 class GoodsBuildingName(Enum):
     LUMBER_MILL = 'Lumber Mill'
     INDUSTRIAL_LUMBER_MILL = 'Industrial Lumber Mill'
@@ -97,6 +108,28 @@ class GoodsBuildingName(Enum):
     EXPLOSIVES_FACTORY = 'Explosives Factory'
     CENTRIFUGE = 'Centrifuge'
     HERBALIST = 'Herbalist'
+
+
+class GoodsRecipeName(Enum):
+    PLANKS = 'Planks'
+    GEARS = 'Gears'
+    PAPER = 'Paper'
+    BOOKS = 'Books'
+    PUNCHCARDS = 'Punchcards'
+    TREATED_PLANKS = 'Treated Planks'
+    METAL_BLOCKS = 'Metal Blocks'
+    SCRAP_METAL = 'Scrap Metal'
+    BIOFUEL_CARROTS = 'Biofuel Carrots'
+    BIOFUEL_POTATOES = 'Biofuel Potatoes'
+    BIOFUEL_SPADDERDOCKS = 'Biofuel Spadderdocks'
+    CATALYST = 'Catalyst'
+    BOT_CHASSIS = 'Bot Chassis'
+    BOT_HEADS = 'Bot Heads'
+    BOT_LIMBS = 'Bot Limbs'
+    BOT = 'Bot'
+    EXPLOSIVES = 'Explosives'
+    EXTRACT = 'Extract'
+    ANTIDOTE = 'Antidote'
 
 
 class DataKeys:

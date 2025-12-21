@@ -264,7 +264,7 @@ faction_data:
               - name: "Treated Planks"
                 quantity: 1
             output_quantity: 5
-      - name: "Rafinery"
+      - name: "Refinery"
         workers: 2
         recipes:
           - name: "Biofuel Carrots"
@@ -288,7 +288,7 @@ faction_data:
             inputs:
               - name: "Water"
                 quantity: 2
-              - name: "Sappeddocks"
+              - name: "Spadderdocks"
                 quantity: 2
             output_quantity: 25
           - name: "Catalyst"

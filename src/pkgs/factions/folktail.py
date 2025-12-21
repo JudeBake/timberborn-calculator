@@ -1,9 +1,9 @@
 import math
 
-from ..data.emunerators import ConsumptionType, CropName, DifficultyLevel
-from ..data.emunerators import FoodProcessingBuildingName, FoodRecipeName
-from ..data.emunerators import GoodsBuildingName, GoodsRecipeName
-from ..data.emunerators import HarvestName, TreeName, WaterBuildingName
+from ..data.enumerators import ConsumptionType, CropName, DifficultyLevel
+from ..data.enumerators import FoodProcessingBuildingName, FoodRecipeName
+from ..data.enumerators import GoodsBuildingName, GoodsRecipeName
+from ..data.enumerators import HarvestName, TreeName, WaterBuildingName
 from ..data.factionData import FactionData
 
 
@@ -1944,16 +1944,16 @@ class Folktail:
 
         return math.ceil(minesCount * treatedPlanksPerMinePerDay)
 
-    def getRafineriesNeededForBiofuelCarrots(
+    def getRefineriesNeededForBiofuelCarrots(
             self, biofuelCarrotsAmount: float) -> int:
         """
-        Calculate the number of rafineries needed to produce a given amount of
+        Calculate the number of refineries needed to produce a given amount of
         biofuel per day using carrots.
 
         :param biofuelCarrotsAmount: Daily amount of biofuel needed.
         :type biofuelCarrotsAmount: float
 
-        :return: Number of rafineries needed.
+        :return: Number of refineries needed.
         :rtype: int
 
         :raises ValueError: If biofuel carrots amount is negative.
@@ -1962,41 +1962,41 @@ class Folktail:
             raise ValueError("Biofuel Carrots amount cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_CARROTS)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         # Production time is in hours, calculate daily production
-        productionPerRafinery = (outputQuantity / productionTime) * 24
+        productionPerRefinery = (outputQuantity / productionTime) * 24
 
-        return math.ceil(biofuelCarrotsAmount / productionPerRafinery)
+        return math.ceil(biofuelCarrotsAmount / productionPerRefinery)
 
-    def getCarrotsNeededForRafineriesWithBiofuelCarrots(
-            self, rafineriesCount: int) -> int:
+    def getCarrotsNeededForRefineriesWithBiofuelCarrots(
+            self, refineriesCount: int) -> int:
         """
         Calculate the number of carrots needed per day to keep a given number
-        of rafineries running producing biofuel with carrots.
+        of refineries running producing biofuel with carrots.
 
-        :param rafineriesCount: Number of rafineries.
-        :type rafineriesCount: int
+        :param refineriesCount: Number of refineries.
+        :type refineriesCount: int
 
         :return: Daily amount of carrots needed.
         :rtype: int
 
-        :raises ValueError: If rafineries count is negative.
+        :raises ValueError: If refineries count is negative.
         """
-        if rafineriesCount < 0:
-            raise ValueError("Rafineries count cannot be negative.")
+        if refineriesCount < 0:
+            raise ValueError("Refineries count cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_CARROTS)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         carrotsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_CARROTS,
             "Carrots")
 
@@ -2004,51 +2004,51 @@ class Folktail:
         cyclesPerDay = 24 / productionTime
         carrotsPerRafineryPerDay = carrotsInput * cyclesPerDay
 
-        return math.ceil(rafineriesCount * carrotsPerRafineryPerDay)
+        return math.ceil(refineriesCount * carrotsPerRafineryPerDay)
 
-    def getWaterNeededForRafineriesWithBiofuelCarrots(
-            self, rafineriesCount: int) -> int:
+    def getWaterNeededForRefineriesWithBiofuelCarrots(
+            self, refineriesCount: int) -> int:
         """
         Calculate the number of water needed per day to keep a given number of
-        rafineries running producing biofuel with carrots.
+        refineries running producing biofuel with carrots.
 
-        :param rafineriesCount: Number of rafineries.
-        :type rafineriesCount: int
+        :param refineriesCount: Number of refineries.
+        :type refineriesCount: int
 
         :return: Daily amount of water needed.
         :rtype: int
 
-        :raises ValueError: If rafineries count is negative.
+        :raises ValueError: If refineries count is negative.
         """
-        if rafineriesCount < 0:
-            raise ValueError("Rafineries count cannot be negative.")
+        if refineriesCount < 0:
+            raise ValueError("Refineries count cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_CARROTS)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         waterInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_CARROTS,
             "Water")
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
-        waterPerRafineryPerDay = waterInput * cyclesPerDay
+        waterPerRefineryPerDay = waterInput * cyclesPerDay
 
-        return math.ceil(rafineriesCount * waterPerRafineryPerDay)
+        return math.ceil(refineriesCount * waterPerRefineryPerDay)
 
-    def getRafineriesNeededForBiofuelPotatoes(
+    def getRefineriesNeededForBiofuelPotatoes(
             self, biofuelPotatoesAmount: float) -> int:
         """
-        Calculate the number of rafineries needed to produce a given amount of
+        Calculate the number of refineries needed to produce a given amount of
         biofuel per day using potatoes.
 
         :param biofuelPotatoesAmount: Daily amount of biofuel needed.
         :type biofuelPotatoesAmount: float
 
-        :return: Number of rafineries needed.
+        :return: Number of refineries needed.
         :rtype: int
 
         :raises ValueError: If biofuel potatoes amount is negative.
@@ -2057,93 +2057,93 @@ class Folktail:
             raise ValueError("Biofuel Potatoes amount cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_POTATOES)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         # Production time is in hours, calculate daily production
-        productionPerRafinery = (outputQuantity / productionTime) * 24
+        productionPerRefinery = (outputQuantity / productionTime) * 24
 
-        return math.ceil(biofuelPotatoesAmount / productionPerRafinery)
+        return math.ceil(biofuelPotatoesAmount / productionPerRefinery)
 
-    def getPotatoesNeededForRafineriesWithBiofuelPotatoes(
-            self, rafineriesCount: int) -> int:
+    def getPotatoesNeededForRefineriesWithBiofuelPotatoes(
+            self, refineriesCount: int) -> int:
         """
         Calculate the number of potatoes needed per day to keep a given number
-        of rafineries running producing biofuel with potatoes.
+        of refineries running producing biofuel with potatoes.
 
-        :param rafineriesCount: Number of rafineries.
-        :type rafineriesCount: int
+        :param refineriesCount: Number of refineries.
+        :type refineriesCount: int
 
         :return: Daily amount of potatoes needed.
         :rtype: int
 
-        :raises ValueError: If rafineries count is negative.
+        :raises ValueError: If refineries count is negative.
         """
-        if rafineriesCount < 0:
-            raise ValueError("Rafineries count cannot be negative.")
+        if refineriesCount < 0:
+            raise ValueError("Refineries count cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_POTATOES)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         potatoesInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_POTATOES,
             "Potatoes")
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
-        potatoesPerRafineryPerDay = potatoesInput * cyclesPerDay
+        potatoesPerRefineryPerDay = potatoesInput * cyclesPerDay
 
-        return math.ceil(rafineriesCount * potatoesPerRafineryPerDay)
+        return math.ceil(refineriesCount * potatoesPerRefineryPerDay)
 
-    def getWaterNeededForRafineriesWithBiofuelPotatoes(
-            self, rafineriesCount: int) -> int:
+    def getWaterNeededForRefineriesWithBiofuelPotatoes(
+            self, refineriesCount: int) -> int:
         """
         Calculate the number of water needed per day to keep a given number of
-        rafineries running producing biofuel with potatoes.
+        refineries running producing biofuel with potatoes.
 
-        :param rafineriesCount: Number of rafineries.
-        :type rafineriesCount: int
+        :param refineriesCount: Number of refineries.
+        :type refineriesCount: int
 
         :return: Daily amount of water needed.
         :rtype: int
 
-        :raises ValueError: If rafineries count is negative.
+        :raises ValueError: If refineries count is negative.
         """
-        if rafineriesCount < 0:
-            raise ValueError("Rafineries count cannot be negative.")
+        if refineriesCount < 0:
+            raise ValueError("Refineries count cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_POTATOES)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         waterInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_POTATOES,
             "Water")
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
-        waterPerRafineryPerDay = waterInput * cyclesPerDay
+        waterPerRefineryPerDay = waterInput * cyclesPerDay
 
-        return math.ceil(rafineriesCount * waterPerRafineryPerDay)
+        return math.ceil(refineriesCount * waterPerRefineryPerDay)
 
-    def getRafineriesNeededForBiofuelSpadderdocks(
+    def getRefineriesNeededForBiofuelSpadderdocks(
             self, biofuelSpadderdocksAmount: float) -> int:
         """
-        Calculate the number of rafineries needed to produce a given amount of
+        Calculate the number of refineries needed to produce a given amount of
         biofuel per day using spadderdocks.
 
         :param biofuelSpadderdocksAmount: Daily amount of biofuel needed.
         :type biofuelSpadderdocksAmount: float
 
-        :return: Number of rafineries needed.
+        :return: Number of refineries needed.
         :rtype: int
 
         :raises ValueError: If biofuel spadderdocks amount is negative.
@@ -2152,93 +2152,93 @@ class Folktail:
             raise ValueError("Biofuel Spadderdocks amount cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         # Production time is in hours, calculate daily production
-        productionPerRafinery = (outputQuantity / productionTime) * 24
+        productionPerRefinery = (outputQuantity / productionTime) * 24
 
-        return math.ceil(biofuelSpadderdocksAmount / productionPerRafinery)
+        return math.ceil(biofuelSpadderdocksAmount / productionPerRefinery)
 
-    def getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocks(
-            self, rafineriesCount: int) -> int:
+    def getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks(
+            self, refineriesCount: int) -> int:
         """
         Calculate the number of spadderdocks needed per day to keep a given
-        number of rafineries running producing biofuel with spadderdocks.
+        number of refineries running producing biofuel with spadderdocks.
 
-        :param rafineriesCount: Number of rafineries.
-        :type rafineriesCount: int
+        :param refineriesCount: Number of refineries.
+        :type refineriesCount: int
 
         :return: Daily amount of spadderdocks needed.
         :rtype: int
 
-        :raises ValueError: If rafineries count is negative.
+        :raises ValueError: If refineries count is negative.
         """
-        if rafineriesCount < 0:
-            raise ValueError("Rafineries count cannot be negative.")
+        if refineriesCount < 0:
+            raise ValueError("Refineries count cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
-        # Note: YAML has typo "Sappeddocks" instead of "Spadderdocks"
+            GoodsBuildingName.REFINERY, recipeIndex)
+        # Note: YAML has typo "Spadderdocks" instead of "Spadderdocks"
         spadderdocksInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_SPADDERDOCKS,
-            "Sappeddocks")
+            "Spadderdocks")
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
-        spadderdocksPerRafineryPerDay = spadderdocksInput * cyclesPerDay
+        spadderdocksPerRefineryPerDay = spadderdocksInput * cyclesPerDay
 
-        return math.ceil(rafineriesCount * spadderdocksPerRafineryPerDay)
+        return math.ceil(refineriesCount * spadderdocksPerRefineryPerDay)
 
-    def getWaterNeededForRafineriesWithBiofuelSpadderdocks(
-            self, rafineriesCount: int) -> int:
+    def getWaterNeededForRefineriesWithBiofuelSpadderdocks(
+            self, refineriesCount: int) -> int:
         """
         Calculate the number of water needed per day to keep a given number of
-        rafineries running producing biofuel with spadderdocks.
+        refineries running producing biofuel with spadderdocks.
 
-        :param rafineriesCount: Number of rafineries.
-        :type rafineriesCount: int
+        :param refineriesCount: Number of refineries.
+        :type refineriesCount: int
 
         :return: Daily amount of water needed.
         :rtype: int
 
-        :raises ValueError: If rafineries count is negative.
+        :raises ValueError: If refineries count is negative.
         """
-        if rafineriesCount < 0:
-            raise ValueError("Rafineries count cannot be negative.")
+        if refineriesCount < 0:
+            raise ValueError("Refineries count cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         waterInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.BIOFUEL_SPADDERDOCKS,
             "Water")
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
-        waterPerRafineryPerDay = waterInput * cyclesPerDay
+        waterPerRefineryPerDay = waterInput * cyclesPerDay
 
-        return math.ceil(rafineriesCount * waterPerRafineryPerDay)
+        return math.ceil(refineriesCount * waterPerRefineryPerDay)
 
-    def getRafineriesNeededForCatalyst(self, catalystAmount: float) -> int:
+    def getRefineriesNeededForCatalyst(self, catalystAmount: float) -> int:
         """
-        Calculate the number of rafineries needed to produce a given amount of
+        Calculate the number of refineries needed to produce a given amount of
         catalyst per day.
 
         :param catalystAmount: Daily amount of catalyst needed.
         :type catalystAmount: float
 
-        :return: Number of rafineries needed.
+        :return: Number of refineries needed.
         :rtype: int
 
         :raises ValueError: If catalyst amount is negative.
@@ -2247,82 +2247,82 @@ class Folktail:
             raise ValueError("Catalyst amount cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.CATALYST)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         # Production time is in hours, calculate daily production
-        productionPerRafinery = (outputQuantity / productionTime) * 24
+        productionPerRefinery = (outputQuantity / productionTime) * 24
 
-        return math.ceil(catalystAmount / productionPerRafinery)
+        return math.ceil(catalystAmount / productionPerRefinery)
 
-    def getMapleSyrupNeededForRafineriesWithCatalyst(
-            self, rafineriesCount: int) -> int:
+    def getMapleSyrupNeededForRefineriesWithCatalyst(
+            self, refineriesCount: int) -> int:
         """
         Calculate the number of maple syrup needed per day to keep a given
-        number of rafineries running producing catalyst.
+        number of refineries running producing catalyst.
 
-        :param rafineriesCount: Number of rafineries.
-        :type rafineriesCount: int
+        :param refineriesCount: Number of refineries.
+        :type refineriesCount: int
 
         :return: Daily amount of maple syrup needed.
         :rtype: int
 
-        :raises ValueError: If rafineries count is negative.
+        :raises ValueError: If refineries count is negative.
         """
-        if rafineriesCount < 0:
-            raise ValueError("Rafineries count cannot be negative.")
+        if refineriesCount < 0:
+            raise ValueError("Refineries count cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.CATALYST)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         mapleSyrupInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.CATALYST,
             "Maple Syrup")
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
-        mapleSyrupPerRafineryPerDay = mapleSyrupInput * cyclesPerDay
+        mapleSyrupPerRefineryPerDay = mapleSyrupInput * cyclesPerDay
 
-        return math.ceil(rafineriesCount * mapleSyrupPerRafineryPerDay)
+        return math.ceil(refineriesCount * mapleSyrupPerRefineryPerDay)
 
-    def getExtractNeededForRafineriesWithCatalyst(
-            self, rafineriesCount: int) -> int:
+    def getExtractNeededForRefineriesWithCatalyst(
+            self, refineriesCount: int) -> int:
         """
         Calculate the number of extract needed per day to keep a given number
-        of rafineries running producing catalyst.
+        of refineries running producing catalyst.
 
-        :param rafineriesCount: Number of rafineries.
-        :type rafineriesCount: int
+        :param refineriesCount: Number of refineries.
+        :type refineriesCount: int
 
         :return: Daily amount of extract needed.
         :rtype: int
 
-        :raises ValueError: If rafineries count is negative.
+        :raises ValueError: If refineries count is negative.
         """
-        if rafineriesCount < 0:
-            raise ValueError("Rafineries count cannot be negative.")
+        if refineriesCount < 0:
+            raise ValueError("Refineries count cannot be negative.")
 
         recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.CATALYST)
         productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.RAFINERY, recipeIndex)
+            GoodsBuildingName.REFINERY, recipeIndex)
         extractInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.RAFINERY,
+            GoodsBuildingName.REFINERY,
             GoodsRecipeName.CATALYST,
             "Extract")
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
-        extractPerRafineryPerDay = extractInput * cyclesPerDay
+        extractPerRefineryPerDay = extractInput * cyclesPerDay
 
-        return math.ceil(rafineriesCount * extractPerRafineryPerDay)
+        return math.ceil(refineriesCount * extractPerRefineryPerDay)
 
     def getBotPartFactoriesNeededForBotChassis(
             self, botChassisAmount: float) -> int:

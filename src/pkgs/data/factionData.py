@@ -2,11 +2,11 @@ from typing import Any
 
 import yaml as yaml
 
-from .emunerators import ConsumptionType, CropName, DifficultyLevel
-from .emunerators import FoodProcessingBuildingName, FoodRecipeName
-from .emunerators import GoodsBuildingName, GoodsRecipeName
-from .emunerators import HarvestName, TreeName, WaterBuildingName
-from .emunerators import DataKeys
+from .enumerators import ConsumptionType, CropName, DifficultyLevel
+from .enumerators import FoodProcessingBuildingName, FoodRecipeName
+from .enumerators import GoodsBuildingName, GoodsRecipeName
+from .enumerators import HarvestName, TreeName, WaterBuildingName
+from .enumerators import DataKeys
 
 
 class FactionData:
@@ -595,12 +595,11 @@ class FactionData:
                             or input is not found in faction data.
         """
         inputIndex = self.getFoodProcessingInputIndex(buildingName, recipeName,
-                                                       inputName)
+                                                      inputName)
         recipeIndex = self.getFoodProcessingRecipeIndex(buildingName,
                                                         recipeName)
         building = self._getFoodProcessing(buildingName)
-        return building[DataKeys.RECIPES][recipeIndex][DataKeys.INPUTS] \
-            [inputIndex][DataKeys.QUANTITY]
+        return building[DataKeys.RECIPES][recipeIndex][DataKeys.INPUTS][inputIndex][DataKeys.QUANTITY]  # noqa: %01
 
     def _getGoods(self, buildingName: GoodsBuildingName) -> dict[str, Any]:
         """

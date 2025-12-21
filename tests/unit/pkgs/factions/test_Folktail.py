@@ -7,7 +7,7 @@ import sys
 sys.path.append(os.path.abspath('./src'))
 
 from pkgs.factions.folktail import Folktail                     # noqa: E402
-from pkgs.data.emunerators import DifficultyLevel               # noqa: E402
+from pkgs.data.enumerators import DifficultyLevel               # noqa: E402
 
 
 class TestFolktail(TestCase):
@@ -83,8 +83,8 @@ class TestFolktail(TestCase):
                                                       DifficultyLevel.NORMAL)
 
             self.assertEqual(275.0, result)
-            mockFactionDataInstance.getDifficultyModifier.assert_called_once_with(
-                DifficultyLevel.NORMAL)
+            mockFactionDataInstance.getDifficultyModifier \
+                .assert_called_once_with(DifficultyLevel.NORMAL)
 
     def test_getDailyWaterConsumptionNegativePopulation(self) -> None:
         """
@@ -114,8 +114,8 @@ class TestFolktail(TestCase):
                                                        DifficultyLevel.NORMAL)
 
             self.assertEqual(225.0, result)
-            mockFactionDataInstance.getDifficultyModifier.assert_called_once_with(
-                DifficultyLevel.NORMAL)
+            mockFactionDataInstance.getDifficultyModifier \
+                .assert_called_once_with(DifficultyLevel.NORMAL)
 
     def test_getFoodPerTypeNegativePopulation(self) -> None:
         """
@@ -1453,8 +1453,7 @@ class TestFolktail(TestCase):
             # Bakeries needed = ceil(300.0 / 285.714...) = ceil(1.05) = 2
             self.assertEqual(2, result)
 
-    def test_getWheatFlourNeededForBakeriesWithBreadsNegativeCount(
-            self) -> None:
+    def test_getWheatFlourNeededForBakeriesWithBreadsNegativeCount(self) -> None:   # noqa: E501
         """
         The getWheatFlourNeededForBakeriesWithBreads method must raise
         ValueError if bakeries count is negative.
@@ -1559,8 +1558,7 @@ class TestFolktail(TestCase):
             # Bakeries needed = ceil(200.0 / 192.0) = ceil(1.041...) = 2
             self.assertEqual(2, result)
 
-    def test_getCattailFlourNeededForBakeriesWithCattailCrackersNegativeCount(
-            self) -> None:
+    def test_getCattailFlourNeededForBakeriesWithCattailCrackersNegativeCount(self) -> None:    # noqa: E501
         """
         The getCattailFlourNeededForBakeriesWithCattailCrackers method must
         raise ValueError if bakeries count is negative.
@@ -1572,8 +1570,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Bakeries count cannot be negative.",
                          str(context.exception))
 
-    def test_getCattailFlourNeededForBakeriesWithCattailCrackersSuccess(
-            self) -> None:
+    def test_getCattailFlourNeededForBakeriesWithCattailCrackersSuccess(self) -> None:  # noqa: E501
         """
         The getCattailFlourNeededForBakeriesWithCattailCrackers method must
         correctly calculate cattail flour needed.
@@ -1598,8 +1595,7 @@ class TestFolktail(TestCase):
             # Ceiling = 144
             self.assertEqual(144, result)
 
-    def test_getLogsNeededForBakeriesWithCattailCrackersNegativeCount(
-            self) -> None:
+    def test_getLogsNeededForBakeriesWithCattailCrackersNegativeCount(self) -> None:    # noqa: E501
         """
         The getLogsNeededForBakeriesWithCattailCrackers method must raise
         ValueError if bakeries count is negative.
@@ -1668,8 +1664,7 @@ class TestFolktail(TestCase):
             # Bakeries needed = ceil(140.0 / 130.909...) = ceil(1.069...) = 2
             self.assertEqual(2, result)
 
-    def test_getWheatFlourNeededForBakeriesWithMaplePastriesNegativeCount(
-            self) -> None:
+    def test_getWheatFlourNeededForBakeriesWithMaplePastriesNegativeCount(self) -> None:    # noqa: E501
         """
         The getWheatFlourNeededForBakeriesWithMaplePastries method must raise
         ValueError if bakeries count is negative.
@@ -1681,8 +1676,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Bakeries count cannot be negative.",
                          str(context.exception))
 
-    def test_getWheatFlourNeededForBakeriesWithMaplePastriesSuccess(
-            self) -> None:
+    def test_getWheatFlourNeededForBakeriesWithMaplePastriesSuccess(self) -> None:  # noqa: E501
         """
         The getWheatFlourNeededForBakeriesWithMaplePastries method must
         correctly calculate wheat flour needed.
@@ -1707,8 +1701,7 @@ class TestFolktail(TestCase):
             # Ceiling = 131
             self.assertEqual(131, result)
 
-    def test_getMapleSyrupNeededForBakeriesWithMaplePastriesNegativeCount(
-            self) -> None:
+    def test_getMapleSyrupNeededForBakeriesWithMaplePastriesNegativeCount(self) -> None:    # noqa: E501
         """
         The getMapleSyrupNeededForBakeriesWithMaplePastries method must raise
         ValueError if bakeries count is negative.
@@ -1720,8 +1713,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Bakeries count cannot be negative.",
                          str(context.exception))
 
-    def test_getMapleSyrupNeededForBakeriesWithMaplePastriesSuccess(
-            self) -> None:
+    def test_getMapleSyrupNeededForBakeriesWithMaplePastriesSuccess(self) -> None:  # noqa: E501
         """
         The getMapleSyrupNeededForBakeriesWithMaplePastries method must
         correctly calculate maple syrup needed.
@@ -1746,8 +1738,7 @@ class TestFolktail(TestCase):
             # Ceiling = 131
             self.assertEqual(131, result)
 
-    def test_getLogsNeededForBakeriesWithMaplePastriesNegativeCount(
-            self) -> None:
+    def test_getLogsNeededForBakeriesWithMaplePastriesNegativeCount(self) -> None:  # noqa: E501
         """
         The getLogsNeededForBakeriesWithMaplePastries method must raise
         ValueError if bakeries count is negative.
@@ -2006,8 +1997,7 @@ class TestFolktail(TestCase):
             # Printing presses needed = ceil(20.0 / 16) = ceil(1.25) = 2
             self.assertEqual(2, result)
 
-    def test_getPaperNeededForPrintingPressesWithBooksNegativeCount(
-            self) -> None:
+    def test_getPaperNeededForPrintingPressesWithBooksNegativeCount(self) -> None:  # noqa: E501
         """
         The getPaperNeededForPrintingPressesWithBooks method must raise
         ValueError if printing presses count is negative.
@@ -2040,8 +2030,7 @@ class TestFolktail(TestCase):
             self.assertEqual(64, result)
 
     # Test Cases for Printing Press - Punchcards
-    def test_getPrintingPressesNeededForPunchcardsNegativeAmount(
-            self) -> None:
+    def test_getPrintingPressesNeededForPunchcardsNegativeAmount(self) -> None:     # noqa: E501
         """
         The getPrintingPressesNeededForPunchcards method must raise ValueError
         if punchcards amount is negative.
@@ -2072,8 +2061,7 @@ class TestFolktail(TestCase):
             # Printing presses needed = ceil(50.0 / 64) = ceil(0.78125) = 1
             self.assertEqual(1, result)
 
-    def test_getPaperNeededForPrintingPressesWithPunchcardsNegativeCount(
-            self) -> None:
+    def test_getPaperNeededForPrintingPressesWithPunchcardsNegativeCount(self) -> None:     # noqa: E501
         """
         The getPaperNeededForPrintingPressesWithPunchcards method must raise
         ValueError if printing presses count is negative.
@@ -2085,8 +2073,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Printing presses count cannot be negative.",
                          str(context.exception))
 
-    def test_getPaperNeededForPrintingPressesWithPunchcardsSuccess(
-            self) -> None:
+    def test_getPaperNeededForPrintingPressesWithPunchcardsSuccess(self) -> None:   # noqa: E501
         """
         The getPaperNeededForPrintingPressesWithPunchcards method must
         correctly calculate paper needed.
@@ -2106,8 +2093,7 @@ class TestFolktail(TestCase):
             # Total paper = 2 * 64 = 128
             self.assertEqual(128, result)
 
-    def test_getPlanksNeededForPrintingPressesWithPunchcardsNegativeCount(
-            self) -> None:
+    def test_getPlanksNeededForPrintingPressesWithPunchcardsNegativeCount(self) -> None:    # noqa: E501
         """
         The getPlanksNeededForPrintingPressesWithPunchcards method must raise
         ValueError if printing presses count is negative.
@@ -2119,8 +2105,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Printing presses count cannot be negative.",
                          str(context.exception))
 
-    def test_getPlanksNeededForPrintingPressesWithPunchcardsSuccess(
-            self) -> None:
+    def test_getPlanksNeededForPrintingPressesWithPunchcardsSuccess(self) -> None:  # noqa: E501
         """
         The getPlanksNeededForPrintingPressesWithPunchcards method must
         correctly calculate planks needed.
@@ -2133,7 +2118,8 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getPlanksNeededForPrintingPressesWithPunchcards(2)
+            result = folktail \
+                .getPlanksNeededForPrintingPressesWithPunchcards(2)
 
             # Cycles per day = 24 / 0.75 = 32
             # Planks per printing press per day = 1 * 32 = 32
@@ -2141,8 +2127,7 @@ class TestFolktail(TestCase):
             self.assertEqual(64, result)
 
     # Test Cases for Wood Workshop
-    def test_getWoodWorkshopsNeededForTreatedPlanksNegativeAmount(
-            self) -> None:
+    def test_getWoodWorkshopsNeededForTreatedPlanksNegativeAmount(self) -> None:    # noqa: E501
         """
         The getWoodWorkshopsNeededForTreatedPlanks method must raise ValueError
         if treated planks amount is negative.
@@ -2397,23 +2382,22 @@ class TestFolktail(TestCase):
             # Total treated planks = 3 * 13.333... = 40
             self.assertEqual(40, result)
 
-    # Test Cases for Rafinery
-    def test_getRafineriesNeededForBiofuelCarrotsNegativeAmount(self) -> None:
+    def test_getRefineriesNeededForBiofuelCarrotsNegativeAmount(self) -> None:
         """
-        The getRafineriesNeededForBiofuelCarrots method must raise ValueError
+        The getRefineriesNeededForBiofuelCarrots method must raise ValueError
         if biofuel carrots amount is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getRafineriesNeededForBiofuelCarrots(-10.0)
+            folktail.getRefineriesNeededForBiofuelCarrots(-10.0)
         self.assertEqual("Biofuel Carrots amount cannot be negative.",
                          str(context.exception))
 
-    def test_getRafineriesNeededForBiofuelCarrotsSuccess(self) -> None:
+    def test_getRefineriesNeededForBiofuelCarrotsSuccess(self) -> None:
         """
-        The getRafineriesNeededForBiofuelCarrots method must correctly
-        calculate rafineries needed.
+        The getRefineriesNeededForBiofuelCarrots method must correctly
+        calculate refineries needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
             mockFactionDataInstance = Mock()
@@ -2423,29 +2407,27 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getRafineriesNeededForBiofuelCarrots(100.0)
+            result = folktail.getRefineriesNeededForBiofuelCarrots(100.0)
 
-            # Production per rafinery per day = (5 / 3.0) * 24 = 40
-            # Rafineries needed = ceil(100.0 / 40) = ceil(2.5) = 3
+            # Production per refinery per day = (5 / 3.0) * 24 = 40
+            # Refineries needed = ceil(100.0 / 40) = ceil(2.5) = 3
             self.assertEqual(3, result)
 
-    def test_getCarrotsNeededForRafineriesWithBiofuelCarrotsNegativeCount(
-            self) -> None:
+    def test_getCarrotsNeededForRefineriesWithBiofuelCarrotsNegativeCount(self) -> None:    # noqa: E501
         """
-        The getCarrotsNeededForRafineriesWithBiofuelCarrots method must raise
-        ValueError if rafineries count is negative.
+        The getCarrotsNeededForRefineriesWithBiofuelCarrots method must raise
+        ValueError if refineries count is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getCarrotsNeededForRafineriesWithBiofuelCarrots(-1)
-        self.assertEqual("Rafineries count cannot be negative.",
+            folktail.getCarrotsNeededForRefineriesWithBiofuelCarrots(-1)
+        self.assertEqual("Refineries count cannot be negative.",
                          str(context.exception))
 
-    def test_getCarrotsNeededForRafineriesWithBiofuelCarrotsSuccess(
-            self) -> None:
+    def test_getCarrotsNeededForRefineriesWithBiofuelCarrotsSuccess(self) -> None:  # noqa: E501
         """
-        The getCarrotsNeededForRafineriesWithBiofuelCarrots method must
+        The getCarrotsNeededForRefineriesWithBiofuelCarrots method must
         correctly calculate carrots needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
@@ -2456,30 +2438,29 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getCarrotsNeededForRafineriesWithBiofuelCarrots(3)
+            result = folktail \
+                .getCarrotsNeededForRefineriesWithBiofuelCarrots(3)
 
             # Cycles per day = 24 / 3.0 = 8
-            # Carrots per rafinery per day = 2 * 8 = 16
+            # Carrots per refinery per day = 2 * 8 = 16
             # Total carrots = 3 * 16 = 48
             self.assertEqual(48, result)
 
-    def test_getWaterNeededForRafineriesWithBiofuelCarrotsNegativeCount(
-            self) -> None:
+    def test_getWaterNeededForRefineriesWithBiofuelCarrotsNegativeCount(self) -> None:  # noqa: E501
         """
-        The getWaterNeededForRafineriesWithBiofuelCarrots method must raise
-        ValueError if rafineries count is negative.
+        The getWaterNeededForRefineriesWithBiofuelCarrots method must raise
+        ValueError if refineries count is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getWaterNeededForRafineriesWithBiofuelCarrots(-1)
-        self.assertEqual("Rafineries count cannot be negative.",
+            folktail.getWaterNeededForRefineriesWithBiofuelCarrots(-1)
+        self.assertEqual("Refineries count cannot be negative.",
                          str(context.exception))
 
-    def test_getWaterNeededForRafineriesWithBiofuelCarrotsSuccess(
-            self) -> None:
+    def test_getWaterNeededForRefineriesWithBiofuelCarrotsSuccess(self) -> None:    # noqa: E501
         """
-        The getWaterNeededForRafineriesWithBiofuelCarrots method must
+        The getWaterNeededForRefineriesWithBiofuelCarrots method must
         correctly calculate water needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
@@ -2490,30 +2471,29 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getWaterNeededForRafineriesWithBiofuelCarrots(3)
+            result = folktail.getWaterNeededForRefineriesWithBiofuelCarrots(3)
 
             # Cycles per day = 24 / 3.0 = 8
-            # Water per rafinery per day = 2 * 8 = 16
+            # Water per refinery per day = 2 * 8 = 16
             # Total water = 3 * 16 = 48
             self.assertEqual(48, result)
 
-    def test_getRafineriesNeededForBiofuelPotatoesNegativeAmount(
-            self) -> None:
+    def test_getRefineriesNeededForBiofuelPotatoesNegativeAmount(self) -> None:     # noqa: E501
         """
-        The getRafineriesNeededForBiofuelPotatoes method must raise ValueError
+        The getRefineriesNeededForBiofuelPotatoes method must raise ValueError
         if biofuel potatoes amount is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getRafineriesNeededForBiofuelPotatoes(-10.0)
+            folktail.getRefineriesNeededForBiofuelPotatoes(-10.0)
         self.assertEqual("Biofuel Potatoes amount cannot be negative.",
                          str(context.exception))
 
-    def test_getRafineriesNeededForBiofuelPotatoesSuccess(self) -> None:
+    def test_getRefineriesNeededForBiofuelPotatoesSuccess(self) -> None:
         """
-        The getRafineriesNeededForBiofuelPotatoes method must correctly
-        calculate rafineries needed.
+        The getRefineriesNeededForBiofuelPotatoes method must correctly
+        calculate refineries needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
             mockFactionDataInstance = Mock()
@@ -2523,29 +2503,27 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getRafineriesNeededForBiofuelPotatoes(250.0)
+            result = folktail.getRefineriesNeededForBiofuelPotatoes(250.0)
 
-            # Production per rafinery per day = (30 / 3.0) * 24 = 240
-            # Rafineries needed = ceil(250.0 / 240) = ceil(1.0416...) = 2
+            # Production per refinery per day = (30 / 3.0) * 24 = 240
+            # Refineries needed = ceil(250.0 / 240) = ceil(1.0416...) = 2
             self.assertEqual(2, result)
 
-    def test_getPotatoesNeededForRafineriesWithBiofuelPotatoesNegativeCount(
-            self) -> None:
+    def test_getPotatoesNeededForRefineriesWithBiofuelPotatoesNegativeCount(self) -> None:  # noqa: E501
         """
-        The getPotatoesNeededForRafineriesWithBiofuelPotatoes method must
-        raise ValueError if rafineries count is negative.
+        The getPotatoesNeededForRefineriesWithBiofuelPotatoes method must
+        raise ValueError if refineries count is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getPotatoesNeededForRafineriesWithBiofuelPotatoes(-1)
-        self.assertEqual("Rafineries count cannot be negative.",
+            folktail.getPotatoesNeededForRefineriesWithBiofuelPotatoes(-1)
+        self.assertEqual("Refineries count cannot be negative.",
                          str(context.exception))
 
-    def test_getPotatoesNeededForRafineriesWithBiofuelPotatoesSuccess(
-            self) -> None:
+    def test_getPotatoesNeededForRefineriesWithBiofuelPotatoesSuccess(self) -> None:    # noqa: E501
         """
-        The getPotatoesNeededForRafineriesWithBiofuelPotatoes method must
+        The getPotatoesNeededForRefineriesWithBiofuelPotatoes method must
         correctly calculate potatoes needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
@@ -2556,30 +2534,29 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getPotatoesNeededForRafineriesWithBiofuelPotatoes(3)
+            result = folktail \
+                .getPotatoesNeededForRefineriesWithBiofuelPotatoes(3)
 
             # Cycles per day = 24 / 3.0 = 8
-            # Potatoes per rafinery per day = 2 * 8 = 16
+            # Potatoes per refinery per day = 2 * 8 = 16
             # Total potatoes = 3 * 16 = 48
             self.assertEqual(48, result)
 
-    def test_getWaterNeededForRafineriesWithBiofuelPotatoesNegativeCount(
-            self) -> None:
+    def test_getWaterNeededForRefineriesWithBiofuelPotatoesNegativeCount(self) -> None:     # noqa: E501
         """
-        The getWaterNeededForRafineriesWithBiofuelPotatoes method must raise
-        ValueError if rafineries count is negative.
+        The getWaterNeededForRefineriesWithBiofuelPotatoes method must raise
+        ValueError if refineries count is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getWaterNeededForRafineriesWithBiofuelPotatoes(-1)
-        self.assertEqual("Rafineries count cannot be negative.",
+            folktail.getWaterNeededForRefineriesWithBiofuelPotatoes(-1)
+        self.assertEqual("Refineries count cannot be negative.",
                          str(context.exception))
 
-    def test_getWaterNeededForRafineriesWithBiofuelPotatoesSuccess(
-            self) -> None:
+    def test_getWaterNeededForRefineriesWithBiofuelPotatoesSuccess(self) -> None:   # noqa: E501
         """
-        The getWaterNeededForRafineriesWithBiofuelPotatoes method must
+        The getWaterNeededForRefineriesWithBiofuelPotatoes method must
         correctly calculate water needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
@@ -2590,30 +2567,29 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getWaterNeededForRafineriesWithBiofuelPotatoes(3)
+            result = folktail.getWaterNeededForRefineriesWithBiofuelPotatoes(3)
 
             # Cycles per day = 24 / 3.0 = 8
-            # Water per rafinery per day = 2 * 8 = 16
+            # Water per refinery per day = 2 * 8 = 16
             # Total water = 3 * 16 = 48
             self.assertEqual(48, result)
 
-    def test_getRafineriesNeededForBiofuelSpadderdocksNegativeAmount(
-            self) -> None:
+    def test_getRefineriesNeededForBiofuelSpadderdocksNegativeAmount(self) -> None:     # noqa: E501
         """
-        The getRafineriesNeededForBiofuelSpadderdocks method must raise
+        The getRefineriesNeededForBiofuelSpadderdocks method must raise
         ValueError if biofuel spadderdocks amount is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getRafineriesNeededForBiofuelSpadderdocks(-10.0)
+            folktail.getRefineriesNeededForBiofuelSpadderdocks(-10.0)
         self.assertEqual("Biofuel Spadderdocks amount cannot be negative.",
                          str(context.exception))
 
-    def test_getRafineriesNeededForBiofuelSpadderdocksSuccess(self) -> None:
+    def test_getRefineriesNeededForBiofuelSpadderdocksSuccess(self) -> None:
         """
-        The getRafineriesNeededForBiofuelSpadderdocks method must correctly
-        calculate rafineries needed.
+        The getRefineriesNeededForBiofuelSpadderdocks method must correctly
+        calculate refineries needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
             mockFactionDataInstance = Mock()
@@ -2623,29 +2599,28 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getRafineriesNeededForBiofuelSpadderdocks(220.0)
+            result = folktail.getRefineriesNeededForBiofuelSpadderdocks(220.0)
 
-            # Production per rafinery per day = (25 / 3.0) * 24 = 200
-            # Rafineries needed = ceil(220.0 / 200) = ceil(1.1) = 2
+            # Production per refinery per day = (25 / 3.0) * 24 = 200
+            # Refineries needed = ceil(220.0 / 200) = ceil(1.1) = 2
             self.assertEqual(2, result)
 
-    def test_getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocksNegativeCount(
-            self) -> None:
+    def test_getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocksNegativeCount(self) -> None:      # noqa: E501
         """
-        The getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocks method
-        must raise ValueError if rafineries count is negative.
+        The getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks method
+        must raise ValueError if refineries count is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocks(-1)
-        self.assertEqual("Rafineries count cannot be negative.",
+            folktail \
+                .getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks(-1)
+        self.assertEqual("Refineries count cannot be negative.",
                          str(context.exception))
 
-    def test_getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocksSuccess(
-            self) -> None:
+    def test_getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocksSuccess(self) -> None:    # noqa: E501
         """
-        The getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocks method
+        The getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks method
         must correctly calculate spadderdocks needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
@@ -2656,30 +2631,29 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getSpadderdocksNeededForRafineriesWithBiofuelSpadderdocks(3)
+            result = folktail \
+                .getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks(3)
 
             # Cycles per day = 24 / 3.0 = 8
-            # Spadderdocks per rafinery per day = 2 * 8 = 16
+            # Spadderdocks per refinery per day = 2 * 8 = 16
             # Total spadderdocks = 3 * 16 = 48
             self.assertEqual(48, result)
 
-    def test_getWaterNeededForRafineriesWithBiofuelSpadderdocksNegativeCount(
-            self) -> None:
+    def test_getWaterNeededForRefineriesWithBiofuelSpadderdocksNegativeCount(self) -> None:     # noqa: E501
         """
-        The getWaterNeededForRafineriesWithBiofuelSpadderdocks method must
-        raise ValueError if rafineries count is negative.
+        The getWaterNeededForRefineriesWithBiofuelSpadderdocks method must
+        raise ValueError if refineries count is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getWaterNeededForRafineriesWithBiofuelSpadderdocks(-1)
-        self.assertEqual("Rafineries count cannot be negative.",
+            folktail.getWaterNeededForRefineriesWithBiofuelSpadderdocks(-1)
+        self.assertEqual("Refineries count cannot be negative.",
                          str(context.exception))
 
-    def test_getWaterNeededForRafineriesWithBiofuelSpadderdocksSuccess(
-            self) -> None:
+    def test_getWaterNeededForRefineriesWithBiofuelSpadderdocksSuccess(self) -> None:   # noqa: E501
         """
-        The getWaterNeededForRafineriesWithBiofuelSpadderdocks method must
+        The getWaterNeededForRefineriesWithBiofuelSpadderdocks method must
         correctly calculate water needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
@@ -2690,29 +2664,30 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getWaterNeededForRafineriesWithBiofuelSpadderdocks(3)
+            result = folktail \
+                .getWaterNeededForRefineriesWithBiofuelSpadderdocks(3)
 
             # Cycles per day = 24 / 3.0 = 8
-            # Water per rafinery per day = 2 * 8 = 16
+            # Water per refinery per day = 2 * 8 = 16
             # Total water = 3 * 16 = 48
             self.assertEqual(48, result)
 
-    def test_getRafineriesNeededForCatalystNegativeAmount(self) -> None:
+    def test_getRefineriesNeededForCatalystNegativeAmount(self) -> None:
         """
-        The getRafineriesNeededForCatalyst method must raise ValueError if
+        The getRefineriesNeededForCatalyst method must raise ValueError if
         catalyst amount is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getRafineriesNeededForCatalyst(-10.0)
+            folktail.getRefineriesNeededForCatalyst(-10.0)
         self.assertEqual("Catalyst amount cannot be negative.",
                          str(context.exception))
 
-    def test_getRafineriesNeededForCatalystSuccess(self) -> None:
+    def test_getRefineriesNeededForCatalystSuccess(self) -> None:
         """
-        The getRafineriesNeededForCatalyst method must correctly calculate
-        rafineries needed.
+        The getRefineriesNeededForCatalyst method must correctly calculate
+        refineries needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
             mockFactionDataInstance = Mock()
@@ -2722,28 +2697,27 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getRafineriesNeededForCatalyst(15.0)
+            result = folktail.getRefineriesNeededForCatalyst(15.0)
 
-            # Production per rafinery per day = (1 / 2.0) * 24 = 12
-            # Rafineries needed = ceil(15.0 / 12) = ceil(1.25) = 2
+            # Production per refinery per day = (1 / 2.0) * 24 = 12
+            # Refineries needed = ceil(15.0 / 12) = ceil(1.25) = 2
             self.assertEqual(2, result)
 
-    def test_getMapleSyrupNeededForRafineriesWithCatalystNegativeCount(
-            self) -> None:
+    def test_getMapleSyrupNeededForRefineriesWithCatalystNegativeCount(self) -> None:   # noqa: E501
         """
-        The getMapleSyrupNeededForRafineriesWithCatalyst method must raise
-        ValueError if rafineries count is negative.
+        The getMapleSyrupNeededForRefineriesWithCatalyst method must raise
+        ValueError if refineries count is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getMapleSyrupNeededForRafineriesWithCatalyst(-1)
-        self.assertEqual("Rafineries count cannot be negative.",
+            folktail.getMapleSyrupNeededForRefineriesWithCatalyst(-1)
+        self.assertEqual("Refineries count cannot be negative.",
                          str(context.exception))
 
-    def test_getMapleSyrupNeededForRafineriesWithCatalystSuccess(self) -> None:
+    def test_getMapleSyrupNeededForRefineriesWithCatalystSuccess(self) -> None:
         """
-        The getMapleSyrupNeededForRafineriesWithCatalyst method must correctly
+        The getMapleSyrupNeededForRefineriesWithCatalyst method must correctly
         calculate maple syrup needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
@@ -2754,29 +2728,28 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getMapleSyrupNeededForRafineriesWithCatalyst(3)
+            result = folktail.getMapleSyrupNeededForRefineriesWithCatalyst(3)
 
             # Cycles per day = 24 / 2.0 = 12
-            # Maple syrup per rafinery per day = 1 * 12 = 12
+            # Maple syrup per refinery per day = 1 * 12 = 12
             # Total maple syrup = 3 * 12 = 36
             self.assertEqual(36, result)
 
-    def test_getExtractNeededForRafineriesWithCatalystNegativeCount(
-            self) -> None:
+    def test_getExtractNeededForRefineriesWithCatalystNegativeCount(self) -> None:  # noqa: E501
         """
-        The getExtractNeededForRafineriesWithCatalyst method must raise
-        ValueError if rafineries count is negative.
+        The getExtractNeededForRefineriesWithCatalyst method must raise
+        ValueError if refineries count is negative.
         """
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getExtractNeededForRafineriesWithCatalyst(-1)
-        self.assertEqual("Rafineries count cannot be negative.",
+            folktail.getExtractNeededForRefineriesWithCatalyst(-1)
+        self.assertEqual("Refineries count cannot be negative.",
                          str(context.exception))
 
-    def test_getExtractNeededForRafineriesWithCatalystSuccess(self) -> None:
+    def test_getExtractNeededForRefineriesWithCatalystSuccess(self) -> None:
         """
-        The getExtractNeededForRafineriesWithCatalyst method must correctly
+        The getExtractNeededForRefineriesWithCatalyst method must correctly
         calculate extract needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
@@ -2787,16 +2760,15 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getExtractNeededForRafineriesWithCatalyst(3)
+            result = folktail.getExtractNeededForRefineriesWithCatalyst(3)
 
             # Cycles per day = 24 / 2.0 = 12
-            # Extract per rafinery per day = 1 * 12 = 12
+            # Extract per refinery per day = 1 * 12 = 12
             # Total extract = 3 * 12 = 36
             self.assertEqual(36, result)
 
     # Test Cases for Bot Part Factory
-    def test_getBotPartFactoriesNeededForBotChassisNegativeAmount(
-            self) -> None:
+    def test_getBotPartFactoriesNeededForBotChassisNegativeAmount(self) -> None:    # noqa: E501
         """
         The getBotPartFactoriesNeededForBotChassis method must raise
         ValueError if bot chassis amount is negative.
@@ -2827,8 +2799,7 @@ class TestFolktail(TestCase):
             # Bot part factories needed = ceil(8.0 / 6) = ceil(1.333...) = 2
             self.assertEqual(2, result)
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotChassisNegativeCount(
-            self) -> None:
+    def test_getPlanksNeededForBotPartFactoriesWithBotChassisNegativeCount(self) -> None:   # noqa: E501
         """
         The getPlanksNeededForBotPartFactoriesWithBotChassis method must raise
         ValueError if bot part factories count is negative.
@@ -2840,8 +2811,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Bot part factories count cannot be negative.",
                          str(context.exception))
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotChassisSuccess(
-            self) -> None:
+    def test_getPlanksNeededForBotPartFactoriesWithBotChassisSuccess(self) -> None:     # noqa: E501
         """
         The getPlanksNeededForBotPartFactoriesWithBotChassis method must
         correctly calculate planks needed.
@@ -2854,15 +2824,15 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getPlanksNeededForBotPartFactoriesWithBotChassis(3)
+            result = folktail \
+                .getPlanksNeededForBotPartFactoriesWithBotChassis(3)
 
             # Cycles per day = 24 / 4.0 = 6
             # Planks per bot part factory per day = 2 * 6 = 12
             # Total planks = 3 * 12 = 36
             self.assertEqual(36, result)
 
-    def test_getMetalBlocksNeededForBotPartFactoriesWithBotChassisNegativeCount(
-            self) -> None:
+    def test_getMetalBlocksNeededForBotPartFactoriesWithBotChassisNegativeCount(self) -> None:  # noqa: E501
         """
         The getMetalBlocksNeededForBotPartFactoriesWithBotChassis method must
         raise ValueError if bot part factories count is negative.
@@ -2874,8 +2844,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Bot part factories count cannot be negative.",
                          str(context.exception))
 
-    def test_getMetalBlocksNeededForBotPartFactoriesWithBotChassisSuccess(
-            self) -> None:
+    def test_getMetalBlocksNeededForBotPartFactoriesWithBotChassisSuccess(self) -> None:    # noqa: E501
         """
         The getMetalBlocksNeededForBotPartFactoriesWithBotChassis method must
         correctly calculate metal blocks needed.
@@ -2888,15 +2857,15 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getMetalBlocksNeededForBotPartFactoriesWithBotChassis(3)
+            result = folktail \
+                .getMetalBlocksNeededForBotPartFactoriesWithBotChassis(3)
 
             # Cycles per day = 24 / 4.0 = 6
             # Metal blocks per bot part factory per day = 1 * 6 = 6
             # Total metal blocks = 3 * 6 = 18
             self.assertEqual(18, result)
 
-    def test_getBiofuelNeededForBotPartFactoriesWithBotChassisNegativeCount(
-            self) -> None:
+    def test_getBiofuelNeededForBotPartFactoriesWithBotChassisNegativeCount(self) -> None:  # noqa: E501
         """
         The getBiofuelNeededForBotPartFactoriesWithBotChassis method must
         raise ValueError if bot part factories count is negative.
@@ -2908,8 +2877,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Bot part factories count cannot be negative.",
                          str(context.exception))
 
-    def test_getBiofuelNeededForBotPartFactoriesWithBotChassisSuccess(
-            self) -> None:
+    def test_getBiofuelNeededForBotPartFactoriesWithBotChassisSuccess(self) -> None:    # noqa: E501
         """
         The getBiofuelNeededForBotPartFactoriesWithBotChassis method must
         correctly calculate biofuel needed.
@@ -2922,7 +2890,8 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getBiofuelNeededForBotPartFactoriesWithBotChassis(3)
+            result = folktail \
+                .getBiofuelNeededForBotPartFactoriesWithBotChassis(3)
 
             # Cycles per day = 24 / 4.0 = 6
             # Biofuel per bot part factory per day = 1 * 6 = 6
@@ -2960,8 +2929,7 @@ class TestFolktail(TestCase):
             # Bot part factories needed = ceil(10.0 / 8) = ceil(1.25) = 2
             self.assertEqual(2, result)
 
-    def test_getGearsNeededForBotPartFactoriesWithBotHeadsNegativeCount(
-            self) -> None:
+    def test_getGearsNeededForBotPartFactoriesWithBotHeadsNegativeCount(self) -> None:  # noqa: E501
         """
         The getGearsNeededForBotPartFactoriesWithBotHeads method must raise
         ValueError if bot part factories count is negative.
@@ -2973,7 +2941,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Bot part factories count cannot be negative.",
                          str(context.exception))
 
-    def test_getGearsNeededForBotPartFactoriesWithBotHeadsSuccess(self) -> None:
+    def test_getGearsNeededForBotPartFactoriesWithBotHeadsSuccess(self) -> None:    # noqa: E501
         """
         The getGearsNeededForBotPartFactoriesWithBotHeads method must
         correctly calculate gears needed.
@@ -2993,8 +2961,7 @@ class TestFolktail(TestCase):
             # Total gears = 3 * 8 = 24
             self.assertEqual(24, result)
 
-    def test_getMetalBlocksNeededForBotPartFactoriesWithBotHeadsNegativeCount(
-            self) -> None:
+    def test_getMetalBlocksNeededForBotPartFactoriesWithBotHeadsNegativeCount(self) -> None:    # noqa: E501
         """
         The getMetalBlocksNeededForBotPartFactoriesWithBotHeads method must
         raise ValueError if bot part factories count is negative.
@@ -3006,8 +2973,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Bot part factories count cannot be negative.",
                          str(context.exception))
 
-    def test_getMetalBlocksNeededForBotPartFactoriesWithBotHeadsSuccess(
-            self) -> None:
+    def test_getMetalBlocksNeededForBotPartFactoriesWithBotHeadsSuccess(self) -> None:  # noqa: E501
         """
         The getMetalBlocksNeededForBotPartFactoriesWithBotHeads method must
         correctly calculate metal blocks needed.
@@ -3020,15 +2986,15 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getMetalBlocksNeededForBotPartFactoriesWithBotHeads(3)
+            result = folktail \
+                .getMetalBlocksNeededForBotPartFactoriesWithBotHeads(3)
 
             # Cycles per day = 24 / 3.0 = 8
             # Metal blocks per bot part factory per day = 1 * 8 = 8
             # Total metal blocks = 3 * 8 = 24
             self.assertEqual(24, result)
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotHeadsNegativeCount(
-            self) -> None:
+    def test_getPlanksNeededForBotPartFactoriesWithBotHeadsNegativeCount(self) -> None:     # noqa: E501
         """
         The getPlanksNeededForBotPartFactoriesWithBotHeads method must raise
         ValueError if bot part factories count is negative.
@@ -3040,8 +3006,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Bot part factories count cannot be negative.",
                          str(context.exception))
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotHeadsSuccess(
-            self) -> None:
+    def test_getPlanksNeededForBotPartFactoriesWithBotHeadsSuccess(self) -> None:   # noqa: E501
         """
         The getPlanksNeededForBotPartFactoriesWithBotHeads method must
         correctly calculate planks needed.
@@ -3092,8 +3057,7 @@ class TestFolktail(TestCase):
             # Bot part factories needed = ceil(20.0 / 16) = ceil(1.25) = 2
             self.assertEqual(2, result)
 
-    def test_getGearsNeededForBotPartFactoriesWithBotLimbsNegativeCount(
-            self) -> None:
+    def test_getGearsNeededForBotPartFactoriesWithBotLimbsNegativeCount(self) -> None:  # noqa: E501
         """
         The getGearsNeededForBotPartFactoriesWithBotLimbs method must raise
         ValueError if bot part factories count is negative.
@@ -3105,7 +3069,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Bot part factories count cannot be negative.",
                          str(context.exception))
 
-    def test_getGearsNeededForBotPartFactoriesWithBotLimbsSuccess(self) -> None:
+    def test_getGearsNeededForBotPartFactoriesWithBotLimbsSuccess(self) -> None:    # noqa: E501
         """
         The getGearsNeededForBotPartFactoriesWithBotLimbs method must
         correctly calculate gears needed.
@@ -3125,8 +3089,7 @@ class TestFolktail(TestCase):
             # Total gears = 3 * 16 = 48
             self.assertEqual(48, result)
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotLimbsNegativeCount(
-            self) -> None:
+    def test_getPlanksNeededForBotPartFactoriesWithBotLimbsNegativeCount(self) -> None:     # noqa: E501
         """
         The getPlanksNeededForBotPartFactoriesWithBotLimbs method must raise
         ValueError if bot part factories count is negative.
@@ -3138,8 +3101,7 @@ class TestFolktail(TestCase):
         self.assertEqual("Bot part factories count cannot be negative.",
                          str(context.exception))
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotLimbsSuccess(
-            self) -> None:
+    def test_getPlanksNeededForBotPartFactoriesWithBotLimbsSuccess(self) -> None:   # noqa: E501
         """
         The getPlanksNeededForBotPartFactoriesWithBotLimbs method must
         correctly calculate planks needed.
@@ -3288,8 +3250,7 @@ class TestFolktail(TestCase):
             self.assertEqual(12, result)
 
     # Test Cases for Explosives Factory
-    def test_getExplosivesFactoriesNeededForExplosivesNegativeAmount(
-            self) -> None:
+    def test_getExplosivesFactoriesNeededForExplosivesNegativeAmount(self) -> None:     # noqa: E501
         """
         The getExplosivesFactoriesNeededForExplosives method must raise
         ValueError if explosives amount is negative.
@@ -3320,8 +3281,7 @@ class TestFolktail(TestCase):
             # Explosives factories needed = ceil(15.0 / 12) = ceil(1.25) = 2
             self.assertEqual(2, result)
 
-    def test_getBadwaterNeededForExplosivesFactoriesNegativeCount(
-            self) -> None:
+    def test_getBadwaterNeededForExplosivesFactoriesNegativeCount(self) -> None:    # noqa: E501
         """
         The getBadwaterNeededForExplosivesFactories method must raise
         ValueError if explosives factories count is negative.

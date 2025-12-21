@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.abspath('./src'))
 
 from pkgs.data.factionData import FactionData                   # noqa: E402
-from pkgs.data.emunerators import ConsumptionType, CropName, \
+from pkgs.data.enumerators import ConsumptionType, CropName, \
     DifficultyLevel, FoodProcessingBuildingName, FoodRecipeName, \
     GoodsBuildingName, GoodsRecipeName, HarvestName, TreeName, \
     WaterBuildingName                                           # noqa: E402
@@ -1294,7 +1294,8 @@ class TestFolktails(TestCase):
         }
         with patch.object(self.uut, '_getGoods') as mockedGetGoods:
             mockedGetGoods.return_value = mockBuildingDict
-            recipeIndex = self.uut.getGoodsRecipeIndex(buildingName, recipeName)
+            recipeIndex = self.uut.getGoodsRecipeIndex(buildingName,
+                                                       recipeName)
             mockedGetGoods.assert_called_once_with(buildingName)
             self.assertEqual(1, recipeIndex)
 
@@ -1314,7 +1315,8 @@ class TestFolktails(TestCase):
         with patch.object(self.uut, '_getGoods') as mockedGetGoods:
             mockedGetGoods.return_value = mockBuildingDict
             with self.assertRaises(ValueError) as context:
-                self.uut.getGoodsInputQuantity(buildingName, recipeName, inputName)
+                self.uut.getGoodsInputQuantity(buildingName, recipeName,
+                                               inputName)
             self.assertEqual(
                 "Recipe 'Planks' in building 'Lumber Mill' has no inputs.",
                 str(context.exception))

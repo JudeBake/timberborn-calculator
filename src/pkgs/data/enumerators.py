@@ -89,6 +89,16 @@ class FoodRecipeName(Enum):
     BREADS = 'Breads'
     CATTAIL_CRACKERS = 'Cattail Crackers'
     MAPLE_PASTRIES = 'Maple Pastries'
+    COFFEE = 'Coffee'
+    FERMENTED_CASSAVA = 'Fermented Cassava'
+    FERMENTED_SOYBEAN = 'Fermented Soybean'
+    FERMENTED_MUSHROOM = 'Fermented Mushroom'
+    CORN_RATIONS = 'Corn Rations'
+    EGGPLANT_RATIONS = 'Eggplant Rations'
+    ALGAE_RATIONS = 'Algae Rations'
+    MUSHROOMS = 'Mushrooms'
+    ALGAE = 'Algae'
+    CANOLA_OIL = 'Canola Oil'
 
 
 class GoodsBuildingName(Enum):
@@ -101,7 +111,7 @@ class GoodsBuildingName(Enum):
     SMELTER = 'Smelter'
     MINE = 'Mine'
     EFFICIENT_MINE = 'Efficient Mine'
-    RAFINERY = 'Rafinery'
+    REFINERY = 'Refinery'
     GREASE_FACTORY = 'Grease Factory'
     BOT_PART_FACTORY = 'Bot Part Factory'
     BOT_ASSEMBLER = 'Bot Assembler'
@@ -123,6 +133,7 @@ class GoodsRecipeName(Enum):
     BIOFUEL_POTATOES = 'Biofuel Potatoes'
     BIOFUEL_SPADDERDOCKS = 'Biofuel Spadderdocks'
     CATALYST = 'Catalyst'
+    GREASE = 'Grease'
     BOT_CHASSIS = 'Bot Chassis'
     BOT_HEADS = 'Bot Heads'
     BOT_LIMBS = 'Bot Limbs'

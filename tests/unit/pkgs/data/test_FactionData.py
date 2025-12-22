@@ -104,10 +104,10 @@ class TestFolktails(TestCase):
         """
         difficultyLevel = Mock()
         difficultyLevel.value = 'non_existent_level'
+        errMsg = f"Difficulty level {difficultyLevel} not found."
         with self.assertRaises(ValueError) as context:
             self.uut.getDifficultyModifier(difficultyLevel)
-        self.assertEqual(f"Difficulty level {difficultyLevel} not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getDifficultyModifierSuccess(self) -> None:
         """
@@ -131,10 +131,10 @@ class TestFolktails(TestCase):
         """
         consumptionType = Mock()
         consumptionType.value = 'non_existent_type'
+        errMsg = f"Consumption type {consumptionType} not found."
         with self.assertRaises(ValueError) as context:
             self.uut.getConsumption(consumptionType)
-        self.assertEqual(f"Consumption type {consumptionType} not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getConsumptionSuccess(self) -> None:
         """
@@ -157,10 +157,10 @@ class TestFolktails(TestCase):
         faction does not have access to beehives.
         """
         self.uut.beehive = None
+        errMsg = "Faction does not have access to beehives."
         with self.assertRaises(ValueError) as context:
             self.uut.getBeehiveModifier()
-        self.assertEqual("Faction does not have access to beehives.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getBeehiveModifierSuccess(self) -> None:
         """
@@ -178,10 +178,10 @@ class TestFolktails(TestCase):
         """
         # Test with Iron Teeth crop on Folktails faction
         cropName = CropName.COFFEE_BUSH
+        errMsg = f"Crop '{cropName.value}' not found."
         with self.assertRaises(ValueError) as context:
             self.uut._getCrop(cropName)
-        self.assertEqual(f"Crop '{cropName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getCropSuccess(self) -> None:
         """
@@ -212,14 +212,13 @@ class TestFolktails(TestCase):
         requested crop is not found (via _getCrop).
         """
         cropName = CropName.COFFEE_BUSH
+        errMsg = f"Crop '{cropName.value}' not found."
         with patch.object(self.uut, '_getCrop') as mockedGetCrop, \
                 self.assertRaises(ValueError) as context:
-            mockedGetCrop.side_effect = ValueError(
-                f"Crop '{cropName.value}' not found.")
+            mockedGetCrop.side_effect = ValueError(errMsg)
             self.uut.getCropGrowthTime(cropName)
             mockedGetCrop.assert_called_once_with(cropName)
-        self.assertEqual(f"Crop '{cropName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getCropGrowthTimeSuccess(self) -> None:
         """
@@ -240,14 +239,13 @@ class TestFolktails(TestCase):
         requested crop is not found (via _getCrop).
         """
         cropName = CropName.COFFEE_BUSH
+        errMsg = f"Crop '{cropName.value}' not found."
         with patch.object(self.uut, '_getCrop') as mockedGetCrop, \
                 self.assertRaises(ValueError) as context:
-            mockedGetCrop.side_effect = ValueError(
-                f"Crop '{cropName.value}' not found.")
+            mockedGetCrop.side_effect = ValueError(errMsg)
             self.uut.getCropHarvestName(cropName)
             mockedGetCrop.assert_called_once_with(cropName)
-        self.assertEqual(f"Crop '{cropName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getCropHarvestNameSuccess(self) -> None:
         """
@@ -269,14 +267,13 @@ class TestFolktails(TestCase):
         requested crop is not found (via _getCrop).
         """
         cropName = CropName.COFFEE_BUSH
+        errMsg = f"Crop '{cropName.value}' not found."
         with patch.object(self.uut, '_getCrop') as mockedGetCrop, \
                 self.assertRaises(ValueError) as context:
-            mockedGetCrop.side_effect = ValueError(
-                f"Crop '{cropName.value}' not found.")
+            mockedGetCrop.side_effect = ValueError(errMsg)
             self.uut.getCropHarvestTime(cropName)
             mockedGetCrop.assert_called_once_with(cropName)
-        self.assertEqual(f"Crop '{cropName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getCropHarvestTimeSuccess(self) -> None:
         """
@@ -297,14 +294,13 @@ class TestFolktails(TestCase):
         requested crop is not found (via _getCrop).
         """
         cropName = CropName.COFFEE_BUSH
+        errMsg = f"Crop '{cropName.value}' not found."
         with patch.object(self.uut, '_getCrop') as mockedGetCrop, \
                 self.assertRaises(ValueError) as context:
-            mockedGetCrop.side_effect = ValueError(
-                f"Crop '{cropName.value}' not found.")
+            mockedGetCrop.side_effect = ValueError(errMsg)
             self.uut.getCropHarvestYield(cropName)
             mockedGetCrop.assert_called_once_with(cropName)
-        self.assertEqual(f"Crop '{cropName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getCropHarvestYieldSuccess(self) -> None:
         """
@@ -326,10 +322,10 @@ class TestFolktails(TestCase):
         """
         # Test with Iron Teeth tree on Folktails faction
         treeName = TreeName.MANGROVE_TREE
+        errMsg = f"Tree '{treeName.value}' not found."
         with self.assertRaises(ValueError) as context:
             self.uut._getTree(treeName)
-        self.assertEqual(f"Tree '{treeName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getTreeSuccess(self) -> None:
         """
@@ -357,14 +353,13 @@ class TestFolktails(TestCase):
         requested tree is not found (via _getTree).
         """
         treeName = TreeName.MANGROVE_TREE
+        errMsg = f"Tree '{treeName.value}' not found."
         with patch.object(self.uut, '_getTree') as mockedGetTree, \
                 self.assertRaises(ValueError) as context:
-            mockedGetTree.side_effect = ValueError(
-                f"Tree '{treeName.value}' not found.")
+            mockedGetTree.side_effect = ValueError(errMsg)
             self.uut.getTreeGrowthTime(treeName)
             mockedGetTree.assert_called_once_with(treeName)
-        self.assertEqual(f"Tree '{treeName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getTreeGrowthTimeSuccess(self) -> None:
         """
@@ -385,14 +380,13 @@ class TestFolktails(TestCase):
         requested tree is not found (via _getTree).
         """
         treeName = TreeName.MANGROVE_TREE
+        errMsg = f"Tree '{treeName.value}' not found."
         with patch.object(self.uut, '_getTree') as mockedGetTree, \
                 self.assertRaises(ValueError) as context:
-            mockedGetTree.side_effect = ValueError(
-                f"Tree '{treeName.value}' not found.")
+            mockedGetTree.side_effect = ValueError(errMsg)
             self.uut.getTreeLogOutput(treeName)
             mockedGetTree.assert_called_once_with(treeName)
-        self.assertEqual(f"Tree '{treeName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getTreeLogOutputSuccess(self) -> None:
         """
@@ -413,14 +407,13 @@ class TestFolktails(TestCase):
         requested tree is not found (via _getTree).
         """
         treeName = TreeName.MANGROVE_TREE
+        errMsg = f"Tree '{treeName.value}' not found."
         with patch.object(self.uut, '_getTree') as mockedGetTree, \
                 self.assertRaises(ValueError) as context:
-            mockedGetTree.side_effect = ValueError(
-                f"Tree '{treeName.value}' not found.")
+            mockedGetTree.side_effect = ValueError(errMsg)
             self.uut.getTreeHarvestName(treeName)
             mockedGetTree.assert_called_once_with(treeName)
-        self.assertEqual(f"Tree '{treeName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getTreeHarvestNameValueErrorNoHarvest(self) -> None:
         """
@@ -429,14 +422,14 @@ class TestFolktails(TestCase):
         """
         treeName = TreeName.BIRCH
         mockTreeDict = {'harvest': None}
+        errMsg = (f"Tree '{treeName.value}' does not produce a "
+                  f"harvestable item.")
         with patch.object(self.uut, '_getTree') as mockedGetTree, \
                 self.assertRaises(ValueError) as context:
             mockedGetTree.return_value = mockTreeDict
             self.uut.getTreeHarvestName(treeName)
             mockedGetTree.assert_called_once_with(treeName)
-        self.assertEqual(f"Tree '{treeName.value}' does not produce a "
-                         f"harvestable item.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getTreeHarvestNameSuccess(self) -> None:
         """
@@ -458,14 +451,13 @@ class TestFolktails(TestCase):
         requested tree is not found (via _getTree).
         """
         treeName = TreeName.MANGROVE_TREE
+        errMsg = f"Tree '{treeName.value}' not found."
         with patch.object(self.uut, '_getTree') as mockedGetTree, \
                 self.assertRaises(ValueError) as context:
-            mockedGetTree.side_effect = ValueError(
-                f"Tree '{treeName.value}' not found.")
+            mockedGetTree.side_effect = ValueError(errMsg)
             self.uut.getTreeHarvestTime(treeName)
             mockedGetTree.assert_called_once_with(treeName)
-        self.assertEqual(f"Tree '{treeName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getTreeHarvestTimeValueErrorNoHarvest(self) -> None:
         """
@@ -474,14 +466,14 @@ class TestFolktails(TestCase):
         """
         treeName = TreeName.BIRCH
         mockTreeDict = {'harvest': None}
+        errMsg = (f"Tree '{treeName.value}' does not produce a "
+                  f"harvestable item.")
         with patch.object(self.uut, '_getTree') as mockedGetTree, \
                 self.assertRaises(ValueError) as context:
             mockedGetTree.return_value = mockTreeDict
             self.uut.getTreeHarvestTime(treeName)
             mockedGetTree.assert_called_once_with(treeName)
-        self.assertEqual(f"Tree '{treeName.value}' does not produce a "
-                         f"harvestable item.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getTreeHarvestTimeSuccess(self) -> None:
         """
@@ -502,14 +494,13 @@ class TestFolktails(TestCase):
         requested tree is not found (via _getTree).
         """
         treeName = TreeName.MANGROVE_TREE
+        errMsg = f"Tree '{treeName.value}' not found."
         with patch.object(self.uut, '_getTree') as mockedGetTree, \
                 self.assertRaises(ValueError) as context:
-            mockedGetTree.side_effect = ValueError(
-                f"Tree '{treeName.value}' not found.")
+            mockedGetTree.side_effect = ValueError(errMsg)
             self.uut.getTreeHarvestYield(treeName)
             mockedGetTree.assert_called_once_with(treeName)
-        self.assertEqual(f"Tree '{treeName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getTreeHarvestYieldValueErrorNoHarvest(self) -> None:
         """
@@ -518,14 +509,14 @@ class TestFolktails(TestCase):
         """
         treeName = TreeName.BIRCH
         mockTreeDict = {'harvest': None}
+        errMsg = (f"Tree '{treeName.value}' does not produce a "
+                  f"harvestable item.")
         with patch.object(self.uut, '_getTree') as mockedGetTree, \
                 self.assertRaises(ValueError) as context:
             mockedGetTree.return_value = mockTreeDict
             self.uut.getTreeHarvestYield(treeName)
             mockedGetTree.assert_called_once_with(treeName)
-        self.assertEqual(f"Tree '{treeName.value}' does not produce a "
-                         f"harvestable item.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getTreeHarvestYieldSuccess(self) -> None:
         """
@@ -547,11 +538,11 @@ class TestFolktails(TestCase):
         """
         # Test with Iron Teeth water building on Folktails faction
         waterBuildingName = WaterBuildingName.DEEP_WATER_PUMP
+        errMsg = (f"Water building '{waterBuildingName.value}' not "
+                  f"found.")
         with self.assertRaises(ValueError) as context:
             self.uut._getWater(waterBuildingName)
-        self.assertEqual(f"Water building '{waterBuildingName.value}' not "
-                         f"found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getWaterSuccess(self) -> None:
         """
@@ -577,15 +568,14 @@ class TestFolktails(TestCase):
         requested water building is not found (via _getWater).
         """
         waterBuildingName = WaterBuildingName.DEEP_WATER_PUMP
+        errMsg = (f"Water building '{waterBuildingName.value}' not "
+                  f"found.")
         with patch.object(self.uut, '_getWater') as mockedGetWater, \
                 self.assertRaises(ValueError) as context:
-            mockedGetWater.side_effect = ValueError(
-                f"Water building '{waterBuildingName.value}' not found.")
+            mockedGetWater.side_effect = ValueError(errMsg)
             self.uut.getWaterWorkers(waterBuildingName)
             mockedGetWater.assert_called_once_with(waterBuildingName)
-        self.assertEqual(f"Water building '{waterBuildingName.value}' not "
-                         f"found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getWaterWorkersSuccess(self) -> None:
         """
@@ -606,15 +596,14 @@ class TestFolktails(TestCase):
         requested water building is not found (via _getWater).
         """
         waterBuildingName = WaterBuildingName.DEEP_WATER_PUMP
+        errMsg = (f"Water building '{waterBuildingName.value}' not "
+                  f"found.")
         with patch.object(self.uut, '_getWater') as mockedGetWater, \
                 self.assertRaises(ValueError) as context:
-            mockedGetWater.side_effect = ValueError(
-                f"Water building '{waterBuildingName.value}' not found.")
+            mockedGetWater.side_effect = ValueError(errMsg)
             self.uut.getWaterRecipeName(waterBuildingName)
             mockedGetWater.assert_called_once_with(waterBuildingName)
-        self.assertEqual(f"Water building '{waterBuildingName.value}' not "
-                         f"found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getWaterRecipeNameSuccess(self) -> None:
         """
@@ -635,15 +624,14 @@ class TestFolktails(TestCase):
         requested water building is not found (via _getWater).
         """
         waterBuildingName = WaterBuildingName.DEEP_WATER_PUMP
+        errMsg = (f"Water building '{waterBuildingName.value}' not "
+                  f"found.")
         with patch.object(self.uut, '_getWater') as mockedGetWater, \
                 self.assertRaises(ValueError) as context:
-            mockedGetWater.side_effect = ValueError(
-                f"Water building '{waterBuildingName.value}' not found.")
+            mockedGetWater.side_effect = ValueError(errMsg)
             self.uut.getWaterProductionTime(waterBuildingName)
             mockedGetWater.assert_called_once_with(waterBuildingName)
-        self.assertEqual(f"Water building '{waterBuildingName.value}' not "
-                         f"found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getWaterProductionTimeSuccess(self) -> None:
         """
@@ -665,15 +653,14 @@ class TestFolktails(TestCase):
         requested water building is not found (via _getWater).
         """
         waterBuildingName = WaterBuildingName.DEEP_WATER_PUMP
+        errMsg = (f"Water building '{waterBuildingName.value}' not "
+                  f"found.")
         with patch.object(self.uut, '_getWater') as mockedGetWater, \
                 self.assertRaises(ValueError) as context:
-            mockedGetWater.side_effect = ValueError(
-                f"Water building '{waterBuildingName.value}' not found.")
+            mockedGetWater.side_effect = ValueError(errMsg)
             self.uut.getWaterOutputQuantity(waterBuildingName)
             mockedGetWater.assert_called_once_with(waterBuildingName)
-        self.assertEqual(f"Water building '{waterBuildingName.value}' not "
-                         f"found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getWaterOutputQuantitySuccess(self) -> None:
         """
@@ -696,11 +683,11 @@ class TestFolktails(TestCase):
         """
         # Test with Iron Teeth building on Folktails faction
         buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        errMsg = (f"Food processing building '{buildingName.value}' "
+                  f"not found.")
         with self.assertRaises(ValueError) as context:
             self.uut._getFoodProcessing(buildingName)
-        self.assertEqual(f"Food processing building '{buildingName.value}' "
-                         f"not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodProcessingSuccess(self) -> None:
         """
@@ -727,15 +714,14 @@ class TestFolktails(TestCase):
         _getFoodProcessing).
         """
         buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        errMsg = (f"Food processing building '{buildingName.value}' "
+                  f"not found.")
         with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
                 self.assertRaises(ValueError) as context:
-            mockedGet.side_effect = ValueError(
-                f"Food processing building '{buildingName.value}' not found.")
+            mockedGet.side_effect = ValueError(errMsg)
             self.uut.getFoodProcessingWorkers(buildingName)
             mockedGet.assert_called_once_with(buildingName)
-        self.assertEqual(f"Food processing building '{buildingName.value}' "
-                         f"not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodProcessingWorkersSuccess(self) -> None:
         """
@@ -757,15 +743,14 @@ class TestFolktails(TestCase):
         _getFoodProcessing).
         """
         buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        errMsg = (f"Food processing building '{buildingName.value}' "
+                  f"not found.")
         with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
                 self.assertRaises(ValueError) as context:
-            mockedGet.side_effect = ValueError(
-                f"Food processing building '{buildingName.value}' not found.")
+            mockedGet.side_effect = ValueError(errMsg)
             self.uut.getFoodProcessingRecipeCount(buildingName)
             mockedGet.assert_called_once_with(buildingName)
-        self.assertEqual(f"Food processing building '{buildingName.value}' "
-                         f"not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodProcessingRecipeCountSuccess(self) -> None:
         """
@@ -787,15 +772,14 @@ class TestFolktails(TestCase):
         _getFoodProcessing).
         """
         buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        errMsg = (f"Food processing building '{buildingName.value}' "
+                  f"not found.")
         with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
                 self.assertRaises(ValueError) as context:
-            mockedGet.side_effect = ValueError(
-                f"Food processing building '{buildingName.value}' not found.")
+            mockedGet.side_effect = ValueError(errMsg)
             self.uut.getFoodProcessingRecipeName(buildingName, 0)
             mockedGet.assert_called_once_with(buildingName)
-        self.assertEqual(f"Food processing building '{buildingName.value}' "
-                         f"not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodProcessingRecipeNameSuccess(self) -> None:
         """
@@ -817,15 +801,14 @@ class TestFolktails(TestCase):
         _getFoodProcessing).
         """
         buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        errMsg = (f"Food processing building '{buildingName.value}' "
+                  f"not found.")
         with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
                 self.assertRaises(ValueError) as context:
-            mockedGet.side_effect = ValueError(
-                f"Food processing building '{buildingName.value}' not found.")
+            mockedGet.side_effect = ValueError(errMsg)
             self.uut.getFoodProcessingProductionTime(buildingName, 0)
             mockedGet.assert_called_once_with(buildingName)
-        self.assertEqual(f"Food processing building '{buildingName.value}' "
-                         f"not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodProcessingProductionTimeSuccess(self) -> None:
         """
@@ -848,15 +831,14 @@ class TestFolktails(TestCase):
         _getFoodProcessing).
         """
         buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
+        errMsg = (f"Food processing building '{buildingName.value}' "
+                  f"not found.")
         with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
                 self.assertRaises(ValueError) as context:
-            mockedGet.side_effect = ValueError(
-                f"Food processing building '{buildingName.value}' not found.")
+            mockedGet.side_effect = ValueError(errMsg)
             self.uut.getFoodProcessingOutputQuantity(buildingName, 0)
             mockedGet.assert_called_once_with(buildingName)
-        self.assertEqual(f"Food processing building '{buildingName.value}' "
-                         f"not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodProcessingOutputQuantitySuccess(self) -> None:
         """
@@ -880,15 +862,14 @@ class TestFolktails(TestCase):
         """
         buildingName = FoodProcessingBuildingName.COFFEE_BREWERY
         recipeName = FoodRecipeName.GRILLED_POTATOES
+        errMsg = (f"Food processing building '{buildingName.value}' "
+                  f"not found.")
         with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
                 self.assertRaises(ValueError) as context:
-            mockedGet.side_effect = ValueError(
-                f"Food processing building '{buildingName.value}' not found.")
+            mockedGet.side_effect = ValueError(errMsg)
             self.uut.getFoodProcessingRecipeIndex(buildingName, recipeName)
             mockedGet.assert_called_once_with(buildingName)
-        self.assertEqual(f"Food processing building '{buildingName.value}' "
-                         f"not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodProcessingRecipeIndexRecipeNotFound(self) -> None:
         """
@@ -903,14 +884,14 @@ class TestFolktails(TestCase):
                 {'name': 'Grilled Spadderdocks'}
             ]
         }
+        errMsg = (f"Recipe '{recipeName.value}' not found in "
+                  f"'{buildingName.value}'.")
         with patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
                 self.assertRaises(ValueError) as context:
             mockedGet.return_value = mockBuildingDict
             self.uut.getFoodProcessingRecipeIndex(buildingName, recipeName)
             mockedGet.assert_called_once_with(buildingName)
-        self.assertEqual(f"Recipe '{recipeName.value}' not found in "
-                         f"'{buildingName.value}'.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodProcessingRecipeIndexSuccess(self) -> None:
         """
@@ -941,17 +922,15 @@ class TestFolktails(TestCase):
         buildingName = FoodProcessingBuildingName.GRILL
         recipeName = FoodRecipeName.GRILLED_POTATOES
         inputName = "Potatoes"
+        errMsg = (f"Recipe '{recipeName.value}' not found in "
+                  f"'{buildingName.value}'.")
         with patch.object(self.uut, 'getFoodProcessingRecipeIndex') \
                 as mockedGet, self.assertRaises(ValueError) as context:
-            mockedGet.side_effect = ValueError(
-                f"Recipe '{recipeName.value}' not found in "
-                f"'{buildingName.value}'.")
+            mockedGet.side_effect = ValueError(errMsg)
             self.uut.getFoodProcessingInputIndex(buildingName, recipeName,
                                                  inputName)
             mockedGet.assert_called_once_with(buildingName, recipeName)
-        self.assertEqual(f"Recipe '{recipeName.value}' not found in "
-                         f"'{buildingName.value}'.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodProcessingInputIndexNoInputs(self) -> None:
         """
@@ -966,6 +945,8 @@ class TestFolktails(TestCase):
                 {'name': 'Grilled Potatoes', 'inputs': None}
             ]
         }
+        errMsg = (f"Recipe '{recipeName.value}' in "
+                  f"'{buildingName.value}' has no inputs.")
         with patch.object(self.uut, 'getFoodProcessingRecipeIndex') \
                 as mockedGetRecipe, \
                 patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
@@ -974,9 +955,7 @@ class TestFolktails(TestCase):
             mockedGet.return_value = mockBuildingDict
             self.uut.getFoodProcessingInputIndex(buildingName, recipeName,
                                                  inputName)
-        self.assertEqual(f"Recipe '{recipeName.value}' in "
-                         f"'{buildingName.value}' has no inputs.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodProcessingInputIndexInputNotFound(self) -> None:
         """
@@ -985,7 +964,7 @@ class TestFolktails(TestCase):
         """
         buildingName = FoodProcessingBuildingName.GRILL
         recipeName = FoodRecipeName.GRILLED_POTATOES
-        inputName = "Carrots"
+        inputName = HarvestName.CARROTS
         mockBuildingDict = {
             'recipes': [
                 {
@@ -997,6 +976,8 @@ class TestFolktails(TestCase):
                 }
             ]
         }
+        errMsg = (f"Input '{inputName.value}' not found in recipe "
+                  f"'{recipeName.value}' of '{buildingName.value}'.")
         with patch.object(self.uut, 'getFoodProcessingRecipeIndex') \
                 as mockedGetRecipe, \
                 patch.object(self.uut, '_getFoodProcessing') as mockedGet, \
@@ -1005,9 +986,7 @@ class TestFolktails(TestCase):
             mockedGet.return_value = mockBuildingDict
             self.uut.getFoodProcessingInputIndex(buildingName, recipeName,
                                                  inputName)
-        self.assertEqual(f"Input '{inputName}' not found in recipe "
-                         f"'{recipeName.value}' of '{buildingName.value}'.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodProcessingInputIndexSuccess(self) -> None:
         """
@@ -1016,7 +995,7 @@ class TestFolktails(TestCase):
         """
         buildingName = FoodProcessingBuildingName.GRILL
         recipeName = FoodRecipeName.GRILLED_POTATOES
-        inputName = "Logs"
+        inputName = HarvestName.LOGS
         mockBuildingDict = {
             'recipes': [
                 {
@@ -1074,10 +1053,10 @@ class TestFolktails(TestCase):
         goods building is not found in the faction data.
         """
         buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        errMsg = f"Goods building '{buildingName.value}' not found."
         with self.assertRaises(ValueError) as context:
             self.uut._getGoods(buildingName)
-        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getGoodsSuccess(self) -> None:
         """
@@ -1095,14 +1074,13 @@ class TestFolktails(TestCase):
         goods building is not found (via _getGoods).
         """
         buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        errMsg = f"Goods building '{buildingName.value}' not found."
         with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
                 self.assertRaises(ValueError) as context:
-            mockedGetGoods.side_effect = ValueError(
-                f"Goods building '{buildingName.value}' not found.")
+            mockedGetGoods.side_effect = ValueError(errMsg)
             self.uut.getGoodsWorkers(buildingName)
             mockedGetGoods.assert_called_once_with(buildingName)
-        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getGoodsWorkersSuccess(self) -> None:
         """
@@ -1123,14 +1101,13 @@ class TestFolktails(TestCase):
         requested goods building is not found (via _getGoods).
         """
         buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        errMsg = f"Goods building '{buildingName.value}' not found."
         with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
                 self.assertRaises(ValueError) as context:
-            mockedGetGoods.side_effect = ValueError(
-                f"Goods building '{buildingName.value}' not found.")
+            mockedGetGoods.side_effect = ValueError(errMsg)
             self.uut.getGoodsRecipeCount(buildingName)
             mockedGetGoods.assert_called_once_with(buildingName)
-        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getGoodsRecipeCountSuccess(self) -> None:
         """
@@ -1151,14 +1128,13 @@ class TestFolktails(TestCase):
         requested goods building is not found (via _getGoods).
         """
         buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        errMsg = f"Goods building '{buildingName.value}' not found."
         with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
                 self.assertRaises(ValueError) as context:
-            mockedGetGoods.side_effect = ValueError(
-                f"Goods building '{buildingName.value}' not found.")
+            mockedGetGoods.side_effect = ValueError(errMsg)
             self.uut.getGoodsRecipeName(buildingName, 0)
             mockedGetGoods.assert_called_once_with(buildingName)
-        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getGoodsRecipeNameSuccess(self) -> None:
         """
@@ -1179,14 +1155,13 @@ class TestFolktails(TestCase):
         requested goods building is not found (via _getGoods).
         """
         buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        errMsg = f"Goods building '{buildingName.value}' not found."
         with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
                 self.assertRaises(ValueError) as context:
-            mockedGetGoods.side_effect = ValueError(
-                f"Goods building '{buildingName.value}' not found.")
+            mockedGetGoods.side_effect = ValueError(errMsg)
             self.uut.getGoodsProductionTime(buildingName, 0)
             mockedGetGoods.assert_called_once_with(buildingName)
-        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getGoodsProductionTimeSuccess(self) -> None:
         """
@@ -1207,14 +1182,13 @@ class TestFolktails(TestCase):
         goods building is not found (via _getGoods).
         """
         buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        errMsg = f"Goods building '{buildingName.value}' not found."
         with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
                 self.assertRaises(ValueError) as context:
-            mockedGetGoods.side_effect = ValueError(
-                f"Goods building '{buildingName.value}' not found.")
+            mockedGetGoods.side_effect = ValueError(errMsg)
             self.uut.getGoodsInputs(buildingName, 0)
             mockedGetGoods.assert_called_once_with(buildingName)
-        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getGoodsInputsSuccess(self) -> None:
         """
@@ -1236,14 +1210,13 @@ class TestFolktails(TestCase):
         requested goods building is not found (via _getGoods).
         """
         buildingName = GoodsBuildingName.INDUSTRIAL_LUMBER_MILL
+        errMsg = f"Goods building '{buildingName.value}' not found."
         with patch.object(self.uut, '_getGoods') as mockedGetGoods, \
                 self.assertRaises(ValueError) as context:
-            mockedGetGoods.side_effect = ValueError(
-                f"Goods building '{buildingName.value}' not found.")
+            mockedGetGoods.side_effect = ValueError(errMsg)
             self.uut.getGoodsOutputQuantity(buildingName, 0)
             mockedGetGoods.assert_called_once_with(buildingName)
-        self.assertEqual(f"Goods building '{buildingName.value}' not found.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getGoodsOutputQuantitySuccess(self) -> None:
         """
@@ -1271,13 +1244,12 @@ class TestFolktails(TestCase):
                 {'name': 'Paper'}
             ]
         }
+        errMsg = "Recipe 'Gears' not found in building 'Lumber Mill'."
         with patch.object(self.uut, '_getGoods') as mockedGetGoods:
             mockedGetGoods.return_value = mockBuildingDict
             with self.assertRaises(ValueError) as context:
                 self.uut.getGoodsRecipeIndex(buildingName, recipeName)
-            self.assertEqual(
-                "Recipe 'Gears' not found in building 'Lumber Mill'.",
-                str(context.exception))
+            self.assertEqual(errMsg, str(context.exception))
 
     def test_getGoodsRecipeIndexSuccess(self) -> None:
         """
@@ -1306,20 +1278,19 @@ class TestFolktails(TestCase):
         """
         buildingName = GoodsBuildingName.LUMBER_MILL
         recipeName = GoodsRecipeName.PLANKS
-        inputName = "Logs"
+        inputName = HarvestName.LOGS
         mockBuildingDict = {
             'recipes': [
                 {'name': 'Planks', 'inputs': None}
             ]
         }
+        errMsg = "Recipe 'Planks' in building 'Lumber Mill' has no inputs."
         with patch.object(self.uut, '_getGoods') as mockedGetGoods:
             mockedGetGoods.return_value = mockBuildingDict
             with self.assertRaises(ValueError) as context:
                 self.uut.getGoodsInputQuantity(buildingName, recipeName,
                                                inputName)
-            self.assertEqual(
-                "Recipe 'Planks' in building 'Lumber Mill' has no inputs.",
-                str(context.exception))
+            self.assertEqual(errMsg, str(context.exception))
 
     def test_getGoodsInputQuantityInputNotFound(self) -> None:
         """
@@ -1328,7 +1299,7 @@ class TestFolktails(TestCase):
         """
         buildingName = GoodsBuildingName.GEAR_WORKSHOP
         recipeName = GoodsRecipeName.GEARS
-        inputName = "Logs"
+        inputName = HarvestName.LOGS
         mockBuildingDict = {
             'recipes': [
                 {
@@ -1339,14 +1310,15 @@ class TestFolktails(TestCase):
                 }
             ]
         }
+        errMsg = (f"Input '{inputName.value}' not found in recipe "
+                  f"'{recipeName.value}' for "
+                  f"building '{buildingName.value}'.")
         with patch.object(self.uut, '_getGoods') as mockedGetGoods:
             mockedGetGoods.return_value = mockBuildingDict
             with self.assertRaises(ValueError) as context:
                 self.uut.getGoodsInputQuantity(buildingName, recipeName,
                                                inputName)
-            self.assertEqual("Input 'Logs' not found in recipe 'Gears' for "
-                             "building 'Gear Workshop'.",
-                             str(context.exception))
+            self.assertEqual(errMsg, str(context.exception))
 
     def test_getGoodsInputQuantitySuccess(self) -> None:
         """
@@ -1355,7 +1327,7 @@ class TestFolktails(TestCase):
         """
         buildingName = GoodsBuildingName.SMELTER
         recipeName = GoodsRecipeName.METAL_BLOCKS
-        inputName = "Logs"
+        inputName = HarvestName.LOGS
         mockBuildingDict = {
             'recipes': [
                 {

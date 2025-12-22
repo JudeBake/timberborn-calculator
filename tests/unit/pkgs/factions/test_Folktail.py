@@ -60,12 +60,12 @@ class TestFolktail(TestCase):
         The getDailyFoodConsumption method must raise ValueError if
         population is negative.
         """
+        errMsg = "Population cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getDailyFoodConsumption(-1, DifficultyLevel.NORMAL)
-        self.assertEqual("Population cannot be negative.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getDailyFoodConsumptionSuccess(self) -> None:
         """
@@ -91,12 +91,12 @@ class TestFolktail(TestCase):
         The getDailyWaterConsumption method must raise ValueError if
         population is negative.
         """
+        errMsg = "Population cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getDailyWaterConsumption(-1, DifficultyLevel.NORMAL)
-        self.assertEqual("Population cannot be negative.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getDailyWaterConsumptionSuccess(self) -> None:
         """
@@ -122,23 +122,24 @@ class TestFolktail(TestCase):
         The getFoodPerType method must raise ValueError if population is
         negative.
         """
+        errMsg = "Population cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getFoodPerType(-1, 5, DifficultyLevel.NORMAL)
-        self.assertEqual("Population cannot be negative.",
-                         str(context.exception))
+        self.assertEqual(errMsg, str(context.exception))
 
     def test_getFoodPerTypeZeroFoodTypeCount(self) -> None:
         """
         The getFoodPerType method must raise ValueError if foodTypeCount is
         zero.
         """
+        errMsg = "Food type count must be positive."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getFoodPerType(100, 0, DifficultyLevel.NORMAL)
-        self.assertEqual("Food type count must be positive.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getFoodPerTypeNegativeFoodTypeCount(self) -> None:
@@ -146,11 +147,12 @@ class TestFolktail(TestCase):
         The getFoodPerType method must raise ValueError if foodTypeCount is
         negative.
         """
+        errMsg = "Food type count must be positive."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getFoodPerType(100, -5, DifficultyLevel.NORMAL)
-        self.assertEqual("Food type count must be positive.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getFoodPerTypeSuccess(self) -> None:
@@ -175,11 +177,12 @@ class TestFolktail(TestCase):
         The getBerryTilesNeeded method must raise ValueError if berry
         amount is negative.
         """
+        errMsg = "Berry amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBerryTilesNeeded(-10.0)
-        self.assertEqual("Berry amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBerryTilesNeededSuccess(self) -> None:
@@ -205,11 +208,12 @@ class TestFolktail(TestCase):
         The getDandelionTilesNeeded method must raise ValueError if dandelion
         amount is negative.
         """
+        errMsg = "Dandelion amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getDandelionTilesNeeded(-10.0)
-        self.assertEqual("Dandelion amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getDandelionTilesNeededSuccess(self) -> None:
@@ -235,11 +239,12 @@ class TestFolktail(TestCase):
         The getCarrotTilesNeeded method must raise ValueError if carrot
         amount is negative.
         """
+        errMsg = "Carrot amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getCarrotTilesNeeded(-10.0, False)
-        self.assertEqual("Carrot amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getCarrotTilesNeededWithoutBeehive(self) -> None:
@@ -286,11 +291,12 @@ class TestFolktail(TestCase):
         The getSunflowerTilesNeeded method must raise ValueError if
         sunflower seed amount is negative.
         """
+        errMsg = "Sunflower seed amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getSunflowerTilesNeeded(-10.0, False)
-        self.assertEqual("Sunflower seed amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getSunflowerTilesNeededWithoutBeehive(self) -> None:
@@ -337,11 +343,12 @@ class TestFolktail(TestCase):
         The getPotatoTilesNeeded method must raise ValueError if potato
         amount is negative.
         """
+        errMsg = "Potato amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPotatoTilesNeeded(-10.0, False)
-        self.assertEqual("Potato amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPotatoTilesNeededWithoutBeehive(self) -> None:
@@ -388,11 +395,12 @@ class TestFolktail(TestCase):
         The getWheatTilesNeeded method must raise ValueError if wheat
         amount is negative.
         """
+        errMsg = "Wheat amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getWheatTilesNeeded(-10.0, False)
-        self.assertEqual("Wheat amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getWheatTilesNeededWithoutBeehive(self) -> None:
@@ -439,11 +447,12 @@ class TestFolktail(TestCase):
         The getCattailTilesNeeded method must raise ValueError if cattail
         root amount is negative.
         """
+        errMsg = "Cattail root amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getCattailTilesNeeded(-10.0, False)
-        self.assertEqual("Cattail root amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getCattailTilesNeededWithoutBeehive(self) -> None:
@@ -490,11 +499,12 @@ class TestFolktail(TestCase):
         The getSpadderdockTilesNeeded method must raise ValueError if
         spadderdock amount is negative.
         """
+        errMsg = "Spadderdock amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getSpadderdockTilesNeeded(-10.0, False)
-        self.assertEqual("Spadderdock amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getSpadderdockTilesNeededWithoutBeehive(self) -> None:
@@ -541,11 +551,12 @@ class TestFolktail(TestCase):
         The getLogPerType method must raise ValueError if total log amount
         is negative.
         """
+        errMsg = "Total log amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogPerType(-100.0, 3)
-        self.assertEqual("Total log amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogPerTypeZeroTreeTypeCount(self) -> None:
@@ -553,11 +564,12 @@ class TestFolktail(TestCase):
         The getLogPerType method must raise ValueError if tree type count
         is zero.
         """
+        errMsg = "Tree type count must be positive."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogPerType(100.0, 0)
-        self.assertEqual("Tree type count must be positive.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogPerTypeNegativeTreeTypeCount(self) -> None:
@@ -565,11 +577,12 @@ class TestFolktail(TestCase):
         The getLogPerType method must raise ValueError if tree type count
         is negative.
         """
+        errMsg = "Tree type count must be positive."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogPerType(100.0, -3)
-        self.assertEqual("Tree type count must be positive.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogPerTypeSuccess(self) -> None:
@@ -589,11 +602,12 @@ class TestFolktail(TestCase):
         The getBirchLogTilesNeeded method must raise ValueError if log
         amount is negative.
         """
+        errMsg = "Log amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBirchLogTilesNeeded(-10.0)
-        self.assertEqual("Log amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBirchLogTilesNeededSuccess(self) -> None:
@@ -619,11 +633,12 @@ class TestFolktail(TestCase):
         The getPineLogTilesNeeded method must raise ValueError if log
         amount is negative.
         """
+        errMsg = "Log amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPineLogTilesNeeded(-10.0)
-        self.assertEqual("Log amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPineLogTilesNeededSuccess(self) -> None:
@@ -649,11 +664,12 @@ class TestFolktail(TestCase):
         The getPineResinTilesNeeded method must raise ValueError if pine
         resin amount is negative.
         """
+        errMsg = "Pine resin amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPineResinTilesNeeded(-10.0)
-        self.assertEqual("Pine resin amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPineResinTilesNeededSuccess(self) -> None:
@@ -679,11 +695,12 @@ class TestFolktail(TestCase):
         The getMapleLogTilesNeeded method must raise ValueError if log
         amount is negative.
         """
+        errMsg = "Log amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getMapleLogTilesNeeded(-10.0)
-        self.assertEqual("Log amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getMapleLogTilesNeededSuccess(self) -> None:
@@ -709,11 +726,12 @@ class TestFolktail(TestCase):
         The getMapleSyrupTilesNeeded method must raise ValueError if maple
         syrup amount is negative.
         """
+        errMsg = "Maple syrup amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getMapleSyrupTilesNeeded(-10.0)
-        self.assertEqual("Maple syrup amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getMapleSyrupTilesNeededSuccess(self) -> None:
@@ -739,11 +757,12 @@ class TestFolktail(TestCase):
         The getChestnutLogTilesNeeded method must raise ValueError if log
         amount is negative.
         """
+        errMsg = "Log amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getChestnutLogTilesNeeded(-10.0)
-        self.assertEqual("Log amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getChestnutLogTilesNeededSuccess(self) -> None:
@@ -769,11 +788,12 @@ class TestFolktail(TestCase):
         The getChestnutTilesNeeded method must raise ValueError if chestnut
         amount is negative.
         """
+        errMsg = "Chestnut amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getChestnutTilesNeeded(-10.0)
-        self.assertEqual("Chestnut amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getChestnutTilesNeededSuccess(self) -> None:
@@ -799,11 +819,12 @@ class TestFolktail(TestCase):
         The getOakLogTilesNeeded method must raise ValueError if log
         amount is negative.
         """
+        errMsg = "Log amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getOakLogTilesNeeded(-10.0)
-        self.assertEqual("Log amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getOakLogTilesNeededSuccess(self) -> None:
@@ -829,11 +850,12 @@ class TestFolktail(TestCase):
         The getWaterPumpsNeeded method must raise ValueError if water
         amount is negative.
         """
+        errMsg = "Water amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getWaterPumpsNeeded(-10.0)
-        self.assertEqual("Water amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getWaterPumpsNeededSuccess(self) -> None:
@@ -859,11 +881,12 @@ class TestFolktail(TestCase):
         The getLargeWaterPumpsNeeded method must raise ValueError if water
         amount is negative.
         """
+        errMsg = "Water amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLargeWaterPumpsNeeded(-10.0, 2)
-        self.assertEqual("Water amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLargeWaterPumpsNeededNegativeWorkersCount(self) -> None:
@@ -871,11 +894,12 @@ class TestFolktail(TestCase):
         The getLargeWaterPumpsNeeded method must raise ValueError if workers
         count is negative.
         """
+        errMsg = "Workers count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLargeWaterPumpsNeeded(50.0, -1)
-        self.assertEqual("Workers count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLargeWaterPumpsNeededExceedsMaxWorkers(self) -> None:
@@ -889,9 +913,10 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
+            errMsg = "Workers count cannot exceed 2."
             with self.assertRaises(ValueError) as context:
                 folktail.getLargeWaterPumpsNeeded(50.0, 5)
-            self.assertEqual("Workers count cannot exceed 2.",
+            self.assertEqual(errMsg,
                              str(context.exception))
 
     def test_getLargeWaterPumpsNeededSuccessFullWorkers(self) -> None:
@@ -939,11 +964,12 @@ class TestFolktail(TestCase):
         The getBadwaterPumpsNeeded method must raise ValueError if water
         amount is negative.
         """
+        errMsg = "Water amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBadwaterPumpsNeeded(-10.0)
-        self.assertEqual("Water amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBadwaterPumpsNeededSuccess(self) -> None:
@@ -969,11 +995,12 @@ class TestFolktail(TestCase):
         The getGrillsNeededForPotatoes method must raise ValueError if
         grilled potato amount is negative.
         """
+        errMsg = "Grilled potato amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getGrillsNeededForPotatoes(-10.0)
-        self.assertEqual("Grilled potato amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getGrillsNeededForPotatoesSuccess(self) -> None:
@@ -1003,11 +1030,12 @@ class TestFolktail(TestCase):
         The getPotatoesNeededForGrills method must raise ValueError if
         grills count is negative.
         """
+        errMsg = "Grills count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPotatoesNeededForGrills(-1)
-        self.assertEqual("Grills count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPotatoesNeededForGrillsSuccess(self) -> None:
@@ -1039,11 +1067,12 @@ class TestFolktail(TestCase):
         The getLogsNeededForGrillsWithPotatoes method must raise ValueError
         if grills count is negative.
         """
+        errMsg = "Grills count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogsNeededForGrillsWithPotatoes(-1)
-        self.assertEqual("Grills count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogsNeededForGrillsWithPotatoesSuccess(self) -> None:
@@ -1074,11 +1103,12 @@ class TestFolktail(TestCase):
         The getGrillsNeededForChestnuts method must raise ValueError if
         grilled chestnut amount is negative.
         """
+        errMsg = "Grilled chestnut amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getGrillsNeededForChestnuts(-10.0)
-        self.assertEqual("Grilled chestnut amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getGrillsNeededForChestnutsSuccess(self) -> None:
@@ -1108,11 +1138,12 @@ class TestFolktail(TestCase):
         The getChestnutsNeededForGrills method must raise ValueError if
         grills count is negative.
         """
+        errMsg = "Grills count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getChestnutsNeededForGrills(-1)
-        self.assertEqual("Grills count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getChestnutsNeededForGrillsSuccess(self) -> None:
@@ -1144,11 +1175,12 @@ class TestFolktail(TestCase):
         The getLogsNeededForGrillsWithChestnuts method must raise ValueError
         if grills count is negative.
         """
+        errMsg = "Grills count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogsNeededForGrillsWithChestnuts(-1)
-        self.assertEqual("Grills count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogsNeededForGrillsWithChestnutsSuccess(self) -> None:
@@ -1179,11 +1211,12 @@ class TestFolktail(TestCase):
         The getGrillsNeededForSpadderdocks method must raise ValueError if
         grilled spadderdock amount is negative.
         """
+        errMsg = "Grilled spadderdock amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getGrillsNeededForSpadderdocks(-10.0)
-        self.assertEqual("Grilled spadderdock amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getGrillsNeededForSpadderdocksSuccess(self) -> None:
@@ -1213,11 +1246,12 @@ class TestFolktail(TestCase):
         The getSpadderdocksNeededForGrills method must raise ValueError if
         grills count is negative.
         """
+        errMsg = "Grills count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getSpadderdocksNeededForGrills(-1)
-        self.assertEqual("Grills count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getSpadderdocksNeededForGrillsSuccess(self) -> None:
@@ -1249,11 +1283,12 @@ class TestFolktail(TestCase):
         The getLogsNeededForGrillsWithSpadderdocks method must raise
         ValueError if grills count is negative.
         """
+        errMsg = "Grills count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogsNeededForGrillsWithSpadderdocks(-1)
-        self.assertEqual("Grills count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogsNeededForGrillsWithSpadderdocksSuccess(self) -> None:
@@ -1284,11 +1319,12 @@ class TestFolktail(TestCase):
         The getGristmillsNeededForWheatFlour method must raise ValueError if
         wheat flour amount is negative.
         """
+        errMsg = "Wheat flour amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getGristmillsNeededForWheatFlour(-10.0)
-        self.assertEqual("Wheat flour amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getGristmillsNeededForWheatFlourSuccess(self) -> None:
@@ -1318,11 +1354,12 @@ class TestFolktail(TestCase):
         The getWheatNeededForGristmills method must raise ValueError if
         gristmills count is negative.
         """
+        errMsg = "Gristmills count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getWheatNeededForGristmills(-1)
-        self.assertEqual("Gristmills count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getWheatNeededForGristmillsSuccess(self) -> None:
@@ -1354,11 +1391,12 @@ class TestFolktail(TestCase):
         The getGristmillsNeededForCattailFlour method must raise ValueError if
         cattail flour amount is negative.
         """
+        errMsg = "Cattail flour amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getGristmillsNeededForCattailFlour(-10.0)
-        self.assertEqual("Cattail flour amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getGristmillsNeededForCattailFlourSuccess(self) -> None:
@@ -1388,11 +1426,12 @@ class TestFolktail(TestCase):
         The getCattailRootsNeededForGristmills method must raise ValueError if
         gristmills count is negative.
         """
+        errMsg = "Gristmills count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getCattailRootsNeededForGristmills(-1)
-        self.assertEqual("Gristmills count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getCattailRootsNeededForGristmillsSuccess(self) -> None:
@@ -1424,11 +1463,12 @@ class TestFolktail(TestCase):
         The getBakeriesNeededForBreads method must raise ValueError if breads
         amount is negative.
         """
+        errMsg = "Breads amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBakeriesNeededForBreads(-10.0)
-        self.assertEqual("Breads amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBakeriesNeededForBreadsSuccess(self) -> None:
@@ -1458,11 +1498,12 @@ class TestFolktail(TestCase):
         The getWheatFlourNeededForBakeriesWithBreads method must raise
         ValueError if bakeries count is negative.
         """
+        errMsg = "Bakeries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getWheatFlourNeededForBakeriesWithBreads(-1)
-        self.assertEqual("Bakeries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getWheatFlourNeededForBakeriesWithBreadsSuccess(self) -> None:
@@ -1494,11 +1535,12 @@ class TestFolktail(TestCase):
         The getLogsNeededForBakeriesWithBreads method must raise ValueError
         if bakeries count is negative.
         """
+        errMsg = "Bakeries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogsNeededForBakeriesWithBreads(-1)
-        self.assertEqual("Bakeries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogsNeededForBakeriesWithBreadsSuccess(self) -> None:
@@ -1529,11 +1571,12 @@ class TestFolktail(TestCase):
         The getBakeriesNeededForCattailCrackers method must raise ValueError
         if cattail crackers amount is negative.
         """
+        errMsg = "Cattail crackers amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBakeriesNeededForCattailCrackers(-10.0)
-        self.assertEqual("Cattail crackers amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBakeriesNeededForCattailCrackersSuccess(self) -> None:
@@ -1563,11 +1606,12 @@ class TestFolktail(TestCase):
         The getCattailFlourNeededForBakeriesWithCattailCrackers method must
         raise ValueError if bakeries count is negative.
         """
+        errMsg = "Bakeries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getCattailFlourNeededForBakeriesWithCattailCrackers(-1)
-        self.assertEqual("Bakeries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getCattailFlourNeededForBakeriesWithCattailCrackersSuccess(self) -> None:  # noqa: E501
@@ -1600,11 +1644,12 @@ class TestFolktail(TestCase):
         The getLogsNeededForBakeriesWithCattailCrackers method must raise
         ValueError if bakeries count is negative.
         """
+        errMsg = "Bakeries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogsNeededForBakeriesWithCattailCrackers(-1)
-        self.assertEqual("Bakeries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogsNeededForBakeriesWithCattailCrackersSuccess(self) -> None:
@@ -1635,11 +1680,12 @@ class TestFolktail(TestCase):
         The getBakeriesNeededForMaplePastries method must raise ValueError
         if maple pastries amount is negative.
         """
+        errMsg = "Maple pastries amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBakeriesNeededForMaplePastries(-10.0)
-        self.assertEqual("Maple pastries amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBakeriesNeededForMaplePastriesSuccess(self) -> None:
@@ -1669,11 +1715,12 @@ class TestFolktail(TestCase):
         The getWheatFlourNeededForBakeriesWithMaplePastries method must raise
         ValueError if bakeries count is negative.
         """
+        errMsg = "Bakeries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getWheatFlourNeededForBakeriesWithMaplePastries(-1)
-        self.assertEqual("Bakeries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getWheatFlourNeededForBakeriesWithMaplePastriesSuccess(self) -> None:  # noqa: E501
@@ -1706,11 +1753,12 @@ class TestFolktail(TestCase):
         The getMapleSyrupNeededForBakeriesWithMaplePastries method must raise
         ValueError if bakeries count is negative.
         """
+        errMsg = "Bakeries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getMapleSyrupNeededForBakeriesWithMaplePastries(-1)
-        self.assertEqual("Bakeries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getMapleSyrupNeededForBakeriesWithMaplePastriesSuccess(self) -> None:  # noqa: E501
@@ -1743,11 +1791,12 @@ class TestFolktail(TestCase):
         The getLogsNeededForBakeriesWithMaplePastries method must raise
         ValueError if bakeries count is negative.
         """
+        errMsg = "Bakeries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogsNeededForBakeriesWithMaplePastries(-1)
-        self.assertEqual("Bakeries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogsNeededForBakeriesWithMaplePastriesSuccess(self) -> None:
@@ -1778,11 +1827,12 @@ class TestFolktail(TestCase):
         The getLumberMillsNeededForPlanks method must raise ValueError if
         planks amount is negative.
         """
+        errMsg = "Planks amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLumberMillsNeededForPlanks(-10.0)
-        self.assertEqual("Planks amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLumberMillsNeededForPlanksSuccess(self) -> None:
@@ -1809,11 +1859,12 @@ class TestFolktail(TestCase):
         The getLogsNeededForLumberMills method must raise ValueError if
         lumber mills count is negative.
         """
+        errMsg = "Lumber mills count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogsNeededForLumberMills(-1)
-        self.assertEqual("Lumber mills count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogsNeededForLumberMillsSuccess(self) -> None:
@@ -1843,11 +1894,12 @@ class TestFolktail(TestCase):
         The getGearWorkshopsNeededForGears method must raise ValueError if
         gears amount is negative.
         """
+        errMsg = "Gears amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getGearWorkshopsNeededForGears(-10.0)
-        self.assertEqual("Gears amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getGearWorkshopsNeededForGearsSuccess(self) -> None:
@@ -1874,11 +1926,12 @@ class TestFolktail(TestCase):
         The getPlanksNeededForGearWorkshops method must raise ValueError if
         gear workshops count is negative.
         """
+        errMsg = "Gear workshops count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPlanksNeededForGearWorkshops(-1)
-        self.assertEqual("Gear workshops count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPlanksNeededForGearWorkshopsSuccess(self) -> None:
@@ -1907,11 +1960,12 @@ class TestFolktail(TestCase):
         The getPaperMillsNeededForPaper method must raise ValueError if
         paper amount is negative.
         """
+        errMsg = "Paper amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPaperMillsNeededForPaper(-10.0)
-        self.assertEqual("Paper amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPaperMillsNeededForPaperSuccess(self) -> None:
@@ -1938,11 +1992,12 @@ class TestFolktail(TestCase):
         The getLogsNeededForPaperMills method must raise ValueError if
         paper mills count is negative.
         """
+        errMsg = "Paper mills count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogsNeededForPaperMills(-1)
-        self.assertEqual("Paper mills count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogsNeededForPaperMillsSuccess(self) -> None:
@@ -1971,11 +2026,12 @@ class TestFolktail(TestCase):
         The getPrintingPressesNeededForBooks method must raise ValueError if
         books amount is negative.
         """
+        errMsg = "Books amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPrintingPressesNeededForBooks(-10.0)
-        self.assertEqual("Books amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPrintingPressesNeededForBooksSuccess(self) -> None:
@@ -2002,11 +2058,12 @@ class TestFolktail(TestCase):
         The getPaperNeededForPrintingPressesWithBooks method must raise
         ValueError if printing presses count is negative.
         """
+        errMsg = "Printing presses count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPaperNeededForPrintingPressesWithBooks(-1)
-        self.assertEqual("Printing presses count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPaperNeededForPrintingPressesWithBooksSuccess(self) -> None:
@@ -2035,11 +2092,12 @@ class TestFolktail(TestCase):
         The getPrintingPressesNeededForPunchcards method must raise ValueError
         if punchcards amount is negative.
         """
+        errMsg = "Punchcards amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPrintingPressesNeededForPunchcards(-10.0)
-        self.assertEqual("Punchcards amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPrintingPressesNeededForPunchcardsSuccess(self) -> None:
@@ -2066,11 +2124,12 @@ class TestFolktail(TestCase):
         The getPaperNeededForPrintingPressesWithPunchcards method must raise
         ValueError if printing presses count is negative.
         """
+        errMsg = "Printing presses count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPaperNeededForPrintingPressesWithPunchcards(-1)
-        self.assertEqual("Printing presses count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPaperNeededForPrintingPressesWithPunchcardsSuccess(self) -> None:   # noqa: E501
@@ -2098,11 +2157,12 @@ class TestFolktail(TestCase):
         The getPlanksNeededForPrintingPressesWithPunchcards method must raise
         ValueError if printing presses count is negative.
         """
+        errMsg = "Printing presses count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPlanksNeededForPrintingPressesWithPunchcards(-1)
-        self.assertEqual("Printing presses count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPlanksNeededForPrintingPressesWithPunchcardsSuccess(self) -> None:  # noqa: E501
@@ -2132,11 +2192,12 @@ class TestFolktail(TestCase):
         The getWoodWorkshopsNeededForTreatedPlanks method must raise ValueError
         if treated planks amount is negative.
         """
+        errMsg = "Treated planks amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getWoodWorkshopsNeededForTreatedPlanks(-10.0)
-        self.assertEqual("Treated planks amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getWoodWorkshopsNeededForTreatedPlanksSuccess(self) -> None:
@@ -2163,11 +2224,12 @@ class TestFolktail(TestCase):
         The getPineResinNeededForWoodWorkshops method must raise ValueError if
         wood workshops count is negative.
         """
+        errMsg = "Wood workshops count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPineResinNeededForWoodWorkshops(-1)
-        self.assertEqual("Wood workshops count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPineResinNeededForWoodWorkshopsSuccess(self) -> None:
@@ -2195,11 +2257,12 @@ class TestFolktail(TestCase):
         The getPlanksNeededForWoodWorkshops method must raise ValueError if
         wood workshops count is negative.
         """
+        errMsg = "Wood workshops count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPlanksNeededForWoodWorkshops(-1)
-        self.assertEqual("Wood workshops count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPlanksNeededForWoodWorkshopsSuccess(self) -> None:
@@ -2228,11 +2291,12 @@ class TestFolktail(TestCase):
         The getSmeltersNeededForMetalBlocks method must raise ValueError if
         metal blocks amount is negative.
         """
+        errMsg = "Metal blocks amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getSmeltersNeededForMetalBlocks(-10.0)
-        self.assertEqual("Metal blocks amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getSmeltersNeededForMetalBlocksSuccess(self) -> None:
@@ -2259,11 +2323,12 @@ class TestFolktail(TestCase):
         The getScrapMetalNeededForSmelters method must raise ValueError if
         smelters count is negative.
         """
+        errMsg = "Smelters count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getScrapMetalNeededForSmelters(-1)
-        self.assertEqual("Smelters count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getScrapMetalNeededForSmeltersSuccess(self) -> None:
@@ -2291,11 +2356,12 @@ class TestFolktail(TestCase):
         The getLogsNeededForSmelters method must raise ValueError if
         smelters count is negative.
         """
+        errMsg = "Smelters count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogsNeededForSmelters(-1)
-        self.assertEqual("Smelters count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogsNeededForSmeltersSuccess(self) -> None:
@@ -2324,11 +2390,12 @@ class TestFolktail(TestCase):
         The getMinesNeededForScrapMetal method must raise ValueError if
         scrap metal amount is negative.
         """
+        errMsg = "Scrap metal amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getMinesNeededForScrapMetal(-10.0)
-        self.assertEqual("Scrap metal amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getMinesNeededForScrapMetalSuccess(self) -> None:
@@ -2355,11 +2422,12 @@ class TestFolktail(TestCase):
         The getTreatedPlanksNeededForMines method must raise ValueError if
         mines count is negative.
         """
+        errMsg = "Mines count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getTreatedPlanksNeededForMines(-1)
-        self.assertEqual("Mines count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getTreatedPlanksNeededForMinesSuccess(self) -> None:
@@ -2387,11 +2455,12 @@ class TestFolktail(TestCase):
         The getRefineriesNeededForBiofuelCarrots method must raise ValueError
         if biofuel carrots amount is negative.
         """
+        errMsg = "Biofuel Carrots amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getRefineriesNeededForBiofuelCarrots(-10.0)
-        self.assertEqual("Biofuel Carrots amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getRefineriesNeededForBiofuelCarrotsSuccess(self) -> None:
@@ -2418,11 +2487,12 @@ class TestFolktail(TestCase):
         The getCarrotsNeededForRefineriesWithBiofuelCarrots method must raise
         ValueError if refineries count is negative.
         """
+        errMsg = "Refineries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getCarrotsNeededForRefineriesWithBiofuelCarrots(-1)
-        self.assertEqual("Refineries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getCarrotsNeededForRefineriesWithBiofuelCarrotsSuccess(self) -> None:  # noqa: E501
@@ -2451,11 +2521,12 @@ class TestFolktail(TestCase):
         The getWaterNeededForRefineriesWithBiofuelCarrots method must raise
         ValueError if refineries count is negative.
         """
+        errMsg = "Refineries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getWaterNeededForRefineriesWithBiofuelCarrots(-1)
-        self.assertEqual("Refineries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getWaterNeededForRefineriesWithBiofuelCarrotsSuccess(self) -> None:    # noqa: E501
@@ -2483,11 +2554,12 @@ class TestFolktail(TestCase):
         The getRefineriesNeededForBiofuelPotatoes method must raise ValueError
         if biofuel potatoes amount is negative.
         """
+        errMsg = "Biofuel Potatoes amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getRefineriesNeededForBiofuelPotatoes(-10.0)
-        self.assertEqual("Biofuel Potatoes amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getRefineriesNeededForBiofuelPotatoesSuccess(self) -> None:
@@ -2514,11 +2586,12 @@ class TestFolktail(TestCase):
         The getPotatoesNeededForRefineriesWithBiofuelPotatoes method must
         raise ValueError if refineries count is negative.
         """
+        errMsg = "Refineries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPotatoesNeededForRefineriesWithBiofuelPotatoes(-1)
-        self.assertEqual("Refineries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPotatoesNeededForRefineriesWithBiofuelPotatoesSuccess(self) -> None:    # noqa: E501
@@ -2547,11 +2620,12 @@ class TestFolktail(TestCase):
         The getWaterNeededForRefineriesWithBiofuelPotatoes method must raise
         ValueError if refineries count is negative.
         """
+        errMsg = "Refineries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getWaterNeededForRefineriesWithBiofuelPotatoes(-1)
-        self.assertEqual("Refineries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getWaterNeededForRefineriesWithBiofuelPotatoesSuccess(self) -> None:   # noqa: E501
@@ -2579,11 +2653,12 @@ class TestFolktail(TestCase):
         The getRefineriesNeededForBiofuelSpadderdocks method must raise
         ValueError if biofuel spadderdocks amount is negative.
         """
+        errMsg = "Biofuel Spadderdocks amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getRefineriesNeededForBiofuelSpadderdocks(-10.0)
-        self.assertEqual("Biofuel Spadderdocks amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getRefineriesNeededForBiofuelSpadderdocksSuccess(self) -> None:
@@ -2610,12 +2685,13 @@ class TestFolktail(TestCase):
         The getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks method
         must raise ValueError if refineries count is negative.
         """
+        errMsg = "Refineries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail \
                 .getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks(-1)
-        self.assertEqual("Refineries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocksSuccess(self) -> None:    # noqa: E501
@@ -2644,11 +2720,12 @@ class TestFolktail(TestCase):
         The getWaterNeededForRefineriesWithBiofuelSpadderdocks method must
         raise ValueError if refineries count is negative.
         """
+        errMsg = "Refineries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getWaterNeededForRefineriesWithBiofuelSpadderdocks(-1)
-        self.assertEqual("Refineries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getWaterNeededForRefineriesWithBiofuelSpadderdocksSuccess(self) -> None:   # noqa: E501
@@ -2677,11 +2754,12 @@ class TestFolktail(TestCase):
         The getRefineriesNeededForCatalyst method must raise ValueError if
         catalyst amount is negative.
         """
+        errMsg = "Catalyst amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getRefineriesNeededForCatalyst(-10.0)
-        self.assertEqual("Catalyst amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getRefineriesNeededForCatalystSuccess(self) -> None:
@@ -2708,11 +2786,12 @@ class TestFolktail(TestCase):
         The getMapleSyrupNeededForRefineriesWithCatalyst method must raise
         ValueError if refineries count is negative.
         """
+        errMsg = "Refineries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getMapleSyrupNeededForRefineriesWithCatalyst(-1)
-        self.assertEqual("Refineries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getMapleSyrupNeededForRefineriesWithCatalystSuccess(self) -> None:
@@ -2740,11 +2819,12 @@ class TestFolktail(TestCase):
         The getExtractNeededForRefineriesWithCatalyst method must raise
         ValueError if refineries count is negative.
         """
+        errMsg = "Refineries count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getExtractNeededForRefineriesWithCatalyst(-1)
-        self.assertEqual("Refineries count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getExtractNeededForRefineriesWithCatalystSuccess(self) -> None:
@@ -2773,11 +2853,12 @@ class TestFolktail(TestCase):
         The getBotPartFactoriesNeededForBotChassis method must raise
         ValueError if bot chassis amount is negative.
         """
+        errMsg = "Bot Chassis amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBotPartFactoriesNeededForBotChassis(-10.0)
-        self.assertEqual("Bot Chassis amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBotPartFactoriesNeededForBotChassisSuccess(self) -> None:
@@ -2804,11 +2885,12 @@ class TestFolktail(TestCase):
         The getPlanksNeededForBotPartFactoriesWithBotChassis method must raise
         ValueError if bot part factories count is negative.
         """
+        errMsg = "Bot part factories count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPlanksNeededForBotPartFactoriesWithBotChassis(-1)
-        self.assertEqual("Bot part factories count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPlanksNeededForBotPartFactoriesWithBotChassisSuccess(self) -> None:     # noqa: E501
@@ -2837,11 +2919,12 @@ class TestFolktail(TestCase):
         The getMetalBlocksNeededForBotPartFactoriesWithBotChassis method must
         raise ValueError if bot part factories count is negative.
         """
+        errMsg = "Bot part factories count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getMetalBlocksNeededForBotPartFactoriesWithBotChassis(-1)
-        self.assertEqual("Bot part factories count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getMetalBlocksNeededForBotPartFactoriesWithBotChassisSuccess(self) -> None:    # noqa: E501
@@ -2870,11 +2953,12 @@ class TestFolktail(TestCase):
         The getBiofuelNeededForBotPartFactoriesWithBotChassis method must
         raise ValueError if bot part factories count is negative.
         """
+        errMsg = "Bot part factories count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBiofuelNeededForBotPartFactoriesWithBotChassis(-1)
-        self.assertEqual("Bot part factories count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBiofuelNeededForBotPartFactoriesWithBotChassisSuccess(self) -> None:    # noqa: E501
@@ -2903,11 +2987,12 @@ class TestFolktail(TestCase):
         The getBotPartFactoriesNeededForBotHeads method must raise ValueError
         if bot heads amount is negative.
         """
+        errMsg = "Bot Heads amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBotPartFactoriesNeededForBotHeads(-10.0)
-        self.assertEqual("Bot Heads amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBotPartFactoriesNeededForBotHeadsSuccess(self) -> None:
@@ -2934,11 +3019,12 @@ class TestFolktail(TestCase):
         The getGearsNeededForBotPartFactoriesWithBotHeads method must raise
         ValueError if bot part factories count is negative.
         """
+        errMsg = "Bot part factories count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getGearsNeededForBotPartFactoriesWithBotHeads(-1)
-        self.assertEqual("Bot part factories count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getGearsNeededForBotPartFactoriesWithBotHeadsSuccess(self) -> None:    # noqa: E501
@@ -2966,11 +3052,12 @@ class TestFolktail(TestCase):
         The getMetalBlocksNeededForBotPartFactoriesWithBotHeads method must
         raise ValueError if bot part factories count is negative.
         """
+        errMsg = "Bot part factories count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getMetalBlocksNeededForBotPartFactoriesWithBotHeads(-1)
-        self.assertEqual("Bot part factories count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getMetalBlocksNeededForBotPartFactoriesWithBotHeadsSuccess(self) -> None:  # noqa: E501
@@ -2999,11 +3086,12 @@ class TestFolktail(TestCase):
         The getPlanksNeededForBotPartFactoriesWithBotHeads method must raise
         ValueError if bot part factories count is negative.
         """
+        errMsg = "Bot part factories count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPlanksNeededForBotPartFactoriesWithBotHeads(-1)
-        self.assertEqual("Bot part factories count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPlanksNeededForBotPartFactoriesWithBotHeadsSuccess(self) -> None:   # noqa: E501
@@ -3031,11 +3119,12 @@ class TestFolktail(TestCase):
         The getBotPartFactoriesNeededForBotLimbs method must raise ValueError
         if bot limbs amount is negative.
         """
+        errMsg = "Bot Limbs amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBotPartFactoriesNeededForBotLimbs(-10.0)
-        self.assertEqual("Bot Limbs amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBotPartFactoriesNeededForBotLimbsSuccess(self) -> None:
@@ -3062,11 +3151,12 @@ class TestFolktail(TestCase):
         The getGearsNeededForBotPartFactoriesWithBotLimbs method must raise
         ValueError if bot part factories count is negative.
         """
+        errMsg = "Bot part factories count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getGearsNeededForBotPartFactoriesWithBotLimbs(-1)
-        self.assertEqual("Bot part factories count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getGearsNeededForBotPartFactoriesWithBotLimbsSuccess(self) -> None:    # noqa: E501
@@ -3094,11 +3184,12 @@ class TestFolktail(TestCase):
         The getPlanksNeededForBotPartFactoriesWithBotLimbs method must raise
         ValueError if bot part factories count is negative.
         """
+        errMsg = "Bot part factories count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getPlanksNeededForBotPartFactoriesWithBotLimbs(-1)
-        self.assertEqual("Bot part factories count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getPlanksNeededForBotPartFactoriesWithBotLimbsSuccess(self) -> None:   # noqa: E501
@@ -3127,11 +3218,12 @@ class TestFolktail(TestCase):
         The getBotAssemblersNeededForBots method must raise ValueError if
         bots amount is negative.
         """
+        errMsg = "Bots amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBotAssemblersNeededForBots(-10.0)
-        self.assertEqual("Bots amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBotAssemblersNeededForBotsSuccess(self) -> None:
@@ -3158,11 +3250,12 @@ class TestFolktail(TestCase):
         The getBotChassisNeededForBotAssemblers method must raise ValueError
         if bot assemblers count is negative.
         """
+        errMsg = "Bot assemblers count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBotChassisNeededForBotAssemblers(-1)
-        self.assertEqual("Bot assemblers count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBotChassisNeededForBotAssemblersSuccess(self) -> None:
@@ -3190,11 +3283,12 @@ class TestFolktail(TestCase):
         The getBotHeadsNeededForBotAssemblers method must raise ValueError
         if bot assemblers count is negative.
         """
+        errMsg = "Bot assemblers count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBotHeadsNeededForBotAssemblers(-1)
-        self.assertEqual("Bot assemblers count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBotHeadsNeededForBotAssemblersSuccess(self) -> None:
@@ -3222,11 +3316,12 @@ class TestFolktail(TestCase):
         The getBotLimbsNeededForBotAssemblers method must raise ValueError
         if bot assemblers count is negative.
         """
+        errMsg = "Bot assemblers count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBotLimbsNeededForBotAssemblers(-1)
-        self.assertEqual("Bot assemblers count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBotLimbsNeededForBotAssemblersSuccess(self) -> None:
@@ -3255,11 +3350,12 @@ class TestFolktail(TestCase):
         The getExplosivesFactoriesNeededForExplosives method must raise
         ValueError if explosives amount is negative.
         """
+        errMsg = "Explosives amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getExplosivesFactoriesNeededForExplosives(-10.0)
-        self.assertEqual("Explosives amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getExplosivesFactoriesNeededForExplosivesSuccess(self) -> None:
@@ -3286,11 +3382,12 @@ class TestFolktail(TestCase):
         The getBadwaterNeededForExplosivesFactories method must raise
         ValueError if explosives factories count is negative.
         """
+        errMsg = "Explosives factories count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBadwaterNeededForExplosivesFactories(-1)
-        self.assertEqual("Explosives factories count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBadwaterNeededForExplosivesFactoriesSuccess(self) -> None:
@@ -3319,11 +3416,12 @@ class TestFolktail(TestCase):
         The getCentrifugesNeededForExtract method must raise ValueError if
         extract amount is negative.
         """
+        errMsg = "Extract amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getCentrifugesNeededForExtract(-10.0)
-        self.assertEqual("Extract amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getCentrifugesNeededForExtractSuccess(self) -> None:
@@ -3350,11 +3448,12 @@ class TestFolktail(TestCase):
         The getBadwaterNeededForCentrifuges method must raise ValueError if
         centrifuges count is negative.
         """
+        errMsg = "Centrifuges count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBadwaterNeededForCentrifuges(-1)
-        self.assertEqual("Centrifuges count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBadwaterNeededForCentrifugesSuccess(self) -> None:
@@ -3382,11 +3481,12 @@ class TestFolktail(TestCase):
         The getLogsNeededForCentrifuges method must raise ValueError if
         centrifuges count is negative.
         """
+        errMsg = "Centrifuges count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getLogsNeededForCentrifuges(-1)
-        self.assertEqual("Centrifuges count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getLogsNeededForCentrifugesSuccess(self) -> None:
@@ -3415,11 +3515,12 @@ class TestFolktail(TestCase):
         The getHerbalistsNeededForAntidote method must raise ValueError if
         antidote amount is negative.
         """
+        errMsg = "Antidote amount cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getHerbalistsNeededForAntidote(-10.0)
-        self.assertEqual("Antidote amount cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getHerbalistsNeededForAntidoteSuccess(self) -> None:
@@ -3446,11 +3547,12 @@ class TestFolktail(TestCase):
         The getDandelionsNeededForHerbalists method must raise ValueError if
         herbalists count is negative.
         """
+        errMsg = "Herbalists count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getDandelionsNeededForHerbalists(-1)
-        self.assertEqual("Herbalists count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getDandelionsNeededForHerbalistsSuccess(self) -> None:
@@ -3478,11 +3580,12 @@ class TestFolktail(TestCase):
         The getBerriesNeededForHerbalists method must raise ValueError if
         herbalists count is negative.
         """
+        errMsg = "Herbalists count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
             folktail.getBerriesNeededForHerbalists(-1)
-        self.assertEqual("Herbalists count cannot be negative.",
+        self.assertEqual(errMsg,
                          str(context.exception))
 
     def test_getBerriesNeededForHerbalistsSuccess(self) -> None:
@@ -3505,21 +3608,22 @@ class TestFolktail(TestCase):
             # Total berries = 3 * 36 = 108
             self.assertEqual(108, result)
 
-    def test_getLogsNeededForHerbalistsNegativeCount(self) -> None:
+    def test_getPapersNeededForHerbalistsNegativeCount(self) -> None:
         """
-        The getLogsNeededForHerbalists method must raise ValueError if
+        The getPapersNeededForHerbalists method must raise ValueError if
         herbalists count is negative.
         """
+        errMsg = "Herbalists count cannot be negative."
         with patch('pkgs.factions.folktail.FactionData'), \
                 self.assertRaises(ValueError) as context:
             folktail = Folktail()
-            folktail.getLogsNeededForHerbalists(-1)
-        self.assertEqual("Herbalists count cannot be negative.",
+            folktail.getPapersNeededForHerbalists(-1)
+        self.assertEqual(errMsg,
                          str(context.exception))
 
-    def test_getLogsNeededForHerbalistsSuccess(self) -> None:
+    def test_getPapersNeededForHerbalistsSuccess(self) -> None:
         """
-        The getLogsNeededForHerbalists method must correctly calculate logs
+        The getPapersNeededForHerbalists method must correctly calculate logs
         needed.
         """
         with patch('pkgs.factions.folktail.FactionData') as MockFactionData:
@@ -3530,7 +3634,7 @@ class TestFolktail(TestCase):
             MockFactionData.return_value = mockFactionDataInstance
 
             folktail = Folktail()
-            result = folktail.getLogsNeededForHerbalists(3)
+            result = folktail.getPapersNeededForHerbalists(3)
 
             # Cycles per day = 24 / 2.0 = 12
             # Logs per herbalist per day = 1 * 12 = 12

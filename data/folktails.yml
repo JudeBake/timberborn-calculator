@@ -370,9 +370,9 @@ faction_data:
             production_time: 2.0
             inputs:
               - name: "Dandelions"
-                quantity: 1
+                quantity: 2
               - name: "Berries"
+                quantity: 2
+              - name: "Paper"
                 quantity: 1
-              - name: "Logs"
-                quantity: 0.2
             output_quantity: 2

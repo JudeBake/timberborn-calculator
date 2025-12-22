@@ -59,6 +59,9 @@ class HarvestName(Enum):
     MAPLE_SYRUP = 'Maple Syrup'
     CHESTNUTS = 'Chestnuts'
     MANGROVE_FRUITS = 'Mangrove Fruits'
+    LOGS = 'Logs'
+    WATER = 'Water'
+    BADWATER = 'Badwater'
 
 
 class WaterBuildingName(Enum):
@@ -129,6 +132,7 @@ class GoodsRecipeName(Enum):
     TREATED_PLANKS = 'Treated Planks'
     METAL_BLOCKS = 'Metal Blocks'
     SCRAP_METAL = 'Scrap Metal'
+    BIOFUEL = 'Biofuel'
     BIOFUEL_CARROTS = 'Biofuel Carrots'
     BIOFUEL_POTATOES = 'Biofuel Potatoes'
     BIOFUEL_SPADDERDOCKS = 'Biofuel Spadderdocks'

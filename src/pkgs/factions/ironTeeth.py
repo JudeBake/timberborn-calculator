@@ -396,6 +396,27 @@ class IronTeeth:
         productionPerTile = logOutput / growthTime
         return math.ceil(logAmount / productionPerTile)
 
+    def getPineResinTilesNeeded(self, pineResinAmount: float) -> int:
+        """
+        Calculate the number of pine tree tiles needed to produce a given
+        amount of pine resin per day.
+
+        :param pineResinAmount: Daily amount of pine resin needed.
+        :type pineResinAmount: float
+
+        :return: Number of pine tree tiles needed.
+        :rtype: int
+
+        :raises ValueError: If pine resin amount is negative.
+        """
+        if pineResinAmount < 0:
+            raise ValueError("Pine resin amount cannot be negative.")
+
+        harvestTime = self.factionData.getTreeHarvestTime(TreeName.PINE)
+        harvestYield = self.factionData.getTreeHarvestYield(TreeName.PINE)
+        productionPerTile = harvestYield / harvestTime
+        return math.ceil(pineResinAmount / productionPerTile)
+
     def getMangroveLogTilesNeeded(self, logAmount: float) -> int:
         """
         Calculate the number of mangrove trees needed to produce a given
@@ -438,27 +459,6 @@ class IronTeeth:
         productionPerTile = logOutput / growthTime
         return math.ceil(logAmount / productionPerTile)
 
-    def getPineResinTilesNeeded(self, pineResinAmount: float) -> int:
-        """
-        Calculate the number of pine tree tiles needed to produce a given
-        amount of pine resin per day.
-
-        :param pineResinAmount: Daily amount of pine resin needed.
-        :type pineResinAmount: float
-
-        :return: Number of pine tree tiles needed.
-        :rtype: int
-
-        :raises ValueError: If pine resin amount is negative.
-        """
-        if pineResinAmount < 0:
-            raise ValueError("Pine resin amount cannot be negative.")
-
-        harvestTime = self.factionData.getTreeHarvestTime(TreeName.PINE)
-        harvestYield = self.factionData.getTreeHarvestYield(TreeName.PINE)
-        productionPerTile = harvestYield / harvestTime
-        return math.ceil(pineResinAmount / productionPerTile)
-
     def getMangroveFruitTilesNeeded(self, mangroveFruitAmount: float) -> int:
         """
         Calculate the number of mangrove tree tiles needed to produce a given
@@ -482,7 +482,6 @@ class IronTeeth:
         productionPerTile = harvestYield / harvestTime
         return math.ceil(mangroveFruitAmount / productionPerTile)
 
-    # Food Processing Methods - Coffee Brewery
     def getCoffeeBreweriesNeededForCoffee(self, coffeeAmount: float) -> int:
         """
         Calculate the number of coffee breweries needed to produce a given
@@ -513,8 +512,9 @@ class IronTeeth:
 
         return math.ceil(coffeeAmount / productionPerBrewery)
 
-    def getCoffeeBeansNeededForCoffeeBreweries(
-            self, coffeeBreweriesCount: int) -> int:
+    def getCoffeeBeansNeededForCoffeeBreweries(self,
+                                               coffeeBreweriesCount: int
+                                               ) -> int:
         """
         Calculate the number of coffee beans needed per day to keep a given
         number of coffee breweries running.
@@ -547,9 +547,1012 @@ class IronTeeth:
 
         return math.ceil(coffeeBreweriesCount * coffeeBeansPerBreweryPerDay)
 
+    def getWaterNeededForCoffeeBreweries(
+            self, coffeeBreweriesCount: int) -> int:
+        """
+        Calculate the amount of water needed per day to keep a given number
+        of coffee breweries running.
+
+        :param coffeeBreweriesCount: Number of coffee breweries.
+        :type coffeeBreweriesCount: int
+
+        :return: Daily amount of water needed.
+        :rtype: int
+
+        :raises ValueError: If coffee breweries count is negative.
+        """
+        if coffeeBreweriesCount < 0:
+            raise ValueError("Coffee breweries count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.COFFEE_BREWERY,
+                FoodRecipeName.COFFEE)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.COFFEE_BREWERY,
+                recipeIndex)
+        waterInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.COFFEE_BREWERY,
+                FoodRecipeName.COFFEE,
+                HarvestName.WATER)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        waterPerBreweryPerDay = waterInput * cyclesPerDay
+
+        return math.ceil(coffeeBreweriesCount * waterPerBreweryPerDay)
+
+    def getLogsNeededForCoffeeBreweries(
+            self, coffeeBreweriesCount: int) -> int:
+        """
+        Calculate the number of logs needed per day to keep a given number
+        of coffee breweries running.
+
+        :param coffeeBreweriesCount: Number of coffee breweries.
+        :type coffeeBreweriesCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: int
+
+        :raises ValueError: If coffee breweries count is negative.
+        """
+        if coffeeBreweriesCount < 0:
+            raise ValueError("Coffee breweries count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.COFFEE_BREWERY,
+                FoodRecipeName.COFFEE)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.COFFEE_BREWERY,
+                recipeIndex)
+        logsInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.COFFEE_BREWERY,
+                FoodRecipeName.COFFEE,
+                HarvestName.LOGS)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerBreweryPerDay = logsInput * cyclesPerDay
+
+        return math.ceil(coffeeBreweriesCount * logsPerBreweryPerDay)
+
+    # Food Processing Methods - Fermenter
+    def getFermentersNeededForFermentedCassava(
+            self, fermentedCassavaAmount: float) -> int:
+        """
+        Calculate the number of fermenters needed to produce a given amount
+        of fermented cassava per day.
+
+        :param fermentedCassavaAmount: Amount of fermented cassava needed
+                                        per day.
+        :type fermentedCassavaAmount: float
+
+        :return: Number of fermenters needed.
+        :rtype: int
+
+        :raises ValueError: If fermented cassava amount is negative.
+        """
+        if fermentedCassavaAmount < 0:
+            raise ValueError(
+                "Fermented cassava amount cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FERMENTER,
+                FoodRecipeName.FERMENTED_CASSAVA)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FERMENTER,
+                recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.FERMENTER,
+                recipeIndex)
+        workersPerBuilding = self.factionData \
+            .getFoodProcessingWorkers(
+                FoodProcessingBuildingName.FERMENTER)
+
+        # Production time is in hours, calculate daily production
+        cyclesPerDay = 24 / productionTime
+        outputPerBuilding = outputQuantity * cyclesPerDay * \
+            workersPerBuilding
+
+        return math.ceil(fermentedCassavaAmount / outputPerBuilding)
+
+    def getCassavasNeededForFermentedCassavaProduction(
+            self, fermentersCount: int) -> int:
+        """
+        Calculate the number of cassavas needed per day to keep a given
+        number of fermenters running for fermented cassava production.
+
+        :param fermentersCount: Number of fermenters.
+        :type fermentersCount: int
+
+        :return: Daily amount of cassavas needed.
+        :rtype: int
+
+        :raises ValueError: If fermenters count is negative.
+        """
+        if fermentersCount < 0:
+            raise ValueError("Fermenters count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FERMENTER,
+                FoodRecipeName.FERMENTED_CASSAVA)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FERMENTER,
+                recipeIndex)
+        cassavasInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FERMENTER,
+                FoodRecipeName.FERMENTED_CASSAVA,
+                HarvestName.CASSAVAS)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        cassavasPerFermenterPerDay = cassavasInput * cyclesPerDay
+
+        return math.ceil(fermentersCount * cassavasPerFermenterPerDay)
+
+    def getFermentersNeededForFermentedSoybean(
+            self, fermentedSoybeanAmount: float) -> int:
+        """
+        Calculate the number of fermenters needed to produce a given amount
+        of fermented soybean per day.
+
+        :param fermentedSoybeanAmount: Amount of fermented soybean needed
+                                        per day.
+        :type fermentedSoybeanAmount: float
+
+        :return: Number of fermenters needed.
+        :rtype: int
+
+        :raises ValueError: If fermented soybean amount is negative.
+        """
+        if fermentedSoybeanAmount < 0:
+            raise ValueError(
+                "Fermented soybean amount cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FERMENTER,
+                FoodRecipeName.FERMENTED_SOYBEAN)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FERMENTER,
+                recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.FERMENTER,
+                recipeIndex)
+        workersPerBuilding = self.factionData \
+            .getFoodProcessingWorkers(
+                FoodProcessingBuildingName.FERMENTER)
+
+        # Production time is in hours, calculate daily production
+        cyclesPerDay = 24 / productionTime
+        outputPerBuilding = outputQuantity * cyclesPerDay * \
+            workersPerBuilding
+
+        return math.ceil(fermentedSoybeanAmount / outputPerBuilding)
+
+    def getSoybeansNeededForFermentedSoybeanProduction(
+            self, fermentersCount: int) -> int:
+        """
+        Calculate the number of soybeans needed per day to keep a given
+        number of fermenters running for fermented soybean production.
+
+        :param fermentersCount: Number of fermenters.
+        :type fermentersCount: int
+
+        :return: Daily amount of soybeans needed.
+        :rtype: int
+
+        :raises ValueError: If fermenters count is negative.
+        """
+        if fermentersCount < 0:
+            raise ValueError("Fermenters count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FERMENTER,
+                FoodRecipeName.FERMENTED_SOYBEAN)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FERMENTER,
+                recipeIndex)
+        soybeansInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FERMENTER,
+                FoodRecipeName.FERMENTED_SOYBEAN,
+                HarvestName.SOYBEANS)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        soybeansPerFermenterPerDay = soybeansInput * cyclesPerDay
+
+        return math.ceil(fermentersCount * soybeansPerFermenterPerDay)
+
+    def getCanolaOilNeededForFermentedSoybeanProduction(
+            self, fermentersCount: int) -> int:
+        """
+        Calculate the amount of canola oil needed per day to keep a given
+        number of fermenters running for fermented soybean production.
+
+        :param fermentersCount: Number of fermenters.
+        :type fermentersCount: int
+
+        :return: Daily amount of canola oil needed.
+        :rtype: int
+
+        :raises ValueError: If fermenters count is negative.
+        """
+        if fermentersCount < 0:
+            raise ValueError("Fermenters count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FERMENTER,
+                FoodRecipeName.FERMENTED_SOYBEAN)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FERMENTER,
+                recipeIndex)
+        canolaOilInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FERMENTER,
+                FoodRecipeName.FERMENTED_SOYBEAN,
+                FoodRecipeName.CANOLA_OIL)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        canolaOilPerFermenterPerDay = canolaOilInput * cyclesPerDay
+
+        return math.ceil(fermentersCount * canolaOilPerFermenterPerDay)
+
+    def getFermentersNeededForFermentedMushroom(
+            self, fermentedMushroomAmount: float) -> int:
+        """
+        Calculate the number of fermenters needed to produce a given amount
+        of fermented mushroom per day.
+
+        :param fermentedMushroomAmount: Amount of fermented mushroom needed
+                                         per day.
+        :type fermentedMushroomAmount: float
+
+        :return: Number of fermenters needed.
+        :rtype: int
+
+        :raises ValueError: If fermented mushroom amount is negative.
+        """
+        if fermentedMushroomAmount < 0:
+            raise ValueError(
+                "Fermented mushroom amount cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FERMENTER,
+                FoodRecipeName.FERMENTED_MUSHROOM)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FERMENTER,
+                recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.FERMENTER,
+                recipeIndex)
+        workersPerBuilding = self.factionData \
+            .getFoodProcessingWorkers(
+                FoodProcessingBuildingName.FERMENTER)
+
+        # Production time is in hours, calculate daily production
+        cyclesPerDay = 24 / productionTime
+        outputPerBuilding = outputQuantity * cyclesPerDay * \
+            workersPerBuilding
+
+        return math.ceil(fermentedMushroomAmount / outputPerBuilding)
+
+    def getMushroomsNeededForFermentedMushroomProduction(
+            self, fermentersCount: int) -> int:
+        """
+        Calculate the number of mushrooms needed per day to keep a given
+        number of fermenters running for fermented mushroom production.
+
+        :param fermentersCount: Number of fermenters.
+        :type fermentersCount: int
+
+        :return: Daily amount of mushrooms needed.
+        :rtype: int
+
+        :raises ValueError: If fermenters count is negative.
+        """
+        if fermentersCount < 0:
+            raise ValueError("Fermenters count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FERMENTER,
+                FoodRecipeName.FERMENTED_MUSHROOM)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FERMENTER,
+                recipeIndex)
+        mushroomsInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FERMENTER,
+                FoodRecipeName.FERMENTED_MUSHROOM,
+                FoodRecipeName.MUSHROOMS)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        mushroomsPerFermenterPerDay = mushroomsInput * cyclesPerDay
+
+        return math.ceil(fermentersCount * mushroomsPerFermenterPerDay)
+
+    # Food Processing Methods - Food Factory
+    def getFoodFactoriesNeededForCornRations(
+            self, cornRationsAmount: float) -> int:
+        """
+        Calculate the number of food factories needed to produce a given
+        amount of corn rations per day.
+
+        :param cornRationsAmount: Amount of corn rations needed per day.
+        :type cornRationsAmount: float
+
+        :return: Number of food factories needed.
+        :rtype: int
+
+        :raises ValueError: If corn rations amount is negative.
+        """
+        if cornRationsAmount < 0:
+            raise ValueError("Corn rations amount cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.CORN_RATIONS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        workersPerBuilding = self.factionData \
+            .getFoodProcessingWorkers(
+                FoodProcessingBuildingName.FOOD_FACTORY)
+
+        # Production time is in hours, calculate daily production
+        cyclesPerDay = 24 / productionTime
+        outputPerBuilding = outputQuantity * cyclesPerDay * \
+            workersPerBuilding
+
+        return math.ceil(cornRationsAmount / outputPerBuilding)
+
+    def getCornNeededForCornRationsProduction(
+            self, foodFactoriesCount: int) -> int:
+        """
+        Calculate the amount of corn needed per day to keep a given number
+        of food factories running for corn rations production.
+
+        :param foodFactoriesCount: Number of food factories.
+        :type foodFactoriesCount: int
+
+        :return: Daily amount of corn needed.
+        :rtype: int
+
+        :raises ValueError: If food factories count is negative.
+        """
+        if foodFactoriesCount < 0:
+            raise ValueError("Food factories count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.CORN_RATIONS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        cornInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.CORN_RATIONS,
+                HarvestName.CORN)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        cornPerFactoryPerDay = cornInput * cyclesPerDay
+
+        return math.ceil(foodFactoriesCount * cornPerFactoryPerDay)
+
+    def getLogsNeededForCornRationsProduction(
+            self, foodFactoriesCount: int) -> int:
+        """
+        Calculate the number of logs needed per day to keep a given number
+        of food factories running for corn rations production.
+
+        :param foodFactoriesCount: Number of food factories.
+        :type foodFactoriesCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: int
+
+        :raises ValueError: If food factories count is negative.
+        """
+        if foodFactoriesCount < 0:
+            raise ValueError("Food factories count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.CORN_RATIONS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        logsInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.CORN_RATIONS,
+                HarvestName.LOGS)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerFactoryPerDay = logsInput * cyclesPerDay
+
+        return math.ceil(foodFactoriesCount * logsPerFactoryPerDay)
+
+    def getFoodFactoriesNeededForEggplantRations(
+            self, eggplantRationsAmount: float) -> int:
+        """
+        Calculate the number of food factories needed to produce a given
+        amount of eggplant rations per day.
+
+        :param eggplantRationsAmount: Amount of eggplant rations needed
+                                       per day.
+        :type eggplantRationsAmount: float
+
+        :return: Number of food factories needed.
+        :rtype: int
+
+        :raises ValueError: If eggplant rations amount is negative.
+        """
+        if eggplantRationsAmount < 0:
+            raise ValueError(
+                "Eggplant rations amount cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.EGGPLANT_RATIONS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        workersPerBuilding = self.factionData \
+            .getFoodProcessingWorkers(
+                FoodProcessingBuildingName.FOOD_FACTORY)
+
+        # Production time is in hours, calculate daily production
+        cyclesPerDay = 24 / productionTime
+        outputPerBuilding = outputQuantity * cyclesPerDay * \
+            workersPerBuilding
+
+        return math.ceil(eggplantRationsAmount / outputPerBuilding)
+
+    def getEggplantsNeededForEggplantRationsProduction(
+            self, foodFactoriesCount: int) -> int:
+        """
+        Calculate the amount of eggplants needed per day to keep a given
+        number of food factories running for eggplant rations production.
+
+        :param foodFactoriesCount: Number of food factories.
+        :type foodFactoriesCount: int
+
+        :return: Daily amount of eggplants needed.
+        :rtype: int
+
+        :raises ValueError: If food factories count is negative.
+        """
+        if foodFactoriesCount < 0:
+            raise ValueError("Food factories count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.EGGPLANT_RATIONS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        eggplantsInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.EGGPLANT_RATIONS,
+                HarvestName.EGGPLANTS)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        eggplantsPerFactoryPerDay = eggplantsInput * cyclesPerDay
+
+        return math.ceil(foodFactoriesCount * eggplantsPerFactoryPerDay)
+
+    def getCanolaOilNeededForEggplantRationsProduction(
+            self, foodFactoriesCount: int) -> int:
+        """
+        Calculate the amount of canola oil needed per day to keep a given
+        number of food factories running for eggplant rations production.
+
+        :param foodFactoriesCount: Number of food factories.
+        :type foodFactoriesCount: int
+
+        :return: Daily amount of canola oil needed.
+        :rtype: int
+
+        :raises ValueError: If food factories count is negative.
+        """
+        if foodFactoriesCount < 0:
+            raise ValueError("Food factories count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.EGGPLANT_RATIONS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        canolaOilInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.EGGPLANT_RATIONS,
+                FoodRecipeName.CANOLA_OIL)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        canolaOilPerFactoryPerDay = canolaOilInput * cyclesPerDay
+
+        return math.ceil(foodFactoriesCount * canolaOilPerFactoryPerDay)
+
+    def getLogsNeededForEggplantRationsProduction(
+            self, foodFactoriesCount: int) -> int:
+        """
+        Calculate the number of logs needed per day to keep a given number
+        of food factories running for eggplant rations production.
+
+        :param foodFactoriesCount: Number of food factories.
+        :type foodFactoriesCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: int
+
+        :raises ValueError: If food factories count is negative.
+        """
+        if foodFactoriesCount < 0:
+            raise ValueError("Food factories count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.EGGPLANT_RATIONS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        logsInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.EGGPLANT_RATIONS,
+                HarvestName.LOGS)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerFactoryPerDay = logsInput * cyclesPerDay
+
+        return math.ceil(foodFactoriesCount * logsPerFactoryPerDay)
+
+    def getFoodFactoriesNeededForAlgaeRations(
+            self, algaeRationsAmount: float) -> int:
+        """
+        Calculate the number of food factories needed to produce a given
+        amount of algae rations per day.
+
+        :param algaeRationsAmount: Amount of algae rations needed per day.
+        :type algaeRationsAmount: float
+
+        :return: Number of food factories needed.
+        :rtype: int
+
+        :raises ValueError: If algae rations amount is negative.
+        """
+        if algaeRationsAmount < 0:
+            raise ValueError("Algae rations amount cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.ALGAE_RATIONS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        workersPerBuilding = self.factionData \
+            .getFoodProcessingWorkers(
+                FoodProcessingBuildingName.FOOD_FACTORY)
+
+        # Production time is in hours, calculate daily production
+        cyclesPerDay = 24 / productionTime
+        outputPerBuilding = outputQuantity * cyclesPerDay * \
+            workersPerBuilding
+
+        return math.ceil(algaeRationsAmount / outputPerBuilding)
+
+    def getAlgaeNeededForAlgaeRationsProduction(
+            self, foodFactoriesCount: int) -> int:
+        """
+        Calculate the amount of algae needed per day to keep a given number
+        of food factories running for algae rations production.
+
+        :param foodFactoriesCount: Number of food factories.
+        :type foodFactoriesCount: int
+
+        :return: Daily amount of algae needed.
+        :rtype: int
+
+        :raises ValueError: If food factories count is negative.
+        """
+        if foodFactoriesCount < 0:
+            raise ValueError("Food factories count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.ALGAE_RATIONS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        algaeInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.ALGAE_RATIONS,
+                FoodRecipeName.ALGAE)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        algaePerFactoryPerDay = algaeInput * cyclesPerDay
+
+        return math.ceil(foodFactoriesCount * algaePerFactoryPerDay)
+
+    def getCanolaOilNeededForAlgaeRationsProduction(
+            self, foodFactoriesCount: int) -> int:
+        """
+        Calculate the amount of canola oil needed per day to keep a given
+        number of food factories running for algae rations production.
+
+        :param foodFactoriesCount: Number of food factories.
+        :type foodFactoriesCount: int
+
+        :return: Daily amount of canola oil needed.
+        :rtype: int
+
+        :raises ValueError: If food factories count is negative.
+        """
+        if foodFactoriesCount < 0:
+            raise ValueError("Food factories count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.ALGAE_RATIONS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        canolaOilInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.ALGAE_RATIONS,
+                FoodRecipeName.CANOLA_OIL)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        canolaOilPerFactoryPerDay = canolaOilInput * cyclesPerDay
+
+        return math.ceil(foodFactoriesCount * canolaOilPerFactoryPerDay)
+
+    def getLogsNeededForAlgaeRationsProduction(
+            self, foodFactoriesCount: int) -> int:
+        """
+        Calculate the number of logs needed per day to keep a given number
+        of food factories running for algae rations production.
+
+        :param foodFactoriesCount: Number of food factories.
+        :type foodFactoriesCount: int
+
+        :return: Daily amount of logs needed.
+        :rtype: int
+
+        :raises ValueError: If food factories count is negative.
+        """
+        if foodFactoriesCount < 0:
+            raise ValueError("Food factories count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.ALGAE_RATIONS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                recipeIndex)
+        logsInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.FOOD_FACTORY,
+                FoodRecipeName.ALGAE_RATIONS,
+                HarvestName.LOGS)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        logsPerFactoryPerDay = logsInput * cyclesPerDay
+
+        return math.ceil(foodFactoriesCount * logsPerFactoryPerDay)
+
+    # Food Processing Methods - Hydroponic Garden
+    def getHydroponicGardensNeededForMushrooms(
+            self, mushroomsAmount: float) -> int:
+        """
+        Calculate the number of hydroponic gardens needed to produce a given
+        amount of mushrooms per day.
+
+        :param mushroomsAmount: Amount of mushrooms needed per day.
+        :type mushroomsAmount: float
+
+        :return: Number of hydroponic gardens needed.
+        :rtype: int
+
+        :raises ValueError: If mushrooms amount is negative.
+        """
+        if mushroomsAmount < 0:
+            raise ValueError("Mushrooms amount cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                FoodRecipeName.MUSHROOMS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                recipeIndex)
+        workersPerBuilding = self.factionData \
+            .getFoodProcessingWorkers(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN)
+
+        # Production time is in hours, calculate daily production
+        cyclesPerDay = 24 / productionTime
+        outputPerBuilding = outputQuantity * cyclesPerDay * \
+            workersPerBuilding
+
+        return math.ceil(mushroomsAmount / outputPerBuilding)
+
+    def getWaterNeededForMushroomsProduction(
+            self, hydroponicGardensCount: int) -> int:
+        """
+        Calculate the amount of water needed per day to keep a given number
+        of hydroponic gardens running for mushrooms production.
+
+        :param hydroponicGardensCount: Number of hydroponic gardens.
+        :type hydroponicGardensCount: int
+
+        :return: Daily amount of water needed.
+        :rtype: int
+
+        :raises ValueError: If hydroponic gardens count is negative.
+        """
+        if hydroponicGardensCount < 0:
+            raise ValueError(
+                "Hydroponic gardens count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                FoodRecipeName.MUSHROOMS)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                recipeIndex)
+        waterInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                FoodRecipeName.MUSHROOMS,
+                HarvestName.WATER)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        waterPerGardenPerDay = waterInput * cyclesPerDay
+
+        return math.ceil(hydroponicGardensCount * waterPerGardenPerDay)
+
+    def getHydroponicGardensNeededForAlgae(
+            self, algaeAmount: float) -> int:
+        """
+        Calculate the number of hydroponic gardens needed to produce a given
+        amount of algae per day.
+
+        :param algaeAmount: Amount of algae needed per day.
+        :type algaeAmount: float
+
+        :return: Number of hydroponic gardens needed.
+        :rtype: int
+
+        :raises ValueError: If algae amount is negative.
+        """
+        if algaeAmount < 0:
+            raise ValueError("Algae amount cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                FoodRecipeName.ALGAE)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                recipeIndex)
+        workersPerBuilding = self.factionData \
+            .getFoodProcessingWorkers(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN)
+
+        # Production time is in hours, calculate daily production
+        cyclesPerDay = 24 / productionTime
+        outputPerBuilding = outputQuantity * cyclesPerDay * \
+            workersPerBuilding
+
+        return math.ceil(algaeAmount / outputPerBuilding)
+
+    def getWaterNeededForAlgaeProduction(
+            self, hydroponicGardensCount: int) -> int:
+        """
+        Calculate the amount of water needed per day to keep a given number
+        of hydroponic gardens running for algae production.
+
+        :param hydroponicGardensCount: Number of hydroponic gardens.
+        :type hydroponicGardensCount: int
+
+        :return: Daily amount of water needed.
+        :rtype: int
+
+        :raises ValueError: If hydroponic gardens count is negative.
+        """
+        if hydroponicGardensCount < 0:
+            raise ValueError(
+                "Hydroponic gardens count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                FoodRecipeName.ALGAE)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                recipeIndex)
+        waterInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
+                FoodRecipeName.ALGAE,
+                HarvestName.WATER)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        waterPerGardenPerDay = waterInput * cyclesPerDay
+
+        return math.ceil(hydroponicGardensCount * waterPerGardenPerDay)
+
+    # Food Processing Methods - Oil Press
+    def getOilPressesNeededForCanolaOil(
+            self, canolaOilAmount: float) -> int:
+        """
+        Calculate the number of oil presses needed to produce a given amount
+        of canola oil per day.
+
+        :param canolaOilAmount: Amount of canola oil needed per day.
+        :type canolaOilAmount: float
+
+        :return: Number of oil presses needed.
+        :rtype: int
+
+        :raises ValueError: If canola oil amount is negative.
+        """
+        if canolaOilAmount < 0:
+            raise ValueError("Canola oil amount cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.OIL_PRESS,
+                FoodRecipeName.CANOLA_OIL)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.OIL_PRESS,
+                recipeIndex)
+        outputQuantity = self.factionData \
+            .getFoodProcessingOutputQuantity(
+                FoodProcessingBuildingName.OIL_PRESS,
+                recipeIndex)
+        workersPerBuilding = self.factionData \
+            .getFoodProcessingWorkers(
+                FoodProcessingBuildingName.OIL_PRESS)
+
+        # Production time is in hours, calculate daily production
+        cyclesPerDay = 24 / productionTime
+        outputPerBuilding = outputQuantity * cyclesPerDay * \
+            workersPerBuilding
+
+        return math.ceil(canolaOilAmount / outputPerBuilding)
+
+    def getCanolaSeedsNeededForCanolaOilProduction(
+            self, oilPressesCount: int) -> int:
+        """
+        Calculate the number of canola seeds needed per day to keep a given
+        number of oil presses running.
+
+        :param oilPressesCount: Number of oil presses.
+        :type oilPressesCount: int
+
+        :return: Daily amount of canola seeds needed.
+        :rtype: int
+
+        :raises ValueError: If oil presses count is negative.
+        """
+        if oilPressesCount < 0:
+            raise ValueError("Oil presses count cannot be negative.")
+
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(
+                FoodProcessingBuildingName.OIL_PRESS,
+                FoodRecipeName.CANOLA_OIL)
+        productionTime = self.factionData \
+            .getFoodProcessingProductionTime(
+                FoodProcessingBuildingName.OIL_PRESS,
+                recipeIndex)
+        canolaSeedsInput = self.factionData \
+            .getFoodProcessingInputQuantity(
+                FoodProcessingBuildingName.OIL_PRESS,
+                FoodRecipeName.CANOLA_OIL,
+                HarvestName.CANOLA_SEEDS)
+
+        # Production time is in hours, calculate daily consumption
+        cyclesPerDay = 24 / productionTime
+        canolaSeedsPerPressPerDay = canolaSeedsInput * cyclesPerDay
+
+        return math.ceil(oilPressesCount * canolaSeedsPerPressPerDay)
+
     # Goods Production Methods - Industrial Lumber Mill
-    def getIndustrialLumberMillsNeededForPlanks(
-            self, planksAmount: float) -> int:
+    def getIndustrialLumberMillsNeededForPlanks(self,
+                                                planksAmount: float) -> int:
         """
         Calculate the number of industrial lumber mills needed to produce
         a given amount of planks per day.
@@ -579,8 +1582,9 @@ class IronTeeth:
 
         return math.ceil(planksAmount / productionPerMill)
 
-    def getLogsNeededForIndustrialLumberMills(
-            self, industrialLumberMillsCount: int) -> float:
+    def getLogsNeededForIndustrialLumberMills(self,
+                                              industrialLumberMillsCount: int
+                                              ) -> float:
         """
         Calculate the number of logs needed per day to keep a given number
         of industrial lumber mills running.
@@ -615,8 +1619,8 @@ class IronTeeth:
         return industrialLumberMillsCount * logsPerMillPerDay
 
     # Efficient Mine Methods
-    def getEfficientMinesNeededForScrapMetal(
-            self, scrapMetalAmount: float) -> int:
+    def getEfficientMinesNeededForScrapMetal(self,
+                                             scrapMetalAmount: float) -> int:
         """
         Calculate the number of efficient mines needed to produce a given
         amount of scrap metal per day (without extract).
@@ -646,8 +1650,9 @@ class IronTeeth:
 
         return math.ceil(scrapMetalAmount / productionPerMine)
 
-    def getTreatedPlanksNeededForEfficientMines(
-            self, efficientMinesCount: int) -> int:
+    def getTreatedPlanksNeededForEfficientMines(self,
+                                                efficientMinesCount: int
+                                                ) -> int:
         """
         Calculate the number of treated planks needed per day to keep a given
         number of efficient mines running.

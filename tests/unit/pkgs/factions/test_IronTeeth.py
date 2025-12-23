@@ -526,6 +526,34 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getTreeLogOutput \
             .assert_called_once_with(TreeName.PINE)
 
+    def test_getPineResinTilesNeededNegativeAmount(self) -> None:
+        """
+        The getPineResinTilesNeeded method must raise ValueError if pine
+        resin amount is negative.
+        """
+        errMsg = "Pine resin amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getPineResinTilesNeeded(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getPineResinTilesNeededSuccess(self) -> None:
+        """
+        The getPineResinTilesNeeded method must correctly calculate tiles
+        needed.
+        """
+        self.uut.factionData.getTreeHarvestTime.return_value = 7
+        self.uut.factionData.getTreeHarvestYield.return_value = 2
+
+        result = self.uut.getPineResinTilesNeeded(10.0)
+
+        # Production per tile = 2 / 7 = 0.285...
+        # Tiles needed = ceil(10.0 / 0.285...) = ceil(35) = 35
+        self.assertEqual(35, result)
+        self.uut.factionData.getTreeHarvestTime \
+            .assert_called_once_with(TreeName.PINE)
+        self.uut.factionData.getTreeHarvestYield \
+            .assert_called_once_with(TreeName.PINE)
+
     def test_getMangroveLogTilesNeededNegativeAmount(self) -> None:
         """
         The getMangroveLogTilesNeeded method must raise ValueError if log
@@ -583,34 +611,6 @@ class TestIronTeeth(TestCase):
             .assert_called_once_with(TreeName.OAK)
 
     # Test Cases for Harvest Tiles
-    def test_getPineResinTilesNeededNegativeAmount(self) -> None:
-        """
-        The getPineResinTilesNeeded method must raise ValueError if pine
-        resin amount is negative.
-        """
-        errMsg = "Pine resin amount cannot be negative."
-        with self.assertRaises(ValueError) as context:
-            self.uut.getPineResinTilesNeeded(-10.0)
-        self.assertEqual(errMsg, str(context.exception))
-
-    def test_getPineResinTilesNeededSuccess(self) -> None:
-        """
-        The getPineResinTilesNeeded method must correctly calculate tiles
-        needed.
-        """
-        self.uut.factionData.getTreeHarvestTime.return_value = 7
-        self.uut.factionData.getTreeHarvestYield.return_value = 2
-
-        result = self.uut.getPineResinTilesNeeded(10.0)
-
-        # Production per tile = 2 / 7 = 0.285...
-        # Tiles needed = ceil(10.0 / 0.285...) = ceil(35) = 35
-        self.assertEqual(35, result)
-        self.uut.factionData.getTreeHarvestTime \
-            .assert_called_once_with(TreeName.PINE)
-        self.uut.factionData.getTreeHarvestYield \
-            .assert_called_once_with(TreeName.PINE)
-
     def test_getMangroveFruitTilesNeededNegativeAmount(self) -> None:
         """
         The getMangroveFruitTilesNeeded method must raise ValueError if
@@ -708,6 +708,743 @@ class TestIronTeeth(TestCase):
             .assert_called_once()
         self.uut.factionData.getFoodProcessingInputQuantity \
             .assert_called_once()
+
+    def test_getWaterNeededForCoffeeBreweriesNegativeCount(self) -> None:
+        """
+        The getWaterNeededForCoffeeBreweries method must raise ValueError
+        if breweries count is negative.
+        """
+        errMsg = "Coffee breweries count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getWaterNeededForCoffeeBreweries(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getWaterNeededForCoffeeBreweriesSuccess(self) -> None:
+        """
+        The getWaterNeededForCoffeeBreweries method must correctly
+        calculate water needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .return_value = 0
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .return_value = 1.0
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .return_value = 1
+
+        result = self.uut.getWaterNeededForCoffeeBreweries(3)
+
+        # Cycles per day = 24 / 1.0 = 24
+        # Water per brewery per day = 1 * 24 = 24
+        # Total water = 3 * 24 = 72
+        self.assertEqual(72, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
+
+    def test_getLogsNeededForCoffeeBreweriesNegativeCount(self) -> None:
+        """
+        The getLogsNeededForCoffeeBreweries method must raise ValueError
+        if breweries count is negative.
+        """
+        errMsg = "Coffee breweries count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getLogsNeededForCoffeeBreweries(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getLogsNeededForCoffeeBreweriesSuccess(self) -> None:
+        """
+        The getLogsNeededForCoffeeBreweries method must correctly
+        calculate logs needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .return_value = 0
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .return_value = 1.0
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .return_value = 0.1
+
+        result = self.uut.getLogsNeededForCoffeeBreweries(3)
+
+        # Cycles per day = 24 / 1.0 = 24
+        # Logs per brewery per day = 0.1 * 24 = 2.4
+        # Total logs = 3 * 2.4 = 7.2
+        # Ceiling of 7.2 = 8
+        self.assertEqual(8, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
+
+    # Test Cases for Fermenter
+    def test_getFermentersNeededForFermentedCassavaNegativeAmount(
+            self) -> None:
+        """
+        The getFermentersNeededForFermentedCassava method must raise
+        ValueError if amount is negative.
+        """
+        errMsg = "Fermented cassava amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getFermentersNeededForFermentedCassava(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getFermentersNeededForFermentedCassavaSuccess(self) -> None:
+        """
+        The getFermentersNeededForFermentedCassava method must correctly
+        calculate fermenters needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 2.0
+        self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 10
+        self.uut.factionData.getFoodProcessingWorkers.return_value = 1
+
+        result = self.uut.getFermentersNeededForFermentedCassava(100.0)
+
+        # Cycles per day = 24 / 2.0 = 12
+        # Output per building = 10 * 12 * 1 = 120
+        # Fermenters needed = 100 / 120 = 0.833... -> ceil = 1
+        self.assertEqual(1, result)
+
+    def test_getCassavasNeededForFermentedCassavaProductionNegativeCount(
+            self) -> None:
+        """
+        The getCassavasNeededForFermentedCassavaProduction method must
+        raise ValueError if count is negative.
+        """
+        errMsg = "Fermenters count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getCassavasNeededForFermentedCassavaProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getCassavasNeededForFermentedCassavaProductionSuccess(
+            self) -> None:
+        """
+        The getCassavasNeededForFermentedCassavaProduction method must
+        correctly calculate cassavas needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 2.0
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 4
+
+        result = self.uut.getCassavasNeededForFermentedCassavaProduction(3)
+
+        # Cycles per day = 24 / 2.0 = 12
+        # Cassavas per fermenter per day = 4 * 12 = 48
+        # Total cassavas = 3 * 48 = 144
+        self.assertEqual(144, result)
+
+    def test_getFermentersNeededForFermentedSoybeanNegativeAmount(
+            self) -> None:
+        """
+        The getFermentersNeededForFermentedSoybean method must raise
+        ValueError if amount is negative.
+        """
+        errMsg = "Fermented soybean amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getFermentersNeededForFermentedSoybean(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getFermentersNeededForFermentedSoybeanSuccess(self) -> None:
+        """
+        The getFermentersNeededForFermentedSoybean method must correctly
+        calculate fermenters needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 3.0
+        self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 20
+        self.uut.factionData.getFoodProcessingWorkers.return_value = 1
+
+        result = self.uut.getFermentersNeededForFermentedSoybean(150.0)
+
+        # Cycles per day = 24 / 3.0 = 8
+        # Output per building = 20 * 8 * 1 = 160
+        # Fermenters needed = 150 / 160 = 0.9375 -> ceil = 1
+        self.assertEqual(1, result)
+
+    def test_getSoybeansNeededForFermentedSoybeanProductionNegativeCount(
+            self) -> None:
+        """
+        The getSoybeansNeededForFermentedSoybeanProduction method must
+        raise ValueError if count is negative.
+        """
+        errMsg = "Fermenters count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getSoybeansNeededForFermentedSoybeanProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getSoybeansNeededForFermentedSoybeanProductionSuccess(
+            self) -> None:
+        """
+        The getSoybeansNeededForFermentedSoybeanProduction method must
+        correctly calculate soybeans needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 3.0
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 6
+
+        result = self.uut.getSoybeansNeededForFermentedSoybeanProduction(2)
+
+        # Cycles per day = 24 / 3.0 = 8
+        # Soybeans per fermenter per day = 6 * 8 = 48
+        # Total soybeans = 2 * 48 = 96
+        self.assertEqual(96, result)
+
+    def test_getCanolaOilNeededForFermentedSoybeanProductionNegativeCount(
+            self) -> None:
+        """
+        The getCanolaOilNeededForFermentedSoybeanProduction method must
+        raise ValueError if count is negative.
+        """
+        errMsg = "Fermenters count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getCanolaOilNeededForFermentedSoybeanProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getCanolaOilNeededForFermentedSoybeanProductionSuccess(
+            self) -> None:
+        """
+        The getCanolaOilNeededForFermentedSoybeanProduction method must
+        correctly calculate canola oil needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 3.0
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
+
+        result = self.uut.getCanolaOilNeededForFermentedSoybeanProduction(2)
+
+        # Cycles per day = 24 / 3.0 = 8
+        # Canola oil per fermenter per day = 1 * 8 = 8
+        # Total canola oil = 2 * 8 = 16
+        self.assertEqual(16, result)
+
+    def test_getFermentersNeededForFermentedMushroomNegativeAmount(
+            self) -> None:
+        """
+        The getFermentersNeededForFermentedMushroom method must raise
+        ValueError if amount is negative.
+        """
+        errMsg = "Fermented mushroom amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getFermentersNeededForFermentedMushroom(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getFermentersNeededForFermentedMushroomSuccess(self) -> None:
+        """
+        The getFermentersNeededForFermentedMushroom method must correctly
+        calculate fermenters needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 2.0
+        self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 16
+        self.uut.factionData.getFoodProcessingWorkers.return_value = 1
+
+        result = self.uut.getFermentersNeededForFermentedMushroom(180.0)
+
+        # Cycles per day = 24 / 2.0 = 12
+        # Output per building = 16 * 12 * 1 = 192
+        # Fermenters needed = 180 / 192 = 0.9375 -> ceil = 1
+        self.assertEqual(1, result)
+
+    def test_getMushroomsNeededForFermentedMushroomProductionNegativeCount(
+            self) -> None:
+        """
+        The getMushroomsNeededForFermentedMushroomProduction method must
+        raise ValueError if count is negative.
+        """
+        errMsg = "Fermenters count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getMushroomsNeededForFermentedMushroomProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getMushroomsNeededForFermentedMushroomProductionSuccess(
+            self) -> None:
+        """
+        The getMushroomsNeededForFermentedMushroomProduction method must
+        correctly calculate mushrooms needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 2.0
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 4
+
+        result = self.uut.getMushroomsNeededForFermentedMushroomProduction(3)
+
+        # Cycles per day = 24 / 2.0 = 12
+        # Mushrooms per fermenter per day = 4 * 12 = 48
+        # Total mushrooms = 3 * 48 = 144
+        self.assertEqual(144, result)
+
+    # Test Cases for Food Factory
+    def test_getFoodFactoriesNeededForCornRationsNegativeAmount(
+            self) -> None:
+        """
+        The getFoodFactoriesNeededForCornRations method must raise
+        ValueError if amount is negative.
+        """
+        errMsg = "Corn rations amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getFoodFactoriesNeededForCornRations(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getFoodFactoriesNeededForCornRationsSuccess(self) -> None:
+        """
+        The getFoodFactoriesNeededForCornRations method must correctly
+        calculate food factories needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.5
+        self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 5
+        self.uut.factionData.getFoodProcessingWorkers.return_value = 1
+
+        result = self.uut.getFoodFactoriesNeededForCornRations(200.0)
+
+        # Cycles per day = 24 / 0.5 = 48
+        # Output per building = 5 * 48 * 1 = 240
+        # Food factories needed = 200 / 240 = 0.833... -> ceil = 1
+        self.assertEqual(1, result)
+
+    def test_getCornNeededForCornRationsProductionNegativeCount(
+            self) -> None:
+        """
+        The getCornNeededForCornRationsProduction method must raise
+        ValueError if count is negative.
+        """
+        errMsg = "Food factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getCornNeededForCornRationsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getCornNeededForCornRationsProductionSuccess(self) -> None:
+        """
+        The getCornNeededForCornRationsProduction method must correctly
+        calculate corn needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.5
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
+
+        result = self.uut.getCornNeededForCornRationsProduction(2)
+
+        # Cycles per day = 24 / 0.5 = 48
+        # Corn per factory per day = 1 * 48 = 48
+        # Total corn = 2 * 48 = 96
+        self.assertEqual(96, result)
+
+    def test_getLogsNeededForCornRationsProductionNegativeCount(
+            self) -> None:
+        """
+        The getLogsNeededForCornRationsProduction method must raise
+        ValueError if count is negative.
+        """
+        errMsg = "Food factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getLogsNeededForCornRationsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getLogsNeededForCornRationsProductionSuccess(self) -> None:
+        """
+        The getLogsNeededForCornRationsProduction method must correctly
+        calculate logs needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.5
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 0.1
+
+        result = self.uut.getLogsNeededForCornRationsProduction(2)
+
+        # Cycles per day = 24 / 0.5 = 48
+        # Logs per factory per day = 0.1 * 48 = 4.8
+        # Total logs = 2 * 4.8 = 9.6 -> ceil = 10
+        self.assertEqual(10, result)
+
+    def test_getFoodFactoriesNeededForEggplantRationsNegativeAmount(
+            self) -> None:
+        """
+        The getFoodFactoriesNeededForEggplantRations method must raise
+        ValueError if amount is negative.
+        """
+        errMsg = "Eggplant rations amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getFoodFactoriesNeededForEggplantRations(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getFoodFactoriesNeededForEggplantRationsSuccess(self) -> None:
+        """
+        The getFoodFactoriesNeededForEggplantRations method must correctly
+        calculate food factories needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.5
+        self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 6
+        self.uut.factionData.getFoodProcessingWorkers.return_value = 1
+
+        result = self.uut.getFoodFactoriesNeededForEggplantRations(250.0)
+
+        # Cycles per day = 24 / 0.5 = 48
+        # Output per building = 6 * 48 * 1 = 288
+        # Food factories needed = 250 / 288 = 0.868... -> ceil = 1
+        self.assertEqual(1, result)
+
+    def test_getEggplantsNeededForEggplantRationsProductionNegativeCount(
+            self) -> None:
+        """
+        The getEggplantsNeededForEggplantRationsProduction method must
+        raise ValueError if count is negative.
+        """
+        errMsg = "Food factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getEggplantsNeededForEggplantRationsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getEggplantsNeededForEggplantRationsProductionSuccess(
+            self) -> None:
+        """
+        The getEggplantsNeededForEggplantRationsProduction method must
+        correctly calculate eggplants needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.5
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
+
+        result = self.uut.getEggplantsNeededForEggplantRationsProduction(2)
+
+        # Cycles per day = 24 / 0.5 = 48
+        # Eggplants per factory per day = 1 * 48 = 48
+        # Total eggplants = 2 * 48 = 96
+        self.assertEqual(96, result)
+
+    def test_getCanolaOilNeededForEggplantRationsProductionNegativeCount(
+            self) -> None:
+        """
+        The getCanolaOilNeededForEggplantRationsProduction method must
+        raise ValueError if count is negative.
+        """
+        errMsg = "Food factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getCanolaOilNeededForEggplantRationsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getCanolaOilNeededForEggplantRationsProductionSuccess(
+            self) -> None:
+        """
+        The getCanolaOilNeededForEggplantRationsProduction method must
+        correctly calculate canola oil needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.5
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
+
+        result = self.uut.getCanolaOilNeededForEggplantRationsProduction(2)
+
+        # Cycles per day = 24 / 0.5 = 48
+        # Canola oil per factory per day = 1 * 48 = 48
+        # Total canola oil = 2 * 48 = 96
+        self.assertEqual(96, result)
+
+    def test_getLogsNeededForEggplantRationsProductionNegativeCount(
+            self) -> None:
+        """
+        The getLogsNeededForEggplantRationsProduction method must raise
+        ValueError if count is negative.
+        """
+        errMsg = "Food factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getLogsNeededForEggplantRationsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getLogsNeededForEggplantRationsProductionSuccess(self) -> None:
+        """
+        The getLogsNeededForEggplantRationsProduction method must correctly
+        calculate logs needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.5
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 0.1
+
+        result = self.uut.getLogsNeededForEggplantRationsProduction(2)
+
+        # Cycles per day = 24 / 0.5 = 48
+        # Logs per factory per day = 0.1 * 48 = 4.8
+        # Total logs = 2 * 4.8 = 9.6 -> ceil = 10
+        self.assertEqual(10, result)
+
+    def test_getFoodFactoriesNeededForAlgaeRationsNegativeAmount(
+            self) -> None:
+        """
+        The getFoodFactoriesNeededForAlgaeRations method must raise
+        ValueError if amount is negative.
+        """
+        errMsg = "Algae rations amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getFoodFactoriesNeededForAlgaeRations(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getFoodFactoriesNeededForAlgaeRationsSuccess(self) -> None:
+        """
+        The getFoodFactoriesNeededForAlgaeRations method must correctly
+        calculate food factories needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.25
+        self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 6
+        self.uut.factionData.getFoodProcessingWorkers.return_value = 1
+
+        result = self.uut.getFoodFactoriesNeededForAlgaeRations(500.0)
+
+        # Cycles per day = 24 / 0.25 = 96
+        # Output per building = 6 * 96 * 1 = 576
+        # Food factories needed = 500 / 576 = 0.868... -> ceil = 1
+        self.assertEqual(1, result)
+
+    def test_getAlgaeNeededForAlgaeRationsProductionNegativeCount(
+            self) -> None:
+        """
+        The getAlgaeNeededForAlgaeRationsProduction method must raise
+        ValueError if count is negative.
+        """
+        errMsg = "Food factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getAlgaeNeededForAlgaeRationsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getAlgaeNeededForAlgaeRationsProductionSuccess(self) -> None:
+        """
+        The getAlgaeNeededForAlgaeRationsProduction method must correctly
+        calculate algae needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.25
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
+
+        result = self.uut.getAlgaeNeededForAlgaeRationsProduction(2)
+
+        # Cycles per day = 24 / 0.25 = 96
+        # Algae per factory per day = 1 * 96 = 96
+        # Total algae = 2 * 96 = 192
+        self.assertEqual(192, result)
+
+    def test_getCanolaOilNeededForAlgaeRationsProductionNegativeCount(
+            self) -> None:
+        """
+        The getCanolaOilNeededForAlgaeRationsProduction method must raise
+        ValueError if count is negative.
+        """
+        errMsg = "Food factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getCanolaOilNeededForAlgaeRationsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getCanolaOilNeededForAlgaeRationsProductionSuccess(
+            self) -> None:
+        """
+        The getCanolaOilNeededForAlgaeRationsProduction method must
+        correctly calculate canola oil needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.25
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
+
+        result = self.uut.getCanolaOilNeededForAlgaeRationsProduction(2)
+
+        # Cycles per day = 24 / 0.25 = 96
+        # Canola oil per factory per day = 1 * 96 = 96
+        # Total canola oil = 2 * 96 = 192
+        self.assertEqual(192, result)
+
+    def test_getLogsNeededForAlgaeRationsProductionNegativeCount(
+            self) -> None:
+        """
+        The getLogsNeededForAlgaeRationsProduction method must raise
+        ValueError if count is negative.
+        """
+        errMsg = "Food factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getLogsNeededForAlgaeRationsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getLogsNeededForAlgaeRationsProductionSuccess(self) -> None:
+        """
+        The getLogsNeededForAlgaeRationsProduction method must correctly
+        calculate logs needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.25
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 0.1
+
+        result = self.uut.getLogsNeededForAlgaeRationsProduction(2)
+
+        # Cycles per day = 24 / 0.25 = 96
+        # Logs per factory per day = 0.1 * 96 = 9.6
+        # Total logs = 2 * 9.6 = 19.2 -> ceil = 20
+        self.assertEqual(20, result)
+
+    # Test Cases for Hydroponic Garden
+    def test_getHydroponicGardensNeededForMushroomsNegativeAmount(
+            self) -> None:
+        """
+        The getHydroponicGardensNeededForMushrooms method must raise
+        ValueError if amount is negative.
+        """
+        errMsg = "Mushrooms amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getHydroponicGardensNeededForMushrooms(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getHydroponicGardensNeededForMushroomsSuccess(self) -> None:
+        """
+        The getHydroponicGardensNeededForMushrooms method must correctly
+        calculate hydroponic gardens needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 192.0
+        self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 45
+        self.uut.factionData.getFoodProcessingWorkers.return_value = 1
+
+        result = self.uut.getHydroponicGardensNeededForMushrooms(6.0)
+
+        # Cycles per day = 24 / 192.0 = 0.125
+        # Output per building = 45 * 0.125 * 1 = 5.625
+        # Gardens needed = 6.0 / 5.625 = 1.0666... -> ceil = 2
+        self.assertEqual(2, result)
+
+    def test_getWaterNeededForMushroomsProductionNegativeCount(
+            self) -> None:
+        """
+        The getWaterNeededForMushroomsProduction method must raise
+        ValueError if count is negative.
+        """
+        errMsg = "Hydroponic gardens count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getWaterNeededForMushroomsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getWaterNeededForMushroomsProductionSuccess(self) -> None:
+        """
+        The getWaterNeededForMushroomsProduction method must correctly
+        calculate water needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 192.0
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 40
+
+        result = self.uut.getWaterNeededForMushroomsProduction(3)
+
+        # Cycles per day = 24 / 192.0 = 0.125
+        # Water per garden per day = 40 * 0.125 = 5
+        # Total water = 3 * 5 = 15
+        self.assertEqual(15, result)
+
+    def test_getHydroponicGardensNeededForAlgaeNegativeAmount(
+            self) -> None:
+        """
+        The getHydroponicGardensNeededForAlgae method must raise
+        ValueError if amount is negative.
+        """
+        errMsg = "Algae amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getHydroponicGardensNeededForAlgae(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getHydroponicGardensNeededForAlgaeSuccess(self) -> None:
+        """
+        The getHydroponicGardensNeededForAlgae method must correctly
+        calculate hydroponic gardens needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 288.0
+        self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 70
+        self.uut.factionData.getFoodProcessingWorkers.return_value = 1
+
+        result = self.uut.getHydroponicGardensNeededForAlgae(6.0)
+
+        # Cycles per day = 24 / 288.0 = 0.083333...
+        # Output per building = 70 * 0.083333... * 1 = 5.833333...
+        # Gardens needed = 6.0 / 5.833333... = 1.0285... -> ceil = 2
+        self.assertEqual(2, result)
+
+    def test_getWaterNeededForAlgaeProductionNegativeCount(self) -> None:
+        """
+        The getWaterNeededForAlgaeProduction method must raise
+        ValueError if count is negative.
+        """
+        errMsg = "Hydroponic gardens count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getWaterNeededForAlgaeProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getWaterNeededForAlgaeProductionSuccess(self) -> None:
+        """
+        The getWaterNeededForAlgaeProduction method must correctly
+        calculate water needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 288.0
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 60
+
+        result = self.uut.getWaterNeededForAlgaeProduction(3)
+
+        # Cycles per day = 24 / 288.0 = 0.083333...
+        # Water per garden per day = 60 * 0.083333... = 5
+        # Total water = 3 * 5 = 15
+        self.assertEqual(15, result)
+
+    # Test Cases for Oil Press
+    def test_getOilPressesNeededForCanolaOilNegativeAmount(self) -> None:
+        """
+        The getOilPressesNeededForCanolaOil method must raise
+        ValueError if amount is negative.
+        """
+        errMsg = "Canola oil amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getOilPressesNeededForCanolaOil(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getOilPressesNeededForCanolaOilSuccess(self) -> None:
+        """
+        The getOilPressesNeededForCanolaOil method must correctly
+        calculate oil presses needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 1.3
+        self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 1
+        self.uut.factionData.getFoodProcessingWorkers.return_value = 1
+
+        result = self.uut.getOilPressesNeededForCanolaOil(20.0)
+
+        # Cycles per day = 24 / 1.3 = 18.461538...
+        # Output per building = 1 * 18.461538... * 1 = 18.461538...
+        # Oil presses needed = 20.0 / 18.461538... = 1.083... -> ceil = 2
+        self.assertEqual(2, result)
+
+    def test_getCanolaSeedsNeededForCanolaOilProductionNegativeCount(
+            self) -> None:
+        """
+        The getCanolaSeedsNeededForCanolaOilProduction method must raise
+        ValueError if count is negative.
+        """
+        errMsg = "Oil presses count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getCanolaSeedsNeededForCanolaOilProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getCanolaSeedsNeededForCanolaOilProductionSuccess(self) -> None:
+        """
+        The getCanolaSeedsNeededForCanolaOilProduction method must
+        correctly calculate canola seeds needed.
+        """
+        self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
+        self.uut.factionData.getFoodProcessingProductionTime.return_value = 1.3
+        self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
+
+        result = self.uut.getCanolaSeedsNeededForCanolaOilProduction(2)
+
+        # Cycles per day = 24 / 1.3 = 18.461538...
+        # Canola seeds per press per day = 1 * 18.461538... = 18.461538...
+        # Total canola seeds = 2 * 18.461538... = 36.923... -> ceil = 37
+        self.assertEqual(37, result)
 
     # Test Cases for Industrial Lumber Mill
     def test_getIndustrialLumberMillsNeededForPlanksNegativeAmount(

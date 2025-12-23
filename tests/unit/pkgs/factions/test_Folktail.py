@@ -7,10 +7,11 @@ import sys
 sys.path.append(os.path.abspath('./src'))
 
 from pkgs.factions.folktail import Folktail                     # noqa: E402
-from pkgs.data.enumerators import ConsumptionType              # noqa: E402
+from pkgs.data.enumerators import ConsumptionType               # noqa: E402
 from pkgs.data.enumerators import CropName                      # noqa: E402
 from pkgs.data.enumerators import DifficultyLevel               # noqa: E402
 from pkgs.data.enumerators import TreeName                      # noqa: E402
+from pkgs.data.enumerators import WaterBuildingName             # noqa: E402
 
 
 class TestFolktail(TestCase):
@@ -157,6 +158,10 @@ class TestFolktail(TestCase):
 
         # 100 * 2.75 * 1.0 = 275.0 / 5 = ceil(55.0) = 55
         self.assertEqual(55, result)
+        self.uut.factionData.getConsumption \
+            .assert_called_once_with(ConsumptionType.FOOD)
+        self.uut.factionData.getDifficultyModifier \
+            .assert_called_once_with(DifficultyLevel.NORMAL)
 
     def test_getBerryTilesNeededNegativeAmount(self) -> None:
         """
@@ -209,6 +214,10 @@ class TestFolktail(TestCase):
         # Production per tile = 1 / 3 = 0.333...
         # Tiles needed = ceil(10.0 / 0.333...) = ceil(30) = 30
         self.assertEqual(30, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.DANDELION_BUSH)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.DANDELION_BUSH)
 
     def test_getCarrotTilesNeededNegativeAmount(self) -> None:
         """
@@ -233,6 +242,10 @@ class TestFolktail(TestCase):
         # Production per tile = 3 / 4 = 0.75
         # Tiles needed = ceil(30.0 / 0.75) = 40
         self.assertEqual(40, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.CARROT_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.CARROT_CROP)
 
     def test_getCarrotTilesNeededWithBeehive(self) -> None:
         """
@@ -249,6 +262,10 @@ class TestFolktail(TestCase):
         # With beehive = 0.75 * 1.43 = 1.0725
         # Tiles needed = ceil(30.0 / 1.0725) = ceil(27.972...) = 28
         self.assertEqual(28, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.CARROT_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.CARROT_CROP)
         self.uut.factionData.getBeehiveModifier.assert_called_once()
 
     def test_getSunflowerTilesNeededNegativeAmount(self) -> None:
@@ -269,12 +286,15 @@ class TestFolktail(TestCase):
         self.uut.factionData.getCropHarvestTime.return_value = 5
         self.uut.factionData.getCropHarvestYield.return_value = 2
 
-        folktail = Folktail()
-        result = folktail.getSunflowerTilesNeeded(20.0, False)
+        result = self.uut.getSunflowerTilesNeeded(20.0, False)
 
         # Production per tile = 2 / 5 = 0.4
         # Tiles needed = ceil(20.0 / 0.4) = 50
         self.assertEqual(50, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.SUNFLOWER_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.SUNFLOWER_CROP)
 
     def test_getSunflowerTilesNeededWithBeehive(self) -> None:
         """
@@ -291,6 +311,10 @@ class TestFolktail(TestCase):
         # With beehive = 0.4 * 1.43 = 0.572
         # Tiles needed = ceil(20.0 / 0.572) = ceil(34.965...) = 35
         self.assertEqual(35, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.SUNFLOWER_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.SUNFLOWER_CROP)
         self.uut.factionData.getBeehiveModifier.assert_called_once()
 
     def test_getPotatoTilesNeededNegativeAmount(self) -> None:
@@ -316,6 +340,10 @@ class TestFolktail(TestCase):
         # Production per tile = 1 / 6 = 0.16666...
         # Tiles needed = ceil(30.0 / 0.16666...) = 180
         self.assertEqual(180, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.POTATO_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.POTATO_CROP)
 
     def test_getPotatoTilesNeededWithBeehive(self) -> None:
         """
@@ -332,6 +360,10 @@ class TestFolktail(TestCase):
         # With beehive = 0.16666... * 1.43 = 0.238333...
         # Tiles needed = ceil(30.0 / 0.238333...) = ceil(125.874...) = 126
         self.assertEqual(126, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.POTATO_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.POTATO_CROP)
         self.uut.factionData.getBeehiveModifier.assert_called_once()
 
     def test_getWheatTilesNeededNegativeAmount(self) -> None:
@@ -357,6 +389,10 @@ class TestFolktail(TestCase):
         # Production per tile = 3 / 10 = 0.3
         # Tiles needed = ceil(30.0 / 0.3) = 100
         self.assertEqual(100, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.WHEAT_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.WHEAT_CROP)
 
     def test_getWheatTilesNeededWithBeehive(self) -> None:
         """
@@ -373,6 +409,10 @@ class TestFolktail(TestCase):
         # With beehive = 0.3 * 1.43 = 0.429
         # Tiles needed = ceil(30.0 / 0.429) = ceil(69.930...) = 70
         self.assertEqual(70, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.WHEAT_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.WHEAT_CROP)
         self.uut.factionData.getBeehiveModifier.assert_called_once()
 
     def test_getCattailTilesNeededNegativeAmount(self) -> None:
@@ -398,6 +438,10 @@ class TestFolktail(TestCase):
         # Production per tile = 3 / 8 = 0.375
         # Tiles needed = ceil(30.0 / 0.375) = 80
         self.assertEqual(80, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.CATTAIL_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.CATTAIL_CROP)
 
     def test_getCattailTilesNeededWithBeehive(self) -> None:
         """
@@ -414,6 +458,10 @@ class TestFolktail(TestCase):
         # With beehive = 0.375 * 1.43 = 0.53625
         # Tiles needed = ceil(30.0 / 0.53625) = ceil(55.944...) = 56
         self.assertEqual(56, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.CATTAIL_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.CATTAIL_CROP)
         self.uut.factionData.getBeehiveModifier.assert_called_once()
 
     def test_getSpadderdockTilesNeededNegativeAmount(self) -> None:
@@ -439,6 +487,10 @@ class TestFolktail(TestCase):
         # Production per tile = 3 / 12 = 0.25
         # Tiles needed = ceil(30.0 / 0.25) = 120
         self.assertEqual(120, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.SPADDERDOCK_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.SPADDERDOCK_CROP)
 
     def test_getSpadderdockTilesNeededWithBeehive(self) -> None:
         """
@@ -455,6 +507,10 @@ class TestFolktail(TestCase):
         # With beehive = 0.25 * 1.43 = 0.3575
         # Tiles needed = ceil(30.0 / 0.3575) = ceil(83.916...) = 84
         self.assertEqual(84, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.SPADDERDOCK_CROP)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.SPADDERDOCK_CROP)
         self.uut.factionData.getBeehiveModifier.assert_called_once()
 
     def test_getLogPerTypeNegativeTotalLogAmount(self) -> None:
@@ -521,6 +577,10 @@ class TestFolktail(TestCase):
         # Production per tile = 5 / 15 = 0.333...
         # Tiles needed = ceil(30.0 / 0.333...) = ceil(90.0) = 90
         self.assertEqual(90, result)
+        self.uut.factionData.getTreeGrowthTime \
+            .assert_called_once_with(TreeName.BIRCH)
+        self.uut.factionData.getTreeLogOutput \
+            .assert_called_once_with(TreeName.BIRCH)
 
     def test_getPineLogTilesNeededNegativeAmount(self) -> None:
         """
@@ -545,6 +605,10 @@ class TestFolktail(TestCase):
         # Production per tile = 4 / 12 = 0.333...
         # Tiles needed = ceil(30.0 / 0.333...) = ceil(90.0) = 90
         self.assertEqual(90, result)
+        self.uut.factionData.getTreeGrowthTime \
+            .assert_called_once_with(TreeName.PINE)
+        self.uut.factionData.getTreeLogOutput \
+            .assert_called_once_with(TreeName.PINE)
 
     def test_getPineResinTilesNeededNegativeAmount(self) -> None:
         """
@@ -569,6 +633,10 @@ class TestFolktail(TestCase):
         # Production per tile = 2 / 8 = 0.25
         # Tiles needed = ceil(30.0 / 0.25) = 120
         self.assertEqual(120, result)
+        self.uut.factionData.getTreeHarvestTime \
+            .assert_called_once_with(TreeName.PINE)
+        self.uut.factionData.getTreeHarvestYield \
+            .assert_called_once_with(TreeName.PINE)
 
     def test_getMapleLogTilesNeededNegativeAmount(self) -> None:
         """
@@ -593,6 +661,10 @@ class TestFolktail(TestCase):
         # Production per tile = 6 / 18 = 0.333...
         # Tiles needed = ceil(30.0 / 0.333...) = ceil(90.0) = 90
         self.assertEqual(90, result)
+        self.uut.factionData.getTreeGrowthTime \
+            .assert_called_once_with(TreeName.MAPLE)
+        self.uut.factionData.getTreeLogOutput \
+            .assert_called_once_with(TreeName.MAPLE)
 
     def test_getMapleSyrupTilesNeededNegativeAmount(self) -> None:
         """
@@ -617,6 +689,10 @@ class TestFolktail(TestCase):
         # Production per tile = 2 / 10 = 0.2
         # Tiles needed = ceil(30.0 / 0.2) = 150
         self.assertEqual(150, result)
+        self.uut.factionData.getTreeHarvestTime \
+            .assert_called_once_with(TreeName.MAPLE)
+        self.uut.factionData.getTreeHarvestYield \
+            .assert_called_once_with(TreeName.MAPLE)
 
     def test_getChestnutLogTilesNeededNegativeAmount(self) -> None:
         """
@@ -641,6 +717,10 @@ class TestFolktail(TestCase):
         # Production per tile = 5 / 20 = 0.25
         # Tiles needed = ceil(30.0 / 0.25) = 120
         self.assertEqual(120, result)
+        self.uut.factionData.getTreeGrowthTime \
+            .assert_called_once_with(TreeName.CHESTNUT_TREE)
+        self.uut.factionData.getTreeLogOutput \
+            .assert_called_once_with(TreeName.CHESTNUT_TREE)
 
     def test_getChestnutTilesNeededNegativeAmount(self) -> None:
         """
@@ -665,6 +745,10 @@ class TestFolktail(TestCase):
         # Production per tile = 3 / 8 = 0.375
         # Tiles needed = ceil(30.0 / 0.375) = 80
         self.assertEqual(80, result)
+        self.uut.factionData.getTreeHarvestTime \
+            .assert_called_once_with(TreeName.CHESTNUT_TREE)
+        self.uut.factionData.getTreeHarvestYield \
+            .assert_called_once_with(TreeName.CHESTNUT_TREE)
 
     def test_getOakLogTilesNeededNegativeAmount(self) -> None:
         """
@@ -689,6 +773,10 @@ class TestFolktail(TestCase):
         # Production per tile = 8 / 25 = 0.32
         # Tiles needed = ceil(30.0 / 0.32) = ceil(93.75) = 94
         self.assertEqual(94, result)
+        self.uut.factionData.getTreeGrowthTime \
+            .assert_called_once_with(TreeName.OAK)
+        self.uut.factionData.getTreeLogOutput \
+            .assert_called_once_with(TreeName.OAK)
 
     def test_getWaterPumpsNeededNegativeAmount(self) -> None:
         """
@@ -713,6 +801,10 @@ class TestFolktail(TestCase):
         # Production per pump per day = (24 / 2.0) * 24 = 288.0
         # Pumps needed = ceil(50.0 / 288.0) = ceil(0.173...) = 1
         self.assertEqual(1, result)
+        self.uut.factionData.getWaterProductionTime \
+            .assert_called_once_with(WaterBuildingName.WATER_PUMP)
+        self.uut.factionData.getWaterOutputQuantity \
+            .assert_called_once_with(WaterBuildingName.WATER_PUMP)
 
     def test_getLargeWaterPumpsNeededNegativeWaterAmount(self) -> None:
         """
@@ -801,6 +893,10 @@ class TestFolktail(TestCase):
         # Production per pump per day = (18 / 3.0) * 24 = 144.0
         # Pumps needed = ceil(40.0 / 144.0) = ceil(0.277...) = 1
         self.assertEqual(1, result)
+        self.uut.factionData.getWaterProductionTime \
+            .assert_called_once_with(WaterBuildingName.BADWATER_PUMP)
+        self.uut.factionData.getWaterOutputQuantity \
+            .assert_called_once_with(WaterBuildingName.BADWATER_PUMP)
 
     def test_getGrillsNeededForPotatoesNegativeAmount(self) -> None:
         """

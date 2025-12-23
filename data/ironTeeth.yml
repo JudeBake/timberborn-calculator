@@ -108,7 +108,7 @@ faction_data:
           - name: "Coffee"
             production_time: 1
             inputs:
-              - name: "Coffee"
+              - name: "Coffee Beans"
                 quantity: 1
               - name: "Water"
                 quantity: 1

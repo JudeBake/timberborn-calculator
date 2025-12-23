@@ -539,7 +539,8 @@ class FactionData:
     def getFoodProcessingInputIndex(self,
                                     buildingName: FoodProcessingBuildingName,
                                     recipeName: FoodRecipeName,
-                                    inputName: str) -> int:
+                                    inputName: HarvestName | FoodRecipeName
+                                    | GoodsRecipeName) -> int:
         """
         Get the input index for a specified food processing building, recipe,
         and input name.
@@ -549,7 +550,7 @@ class FactionData:
         :param recipeName: The recipe to search in.
         :type recipeName: FoodRecipeName
         :param inputName: The input name to find.
-        :type inputName: str
+        :type inputName: HarvestName, FoodRecipeName or GoodRecipeName
 
         :return: Input index.
         :rtype: int
@@ -567,16 +568,17 @@ class FactionData:
                              f"'{buildingName.value}' has no inputs.")
 
         for index, input_item in enumerate(inputs):
-            if input_item[DataKeys.NAME] == inputName:
+            if input_item[DataKeys.NAME] == inputName.value:
                 return index
-        raise ValueError(f"Input '{inputName}' not found in recipe "
+        raise ValueError(f"Input '{inputName.value}' not found in recipe "
                          f"'{recipeName.value}' of '{buildingName.value}'.")
 
     def getFoodProcessingInputQuantity(self,
                                        buildingName:
                                        FoodProcessingBuildingName,
                                        recipeName: FoodRecipeName,
-                                       inputName: str) -> float:
+                                       inputName: HarvestName | FoodRecipeName
+                                       | GoodsRecipeName) -> float:
         """
         Get the input quantity for a specified food processing building,
         recipe, and input name.
@@ -586,7 +588,7 @@ class FactionData:
         :param recipeName: The recipe.
         :type recipeName: FoodRecipeName
         :param inputName: The input name.
-        :type inputName: str
+        :type inputName: HarvestName, FoodRecipeName or GoodRecipeName
 
         :return: Input quantity.
         :rtype: float
@@ -763,7 +765,7 @@ class FactionData:
 
     def getGoodsInputQuantity(self, buildingName: GoodsBuildingName,
                               recipeName: 'GoodsRecipeName',
-                              inputName: str) -> float:
+                              inputName: HarvestName | GoodsRecipeName) -> float:   # noqa: E501
         """
         Get the quantity of a specific input for a goods recipe.
 
@@ -772,7 +774,7 @@ class FactionData:
         :param recipeName: The recipe name.
         :type recipeName: GoodsRecipeName
         :param inputName: The name of the input to get quantity for.
-        :type inputName: str
+        :type inputName: HarvestName or GoodRecipeName
 
         :return: The quantity of the specified input.
         :rtype: float
@@ -788,10 +790,10 @@ class FactionData:
                              f"'{buildingName.value}' has no inputs.")
 
         for input_item in inputs:
-            if input_item[DataKeys.NAME] == inputName:
+            if input_item[DataKeys.NAME] == inputName.value:
                 return input_item[DataKeys.QUANTITY]
 
-        raise ValueError(f"Input '{inputName}' not found in recipe "
+        raise ValueError(f"Input '{inputName.value}' not found in recipe "
                          f"'{recipeName.value}' for building "
                          f"'{buildingName.value}'.")
 

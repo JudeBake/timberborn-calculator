@@ -40,8 +40,7 @@ class Folktail:
         if population < 0:
             raise ValueError("Population cannot be negative.")
 
-        baseConsumption = self.factionData.getConsumption(
-            ConsumptionType.FOOD)
+        baseConsumption = self.factionData.getConsumption(ConsumptionType.FOOD)
         difficultyModifier = self.factionData.getDifficultyModifier(difficulty)
         return population * baseConsumption * difficultyModifier
 
@@ -64,8 +63,8 @@ class Folktail:
         if population < 0:
             raise ValueError("Population cannot be negative.")
 
-        baseConsumption = self.factionData.getConsumption(
-            ConsumptionType.WATER)
+        baseConsumption = self.factionData \
+            .getConsumption(ConsumptionType.WATER)
         difficultyModifier = self.factionData.getDifficultyModifier(difficulty)
         return population * baseConsumption * difficultyModifier
 
@@ -478,8 +477,7 @@ class Folktail:
         if logAmount < 0:
             raise ValueError("Log amount cannot be negative.")
 
-        growthTime = self.factionData.getTreeGrowthTime(
-            TreeName.CHESTNUT_TREE)
+        growthTime = self.factionData.getTreeGrowthTime(TreeName.CHESTNUT_TREE)
         logOutput = self.factionData.getTreeLogOutput(TreeName.CHESTNUT_TREE)
         productionPerTile = logOutput / growthTime
 
@@ -636,14 +634,15 @@ class Folktail:
         if grilledPotatoAmount < 0:
             raise ValueError("Grilled potato amount cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_POTATOES)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRILL,
+                                          FoodRecipeName.GRILLED_POTATOES)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerGrill = (outputQuantity / productionTime) * 24
 
@@ -665,14 +664,15 @@ class Folktail:
         if grillsCount < 0:
             raise ValueError("Grills count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_POTATOES)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRILL,
+                                          FoodRecipeName.GRILLED_POTATOES)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
         potatoInput = self.factionData.getFoodProcessingInputQuantity(
             FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_POTATOES,
-            HarvestName.POTATOES.value)
+            HarvestName.POTATOES)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -696,14 +696,16 @@ class Folktail:
         if grillsCount < 0:
             raise ValueError("Grills count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_POTATOES)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRILL,
+                                          FoodRecipeName.GRILLED_POTATOES)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
-        logInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_POTATOES,
-            "Logs")
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
+        logInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.GRILL,
+                                            FoodRecipeName.GRILLED_POTATOES,
+                                            HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -727,14 +729,15 @@ class Folktail:
         if grilledChestnutAmount < 0:
             raise ValueError("Grilled chestnut amount cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_CHESTNUTS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRILL,
+                                          FoodRecipeName.GRILLED_CHESTNUTS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerGrill = (outputQuantity / productionTime) * 24
 
@@ -756,14 +759,16 @@ class Folktail:
         if grillsCount < 0:
             raise ValueError("Grills count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_CHESTNUTS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRILL,
+                                          FoodRecipeName.GRILLED_CHESTNUTS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
-        chestnutInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_CHESTNUTS,
-            HarvestName.CHESTNUTS.value)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
+        chestnutInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.GRILL,
+                                            FoodRecipeName.GRILLED_CHESTNUTS,
+                                            HarvestName.CHESTNUTS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -787,14 +792,16 @@ class Folktail:
         if grillsCount < 0:
             raise ValueError("Grills count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_CHESTNUTS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRILL,
+                                          FoodRecipeName.GRILLED_CHESTNUTS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
-        logInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.GRILL, FoodRecipeName.GRILLED_CHESTNUTS,
-            "Logs")
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
+        logInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.GRILL,
+                                            FoodRecipeName.GRILLED_CHESTNUTS,
+                                            HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -820,15 +827,15 @@ class Folktail:
         if grilledSpadderdockAmount < 0:
             raise ValueError("Grilled spadderdock amount cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRILL,
-            FoodRecipeName.GRILLED_SPADDERDOCKS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRILL,
+                                          FoodRecipeName.GRILLED_SPADDERDOCKS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerGrill = (outputQuantity / productionTime) * 24
 
@@ -850,16 +857,16 @@ class Folktail:
         if grillsCount < 0:
             raise ValueError("Grills count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRILL,
-            FoodRecipeName.GRILLED_SPADDERDOCKS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRILL,
+                                          FoodRecipeName.GRILLED_SPADDERDOCKS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
-        spadderdockInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.GRILL,
-            FoodRecipeName.GRILLED_SPADDERDOCKS,
-            HarvestName.SPADDERDOCKS.value)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
+        spadderdockInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.GRILL,
+                                            FoodRecipeName.GRILLED_SPADDERDOCKS,    # noqa: E501
+                                            HarvestName.SPADDERDOCKS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -884,16 +891,16 @@ class Folktail:
         if grillsCount < 0:
             raise ValueError("Grills count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRILL,
-            FoodRecipeName.GRILLED_SPADDERDOCKS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRILL,
+                                          FoodRecipeName.GRILLED_SPADDERDOCKS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRILL, recipeIndex)
-        logInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.GRILL,
-            FoodRecipeName.GRILLED_SPADDERDOCKS,
-            "Logs")
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRILL,
+                                             recipeIndex)
+        logInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.GRILL,
+                                            FoodRecipeName.GRILLED_SPADDERDOCKS,    # noqa: E501
+                                            HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -917,15 +924,15 @@ class Folktail:
         if wheatFlourAmount < 0:
             raise ValueError("Wheat flour amount cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRISTMILL,
-            FoodRecipeName.WHEAT_FLOUR)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRISTMILL,
+                                          FoodRecipeName.WHEAT_FLOUR)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRISTMILL,  # noqa: E501
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.GRISTMILL,  # noqa: E501
+                                             recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerGristmill = (outputQuantity / productionTime) * 24
 
@@ -947,16 +954,16 @@ class Folktail:
         if gristmillsCount < 0:
             raise ValueError("Gristmills count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRISTMILL,
-            FoodRecipeName.WHEAT_FLOUR)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRISTMILL,
+                                          FoodRecipeName.WHEAT_FLOUR)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
-        wheatInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.GRISTMILL,
-            FoodRecipeName.WHEAT_FLOUR,
-            HarvestName.WHEAT.value)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRISTMILL,  # noqa: E501
+                                             recipeIndex)
+        wheatInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.GRISTMILL,   # noqa: E501
+                                            FoodRecipeName.WHEAT_FLOUR,
+                                            HarvestName.WHEAT)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -981,15 +988,15 @@ class Folktail:
         if cattailFlourAmount < 0:
             raise ValueError("Cattail flour amount cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRISTMILL,
-            FoodRecipeName.CATTAIL_FLOUR)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRISTMILL,
+                                          FoodRecipeName.CATTAIL_FLOUR)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRISTMILL,  # noqa: E501
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.GRISTMILL,  # noqa: E501
+                                             recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerGristmill = (outputQuantity / productionTime) * 24
 
@@ -1011,16 +1018,16 @@ class Folktail:
         if gristmillsCount < 0:
             raise ValueError("Gristmills count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.GRISTMILL,
-            FoodRecipeName.CATTAIL_FLOUR)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.GRISTMILL,
+                                          FoodRecipeName.CATTAIL_FLOUR)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.GRISTMILL, recipeIndex)
-        cattailRootsInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.GRISTMILL,
-            FoodRecipeName.CATTAIL_FLOUR,
-            HarvestName.CATTAIL_ROOTS.value)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.GRISTMILL,  # noqa: E501
+                                             recipeIndex)
+        cattailRootsInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.GRISTMILL,   # noqa: E501
+                                            FoodRecipeName.CATTAIL_FLOUR,
+                                            HarvestName.CATTAIL_ROOTS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1044,15 +1051,15 @@ class Folktail:
         if breadsAmount < 0:
             raise ValueError("Breads amount cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.BREADS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.BAKERY,
+                                          FoodRecipeName.BREADS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerBakery = (outputQuantity / productionTime) * 24
 
@@ -1075,16 +1082,16 @@ class Folktail:
         if bakeriesCount < 0:
             raise ValueError("Bakeries count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.BREADS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.BAKERY,
+                                          FoodRecipeName.BREADS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
-        wheatFlourInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.BREADS,
-            "Wheat Flour")
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
+        wheatFlourInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.BAKERY,
+                                            FoodRecipeName.BREADS,
+                                            FoodRecipeName.WHEAT_FLOUR)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1108,16 +1115,16 @@ class Folktail:
         if bakeriesCount < 0:
             raise ValueError("Bakeries count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.BREADS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.BAKERY,
+                                          FoodRecipeName.BREADS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
-        logInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.BREADS,
-            "Logs")
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
+        logInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.BAKERY,
+                                            FoodRecipeName.BREADS,
+                                            HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1143,15 +1150,15 @@ class Folktail:
         if cattailCrackersAmount < 0:
             raise ValueError("Cattail crackers amount cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.CATTAIL_CRACKERS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.BAKERY,
+                                          FoodRecipeName.CATTAIL_CRACKERS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerBakery = (outputQuantity / productionTime) * 24
 
@@ -1175,16 +1182,16 @@ class Folktail:
         if bakeriesCount < 0:
             raise ValueError("Bakeries count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.CATTAIL_CRACKERS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.BAKERY,
+                                          FoodRecipeName.CATTAIL_CRACKERS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
-        cattailFlourInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.CATTAIL_CRACKERS,
-            "Cattail Flour")
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
+        cattailFlourInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.BAKERY,
+                                            FoodRecipeName.CATTAIL_CRACKERS,
+                                            FoodRecipeName.CATTAIL_FLOUR)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1210,16 +1217,16 @@ class Folktail:
         if bakeriesCount < 0:
             raise ValueError("Bakeries count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.CATTAIL_CRACKERS)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.BAKERY,
+                                          FoodRecipeName.CATTAIL_CRACKERS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
-        logInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.CATTAIL_CRACKERS,
-            "Logs")
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
+        logInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.BAKERY,
+                                            FoodRecipeName.CATTAIL_CRACKERS,
+                                            HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1244,15 +1251,15 @@ class Folktail:
         if maplePastriesAmount < 0:
             raise ValueError("Maple pastries amount cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.MAPLE_PASTRIES)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.BAKERY,
+                                          FoodRecipeName.MAPLE_PASTRIES)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerBakery = (outputQuantity / productionTime) * 24
 
@@ -1276,16 +1283,16 @@ class Folktail:
         if bakeriesCount < 0:
             raise ValueError("Bakeries count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.MAPLE_PASTRIES)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.BAKERY,
+                                          FoodRecipeName.MAPLE_PASTRIES)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
-        wheatFlourInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.MAPLE_PASTRIES,
-            "Wheat Flour")
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
+        wheatFlourInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.BAKERY,
+                                            FoodRecipeName.MAPLE_PASTRIES,
+                                            FoodRecipeName.WHEAT_FLOUR)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1310,16 +1317,16 @@ class Folktail:
         if bakeriesCount < 0:
             raise ValueError("Bakeries count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.MAPLE_PASTRIES)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.BAKERY,
+                                          FoodRecipeName.MAPLE_PASTRIES)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
-        mapleSyrupInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.MAPLE_PASTRIES,
-            HarvestName.MAPLE_SYRUP.value)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
+        mapleSyrupInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.BAKERY,
+                                            FoodRecipeName.MAPLE_PASTRIES,
+                                            HarvestName.MAPLE_SYRUP)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1344,16 +1351,16 @@ class Folktail:
         if bakeriesCount < 0:
             raise ValueError("Bakeries count cannot be negative.")
 
-        recipeIndex = self.factionData.getFoodProcessingRecipeIndex(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.MAPLE_PASTRIES)
+        recipeIndex = self.factionData \
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.BAKERY,
+                                          FoodRecipeName.MAPLE_PASTRIES)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.BAKERY, recipeIndex)
-        logInput = self.factionData.getFoodProcessingInputQuantity(
-            FoodProcessingBuildingName.BAKERY,
-            FoodRecipeName.MAPLE_PASTRIES,
-            "Logs")
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.BAKERY,
+                                             recipeIndex)
+        logInput = self.factionData \
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.BAKERY,
+                                            FoodRecipeName.MAPLE_PASTRIES,
+                                            HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1377,13 +1384,13 @@ class Folktail:
         if planksAmount < 0:
             raise ValueError("Planks amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.LUMBER_MILL,
-            GoodsRecipeName.PLANKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.LUMBER_MILL, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.LUMBER_MILL, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.LUMBER_MILL,
+                                 GoodsRecipeName.PLANKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.LUMBER_MILL, recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.LUMBER_MILL, recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerLumberMill = (outputQuantity / productionTime) * 24
 
@@ -1405,15 +1412,15 @@ class Folktail:
         if lumberMillsCount < 0:
             raise ValueError("Lumber mills count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.LUMBER_MILL,
-            GoodsRecipeName.PLANKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.LUMBER_MILL, recipeIndex)
-        logsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.LUMBER_MILL,
-            GoodsRecipeName.PLANKS,
-            "Logs")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.LUMBER_MILL,
+                                 GoodsRecipeName.PLANKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.LUMBER_MILL, recipeIndex)
+        logsInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.LUMBER_MILL,
+                                   GoodsRecipeName.PLANKS,
+                                   HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1437,13 +1444,15 @@ class Folktail:
         if gearsAmount < 0:
             raise ValueError("Gears amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.GEAR_WORKSHOP,
-            GoodsRecipeName.GEARS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.GEAR_WORKSHOP, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.GEAR_WORKSHOP, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.GEAR_WORKSHOP,
+                                 GoodsRecipeName.GEARS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.GEAR_WORKSHOP,
+                                    recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.GEAR_WORKSHOP,
+                                    recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerGearWorkshop = (outputQuantity / productionTime) * 24
 
@@ -1465,15 +1474,16 @@ class Folktail:
         if gearWorkshopsCount < 0:
             raise ValueError("Gear workshops count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.GEAR_WORKSHOP,
-            GoodsRecipeName.GEARS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.GEAR_WORKSHOP, recipeIndex)
-        planksInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.GEAR_WORKSHOP,
-            GoodsRecipeName.GEARS,
-            "Planks")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.GEAR_WORKSHOP,
+                                 GoodsRecipeName.GEARS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.GEAR_WORKSHOP,
+                                    recipeIndex)
+        planksInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.GEAR_WORKSHOP,
+                                   GoodsRecipeName.GEARS,
+                                   GoodsRecipeName.PLANKS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1497,13 +1507,13 @@ class Folktail:
         if paperAmount < 0:
             raise ValueError("Paper amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.PAPER_MILL,
-            GoodsRecipeName.PAPER)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.PAPER_MILL, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.PAPER_MILL, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.PAPER_MILL,
+                                 GoodsRecipeName.PAPER)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.PAPER_MILL, recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.PAPER_MILL, recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerPaperMill = (outputQuantity / productionTime) * 24
 
@@ -1525,15 +1535,15 @@ class Folktail:
         if paperMillsCount < 0:
             raise ValueError("Paper mills count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.PAPER_MILL,
-            GoodsRecipeName.PAPER)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.PAPER_MILL, recipeIndex)
-        logsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.PAPER_MILL,
-            GoodsRecipeName.PAPER,
-            "Logs")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.PAPER_MILL,
+                                 GoodsRecipeName.PAPER)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.PAPER_MILL, recipeIndex)
+        logsInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.PAPER_MILL,
+                                   GoodsRecipeName.PAPER,
+                                   HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1557,20 +1567,23 @@ class Folktail:
         if booksAmount < 0:
             raise ValueError("Books amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.PRINTING_PRESS,
-            GoodsRecipeName.BOOKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.PRINTING_PRESS,
+                                 GoodsRecipeName.BOOKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.PRINTING_PRESS,
+                                    recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.PRINTING_PRESS,
+                                    recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerPrintingPress = (outputQuantity / productionTime) * 24
 
         return math.ceil(booksAmount / productionPerPrintingPress)
 
-    def getPaperNeededForPrintingPressesWithBooks(
-            self, printingPressesCount: int) -> int:
+    def getPaperNeededForPrintingPressesWithBooks(self,
+                                                  printingPressesCount: int
+                                                  ) -> int:
         """
         Calculate the number of paper needed per day to keep a given number of
         printing presses running producing books.
@@ -1586,15 +1599,16 @@ class Folktail:
         if printingPressesCount < 0:
             raise ValueError("Printing presses count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.PRINTING_PRESS,
-            GoodsRecipeName.BOOKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
-        paperInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.PRINTING_PRESS,
-            GoodsRecipeName.BOOKS,
-            "Paper")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.PRINTING_PRESS,
+                                 GoodsRecipeName.BOOKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.PRINTING_PRESS,
+                                    recipeIndex)
+        paperInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.PRINTING_PRESS,
+                                   GoodsRecipeName.BOOKS,
+                                   GoodsRecipeName.PAPER)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1602,8 +1616,8 @@ class Folktail:
 
         return math.ceil(printingPressesCount * paperPerPrintingPressPerDay)
 
-    def getPrintingPressesNeededForPunchcards(
-            self, punchcardsAmount: float) -> int:
+    def getPrintingPressesNeededForPunchcards(self,
+                                              punchcardsAmount: float) -> int:
         """
         Calculate the number of printing presses needed to produce a given
         amount of punchcards per day.
@@ -1619,13 +1633,15 @@ class Folktail:
         if punchcardsAmount < 0:
             raise ValueError("Punchcards amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.PRINTING_PRESS,
-            GoodsRecipeName.PUNCHCARDS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.PRINTING_PRESS,
+                                 GoodsRecipeName.PUNCHCARDS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.PRINTING_PRESS,
+                                    recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.PRINTING_PRESS,
+                                    recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerPrintingPress = (outputQuantity / productionTime) * 24
 
@@ -1648,15 +1664,16 @@ class Folktail:
         if printingPressesCount < 0:
             raise ValueError("Printing presses count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.PRINTING_PRESS,
-            GoodsRecipeName.PUNCHCARDS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
-        paperInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.PRINTING_PRESS,
-            GoodsRecipeName.PUNCHCARDS,
-            "Paper")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.PRINTING_PRESS,
+                                 GoodsRecipeName.PUNCHCARDS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.PRINTING_PRESS,
+                                    recipeIndex)
+        paperInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.PRINTING_PRESS,
+                                   GoodsRecipeName.PUNCHCARDS,
+                                   GoodsRecipeName.PAPER)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1664,8 +1681,8 @@ class Folktail:
 
         return math.ceil(printingPressesCount * paperPerPrintingPressPerDay)
 
-    def getPlanksNeededForPrintingPressesWithPunchcards(
-            self, printingPressesCount: int) -> int:
+    def getPlanksNeededForPrintingPressesWithPunchcards(self,
+                                                        printingPressesCount: int) -> int:  # noqa: E501
         """
         Calculate the number of planks needed per day to keep a given number
         of printing presses running producing punchcards.
@@ -1681,15 +1698,16 @@ class Folktail:
         if printingPressesCount < 0:
             raise ValueError("Printing presses count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.PRINTING_PRESS,
-            GoodsRecipeName.PUNCHCARDS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.PRINTING_PRESS, recipeIndex)
-        planksInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.PRINTING_PRESS,
-            GoodsRecipeName.PUNCHCARDS,
-            "Planks")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.PRINTING_PRESS,
+                                 GoodsRecipeName.PUNCHCARDS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.PRINTING_PRESS,
+                                    recipeIndex)
+        planksInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.PRINTING_PRESS,
+                                   GoodsRecipeName.PUNCHCARDS,
+                                   GoodsRecipeName.PLANKS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1697,8 +1715,9 @@ class Folktail:
 
         return math.ceil(printingPressesCount * planksPerPrintingPressPerDay)
 
-    def getWoodWorkshopsNeededForTreatedPlanks(
-            self, treatedPlanksAmount: float) -> int:
+    def getWoodWorkshopsNeededForTreatedPlanks(self,
+                                               treatedPlanksAmount: float
+                                               ) -> int:
         """
         Calculate the number of wood workshops needed to produce a given
         amount of treated planks per day.
@@ -1714,20 +1733,22 @@ class Folktail:
         if treatedPlanksAmount < 0:
             raise ValueError("Treated planks amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.WOOD_WORKSHOP,
-            GoodsRecipeName.TREATED_PLANKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.WOOD_WORKSHOP, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.WOOD_WORKSHOP, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.WOOD_WORKSHOP,
+                                 GoodsRecipeName.TREATED_PLANKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.WOOD_WORKSHOP,
+                                    recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.WOOD_WORKSHOP,
+                                    recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerWoodWorkshop = (outputQuantity / productionTime) * 24
 
         return math.ceil(treatedPlanksAmount / productionPerWoodWorkshop)
 
-    def getPineResinNeededForWoodWorkshops(
-            self, woodWorkshopsCount: int) -> int:
+    def getPineResinNeededForWoodWorkshops(self,
+                                           woodWorkshopsCount: int) -> int:
         """
         Calculate the number of pine resin needed per day to keep a given
         number of wood workshops running producing treated planks.
@@ -1743,15 +1764,16 @@ class Folktail:
         if woodWorkshopsCount < 0:
             raise ValueError("Wood workshops count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.WOOD_WORKSHOP,
-            GoodsRecipeName.TREATED_PLANKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.WOOD_WORKSHOP, recipeIndex)
-        pineResinInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.WOOD_WORKSHOP,
-            GoodsRecipeName.TREATED_PLANKS,
-            HarvestName.PINE_RESIN.value)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.WOOD_WORKSHOP,
+                                 GoodsRecipeName.TREATED_PLANKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.WOOD_WORKSHOP,
+                                    recipeIndex)
+        pineResinInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.WOOD_WORKSHOP,
+                                   GoodsRecipeName.TREATED_PLANKS,
+                                   HarvestName.PINE_RESIN)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1775,15 +1797,16 @@ class Folktail:
         if woodWorkshopsCount < 0:
             raise ValueError("Wood workshops count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.WOOD_WORKSHOP,
-            GoodsRecipeName.TREATED_PLANKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.WOOD_WORKSHOP, recipeIndex)
-        planksInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.WOOD_WORKSHOP,
-            GoodsRecipeName.TREATED_PLANKS,
-            "Planks")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.WOOD_WORKSHOP,
+                                 GoodsRecipeName.TREATED_PLANKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.WOOD_WORKSHOP,
+                                    recipeIndex)
+        planksInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.WOOD_WORKSHOP,
+                                   GoodsRecipeName.TREATED_PLANKS,
+                                   GoodsRecipeName.PLANKS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1791,8 +1814,7 @@ class Folktail:
 
         return math.ceil(woodWorkshopsCount * planksPerWoodWorkshopPerDay)
 
-    def getSmeltersNeededForMetalBlocks(
-            self, metalBlocksAmount: float) -> int:
+    def getSmeltersNeededForMetalBlocks(self, metalBlocksAmount: float) -> int:
         """
         Calculate the number of smelters needed to produce a given amount of
         metal blocks per day.
@@ -1808,13 +1830,13 @@ class Folktail:
         if metalBlocksAmount < 0:
             raise ValueError("Metal blocks amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.SMELTER,
-            GoodsRecipeName.METAL_BLOCKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.SMELTER, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.SMELTER, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.SMELTER,
+                                 GoodsRecipeName.METAL_BLOCKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.SMELTER, recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.SMELTER, recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerSmelter = (outputQuantity / productionTime) * 24
 
@@ -1836,15 +1858,15 @@ class Folktail:
         if smeltersCount < 0:
             raise ValueError("Smelters count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.SMELTER,
-            GoodsRecipeName.METAL_BLOCKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.SMELTER, recipeIndex)
-        scrapMetalInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.SMELTER,
-            GoodsRecipeName.METAL_BLOCKS,
-            "Scrap Metal")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.SMELTER,
+                                 GoodsRecipeName.METAL_BLOCKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.SMELTER, recipeIndex)
+        scrapMetalInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.SMELTER,
+                                   GoodsRecipeName.METAL_BLOCKS,
+                                   GoodsRecipeName.SCRAP_METAL)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1868,15 +1890,15 @@ class Folktail:
         if smeltersCount < 0:
             raise ValueError("Smelters count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.SMELTER,
-            GoodsRecipeName.METAL_BLOCKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.SMELTER, recipeIndex)
-        logsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.SMELTER,
-            GoodsRecipeName.METAL_BLOCKS,
-            "Logs")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.SMELTER,
+                                 GoodsRecipeName.METAL_BLOCKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.SMELTER, recipeIndex)
+        logsInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.SMELTER,
+                                   GoodsRecipeName.METAL_BLOCKS,
+                                   HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1900,13 +1922,13 @@ class Folktail:
         if scrapMetalAmount < 0:
             raise ValueError("Scrap metal amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.MINE,
-            GoodsRecipeName.SCRAP_METAL)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.MINE, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.MINE, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.MINE,
+                                 GoodsRecipeName.SCRAP_METAL)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.MINE, recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.MINE, recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerMine = (outputQuantity / productionTime) * 24
 
@@ -1928,15 +1950,15 @@ class Folktail:
         if minesCount < 0:
             raise ValueError("Mines count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.MINE,
-            GoodsRecipeName.SCRAP_METAL)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.MINE, recipeIndex)
-        treatedPlanksInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.MINE,
-            GoodsRecipeName.SCRAP_METAL,
-            "Treated Planks")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.MINE,
+                                 GoodsRecipeName.SCRAP_METAL)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.MINE, recipeIndex)
+        treatedPlanksInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.MINE,
+                                   GoodsRecipeName.SCRAP_METAL,
+                                   GoodsRecipeName.TREATED_PLANKS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1944,8 +1966,9 @@ class Folktail:
 
         return math.ceil(minesCount * treatedPlanksPerMinePerDay)
 
-    def getRefineriesNeededForBiofuelCarrots(
-            self, biofuelCarrotsAmount: float) -> int:
+    def getRefineriesNeededForBiofuelCarrots(self,
+                                             biofuelCarrotsAmount: float
+                                             ) -> int:
         """
         Calculate the number of refineries needed to produce a given amount of
         biofuel per day using carrots.
@@ -1961,20 +1984,21 @@ class Folktail:
         if biofuelCarrotsAmount < 0:
             raise ValueError("Biofuel Carrots amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_CARROTS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.REFINERY, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.BIOFUEL_CARROTS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.REFINERY, recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerRefinery = (outputQuantity / productionTime) * 24
 
         return math.ceil(biofuelCarrotsAmount / productionPerRefinery)
 
-    def getCarrotsNeededForRefineriesWithBiofuelCarrots(
-            self, refineriesCount: int) -> int:
+    def getCarrotsNeededForRefineriesWithBiofuelCarrots(self,
+                                                        refineriesCount: int
+                                                        ) -> int:
         """
         Calculate the number of carrots needed per day to keep a given number
         of refineries running producing biofuel with carrots.
@@ -1990,24 +2014,25 @@ class Folktail:
         if refineriesCount < 0:
             raise ValueError("Refineries count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_CARROTS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
-        carrotsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_CARROTS,
-            "Carrots")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.BIOFUEL_CARROTS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
+        carrotsInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.REFINERY,
+                                   GoodsRecipeName.BIOFUEL_CARROTS,
+                                   HarvestName.CARROTS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
-        carrotsPerRafineryPerDay = carrotsInput * cyclesPerDay
+        carrotsPerRefineryPerDay = carrotsInput * cyclesPerDay
 
-        return math.ceil(refineriesCount * carrotsPerRafineryPerDay)
+        return math.ceil(refineriesCount * carrotsPerRefineryPerDay)
 
-    def getWaterNeededForRefineriesWithBiofuelCarrots(
-            self, refineriesCount: int) -> int:
+    def getWaterNeededForRefineriesWithBiofuelCarrots(self,
+                                                      refineriesCount: int
+                                                      ) -> int:
         """
         Calculate the number of water needed per day to keep a given number of
         refineries running producing biofuel with carrots.
@@ -2023,15 +2048,15 @@ class Folktail:
         if refineriesCount < 0:
             raise ValueError("Refineries count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_CARROTS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
-        waterInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_CARROTS,
-            "Water")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.BIOFUEL_CARROTS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
+        waterInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.REFINERY,
+                                   GoodsRecipeName.BIOFUEL_CARROTS,
+                                   HarvestName.WATER)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2039,8 +2064,9 @@ class Folktail:
 
         return math.ceil(refineriesCount * waterPerRefineryPerDay)
 
-    def getRefineriesNeededForBiofuelPotatoes(
-            self, biofuelPotatoesAmount: float) -> int:
+    def getRefineriesNeededForBiofuelPotatoes(self,
+                                              biofuelPotatoesAmount: float
+                                              ) -> int:
         """
         Calculate the number of refineries needed to produce a given amount of
         biofuel per day using potatoes.
@@ -2056,20 +2082,21 @@ class Folktail:
         if biofuelPotatoesAmount < 0:
             raise ValueError("Biofuel Potatoes amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_POTATOES)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.REFINERY, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.BIOFUEL_POTATOES)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.REFINERY, recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerRefinery = (outputQuantity / productionTime) * 24
 
         return math.ceil(biofuelPotatoesAmount / productionPerRefinery)
 
-    def getPotatoesNeededForRefineriesWithBiofuelPotatoes(
-            self, refineriesCount: int) -> int:
+    def getPotatoesNeededForRefineriesWithBiofuelPotatoes(self,
+                                                          refineriesCount: int
+                                                          ) -> int:
         """
         Calculate the number of potatoes needed per day to keep a given number
         of refineries running producing biofuel with potatoes.
@@ -2085,15 +2112,15 @@ class Folktail:
         if refineriesCount < 0:
             raise ValueError("Refineries count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_POTATOES)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
-        potatoesInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_POTATOES,
-            "Potatoes")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.BIOFUEL_POTATOES)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
+        potatoesInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.REFINERY,
+                                   GoodsRecipeName.BIOFUEL_POTATOES,
+                                   HarvestName.POTATOES)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2101,8 +2128,9 @@ class Folktail:
 
         return math.ceil(refineriesCount * potatoesPerRefineryPerDay)
 
-    def getWaterNeededForRefineriesWithBiofuelPotatoes(
-            self, refineriesCount: int) -> int:
+    def getWaterNeededForRefineriesWithBiofuelPotatoes(self,
+                                                       refineriesCount: int
+                                                       ) -> int:
         """
         Calculate the number of water needed per day to keep a given number of
         refineries running producing biofuel with potatoes.
@@ -2118,15 +2146,15 @@ class Folktail:
         if refineriesCount < 0:
             raise ValueError("Refineries count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_POTATOES)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
-        waterInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_POTATOES,
-            "Water")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.BIOFUEL_POTATOES)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
+        waterInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.REFINERY,
+                                   GoodsRecipeName.BIOFUEL_POTATOES,
+                                   HarvestName.WATER)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2134,8 +2162,8 @@ class Folktail:
 
         return math.ceil(refineriesCount * waterPerRefineryPerDay)
 
-    def getRefineriesNeededForBiofuelSpadderdocks(
-            self, biofuelSpadderdocksAmount: float) -> int:
+    def getRefineriesNeededForBiofuelSpadderdocks(self,
+                                                  biofuelSpadderdocksAmount: float) -> int:     # noqa: E501
         """
         Calculate the number of refineries needed to produce a given amount of
         biofuel per day using spadderdocks.
@@ -2151,20 +2179,20 @@ class Folktail:
         if biofuelSpadderdocksAmount < 0:
             raise ValueError("Biofuel Spadderdocks amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.REFINERY, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.REFINERY, recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerRefinery = (outputQuantity / productionTime) * 24
 
         return math.ceil(biofuelSpadderdocksAmount / productionPerRefinery)
 
-    def getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks(
-            self, refineriesCount: int) -> int:
+    def getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks(self,
+                                                                  refineriesCount: int) -> int:     # noqa: E501
         """
         Calculate the number of spadderdocks needed per day to keep a given
         number of refineries running producing biofuel with spadderdocks.
@@ -2180,16 +2208,16 @@ class Folktail:
         if refineriesCount < 0:
             raise ValueError("Refineries count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
         # Note: YAML has typo "Spadderdocks" instead of "Spadderdocks"
-        spadderdocksInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_SPADDERDOCKS,
-            "Spadderdocks")
+        spadderdocksInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.REFINERY,
+                                   GoodsRecipeName.BIOFUEL_SPADDERDOCKS,
+                                   HarvestName.SPADDERDOCKS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2197,8 +2225,9 @@ class Folktail:
 
         return math.ceil(refineriesCount * spadderdocksPerRefineryPerDay)
 
-    def getWaterNeededForRefineriesWithBiofuelSpadderdocks(
-            self, refineriesCount: int) -> int:
+    def getWaterNeededForRefineriesWithBiofuelSpadderdocks(self,
+                                                           refineriesCount: int
+                                                           ) -> int:
         """
         Calculate the number of water needed per day to keep a given number of
         refineries running producing biofuel with spadderdocks.
@@ -2214,15 +2243,15 @@ class Folktail:
         if refineriesCount < 0:
             raise ValueError("Refineries count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
-        waterInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.BIOFUEL_SPADDERDOCKS,
-            "Water")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.BIOFUEL_SPADDERDOCKS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
+        waterInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.REFINERY,
+                                   GoodsRecipeName.BIOFUEL_SPADDERDOCKS,
+                                   HarvestName.WATER)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2246,20 +2275,21 @@ class Folktail:
         if catalystAmount < 0:
             raise ValueError("Catalyst amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.CATALYST)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.REFINERY, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.CATALYST)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.REFINERY, recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerRefinery = (outputQuantity / productionTime) * 24
 
         return math.ceil(catalystAmount / productionPerRefinery)
 
-    def getMapleSyrupNeededForRefineriesWithCatalyst(
-            self, refineriesCount: int) -> int:
+    def getMapleSyrupNeededForRefineriesWithCatalyst(self,
+                                                     refineriesCount: int
+                                                     ) -> int:
         """
         Calculate the number of maple syrup needed per day to keep a given
         number of refineries running producing catalyst.
@@ -2275,15 +2305,15 @@ class Folktail:
         if refineriesCount < 0:
             raise ValueError("Refineries count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.CATALYST)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
-        mapleSyrupInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.CATALYST,
-            "Maple Syrup")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.CATALYST)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
+        mapleSyrupInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.REFINERY,
+                                   GoodsRecipeName.CATALYST,
+                                   HarvestName.MAPLE_SYRUP)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2291,8 +2321,8 @@ class Folktail:
 
         return math.ceil(refineriesCount * mapleSyrupPerRefineryPerDay)
 
-    def getExtractNeededForRefineriesWithCatalyst(
-            self, refineriesCount: int) -> int:
+    def getExtractNeededForRefineriesWithCatalyst(self,
+                                                  refineriesCount: int) -> int:
         """
         Calculate the number of extract needed per day to keep a given number
         of refineries running producing catalyst.
@@ -2308,15 +2338,15 @@ class Folktail:
         if refineriesCount < 0:
             raise ValueError("Refineries count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.CATALYST)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.REFINERY, recipeIndex)
-        extractInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.REFINERY,
-            GoodsRecipeName.CATALYST,
-            "Extract")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.REFINERY,
+                                 GoodsRecipeName.CATALYST)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.REFINERY, recipeIndex)
+        extractInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.REFINERY,
+                                   GoodsRecipeName.CATALYST,
+                                   GoodsRecipeName.EXTRACT)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2324,8 +2354,8 @@ class Folktail:
 
         return math.ceil(refineriesCount * extractPerRefineryPerDay)
 
-    def getBotPartFactoriesNeededForBotChassis(
-            self, botChassisAmount: float) -> int:
+    def getBotPartFactoriesNeededForBotChassis(self,
+                                               botChassisAmount: float) -> int:
         """
         Calculate the number of bot part factories needed to produce a given
         amount of bot chassis per day.
@@ -2341,20 +2371,22 @@ class Folktail:
         if botChassisAmount < 0:
             raise ValueError("Bot Chassis amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_CHASSIS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_PART_FACTORY,
+                                 GoodsRecipeName.BOT_CHASSIS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerBotPartFactory = (outputQuantity / productionTime) * 24
 
         return math.ceil(botChassisAmount / productionPerBotPartFactory)
 
-    def getPlanksNeededForBotPartFactoriesWithBotChassis(
-            self, botPartFactoriesCount: int) -> int:
+    def getPlanksNeededForBotPartFactoriesWithBotChassis(self,
+                                                         botPartFactoriesCount: int) -> int:    # noqa: E501
         """
         Calculate the number of planks needed per day to keep a given number
         of bot part factories running producing bot chassis.
@@ -2370,15 +2402,16 @@ class Folktail:
         if botPartFactoriesCount < 0:
             raise ValueError("Bot part factories count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_CHASSIS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
-        planksInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_CHASSIS,
-            "Planks")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_PART_FACTORY,
+                                 GoodsRecipeName.BOT_CHASSIS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
+        planksInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.BOT_PART_FACTORY,
+                                   GoodsRecipeName.BOT_CHASSIS,
+                                   GoodsRecipeName.PLANKS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2386,8 +2419,8 @@ class Folktail:
 
         return math.ceil(botPartFactoriesCount * planksPerBotPartFactoryPerDay)
 
-    def getMetalBlocksNeededForBotPartFactoriesWithBotChassis(
-            self, botPartFactoriesCount: int) -> int:
+    def getMetalBlocksNeededForBotPartFactoriesWithBotChassis(self,
+                                                              botPartFactoriesCount: int) -> int:   # noqa: E501
         """
         Calculate the number of metal blocks needed per day to keep a given
         number of bot part factories running producing bot chassis.
@@ -2403,15 +2436,16 @@ class Folktail:
         if botPartFactoriesCount < 0:
             raise ValueError("Bot part factories count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_CHASSIS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
-        metalBlocksInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_CHASSIS,
-            "Metal Blocks")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_PART_FACTORY,
+                                 GoodsRecipeName.BOT_CHASSIS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
+        metalBlocksInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.BOT_PART_FACTORY,
+                                   GoodsRecipeName.BOT_CHASSIS,
+                                   GoodsRecipeName.METAL_BLOCKS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2420,8 +2454,8 @@ class Folktail:
         return math.ceil(botPartFactoriesCount *
                          metalBlocksPerBotPartFactoryPerDay)
 
-    def getBiofuelNeededForBotPartFactoriesWithBotChassis(
-            self, botPartFactoriesCount: int) -> int:
+    def getBiofuelNeededForBotPartFactoriesWithBotChassis(self,
+                                                          botPartFactoriesCount: int) -> int:   # noqa: E501
         """
         Calculate the number of biofuel needed per day to keep a given number
         of bot part factories running producing bot chassis.
@@ -2437,15 +2471,16 @@ class Folktail:
         if botPartFactoriesCount < 0:
             raise ValueError("Bot part factories count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_CHASSIS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
-        biofuelInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_CHASSIS,
-            "Biofuel")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_PART_FACTORY,
+                                 GoodsRecipeName.BOT_CHASSIS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
+        biofuelInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.BOT_PART_FACTORY,
+                                   GoodsRecipeName.BOT_CHASSIS,
+                                   GoodsRecipeName.BIOFUEL)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2454,8 +2489,8 @@ class Folktail:
         return math.ceil(botPartFactoriesCount *
                          biofuelPerBotPartFactoryPerDay)
 
-    def getBotPartFactoriesNeededForBotHeads(
-            self, botHeadsAmount: float) -> int:
+    def getBotPartFactoriesNeededForBotHeads(self,
+                                             botHeadsAmount: float) -> int:
         """
         Calculate the number of bot part factories needed to produce a given
         amount of bot heads per day.
@@ -2471,20 +2506,22 @@ class Folktail:
         if botHeadsAmount < 0:
             raise ValueError("Bot Heads amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_HEADS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_PART_FACTORY,
+                                 GoodsRecipeName.BOT_HEADS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerBotPartFactory = (outputQuantity / productionTime) * 24
 
         return math.ceil(botHeadsAmount / productionPerBotPartFactory)
 
-    def getGearsNeededForBotPartFactoriesWithBotHeads(
-            self, botPartFactoriesCount: int) -> int:
+    def getGearsNeededForBotPartFactoriesWithBotHeads(self,
+                                                      botPartFactoriesCount: int) -> int:   # noqa: E501
         """
         Calculate the number of gears needed per day to keep a given number of
         bot part factories running producing bot heads.
@@ -2500,15 +2537,16 @@ class Folktail:
         if botPartFactoriesCount < 0:
             raise ValueError("Bot part factories count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_HEADS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
-        gearsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_HEADS,
-            "Gears")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_PART_FACTORY,
+                                 GoodsRecipeName.BOT_HEADS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
+        gearsInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.BOT_PART_FACTORY,
+                                   GoodsRecipeName.BOT_HEADS,
+                                   GoodsRecipeName.GEARS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2533,15 +2571,16 @@ class Folktail:
         if botPartFactoriesCount < 0:
             raise ValueError("Bot part factories count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_HEADS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
-        metalBlocksInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_HEADS,
-            "Metal Blocks")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_PART_FACTORY,
+                                 GoodsRecipeName.BOT_HEADS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
+        metalBlocksInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.BOT_PART_FACTORY,
+                                   GoodsRecipeName.BOT_HEADS,
+                                   GoodsRecipeName.METAL_BLOCKS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2550,8 +2589,8 @@ class Folktail:
         return math.ceil(botPartFactoriesCount *
                          metalBlocksPerBotPartFactoryPerDay)
 
-    def getPlanksNeededForBotPartFactoriesWithBotHeads(
-            self, botPartFactoriesCount: int) -> int:
+    def getPlanksNeededForBotPartFactoriesWithBotHeads(self,
+                                                       botPartFactoriesCount: int) -> int:  # noqa: E501
         """
         Calculate the number of planks needed per day to keep a given number
         of bot part factories running producing bot heads.
@@ -2567,15 +2606,16 @@ class Folktail:
         if botPartFactoriesCount < 0:
             raise ValueError("Bot part factories count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_HEADS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
-        planksInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_HEADS,
-            "Planks")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_PART_FACTORY,
+                                 GoodsRecipeName.BOT_HEADS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
+        planksInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.BOT_PART_FACTORY,
+                                   GoodsRecipeName.BOT_HEADS,
+                                   GoodsRecipeName.PLANKS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2583,8 +2623,8 @@ class Folktail:
 
         return math.ceil(botPartFactoriesCount * planksPerBotPartFactoryPerDay)
 
-    def getBotPartFactoriesNeededForBotLimbs(
-            self, botLimbsAmount: float) -> int:
+    def getBotPartFactoriesNeededForBotLimbs(self,
+                                             botLimbsAmount: float) -> int:
         """
         Calculate the number of bot part factories needed to produce a given
         amount of bot limbs per day.
@@ -2600,20 +2640,22 @@ class Folktail:
         if botLimbsAmount < 0:
             raise ValueError("Bot Limbs amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_LIMBS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_PART_FACTORY,
+                                 GoodsRecipeName.BOT_LIMBS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerBotPartFactory = (outputQuantity / productionTime) * 24
 
         return math.ceil(botLimbsAmount / productionPerBotPartFactory)
 
-    def getGearsNeededForBotPartFactoriesWithBotLimbs(
-            self, botPartFactoriesCount: int) -> int:
+    def getGearsNeededForBotPartFactoriesWithBotLimbs(self,
+                                                      botPartFactoriesCount: int) -> int:   # noqa: E501
         """
         Calculate the number of gears needed per day to keep a given number of
         bot part factories running producing bot limbs.
@@ -2629,15 +2671,16 @@ class Folktail:
         if botPartFactoriesCount < 0:
             raise ValueError("Bot part factories count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_LIMBS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
-        gearsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_LIMBS,
-            "Gears")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_PART_FACTORY,
+                                 GoodsRecipeName.BOT_LIMBS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
+        gearsInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.BOT_PART_FACTORY,
+                                   GoodsRecipeName.BOT_LIMBS,
+                                   GoodsRecipeName.GEARS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2645,8 +2688,8 @@ class Folktail:
 
         return math.ceil(botPartFactoriesCount * gearsPerBotPartFactoryPerDay)
 
-    def getPlanksNeededForBotPartFactoriesWithBotLimbs(
-            self, botPartFactoriesCount: int) -> int:
+    def getPlanksNeededForBotPartFactoriesWithBotLimbs(self,
+                                                       botPartFactoriesCount: int) -> int:  # noqa: E501
         """
         Calculate the number of planks needed per day to keep a given number
         of bot part factories running producing bot limbs.
@@ -2662,15 +2705,16 @@ class Folktail:
         if botPartFactoriesCount < 0:
             raise ValueError("Bot part factories count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_LIMBS)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_PART_FACTORY, recipeIndex)
-        planksInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.BOT_PART_FACTORY,
-            GoodsRecipeName.BOT_LIMBS,
-            "Planks")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_PART_FACTORY,
+                                 GoodsRecipeName.BOT_LIMBS)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_PART_FACTORY,
+                                    recipeIndex)
+        planksInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.BOT_PART_FACTORY,
+                                   GoodsRecipeName.BOT_LIMBS,
+                                   GoodsRecipeName.PLANKS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2694,20 +2738,22 @@ class Folktail:
         if botsAmount < 0:
             raise ValueError("Bots amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_ASSEMBLER,
-            GoodsRecipeName.BOT)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_ASSEMBLER, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.BOT_ASSEMBLER, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_ASSEMBLER,
+                                 GoodsRecipeName.BOT)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_ASSEMBLER,
+                                    recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.BOT_ASSEMBLER,
+                                    recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerBotAssembler = (outputQuantity / productionTime) * 24
 
         return math.ceil(botsAmount / productionPerBotAssembler)
 
-    def getBotChassisNeededForBotAssemblers(
-            self, botAssemblersCount: int) -> int:
+    def getBotChassisNeededForBotAssemblers(self,
+                                            botAssemblersCount: int) -> int:
         """
         Calculate the number of bot chassis needed per day to keep a given
         number of bot assemblers running.
@@ -2723,15 +2769,16 @@ class Folktail:
         if botAssemblersCount < 0:
             raise ValueError("Bot assemblers count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_ASSEMBLER,
-            GoodsRecipeName.BOT)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_ASSEMBLER, recipeIndex)
-        botChassisInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.BOT_ASSEMBLER,
-            GoodsRecipeName.BOT,
-            "Bot Chassis")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_ASSEMBLER,
+                                 GoodsRecipeName.BOT)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_ASSEMBLER,
+                                    recipeIndex)
+        botChassisInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.BOT_ASSEMBLER,
+                                   GoodsRecipeName.BOT,
+                                   GoodsRecipeName.BOT_CHASSIS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2739,8 +2786,8 @@ class Folktail:
 
         return math.ceil(botAssemblersCount * botChassisPerBotAssemblerPerDay)
 
-    def getBotHeadsNeededForBotAssemblers(
-            self, botAssemblersCount: int) -> int:
+    def getBotHeadsNeededForBotAssemblers(self,
+                                          botAssemblersCount: int) -> int:
         """
         Calculate the number of bot heads needed per day to keep a given
         number of bot assemblers running.
@@ -2756,15 +2803,16 @@ class Folktail:
         if botAssemblersCount < 0:
             raise ValueError("Bot assemblers count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_ASSEMBLER,
-            GoodsRecipeName.BOT)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_ASSEMBLER, recipeIndex)
-        botHeadsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.BOT_ASSEMBLER,
-            GoodsRecipeName.BOT,
-            "Bot Heads")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_ASSEMBLER,
+                                 GoodsRecipeName.BOT)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_ASSEMBLER,
+                                    recipeIndex)
+        botHeadsInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.BOT_ASSEMBLER,
+                                   GoodsRecipeName.BOT,
+                                   GoodsRecipeName.BOT_HEADS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2772,8 +2820,8 @@ class Folktail:
 
         return math.ceil(botAssemblersCount * botHeadsPerBotAssemblerPerDay)
 
-    def getBotLimbsNeededForBotAssemblers(
-            self, botAssemblersCount: int) -> int:
+    def getBotLimbsNeededForBotAssemblers(self,
+                                          botAssemblersCount: int) -> int:
         """
         Calculate the number of bot limbs needed per day to keep a given
         number of bot assemblers running.
@@ -2789,15 +2837,16 @@ class Folktail:
         if botAssemblersCount < 0:
             raise ValueError("Bot assemblers count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.BOT_ASSEMBLER,
-            GoodsRecipeName.BOT)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.BOT_ASSEMBLER, recipeIndex)
-        botLimbsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.BOT_ASSEMBLER,
-            GoodsRecipeName.BOT,
-            "Bot Limbs")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.BOT_ASSEMBLER,
+                                 GoodsRecipeName.BOT)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.BOT_ASSEMBLER,
+                                    recipeIndex)
+        botLimbsInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.BOT_ASSEMBLER,
+                                   GoodsRecipeName.BOT,
+                                   GoodsRecipeName.BOT_LIMBS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2805,8 +2854,9 @@ class Folktail:
 
         return math.ceil(botAssemblersCount * botLimbsPerBotAssemblerPerDay)
 
-    def getExplosivesFactoriesNeededForExplosives(
-            self, explosivesAmount: float) -> int:
+    def getExplosivesFactoriesNeededForExplosives(self,
+                                                  explosivesAmount: float
+                                                  ) -> int:
         """
         Calculate the number of explosives factories needed to produce a given
         amount of explosives per day.
@@ -2822,20 +2872,23 @@ class Folktail:
         if explosivesAmount < 0:
             raise ValueError("Explosives amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.EXPLOSIVES_FACTORY,
-            GoodsRecipeName.EXPLOSIVES)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.EXPLOSIVES_FACTORY, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.EXPLOSIVES_FACTORY, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.EXPLOSIVES_FACTORY,
+                                 GoodsRecipeName.EXPLOSIVES)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.EXPLOSIVES_FACTORY,
+                                    recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.EXPLOSIVES_FACTORY,
+                                    recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerExplosivesFactory = (outputQuantity / productionTime) * 24
 
         return math.ceil(explosivesAmount / productionPerExplosivesFactory)
 
-    def getBadwaterNeededForExplosivesFactories(
-            self, explosivesFactoriesCount: int) -> int:
+    def getBadwaterNeededForExplosivesFactories(self,
+                                                explosivesFactoriesCount: int
+                                                ) -> int:
         """
         Calculate the number of badwater needed per day to keep a given number
         of explosives factories running.
@@ -2851,15 +2904,16 @@ class Folktail:
         if explosivesFactoriesCount < 0:
             raise ValueError("Explosives factories count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.EXPLOSIVES_FACTORY,
-            GoodsRecipeName.EXPLOSIVES)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.EXPLOSIVES_FACTORY, recipeIndex)
-        badwaterInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.EXPLOSIVES_FACTORY,
-            GoodsRecipeName.EXPLOSIVES,
-            "Badwater")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.EXPLOSIVES_FACTORY,
+                                 GoodsRecipeName.EXPLOSIVES)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.EXPLOSIVES_FACTORY,
+                                    recipeIndex)
+        badwaterInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.EXPLOSIVES_FACTORY,
+                                   GoodsRecipeName.EXPLOSIVES,
+                                   HarvestName.BADWATER)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2884,20 +2938,19 @@ class Folktail:
         if extractAmount < 0:
             raise ValueError("Extract amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.CENTRIFUGE,
-            GoodsRecipeName.EXTRACT)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.CENTRIFUGE, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.CENTRIFUGE, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.CENTRIFUGE,
+                                 GoodsRecipeName.EXTRACT)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.CENTRIFUGE, recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.CENTRIFUGE, recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerCentrifuge = (outputQuantity / productionTime) * 24
 
         return math.ceil(extractAmount / productionPerCentrifuge)
 
-    def getBadwaterNeededForCentrifuges(
-            self, centrifugesCount: int) -> int:
+    def getBadwaterNeededForCentrifuges(self, centrifugesCount: int) -> int:
         """
         Calculate the number of badwater needed per day to keep a given number
         of centrifuges running.
@@ -2913,15 +2966,15 @@ class Folktail:
         if centrifugesCount < 0:
             raise ValueError("Centrifuges count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.CENTRIFUGE,
-            GoodsRecipeName.EXTRACT)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.CENTRIFUGE, recipeIndex)
-        badwaterInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.CENTRIFUGE,
-            GoodsRecipeName.EXTRACT,
-            "Badwater")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.CENTRIFUGE,
+                                 GoodsRecipeName.EXTRACT)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.CENTRIFUGE, recipeIndex)
+        badwaterInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.CENTRIFUGE,
+                                   GoodsRecipeName.EXTRACT,
+                                   HarvestName.BADWATER)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2945,15 +2998,15 @@ class Folktail:
         if centrifugesCount < 0:
             raise ValueError("Centrifuges count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.CENTRIFUGE,
-            GoodsRecipeName.EXTRACT)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.CENTRIFUGE, recipeIndex)
-        logsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.CENTRIFUGE,
-            GoodsRecipeName.EXTRACT,
-            "Logs")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.CENTRIFUGE,
+                                 GoodsRecipeName.EXTRACT)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.CENTRIFUGE, recipeIndex)
+        logsInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.CENTRIFUGE,
+                                   GoodsRecipeName.EXTRACT,
+                                   HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -2977,20 +3030,19 @@ class Folktail:
         if antidoteAmount < 0:
             raise ValueError("Antidote amount cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.HERBALIST,
-            GoodsRecipeName.ANTIDOTE)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.HERBALIST, recipeIndex)
-        outputQuantity = self.factionData.getGoodsOutputQuantity(
-            GoodsBuildingName.HERBALIST, recipeIndex)
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.HERBALIST,
+                                 GoodsRecipeName.ANTIDOTE)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.HERBALIST, recipeIndex)
+        outputQuantity = self.factionData \
+            .getGoodsOutputQuantity(GoodsBuildingName.HERBALIST, recipeIndex)
         # Production time is in hours, calculate daily production
         productionPerHerbalist = (outputQuantity / productionTime) * 24
 
         return math.ceil(antidoteAmount / productionPerHerbalist)
 
-    def getDandelionsNeededForHerbalists(
-            self, herbalistsCount: int) -> int:
+    def getDandelionsNeededForHerbalists(self, herbalistsCount: int) -> int:
         """
         Calculate the number of dandelions needed per day to keep a given
         number of herbalists running.
@@ -3006,15 +3058,15 @@ class Folktail:
         if herbalistsCount < 0:
             raise ValueError("Herbalists count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.HERBALIST,
-            GoodsRecipeName.ANTIDOTE)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.HERBALIST, recipeIndex)
-        dandelionsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.HERBALIST,
-            GoodsRecipeName.ANTIDOTE,
-            "Dandelions")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.HERBALIST,
+                                 GoodsRecipeName.ANTIDOTE)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.HERBALIST, recipeIndex)
+        dandelionsInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.HERBALIST,
+                                   GoodsRecipeName.ANTIDOTE,
+                                   HarvestName.DANDELIONS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -3038,15 +3090,15 @@ class Folktail:
         if herbalistsCount < 0:
             raise ValueError("Herbalists count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.HERBALIST,
-            GoodsRecipeName.ANTIDOTE)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.HERBALIST, recipeIndex)
-        berriesInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.HERBALIST,
-            GoodsRecipeName.ANTIDOTE,
-            "Berries")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.HERBALIST,
+                                 GoodsRecipeName.ANTIDOTE)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.HERBALIST, recipeIndex)
+        berriesInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.HERBALIST,
+                                   GoodsRecipeName.ANTIDOTE,
+                                   HarvestName.BERRIES)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -3054,15 +3106,15 @@ class Folktail:
 
         return math.ceil(herbalistsCount * berriesPerHerbalistPerDay)
 
-    def getLogsNeededForHerbalists(self, herbalistsCount: int) -> float:
+    def getPapersNeededForHerbalists(self, herbalistsCount: int) -> float:
         """
-        Calculate the number of logs needed per day to keep a given number of
+        Calculate the number of papers needed per day to keep a given number of
         herbalists running.
 
         :param herbalistsCount: Number of herbalists.
         :type herbalistsCount: int
 
-        :return: Daily amount of logs needed.
+        :return: Daily amount of papers needed.
         :rtype: float
 
         :raises ValueError: If herbalists count is negative.
@@ -3070,15 +3122,15 @@ class Folktail:
         if herbalistsCount < 0:
             raise ValueError("Herbalists count cannot be negative.")
 
-        recipeIndex = self.factionData.getGoodsRecipeIndex(
-            GoodsBuildingName.HERBALIST,
-            GoodsRecipeName.ANTIDOTE)
-        productionTime = self.factionData.getGoodsProductionTime(
-            GoodsBuildingName.HERBALIST, recipeIndex)
-        logsInput = self.factionData.getGoodsInputQuantity(
-            GoodsBuildingName.HERBALIST,
-            GoodsRecipeName.ANTIDOTE,
-            "Logs")
+        recipeIndex = self.factionData \
+            .getGoodsRecipeIndex(GoodsBuildingName.HERBALIST,
+                                 GoodsRecipeName.ANTIDOTE)
+        productionTime = self.factionData \
+            .getGoodsProductionTime(GoodsBuildingName.HERBALIST, recipeIndex)
+        logsInput = self.factionData \
+            .getGoodsInputQuantity(GoodsBuildingName.HERBALIST,
+                                   GoodsRecipeName.ANTIDOTE,
+                                   GoodsRecipeName.PAPER)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime

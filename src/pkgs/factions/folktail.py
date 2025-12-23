@@ -648,7 +648,8 @@ class Folktail:
 
         return math.ceil(grilledPotatoAmount / productionPerGrill)
 
-    def getPotatoesNeededForGrills(self, grillsCount: int) -> int:
+    def getPotatoesNeededForGrilledPotatoesProduction(self,
+                                                      grillsCount: int) -> int:
         """
         Calculate the number of potatoes needed per day to keep a given
         number of grills running producing grilled potatoes.
@@ -680,7 +681,8 @@ class Folktail:
 
         return math.ceil(grillsCount * potatoesPerGrillPerDay)
 
-    def getLogsNeededForGrillsWithPotatoes(self, grillsCount: int) -> float:
+    def getLogsNeededForGrilledPotatoesProduction(self,
+                                                  grillsCount: int) -> float:
         """
         Calculate the number of logs needed per day to keep a given number
         of grills running producing grilled potatoes.
@@ -743,7 +745,9 @@ class Folktail:
 
         return math.ceil(grilledChestnutAmount / productionPerGrill)
 
-    def getChestnutsNeededForGrills(self, grillsCount: int) -> int:
+    def getChestnutsNeededForGrilledChestnutsProduction(self,
+                                                        grillsCount: int
+                                                        ) -> int:
         """
         Calculate the number of chestnuts needed per day to keep a given
         number of grills running producing grilled chestnuts.
@@ -776,7 +780,8 @@ class Folktail:
 
         return math.ceil(grillsCount * chestnutsPerGrillPerDay)
 
-    def getLogsNeededForGrillsWithChestnuts(self, grillsCount: int) -> float:
+    def getLogsNeededForGrilledChestnutsProduction(self,
+                                                   grillsCount: int) -> float:
         """
         Calculate the number of logs needed per day to keep a given number
         of grills running producing grilled chestnuts.
@@ -841,7 +846,9 @@ class Folktail:
 
         return math.ceil(grilledSpadderdockAmount / productionPerGrill)
 
-    def getSpadderdocksNeededForGrills(self, grillsCount: int) -> int:
+    def getSpadderdocksNeededForGrilledSpadderdocksProduction(self,
+                                                              grillsCount: int
+                                                              ) -> int:
         """
         Calculate the number of spadderdocks needed per day to keep a given
         number of grills running producing grilled spadderdocks.
@@ -874,8 +881,9 @@ class Folktail:
 
         return math.ceil(grillsCount * spadderdocksPerGrillPerDay)
 
-    def getLogsNeededForGrillsWithSpadderdocks(self,
-                                               grillsCount: int) -> float:
+    def getLogsNeededForGrilledSpadderdocksProduction(self,
+                                                      grillsCount: int
+                                                      ) -> float:
         """
         Calculate the number of logs needed per day to keep a given number
         of grills running producing grilled spadderdocks.
@@ -938,7 +946,8 @@ class Folktail:
 
         return math.ceil(wheatFlourAmount / productionPerGristmill)
 
-    def getWheatNeededForGristmills(self, gristmillsCount: int) -> int:
+    def getWheatNeededForWheatFlourProduction(self,
+                                              gristmillsCount: int) -> int:
         """
         Calculate the number of wheat needed per day to keep a given number of
         gristmills running producing wheat flour.
@@ -1002,7 +1011,9 @@ class Folktail:
 
         return math.ceil(cattailFlourAmount / productionPerGristmill)
 
-    def getCattailRootsNeededForGristmills(self, gristmillsCount: int) -> int:
+    def getCattailRootsNeededForCattailFlourProduction(self,
+                                                       gristmillsCount: int
+                                                       ) -> int:
         """
         Calculate the number of cattail roots needed per day to keep a given
         number of gristmills running producing cattail flour.
@@ -1065,8 +1076,8 @@ class Folktail:
 
         return math.ceil(breadsAmount / productionPerBakery)
 
-    def getWheatFlourNeededForBakeriesWithBreads(self,
-                                                 bakeriesCount: int) -> int:
+    def getWheatFlourNeededForBreadsProduction(self,
+                                               bakeriesCount: int) -> int:
         """
         Calculate the number of wheat flour needed per day to keep a given
         number of bakeries running producing breads.
@@ -1099,7 +1110,7 @@ class Folktail:
 
         return math.ceil(bakeriesCount * wheatFlourPerBakeryPerDay)
 
-    def getLogsNeededForBakeriesWithBreads(self, bakeriesCount: int) -> float:
+    def getLogsNeededForBreadsProduction(self, bakeriesCount: int) -> float:
         """
         Calculate the number of logs needed per day to keep a given number
         of bakeries running producing breads.
@@ -1164,9 +1175,9 @@ class Folktail:
 
         return math.ceil(cattailCrackersAmount / productionPerBakery)
 
-    def getCattailFlourNeededForBakeriesWithCattailCrackers(self,
-                                                            bakeriesCount: int
-                                                            ) -> int:
+    def getCattailFlourNeededForCattailCrackersProduction(self,
+                                                          bakeriesCount: int
+                                                          ) -> int:
         """
         Calculate the number of cattail flour needed per day to keep a given
         number of bakeries running producing cattail crackers.
@@ -1199,9 +1210,9 @@ class Folktail:
 
         return math.ceil(bakeriesCount * cattailFlourPerBakeryPerDay)
 
-    def getLogsNeededForBakeriesWithCattailCrackers(self,
-                                                    bakeriesCount: int
-                                                    ) -> float:
+    def getLogsNeededForCattailCrackersProduction(self,
+                                                  bakeriesCount: int
+                                                  ) -> float:
         """
         Calculate the number of logs needed per day to keep a given number
         of bakeries running producing cattail crackers.
@@ -1265,9 +1276,9 @@ class Folktail:
 
         return math.ceil(maplePastriesAmount / productionPerBakery)
 
-    def getWheatFlourNeededForBakeriesWithMaplePastries(self,
-                                                        bakeriesCount: int
-                                                        ) -> int:
+    def getWheatFlourNeededForMaplePastriesProduction(self,
+                                                      bakeriesCount: int
+                                                      ) -> int:
         """
         Calculate the number of wheat flour needed per day to keep a given
         number of bakeries running producing maple pastries.
@@ -1300,7 +1311,7 @@ class Folktail:
 
         return math.ceil(bakeriesCount * wheatFlourPerBakeryPerDay)
 
-    def getMapleSyrupNeededForBakeriesWithMaplePastries(
+    def getMapleSyrupNeededForMaplePastriesProduction(
             self, bakeriesCount: int) -> int:
         """
         Calculate the number of maple syrup needed per day to keep a given
@@ -1334,8 +1345,8 @@ class Folktail:
 
         return math.ceil(bakeriesCount * mapleSyrupPerBakeryPerDay)
 
-    def getLogsNeededForBakeriesWithMaplePastries(self,
-                                                  bakeriesCount: int) -> float:
+    def getLogsNeededForMaplePastriesProduction(self,
+                                                bakeriesCount: int) -> float:
         """
         Calculate the number of logs needed per day to keep a given number
         of bakeries running producing maple pastries.
@@ -1396,7 +1407,7 @@ class Folktail:
 
         return math.ceil(planksAmount / productionPerLumberMill)
 
-    def getLogsNeededForLumberMills(self, lumberMillsCount: int) -> int:
+    def getLogsNeededForPlanksProduction(self, lumberMillsCount: int) -> int:
         """
         Calculate the number of logs needed per day to keep a given number of
         lumber mills running producing planks.
@@ -1458,7 +1469,8 @@ class Folktail:
 
         return math.ceil(gearsAmount / productionPerGearWorkshop)
 
-    def getPlanksNeededForGearWorkshops(self, gearWorkshopsCount: int) -> int:
+    def getPlanksNeededForGearsProduction(self,
+                                          gearWorkshopsCount: int) -> int:
         """
         Calculate the number of planks needed per day to keep a given number
         of gear workshops running producing gears.
@@ -1519,7 +1531,7 @@ class Folktail:
 
         return math.ceil(paperAmount / productionPerPaperMill)
 
-    def getLogsNeededForPaperMills(self, paperMillsCount: int) -> int:
+    def getLogsNeededForPaperProduction(self, paperMillsCount: int) -> int:
         """
         Calculate the number of logs needed per day to keep a given number of
         paper mills running producing paper.
@@ -1581,9 +1593,8 @@ class Folktail:
 
         return math.ceil(booksAmount / productionPerPrintingPress)
 
-    def getPaperNeededForPrintingPressesWithBooks(self,
-                                                  printingPressesCount: int
-                                                  ) -> int:
+    def getPaperNeededForBooksProduction(self,
+                                         printingPressesCount: int) -> int:
         """
         Calculate the number of paper needed per day to keep a given number of
         printing presses running producing books.
@@ -1647,8 +1658,9 @@ class Folktail:
 
         return math.ceil(punchcardsAmount / productionPerPrintingPress)
 
-    def getPaperNeededForPrintingPressesWithPunchcards(
-            self, printingPressesCount: int) -> int:
+    def getPaperNeededForPunchcardsProduction(self,
+                                              printingPressesCount: int
+                                              ) -> int:
         """
         Calculate the number of paper needed per day to keep a given number of
         printing presses running producing punchcards.
@@ -1681,8 +1693,9 @@ class Folktail:
 
         return math.ceil(printingPressesCount * paperPerPrintingPressPerDay)
 
-    def getPlanksNeededForPrintingPressesWithPunchcards(self,
-                                                        printingPressesCount: int) -> int:  # noqa: E501
+    def getPlanksNeededForPunchcardsProduction(self,
+                                               printingPressesCount: int
+                                               ) -> int:
         """
         Calculate the number of planks needed per day to keep a given number
         of printing presses running producing punchcards.
@@ -1747,8 +1760,9 @@ class Folktail:
 
         return math.ceil(treatedPlanksAmount / productionPerWoodWorkshop)
 
-    def getPineResinNeededForWoodWorkshops(self,
-                                           woodWorkshopsCount: int) -> int:
+    def getPineResinNeededForTreatedPlanksProduction(self,
+                                                     woodWorkshopsCount: int
+                                                     ) -> int:
         """
         Calculate the number of pine resin needed per day to keep a given
         number of wood workshops running producing treated planks.
@@ -1781,7 +1795,9 @@ class Folktail:
 
         return math.ceil(woodWorkshopsCount * pineResinPerWoodWorkshopPerDay)
 
-    def getPlanksNeededForWoodWorkshops(self, woodWorkshopsCount: int) -> int:
+    def getPlanksNeededForTreatedPlanksProduction(self,
+                                                  woodWorkshopsCount: int
+                                                  ) -> int:
         """
         Calculate the number of planks needed per day to keep a given number
         of wood workshops running producing treated planks.
@@ -1842,7 +1858,8 @@ class Folktail:
 
         return math.ceil(metalBlocksAmount / productionPerSmelter)
 
-    def getScrapMetalNeededForSmelters(self, smeltersCount: int) -> int:
+    def getScrapMetalNeededForMetalBlocksProduction(self,
+                                                    smeltersCount: int) -> int:
         """
         Calculate the number of scrap metal needed per day to keep a given
         number of smelters running producing metal blocks.
@@ -1874,7 +1891,8 @@ class Folktail:
 
         return math.ceil(smeltersCount * scrapMetalPerSmelterPerDay)
 
-    def getLogsNeededForSmelters(self, smeltersCount: int) -> float:
+    def getLogsNeededForMetalBlocksProduction(self,
+                                              smeltersCount: int) -> float:
         """
         Calculate the number of logs needed per day to keep a given number of
         smelters running producing metal blocks.
@@ -1934,7 +1952,8 @@ class Folktail:
 
         return math.ceil(scrapMetalAmount / productionPerMine)
 
-    def getTreatedPlanksNeededForMines(self, minesCount: int) -> int:
+    def getTreatedPlanksNeededForScrapMetalProduction(self,
+                                                      minesCount: int) -> int:
         """
         Calculate the number of treated planks needed per day to keep a given
         number of mines running producing scrap metal.
@@ -1996,9 +2015,9 @@ class Folktail:
 
         return math.ceil(biofuelCarrotsAmount / productionPerRefinery)
 
-    def getCarrotsNeededForRefineriesWithBiofuelCarrots(self,
-                                                        refineriesCount: int
-                                                        ) -> int:
+    def getCarrotsNeededForBiofuelCarrotsProduction(self,
+                                                    refineriesCount: int
+                                                    ) -> int:
         """
         Calculate the number of carrots needed per day to keep a given number
         of refineries running producing biofuel with carrots.
@@ -2030,9 +2049,9 @@ class Folktail:
 
         return math.ceil(refineriesCount * carrotsPerRefineryPerDay)
 
-    def getWaterNeededForRefineriesWithBiofuelCarrots(self,
-                                                      refineriesCount: int
-                                                      ) -> int:
+    def getWaterNeededForBiofuelCarrotsProduction(self,
+                                                  refineriesCount: int
+                                                  ) -> int:
         """
         Calculate the number of water needed per day to keep a given number of
         refineries running producing biofuel with carrots.
@@ -2094,9 +2113,9 @@ class Folktail:
 
         return math.ceil(biofuelPotatoesAmount / productionPerRefinery)
 
-    def getPotatoesNeededForRefineriesWithBiofuelPotatoes(self,
-                                                          refineriesCount: int
-                                                          ) -> int:
+    def getPotatoesNeededForBiofuelPotatoesProduction(self,
+                                                      refineriesCount: int
+                                                      ) -> int:
         """
         Calculate the number of potatoes needed per day to keep a given number
         of refineries running producing biofuel with potatoes.
@@ -2128,9 +2147,9 @@ class Folktail:
 
         return math.ceil(refineriesCount * potatoesPerRefineryPerDay)
 
-    def getWaterNeededForRefineriesWithBiofuelPotatoes(self,
-                                                       refineriesCount: int
-                                                       ) -> int:
+    def getWaterNeededForBiofuelPotatoesProduction(self,
+                                                   refineriesCount: int
+                                                   ) -> int:
         """
         Calculate the number of water needed per day to keep a given number of
         refineries running producing biofuel with potatoes.
@@ -2191,8 +2210,8 @@ class Folktail:
 
         return math.ceil(biofuelSpadderdocksAmount / productionPerRefinery)
 
-    def getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks(self,
-                                                                  refineriesCount: int) -> int:     # noqa: E501
+    def getSpadderdocksNeededForBiofuelSpadderdocksProduction(self,
+                                                              refineriesCount: int) -> int:     # noqa: E501
         """
         Calculate the number of spadderdocks needed per day to keep a given
         number of refineries running producing biofuel with spadderdocks.
@@ -2225,9 +2244,9 @@ class Folktail:
 
         return math.ceil(refineriesCount * spadderdocksPerRefineryPerDay)
 
-    def getWaterNeededForRefineriesWithBiofuelSpadderdocks(self,
-                                                           refineriesCount: int
-                                                           ) -> int:
+    def getWaterNeededForBiofuelSpadderdocksProduction(self,
+                                                       refineriesCount: int
+                                                       ) -> int:
         """
         Calculate the number of water needed per day to keep a given number of
         refineries running producing biofuel with spadderdocks.
@@ -2287,9 +2306,9 @@ class Folktail:
 
         return math.ceil(catalystAmount / productionPerRefinery)
 
-    def getMapleSyrupNeededForRefineriesWithCatalyst(self,
-                                                     refineriesCount: int
-                                                     ) -> int:
+    def getMapleSyrupNeededForCatalystProduction(self,
+                                                 refineriesCount: int
+                                                 ) -> int:
         """
         Calculate the number of maple syrup needed per day to keep a given
         number of refineries running producing catalyst.
@@ -2321,8 +2340,8 @@ class Folktail:
 
         return math.ceil(refineriesCount * mapleSyrupPerRefineryPerDay)
 
-    def getExtractNeededForRefineriesWithCatalyst(self,
-                                                  refineriesCount: int) -> int:
+    def getExtractNeededForCatalystProduction(self,
+                                              refineriesCount: int) -> int:
         """
         Calculate the number of extract needed per day to keep a given number
         of refineries running producing catalyst.
@@ -2385,8 +2404,9 @@ class Folktail:
 
         return math.ceil(botChassisAmount / productionPerBotPartFactory)
 
-    def getPlanksNeededForBotPartFactoriesWithBotChassis(self,
-                                                         botPartFactoriesCount: int) -> int:    # noqa: E501
+    def getPlanksNeededForBotChassisProduction(self,
+                                               botPartFactoriesCount: int
+                                               ) -> int:
         """
         Calculate the number of planks needed per day to keep a given number
         of bot part factories running producing bot chassis.
@@ -2419,8 +2439,9 @@ class Folktail:
 
         return math.ceil(botPartFactoriesCount * planksPerBotPartFactoryPerDay)
 
-    def getMetalBlocksNeededForBotPartFactoriesWithBotChassis(self,
-                                                              botPartFactoriesCount: int) -> int:   # noqa: E501
+    def getMetalBlocksNeededForBotChassisProduction(self,
+                                                    botPartFactoriesCount: int
+                                                    ) -> int:
         """
         Calculate the number of metal blocks needed per day to keep a given
         number of bot part factories running producing bot chassis.
@@ -2454,8 +2475,9 @@ class Folktail:
         return math.ceil(botPartFactoriesCount *
                          metalBlocksPerBotPartFactoryPerDay)
 
-    def getBiofuelNeededForBotPartFactoriesWithBotChassis(self,
-                                                          botPartFactoriesCount: int) -> int:   # noqa: E501
+    def getBiofuelNeededForBotChassisProduction(self,
+                                                botPartFactoriesCount: int
+                                                ) -> int:
         """
         Calculate the number of biofuel needed per day to keep a given number
         of bot part factories running producing bot chassis.
@@ -2520,8 +2542,8 @@ class Folktail:
 
         return math.ceil(botHeadsAmount / productionPerBotPartFactory)
 
-    def getGearsNeededForBotPartFactoriesWithBotHeads(self,
-                                                      botPartFactoriesCount: int) -> int:   # noqa: E501
+    def getGearsNeededForBotHeadsProduction(self,
+                                            botPartFactoriesCount: int) -> int:
         """
         Calculate the number of gears needed per day to keep a given number of
         bot part factories running producing bot heads.
@@ -2554,7 +2576,7 @@ class Folktail:
 
         return math.ceil(botPartFactoriesCount * gearsPerBotPartFactoryPerDay)
 
-    def getMetalBlocksNeededForBotPartFactoriesWithBotHeads(
+    def getMetalBlocksNeededForBotHeadsProduction(
             self, botPartFactoriesCount: int) -> int:
         """
         Calculate the number of metal blocks needed per day to keep a given
@@ -2589,8 +2611,9 @@ class Folktail:
         return math.ceil(botPartFactoriesCount *
                          metalBlocksPerBotPartFactoryPerDay)
 
-    def getPlanksNeededForBotPartFactoriesWithBotHeads(self,
-                                                       botPartFactoriesCount: int) -> int:  # noqa: E501
+    def getPlanksNeededForBotHeadsProduction(self,
+                                             botPartFactoriesCount: int
+                                             ) -> int:
         """
         Calculate the number of planks needed per day to keep a given number
         of bot part factories running producing bot heads.
@@ -2654,8 +2677,8 @@ class Folktail:
 
         return math.ceil(botLimbsAmount / productionPerBotPartFactory)
 
-    def getGearsNeededForBotPartFactoriesWithBotLimbs(self,
-                                                      botPartFactoriesCount: int) -> int:   # noqa: E501
+    def getGearsNeededForBotLimbsProduction(self,
+                                            botPartFactoriesCount: int) -> int:
         """
         Calculate the number of gears needed per day to keep a given number of
         bot part factories running producing bot limbs.
@@ -2688,8 +2711,9 @@ class Folktail:
 
         return math.ceil(botPartFactoriesCount * gearsPerBotPartFactoryPerDay)
 
-    def getPlanksNeededForBotPartFactoriesWithBotLimbs(self,
-                                                       botPartFactoriesCount: int) -> int:  # noqa: E501
+    def getPlanksNeededForBotLimbsProduction(self,
+                                             botPartFactoriesCount: int
+                                             ) -> int:
         """
         Calculate the number of planks needed per day to keep a given number
         of bot part factories running producing bot limbs.
@@ -2752,8 +2776,8 @@ class Folktail:
 
         return math.ceil(botsAmount / productionPerBotAssembler)
 
-    def getBotChassisNeededForBotAssemblers(self,
-                                            botAssemblersCount: int) -> int:
+    def getBotChassisNeededForBotsProduction(self,
+                                             botAssemblersCount: int) -> int:
         """
         Calculate the number of bot chassis needed per day to keep a given
         number of bot assemblers running.
@@ -2786,8 +2810,8 @@ class Folktail:
 
         return math.ceil(botAssemblersCount * botChassisPerBotAssemblerPerDay)
 
-    def getBotHeadsNeededForBotAssemblers(self,
-                                          botAssemblersCount: int) -> int:
+    def getBotHeadsNeededForBotsProduction(self,
+                                           botAssemblersCount: int) -> int:
         """
         Calculate the number of bot heads needed per day to keep a given
         number of bot assemblers running.
@@ -2820,8 +2844,8 @@ class Folktail:
 
         return math.ceil(botAssemblersCount * botHeadsPerBotAssemblerPerDay)
 
-    def getBotLimbsNeededForBotAssemblers(self,
-                                          botAssemblersCount: int) -> int:
+    def getBotLimbsNeededForBotsProduction(self,
+                                           botAssemblersCount: int) -> int:
         """
         Calculate the number of bot limbs needed per day to keep a given
         number of bot assemblers running.
@@ -2886,9 +2910,9 @@ class Folktail:
 
         return math.ceil(explosivesAmount / productionPerExplosivesFactory)
 
-    def getBadwaterNeededForExplosivesFactories(self,
-                                                explosivesFactoriesCount: int
-                                                ) -> int:
+    def getBadwaterNeededForExplosivesProduction(self,
+                                                 explosivesFactoriesCount: int
+                                                 ) -> int:
         """
         Calculate the number of badwater needed per day to keep a given number
         of explosives factories running.
@@ -2950,7 +2974,8 @@ class Folktail:
 
         return math.ceil(extractAmount / productionPerCentrifuge)
 
-    def getBadwaterNeededForCentrifuges(self, centrifugesCount: int) -> int:
+    def getBadwaterNeededForExtractProduction(self,
+                                              centrifugesCount: int) -> int:
         """
         Calculate the number of badwater needed per day to keep a given number
         of centrifuges running.
@@ -2982,7 +3007,7 @@ class Folktail:
 
         return math.ceil(centrifugesCount * badwaterPerCentrifugePerDay)
 
-    def getLogsNeededForCentrifuges(self, centrifugesCount: int) -> float:
+    def getLogsNeededForExtractProduction(self, centrifugesCount: int) -> float:
         """
         Calculate the number of logs needed per day to keep a given number of
         centrifuges running.
@@ -3042,7 +3067,8 @@ class Folktail:
 
         return math.ceil(antidoteAmount / productionPerHerbalist)
 
-    def getDandelionsNeededForHerbalists(self, herbalistsCount: int) -> int:
+    def getDandelionsNeededForAntidoteProduction(self,
+                                                 herbalistsCount: int) -> int:
         """
         Calculate the number of dandelions needed per day to keep a given
         number of herbalists running.
@@ -3074,7 +3100,8 @@ class Folktail:
 
         return math.ceil(herbalistsCount * dandelionsPerHerbalistPerDay)
 
-    def getBerriesNeededForHerbalists(self, herbalistsCount: int) -> int:
+    def getBerriesNeededForAntidoteProduction(self,
+                                              herbalistsCount: int) -> int:
         """
         Calculate the number of berries needed per day to keep a given number
         of herbalists running.
@@ -3106,7 +3133,8 @@ class Folktail:
 
         return math.ceil(herbalistsCount * berriesPerHerbalistPerDay)
 
-    def getPapersNeededForHerbalists(self, herbalistsCount: int) -> float:
+    def getPapersNeededForAntidoteProduction(self,
+                                             herbalistsCount: int) -> float:
         """
         Calculate the number of papers needed per day to keep a given number of
         herbalists running.

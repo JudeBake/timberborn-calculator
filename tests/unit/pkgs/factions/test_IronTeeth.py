@@ -674,19 +674,19 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getFoodProcessingOutputQuantity \
             .assert_called_once()
 
-    def test_getCoffeeBeansNeededForCoffeeBreweriesNegativeCount(self) -> None:
+    def test_getCoffeeBeansNeededForCoffeeProductionNegativeCount(self) -> None:
         """
-        The getCoffeeBeansNeededForCoffeeBreweries method must raise
+        The getCoffeeBeansNeededForCoffeeProduction method must raise
         ValueError if breweries count is negative.
         """
         errMsg = "Coffee breweries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getCoffeeBeansNeededForCoffeeBreweries(-1)
+            self.uut.getCoffeeBeansNeededForCoffeeProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getCoffeeBeansNeededForCoffeeBreweriesSuccess(self) -> None:
+    def test_getCoffeeBeansNeededForCoffeeProductionSuccess(self) -> None:
         """
-        The getCoffeeBeansNeededForCoffeeBreweries method must correctly
+        The getCoffeeBeansNeededForCoffeeProduction method must correctly
         calculate coffee beans needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex \
@@ -696,7 +696,7 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getFoodProcessingInputQuantity \
             .return_value = 1
 
-        result = self.uut.getCoffeeBeansNeededForCoffeeBreweries(3)
+        result = self.uut.getCoffeeBeansNeededForCoffeeProduction(3)
 
         # Cycles per day = 24 / 1.0 = 24
         # Coffee beans per brewery per day = 1 * 24 = 24
@@ -709,19 +709,19 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getFoodProcessingInputQuantity \
             .assert_called_once()
 
-    def test_getWaterNeededForCoffeeBreweriesNegativeCount(self) -> None:
+    def test_getWaterNeededForCoffeeProductionNegativeCount(self) -> None:
         """
-        The getWaterNeededForCoffeeBreweries method must raise ValueError
+        The getWaterNeededForCoffeeProduction method must raise ValueError
         if breweries count is negative.
         """
         errMsg = "Coffee breweries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getWaterNeededForCoffeeBreweries(-1)
+            self.uut.getWaterNeededForCoffeeProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getWaterNeededForCoffeeBreweriesSuccess(self) -> None:
+    def test_getWaterNeededForCoffeeProductionSuccess(self) -> None:
         """
-        The getWaterNeededForCoffeeBreweries method must correctly
+        The getWaterNeededForCoffeeProduction method must correctly
         calculate water needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex \
@@ -731,7 +731,7 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getFoodProcessingInputQuantity \
             .return_value = 1
 
-        result = self.uut.getWaterNeededForCoffeeBreweries(3)
+        result = self.uut.getWaterNeededForCoffeeProduction(3)
 
         # Cycles per day = 24 / 1.0 = 24
         # Water per brewery per day = 1 * 24 = 24
@@ -744,19 +744,19 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getFoodProcessingInputQuantity \
             .assert_called_once()
 
-    def test_getLogsNeededForCoffeeBreweriesNegativeCount(self) -> None:
+    def test_getLogsNeededForCoffeeProductionNegativeCount(self) -> None:
         """
-        The getLogsNeededForCoffeeBreweries method must raise ValueError
+        The getLogsNeededForCoffeeProduction method must raise ValueError
         if breweries count is negative.
         """
         errMsg = "Coffee breweries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForCoffeeBreweries(-1)
+            self.uut.getLogsNeededForCoffeeProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForCoffeeBreweriesSuccess(self) -> None:
+    def test_getLogsNeededForCoffeeProductionSuccess(self) -> None:
         """
-        The getLogsNeededForCoffeeBreweries method must correctly
+        The getLogsNeededForCoffeeProduction method must correctly
         calculate logs needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex \
@@ -766,7 +766,7 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getFoodProcessingInputQuantity \
             .return_value = 0.1
 
-        result = self.uut.getLogsNeededForCoffeeBreweries(3)
+        result = self.uut.getLogsNeededForCoffeeProduction(3)
 
         # Cycles per day = 24 / 1.0 = 24
         # Logs per brewery per day = 0.1 * 24 = 2.4
@@ -1476,26 +1476,26 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getGoodsProductionTime.assert_called_once()
         self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
 
-    def test_getLogsNeededForIndustrialLumberMillsNegativeCount(self) -> None:
+    def test_getLogsNeededForPlanksProductionNegativeCount(self) -> None:
         """
-        The getLogsNeededForIndustrialLumberMills method must raise
+        The getLogsNeededForPlanksProduction method must raise
         ValueError if mills count is negative.
         """
         errMsg = "Industrial lumber mills count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForIndustrialLumberMills(-1)
+            self.uut.getLogsNeededForPlanksProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForIndustrialLumberMillsSuccess(self) -> None:
+    def test_getLogsNeededForPlanksProductionSuccess(self) -> None:
         """
-        The getLogsNeededForIndustrialLumberMills method must correctly
+        The getLogsNeededForPlanksProduction method must correctly
         calculate logs needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 0.63
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getLogsNeededForIndustrialLumberMills(3)
+        result = self.uut.getLogsNeededForPlanksProduction(3)
 
         # Cycles per day = 24 / 0.63 = 38.095...
         # Logs per mill per day = 1 * 38.095... = 38.095...
@@ -1534,27 +1534,27 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getGoodsProductionTime.assert_called_once()
         self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
 
-    def test_getTreatedPlanksNeededForEfficientMinesNegativeCount(
+    def test_getTreatedPlanksNeededForScrapMetalProductionNegativeCount(
             self) -> None:
         """
-        The getTreatedPlanksNeededForEfficientMines method must raise
+        The getTreatedPlanksNeededForScrapMetalProduction method must raise
         ValueError if efficient mines count is negative.
         """
         errMsg = "Efficient mines count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getTreatedPlanksNeededForEfficientMines(-1)
+            self.uut.getTreatedPlanksNeededForScrapMetalProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getTreatedPlanksNeededForEfficientMinesSuccess(self) -> None:
+    def test_getTreatedPlanksNeededForScrapMetalProductionSuccess(self) -> None:
         """
-        The getTreatedPlanksNeededForEfficientMines method must correctly
+        The getTreatedPlanksNeededForScrapMetalProduction method must correctly
         calculate treated planks needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 1.8
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getTreatedPlanksNeededForEfficientMines(3)
+        result = self.uut.getTreatedPlanksNeededForScrapMetalProduction(3)
 
         # Cycles per day = 24 / 1.8 = 13.333...
         # Treated planks per mine per day = 1 * 13.333... = 13.333...

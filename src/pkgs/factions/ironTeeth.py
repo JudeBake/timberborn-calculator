@@ -499,7 +499,7 @@ class IronTeeth:
             raise ValueError("Coffee amount cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.COFFEE_BREWERY,    # noqa: E501
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.COFFEE_BREWERY,        # noqa: E501
                                           FoodRecipeName.COFFEE)
         productionTime = self.factionData \
             .getFoodProcessingProductionTime(
@@ -512,9 +512,9 @@ class IronTeeth:
 
         return math.ceil(coffeeAmount / productionPerBrewery)
 
-    def getCoffeeBeansNeededForCoffeeBreweries(self,
-                                               coffeeBreweriesCount: int
-                                               ) -> int:
+    def getCoffeeBeansNeededForCoffeeProduction(self,
+                                                coffeeBreweriesCount: int
+                                                ) -> int:
         """
         Calculate the number of coffee beans needed per day to keep a given
         number of coffee breweries running.
@@ -531,13 +531,13 @@ class IronTeeth:
             raise ValueError("Coffee breweries count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.COFFEE_BREWERY,    # noqa: E501
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.COFFEE_BREWERY,        # noqa: E501
                                           FoodRecipeName.COFFEE)
         productionTime = self.factionData \
             .getFoodProcessingProductionTime(FoodProcessingBuildingName.COFFEE_BREWERY,     # noqa: E501
                                              recipeIndex)
         coffeeBeansInput = self.factionData \
-            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.COFFEE_BREWERY,  # noqa: E501
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.COFFEE_BREWERY,      # noqa: E501
                                             FoodRecipeName.COFFEE,
                                             HarvestName.COFFEE_BEANS)
 
@@ -547,7 +547,7 @@ class IronTeeth:
 
         return math.ceil(coffeeBreweriesCount * coffeeBeansPerBreweryPerDay)
 
-    def getWaterNeededForCoffeeBreweries(
+    def getWaterNeededForCoffeeProduction(
             self, coffeeBreweriesCount: int) -> int:
         """
         Calculate the amount of water needed per day to keep a given number
@@ -565,18 +565,15 @@ class IronTeeth:
             raise ValueError("Coffee breweries count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.COFFEE_BREWERY,
-                FoodRecipeName.COFFEE)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.COFFEE_BREWERY,        # noqa: E501
+                                          FoodRecipeName.COFFEE)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.COFFEE_BREWERY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.COFFEE_BREWERY,     # noqa: E501
+                                             recipeIndex)
         waterInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.COFFEE_BREWERY,
-                FoodRecipeName.COFFEE,
-                HarvestName.WATER)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.COFFEE_BREWERY,      # noqa: E501
+                                            FoodRecipeName.COFFEE,
+                                            HarvestName.WATER)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -584,8 +581,8 @@ class IronTeeth:
 
         return math.ceil(coffeeBreweriesCount * waterPerBreweryPerDay)
 
-    def getLogsNeededForCoffeeBreweries(
-            self, coffeeBreweriesCount: int) -> int:
+    def getLogsNeededForCoffeeProduction(self,
+                                         coffeeBreweriesCount: int) -> int:
         """
         Calculate the number of logs needed per day to keep a given number
         of coffee breweries running.
@@ -602,18 +599,15 @@ class IronTeeth:
             raise ValueError("Coffee breweries count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.COFFEE_BREWERY,
-                FoodRecipeName.COFFEE)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.COFFEE_BREWERY,        # noqa: E501
+                                          FoodRecipeName.COFFEE)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.COFFEE_BREWERY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.COFFEE_BREWERY,     # noqa: E501
+                                             recipeIndex)
         logsInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.COFFEE_BREWERY,
-                FoodRecipeName.COFFEE,
-                HarvestName.LOGS)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.COFFEE_BREWERY,      # noqa: E501
+                                            FoodRecipeName.COFFEE,
+                                            HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -622,8 +616,9 @@ class IronTeeth:
         return math.ceil(coffeeBreweriesCount * logsPerBreweryPerDay)
 
     # Food Processing Methods - Fermenter
-    def getFermentersNeededForFermentedCassava(
-            self, fermentedCassavaAmount: float) -> int:
+    def getFermentersNeededForFermentedCassava(self,
+                                               fermentedCassavaAmount: float
+                                               ) -> int:
         """
         Calculate the number of fermenters needed to produce a given amount
         of fermented cassava per day.
@@ -642,20 +637,16 @@ class IronTeeth:
                 "Fermented cassava amount cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FERMENTER,
-                FoodRecipeName.FERMENTED_CASSAVA)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FERMENTER,
+                                          FoodRecipeName.FERMENTED_CASSAVA)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FERMENTER,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FERMENTER,  # noqa: E501
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.FERMENTER,
-                recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.FERMENTER,  # noqa: E501
+                                             recipeIndex)
         workersPerBuilding = self.factionData \
-            .getFoodProcessingWorkers(
-                FoodProcessingBuildingName.FERMENTER)
+            .getFoodProcessingWorkers(FoodProcessingBuildingName.FERMENTER)
 
         # Production time is in hours, calculate daily production
         cyclesPerDay = 24 / productionTime
@@ -664,8 +655,9 @@ class IronTeeth:
 
         return math.ceil(fermentedCassavaAmount / outputPerBuilding)
 
-    def getCassavasNeededForFermentedCassavaProduction(
-            self, fermentersCount: int) -> int:
+    def getCassavasNeededForFermentedCassavaProduction(self,
+                                                       fermentersCount: int
+                                                       ) -> int:
         """
         Calculate the number of cassavas needed per day to keep a given
         number of fermenters running for fermented cassava production.
@@ -682,18 +674,15 @@ class IronTeeth:
             raise ValueError("Fermenters count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FERMENTER,
-                FoodRecipeName.FERMENTED_CASSAVA)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FERMENTER,
+                                          FoodRecipeName.FERMENTED_CASSAVA)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FERMENTER,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FERMENTER,  # noqa: E501
+                                             recipeIndex)
         cassavasInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FERMENTER,
-                FoodRecipeName.FERMENTED_CASSAVA,
-                HarvestName.CASSAVAS)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FERMENTER,   # noqa: E501
+                                            FoodRecipeName.FERMENTED_CASSAVA,
+                                            HarvestName.CASSAVAS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -701,8 +690,9 @@ class IronTeeth:
 
         return math.ceil(fermentersCount * cassavasPerFermenterPerDay)
 
-    def getFermentersNeededForFermentedSoybean(
-            self, fermentedSoybeanAmount: float) -> int:
+    def getFermentersNeededForFermentedSoybean(self,
+                                               fermentedSoybeanAmount: float
+                                               ) -> int:
         """
         Calculate the number of fermenters needed to produce a given amount
         of fermented soybean per day.
@@ -721,20 +711,16 @@ class IronTeeth:
                 "Fermented soybean amount cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FERMENTER,
-                FoodRecipeName.FERMENTED_SOYBEAN)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FERMENTER,
+                                          FoodRecipeName.FERMENTED_SOYBEAN)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FERMENTER,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FERMENTER,  # noqa: E501
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.FERMENTER,
-                recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.FERMENTER,  # noqa: E501
+                                             recipeIndex)
         workersPerBuilding = self.factionData \
-            .getFoodProcessingWorkers(
-                FoodProcessingBuildingName.FERMENTER)
+            .getFoodProcessingWorkers(FoodProcessingBuildingName.FERMENTER)
 
         # Production time is in hours, calculate daily production
         cyclesPerDay = 24 / productionTime
@@ -743,8 +729,9 @@ class IronTeeth:
 
         return math.ceil(fermentedSoybeanAmount / outputPerBuilding)
 
-    def getSoybeansNeededForFermentedSoybeanProduction(
-            self, fermentersCount: int) -> int:
+    def getSoybeansNeededForFermentedSoybeanProduction(self,
+                                                       fermentersCount: int
+                                                       ) -> int:
         """
         Calculate the number of soybeans needed per day to keep a given
         number of fermenters running for fermented soybean production.
@@ -761,18 +748,15 @@ class IronTeeth:
             raise ValueError("Fermenters count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FERMENTER,
-                FoodRecipeName.FERMENTED_SOYBEAN)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FERMENTER,
+                                          FoodRecipeName.FERMENTED_SOYBEAN)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FERMENTER,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FERMENTER,  # noqa: E501
+                                             recipeIndex)
         soybeansInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FERMENTER,
-                FoodRecipeName.FERMENTED_SOYBEAN,
-                HarvestName.SOYBEANS)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FERMENTER,   # noqa: E501
+                                            FoodRecipeName.FERMENTED_SOYBEAN,
+                                            HarvestName.SOYBEANS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -780,8 +764,9 @@ class IronTeeth:
 
         return math.ceil(fermentersCount * soybeansPerFermenterPerDay)
 
-    def getCanolaOilNeededForFermentedSoybeanProduction(
-            self, fermentersCount: int) -> int:
+    def getCanolaOilNeededForFermentedSoybeanProduction(self,
+                                                        fermentersCount: int
+                                                        ) -> int:
         """
         Calculate the amount of canola oil needed per day to keep a given
         number of fermenters running for fermented soybean production.
@@ -798,18 +783,15 @@ class IronTeeth:
             raise ValueError("Fermenters count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FERMENTER,
-                FoodRecipeName.FERMENTED_SOYBEAN)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FERMENTER,
+                                          FoodRecipeName.FERMENTED_SOYBEAN)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FERMENTER,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FERMENTER,  # noqa: E501
+                                             recipeIndex)
         canolaOilInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FERMENTER,
-                FoodRecipeName.FERMENTED_SOYBEAN,
-                FoodRecipeName.CANOLA_OIL)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FERMENTER,   # noqa: E501
+                                            FoodRecipeName.FERMENTED_SOYBEAN,
+                                            FoodRecipeName.CANOLA_OIL)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -817,8 +799,9 @@ class IronTeeth:
 
         return math.ceil(fermentersCount * canolaOilPerFermenterPerDay)
 
-    def getFermentersNeededForFermentedMushroom(
-            self, fermentedMushroomAmount: float) -> int:
+    def getFermentersNeededForFermentedMushroom(self,
+                                                fermentedMushroomAmount: float
+                                                ) -> int:
         """
         Calculate the number of fermenters needed to produce a given amount
         of fermented mushroom per day.
@@ -837,20 +820,16 @@ class IronTeeth:
                 "Fermented mushroom amount cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FERMENTER,
-                FoodRecipeName.FERMENTED_MUSHROOM)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FERMENTER,
+                                          FoodRecipeName.FERMENTED_MUSHROOM)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FERMENTER,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FERMENTER,  # noqa: E501
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.FERMENTER,
-                recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.FERMENTER,  # noqa: E501
+                                             recipeIndex)
         workersPerBuilding = self.factionData \
-            .getFoodProcessingWorkers(
-                FoodProcessingBuildingName.FERMENTER)
+            .getFoodProcessingWorkers(FoodProcessingBuildingName.FERMENTER)
 
         # Production time is in hours, calculate daily production
         cyclesPerDay = 24 / productionTime
@@ -859,8 +838,9 @@ class IronTeeth:
 
         return math.ceil(fermentedMushroomAmount / outputPerBuilding)
 
-    def getMushroomsNeededForFermentedMushroomProduction(
-            self, fermentersCount: int) -> int:
+    def getMushroomsNeededForFermentedMushroomProduction(self,
+                                                         fermentersCount: int
+                                                         ) -> int:
         """
         Calculate the number of mushrooms needed per day to keep a given
         number of fermenters running for fermented mushroom production.
@@ -877,18 +857,15 @@ class IronTeeth:
             raise ValueError("Fermenters count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FERMENTER,
-                FoodRecipeName.FERMENTED_MUSHROOM)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FERMENTER,
+                                          FoodRecipeName.FERMENTED_MUSHROOM)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FERMENTER,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FERMENTER,  # noqa: E501
+                                             recipeIndex)
         mushroomsInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FERMENTER,
-                FoodRecipeName.FERMENTED_MUSHROOM,
-                FoodRecipeName.MUSHROOMS)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FERMENTER,   # noqa: E501
+                                            FoodRecipeName.FERMENTED_MUSHROOM,
+                                            FoodRecipeName.MUSHROOMS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -897,8 +874,8 @@ class IronTeeth:
         return math.ceil(fermentersCount * mushroomsPerFermenterPerDay)
 
     # Food Processing Methods - Food Factory
-    def getFoodFactoriesNeededForCornRations(
-            self, cornRationsAmount: float) -> int:
+    def getFoodFactoriesNeededForCornRations(self,
+                                             cornRationsAmount: float) -> int:
         """
         Calculate the number of food factories needed to produce a given
         amount of corn rations per day.
@@ -915,20 +892,16 @@ class IronTeeth:
             raise ValueError("Corn rations amount cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.CORN_RATIONS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FOOD_FACTORY,      # noqa: E501
+                                          FoodRecipeName.CORN_RATIONS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         workersPerBuilding = self.factionData \
-            .getFoodProcessingWorkers(
-                FoodProcessingBuildingName.FOOD_FACTORY)
+            .getFoodProcessingWorkers(FoodProcessingBuildingName.FOOD_FACTORY)
 
         # Production time is in hours, calculate daily production
         cyclesPerDay = 24 / productionTime
@@ -937,8 +910,8 @@ class IronTeeth:
 
         return math.ceil(cornRationsAmount / outputPerBuilding)
 
-    def getCornNeededForCornRationsProduction(
-            self, foodFactoriesCount: int) -> int:
+    def getCornNeededForCornRationsProduction(self,
+                                              foodFactoriesCount: int) -> int:
         """
         Calculate the amount of corn needed per day to keep a given number
         of food factories running for corn rations production.
@@ -955,18 +928,15 @@ class IronTeeth:
             raise ValueError("Food factories count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.CORN_RATIONS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FOOD_FACTORY,      # noqa: E501
+                                          FoodRecipeName.CORN_RATIONS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         cornInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.CORN_RATIONS,
-                HarvestName.CORN)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FOOD_FACTORY,    # noqa: E501
+                                            FoodRecipeName.CORN_RATIONS,
+                                            HarvestName.CORN)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -974,8 +944,8 @@ class IronTeeth:
 
         return math.ceil(foodFactoriesCount * cornPerFactoryPerDay)
 
-    def getLogsNeededForCornRationsProduction(
-            self, foodFactoriesCount: int) -> int:
+    def getLogsNeededForCornRationsProduction(self,
+                                              foodFactoriesCount: int) -> int:
         """
         Calculate the number of logs needed per day to keep a given number
         of food factories running for corn rations production.
@@ -992,18 +962,15 @@ class IronTeeth:
             raise ValueError("Food factories count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.CORN_RATIONS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FOOD_FACTORY,      # noqa: E501
+                                          FoodRecipeName.CORN_RATIONS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         logsInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.CORN_RATIONS,
-                HarvestName.LOGS)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FOOD_FACTORY,    # noqa: E501
+                                            FoodRecipeName.CORN_RATIONS,
+                                            HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1011,8 +978,9 @@ class IronTeeth:
 
         return math.ceil(foodFactoriesCount * logsPerFactoryPerDay)
 
-    def getFoodFactoriesNeededForEggplantRations(
-            self, eggplantRationsAmount: float) -> int:
+    def getFoodFactoriesNeededForEggplantRations(self,
+                                                 eggplantRationsAmount: float
+                                                 ) -> int:
         """
         Calculate the number of food factories needed to produce a given
         amount of eggplant rations per day.
@@ -1031,20 +999,16 @@ class IronTeeth:
                 "Eggplant rations amount cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.EGGPLANT_RATIONS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FOOD_FACTORY,      # noqa: E501
+                                          FoodRecipeName.EGGPLANT_RATIONS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         workersPerBuilding = self.factionData \
-            .getFoodProcessingWorkers(
-                FoodProcessingBuildingName.FOOD_FACTORY)
+            .getFoodProcessingWorkers(FoodProcessingBuildingName.FOOD_FACTORY)
 
         # Production time is in hours, calculate daily production
         cyclesPerDay = 24 / productionTime
@@ -1053,8 +1017,9 @@ class IronTeeth:
 
         return math.ceil(eggplantRationsAmount / outputPerBuilding)
 
-    def getEggplantsNeededForEggplantRationsProduction(
-            self, foodFactoriesCount: int) -> int:
+    def getEggplantsNeededForEggplantRationsProduction(self,
+                                                       foodFactoriesCount: int
+                                                       ) -> int:
         """
         Calculate the amount of eggplants needed per day to keep a given
         number of food factories running for eggplant rations production.
@@ -1071,18 +1036,15 @@ class IronTeeth:
             raise ValueError("Food factories count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.EGGPLANT_RATIONS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FOOD_FACTORY,      # noqa: E501
+                                          FoodRecipeName.EGGPLANT_RATIONS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         eggplantsInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.EGGPLANT_RATIONS,
-                HarvestName.EGGPLANTS)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FOOD_FACTORY,    # noqa: E501
+                                            FoodRecipeName.EGGPLANT_RATIONS,
+                                            HarvestName.EGGPLANTS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1090,8 +1052,9 @@ class IronTeeth:
 
         return math.ceil(foodFactoriesCount * eggplantsPerFactoryPerDay)
 
-    def getCanolaOilNeededForEggplantRationsProduction(
-            self, foodFactoriesCount: int) -> int:
+    def getCanolaOilNeededForEggplantRationsProduction(self,
+                                                       foodFactoriesCount: int
+                                                       ) -> int:
         """
         Calculate the amount of canola oil needed per day to keep a given
         number of food factories running for eggplant rations production.
@@ -1108,18 +1071,15 @@ class IronTeeth:
             raise ValueError("Food factories count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.EGGPLANT_RATIONS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FOOD_FACTORY,      # noqa: E501
+                                          FoodRecipeName.EGGPLANT_RATIONS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         canolaOilInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.EGGPLANT_RATIONS,
-                FoodRecipeName.CANOLA_OIL)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FOOD_FACTORY,    # noqa: E501
+                                            FoodRecipeName.EGGPLANT_RATIONS,
+                                            FoodRecipeName.CANOLA_OIL)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1127,8 +1087,9 @@ class IronTeeth:
 
         return math.ceil(foodFactoriesCount * canolaOilPerFactoryPerDay)
 
-    def getLogsNeededForEggplantRationsProduction(
-            self, foodFactoriesCount: int) -> int:
+    def getLogsNeededForEggplantRationsProduction(self,
+                                                  foodFactoriesCount: int
+                                                  ) -> int:
         """
         Calculate the number of logs needed per day to keep a given number
         of food factories running for eggplant rations production.
@@ -1145,18 +1106,15 @@ class IronTeeth:
             raise ValueError("Food factories count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.EGGPLANT_RATIONS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FOOD_FACTORY,      # noqa: E501
+                                          FoodRecipeName.EGGPLANT_RATIONS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         logsInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.EGGPLANT_RATIONS,
-                HarvestName.LOGS)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FOOD_FACTORY,    # noqa: E501
+                                            FoodRecipeName.EGGPLANT_RATIONS,
+                                            HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1164,8 +1122,9 @@ class IronTeeth:
 
         return math.ceil(foodFactoriesCount * logsPerFactoryPerDay)
 
-    def getFoodFactoriesNeededForAlgaeRations(
-            self, algaeRationsAmount: float) -> int:
+    def getFoodFactoriesNeededForAlgaeRations(self,
+                                              algaeRationsAmount: float
+                                              ) -> int:
         """
         Calculate the number of food factories needed to produce a given
         amount of algae rations per day.
@@ -1182,20 +1141,16 @@ class IronTeeth:
             raise ValueError("Algae rations amount cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.ALGAE_RATIONS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FOOD_FACTORY,      # noqa: E501
+                                          FoodRecipeName.ALGAE_RATIONS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         workersPerBuilding = self.factionData \
-            .getFoodProcessingWorkers(
-                FoodProcessingBuildingName.FOOD_FACTORY)
+            .getFoodProcessingWorkers(FoodProcessingBuildingName.FOOD_FACTORY)
 
         # Production time is in hours, calculate daily production
         cyclesPerDay = 24 / productionTime
@@ -1204,8 +1159,9 @@ class IronTeeth:
 
         return math.ceil(algaeRationsAmount / outputPerBuilding)
 
-    def getAlgaeNeededForAlgaeRationsProduction(
-            self, foodFactoriesCount: int) -> int:
+    def getAlgaeNeededForAlgaeRationsProduction(self,
+                                                foodFactoriesCount: int
+                                                ) -> int:
         """
         Calculate the amount of algae needed per day to keep a given number
         of food factories running for algae rations production.
@@ -1222,18 +1178,15 @@ class IronTeeth:
             raise ValueError("Food factories count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.ALGAE_RATIONS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FOOD_FACTORY,      # noqa: E501
+                                          FoodRecipeName.ALGAE_RATIONS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         algaeInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.ALGAE_RATIONS,
-                FoodRecipeName.ALGAE)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FOOD_FACTORY,    # noqa: E501
+                                            FoodRecipeName.ALGAE_RATIONS,
+                                            FoodRecipeName.ALGAE)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1241,8 +1194,9 @@ class IronTeeth:
 
         return math.ceil(foodFactoriesCount * algaePerFactoryPerDay)
 
-    def getCanolaOilNeededForAlgaeRationsProduction(
-            self, foodFactoriesCount: int) -> int:
+    def getCanolaOilNeededForAlgaeRationsProduction(self,
+                                                    foodFactoriesCount: int
+                                                    ) -> int:
         """
         Calculate the amount of canola oil needed per day to keep a given
         number of food factories running for algae rations production.
@@ -1259,18 +1213,15 @@ class IronTeeth:
             raise ValueError("Food factories count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.ALGAE_RATIONS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FOOD_FACTORY,      # noqa: E501
+                                          FoodRecipeName.ALGAE_RATIONS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         canolaOilInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.ALGAE_RATIONS,
-                FoodRecipeName.CANOLA_OIL)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FOOD_FACTORY,    # noqa: E501
+                                            FoodRecipeName.ALGAE_RATIONS,
+                                            FoodRecipeName.CANOLA_OIL)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1278,8 +1229,8 @@ class IronTeeth:
 
         return math.ceil(foodFactoriesCount * canolaOilPerFactoryPerDay)
 
-    def getLogsNeededForAlgaeRationsProduction(
-            self, foodFactoriesCount: int) -> int:
+    def getLogsNeededForAlgaeRationsProduction(self,
+                                               foodFactoriesCount: int) -> int:
         """
         Calculate the number of logs needed per day to keep a given number
         of food factories running for algae rations production.
@@ -1296,18 +1247,15 @@ class IronTeeth:
             raise ValueError("Food factories count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.ALGAE_RATIONS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.FOOD_FACTORY,      # noqa: E501
+                                          FoodRecipeName.ALGAE_RATIONS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.FOOD_FACTORY,   # noqa: E501
+                                             recipeIndex)
         logsInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.FOOD_FACTORY,
-                FoodRecipeName.ALGAE_RATIONS,
-                HarvestName.LOGS)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.FOOD_FACTORY,    # noqa: E501
+                                            FoodRecipeName.ALGAE_RATIONS,
+                                            HarvestName.LOGS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1316,8 +1264,8 @@ class IronTeeth:
         return math.ceil(foodFactoriesCount * logsPerFactoryPerDay)
 
     # Food Processing Methods - Hydroponic Garden
-    def getHydroponicGardensNeededForMushrooms(
-            self, mushroomsAmount: float) -> int:
+    def getHydroponicGardensNeededForMushrooms(self,
+                                               mushroomsAmount: float) -> int:
         """
         Calculate the number of hydroponic gardens needed to produce a given
         amount of mushrooms per day.
@@ -1334,20 +1282,16 @@ class IronTeeth:
             raise ValueError("Mushrooms amount cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                FoodRecipeName.MUSHROOMS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.HYDROPONIC_GARDEN,     # noqa: E501
+                                          FoodRecipeName.MUSHROOMS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.HYDROPONIC_GARDEN,  # noqa: E501
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.HYDROPONIC_GARDEN,  # noqa: E501
+                                             recipeIndex)
         workersPerBuilding = self.factionData \
-            .getFoodProcessingWorkers(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN)
+            .getFoodProcessingWorkers(FoodProcessingBuildingName.HYDROPONIC_GARDEN)     # noqa: E501
 
         # Production time is in hours, calculate daily production
         cyclesPerDay = 24 / productionTime
@@ -1356,8 +1300,9 @@ class IronTeeth:
 
         return math.ceil(mushroomsAmount / outputPerBuilding)
 
-    def getWaterNeededForMushroomsProduction(
-            self, hydroponicGardensCount: int) -> int:
+    def getWaterNeededForMushroomsProduction(self,
+                                             hydroponicGardensCount: int
+                                             ) -> int:
         """
         Calculate the amount of water needed per day to keep a given number
         of hydroponic gardens running for mushrooms production.
@@ -1375,18 +1320,15 @@ class IronTeeth:
                 "Hydroponic gardens count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                FoodRecipeName.MUSHROOMS)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.HYDROPONIC_GARDEN,     # noqa: E501
+                                          FoodRecipeName.MUSHROOMS)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.HYDROPONIC_GARDEN,  # noqa: E501
+                                             recipeIndex)
         waterInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                FoodRecipeName.MUSHROOMS,
-                HarvestName.WATER)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.HYDROPONIC_GARDEN,   # noqa: E501
+                                            FoodRecipeName.MUSHROOMS,
+                                            HarvestName.WATER)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1394,8 +1336,7 @@ class IronTeeth:
 
         return math.ceil(hydroponicGardensCount * waterPerGardenPerDay)
 
-    def getHydroponicGardensNeededForAlgae(
-            self, algaeAmount: float) -> int:
+    def getHydroponicGardensNeededForAlgae(self, algaeAmount: float) -> int:
         """
         Calculate the number of hydroponic gardens needed to produce a given
         amount of algae per day.
@@ -1412,20 +1353,16 @@ class IronTeeth:
             raise ValueError("Algae amount cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                FoodRecipeName.ALGAE)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.HYDROPONIC_GARDEN,     # noqa: E501
+                                          FoodRecipeName.ALGAE)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.HYDROPONIC_GARDEN,  # noqa: E501
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.HYDROPONIC_GARDEN,  # noqa: E501
+                                             recipeIndex)
         workersPerBuilding = self.factionData \
-            .getFoodProcessingWorkers(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN)
+            .getFoodProcessingWorkers(FoodProcessingBuildingName.HYDROPONIC_GARDEN)     # noqa: E501
 
         # Production time is in hours, calculate daily production
         cyclesPerDay = 24 / productionTime
@@ -1434,8 +1371,8 @@ class IronTeeth:
 
         return math.ceil(algaeAmount / outputPerBuilding)
 
-    def getWaterNeededForAlgaeProduction(
-            self, hydroponicGardensCount: int) -> int:
+    def getWaterNeededForAlgaeProduction(self,
+                                         hydroponicGardensCount: int) -> int:
         """
         Calculate the amount of water needed per day to keep a given number
         of hydroponic gardens running for algae production.
@@ -1453,18 +1390,15 @@ class IronTeeth:
                 "Hydroponic gardens count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                FoodRecipeName.ALGAE)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.HYDROPONIC_GARDEN,     # noqa: E501
+                                          FoodRecipeName.ALGAE)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.HYDROPONIC_GARDEN,  # noqa: E501
+                                             recipeIndex)
         waterInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.HYDROPONIC_GARDEN,
-                FoodRecipeName.ALGAE,
-                HarvestName.WATER)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.HYDROPONIC_GARDEN,   # noqa: E501
+                                            FoodRecipeName.ALGAE,
+                                            HarvestName.WATER)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1473,8 +1407,7 @@ class IronTeeth:
         return math.ceil(hydroponicGardensCount * waterPerGardenPerDay)
 
     # Food Processing Methods - Oil Press
-    def getOilPressesNeededForCanolaOil(
-            self, canolaOilAmount: float) -> int:
+    def getOilPressesNeededForCanolaOil(self, canolaOilAmount: float) -> int:
         """
         Calculate the number of oil presses needed to produce a given amount
         of canola oil per day.
@@ -1491,20 +1424,16 @@ class IronTeeth:
             raise ValueError("Canola oil amount cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.OIL_PRESS,
-                FoodRecipeName.CANOLA_OIL)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.OIL_PRESS,
+                                          FoodRecipeName.CANOLA_OIL)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.OIL_PRESS,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.OIL_PRESS,      # noqa: E501
+                                             recipeIndex)
         outputQuantity = self.factionData \
-            .getFoodProcessingOutputQuantity(
-                FoodProcessingBuildingName.OIL_PRESS,
-                recipeIndex)
+            .getFoodProcessingOutputQuantity(FoodProcessingBuildingName.OIL_PRESS,      # noqa: E501
+                                             recipeIndex)
         workersPerBuilding = self.factionData \
-            .getFoodProcessingWorkers(
-                FoodProcessingBuildingName.OIL_PRESS)
+            .getFoodProcessingWorkers(FoodProcessingBuildingName.OIL_PRESS)
 
         # Production time is in hours, calculate daily production
         cyclesPerDay = 24 / productionTime
@@ -1513,8 +1442,9 @@ class IronTeeth:
 
         return math.ceil(canolaOilAmount / outputPerBuilding)
 
-    def getCanolaSeedsNeededForCanolaOilProduction(
-            self, oilPressesCount: int) -> int:
+    def getCanolaSeedsNeededForCanolaOilProduction(self,
+                                                   oilPressesCount: int
+                                                   ) -> int:
         """
         Calculate the number of canola seeds needed per day to keep a given
         number of oil presses running.
@@ -1531,18 +1461,15 @@ class IronTeeth:
             raise ValueError("Oil presses count cannot be negative.")
 
         recipeIndex = self.factionData \
-            .getFoodProcessingRecipeIndex(
-                FoodProcessingBuildingName.OIL_PRESS,
-                FoodRecipeName.CANOLA_OIL)
+            .getFoodProcessingRecipeIndex(FoodProcessingBuildingName.OIL_PRESS,
+                                          FoodRecipeName.CANOLA_OIL)
         productionTime = self.factionData \
-            .getFoodProcessingProductionTime(
-                FoodProcessingBuildingName.OIL_PRESS,
-                recipeIndex)
+            .getFoodProcessingProductionTime(FoodProcessingBuildingName.OIL_PRESS,      # noqa: E501
+                                             recipeIndex)
         canolaSeedsInput = self.factionData \
-            .getFoodProcessingInputQuantity(
-                FoodProcessingBuildingName.OIL_PRESS,
-                FoodRecipeName.CANOLA_OIL,
-                HarvestName.CANOLA_SEEDS)
+            .getFoodProcessingInputQuantity(FoodProcessingBuildingName.OIL_PRESS,       # noqa: E501
+                                            FoodRecipeName.CANOLA_OIL,
+                                            HarvestName.CANOLA_SEEDS)
 
         # Production time is in hours, calculate daily consumption
         cyclesPerDay = 24 / productionTime
@@ -1582,9 +1509,9 @@ class IronTeeth:
 
         return math.ceil(planksAmount / productionPerMill)
 
-    def getLogsNeededForIndustrialLumberMills(self,
-                                              industrialLumberMillsCount: int
-                                              ) -> float:
+    def getLogsNeededForPlanksProduction(self,
+                                         industrialLumberMillsCount: int
+                                         ) -> float:
         """
         Calculate the number of logs needed per day to keep a given number
         of industrial lumber mills running.
@@ -1650,9 +1577,9 @@ class IronTeeth:
 
         return math.ceil(scrapMetalAmount / productionPerMine)
 
-    def getTreatedPlanksNeededForEfficientMines(self,
-                                                efficientMinesCount: int
-                                                ) -> int:
+    def getTreatedPlanksNeededForScrapMetalProduction(self,
+                                                      efficientMinesCount: int
+                                                      ) -> int:
         """
         Calculate the number of treated planks needed per day to keep a given
         number of efficient mines running.

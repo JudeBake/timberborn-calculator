@@ -7,7 +7,10 @@ import sys
 sys.path.append(os.path.abspath('./src'))
 
 from pkgs.factions.folktail import Folktail                     # noqa: E402
+from pkgs.data.enumerators import ConsumptionType              # noqa: E402
+from pkgs.data.enumerators import CropName                      # noqa: E402
 from pkgs.data.enumerators import DifficultyLevel               # noqa: E402
+from pkgs.data.enumerators import TreeName                      # noqa: E402
 
 
 class TestFolktail(TestCase):
@@ -81,6 +84,8 @@ class TestFolktail(TestCase):
         result = self.uut.getDailyFoodConsumption(100, DifficultyLevel.NORMAL)
 
         self.assertEqual(275.0, result)
+        self.uut.factionData.getConsumption \
+            .assert_called_once_with(ConsumptionType.FOOD)
         self.uut.factionData.getDifficultyModifier \
             .assert_called_once_with(DifficultyLevel.NORMAL)
 
@@ -105,6 +110,8 @@ class TestFolktail(TestCase):
         result = self.uut.getDailyWaterConsumption(100, DifficultyLevel.NORMAL)
 
         self.assertEqual(225.0, result)
+        self.uut.factionData.getConsumption \
+            .assert_called_once_with(ConsumptionType.WATER)
         self.uut.factionData.getDifficultyModifier \
             .assert_called_once_with(DifficultyLevel.NORMAL)
 
@@ -174,6 +181,10 @@ class TestFolktail(TestCase):
         # Production per tile = 3 / 12 = 0.25
         # Tiles needed = ceil(30.0 / 0.25) = 120
         self.assertEqual(120, result)
+        self.uut.factionData.getCropHarvestTime \
+            .assert_called_once_with(CropName.BERRY_BUSH)
+        self.uut.factionData.getCropHarvestYield \
+            .assert_called_once_with(CropName.BERRY_BUSH)
 
     def test_getDandelionTilesNeededNegativeAmount(self) -> None:
         """

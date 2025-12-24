@@ -88,6 +88,8 @@ class TestIronTeeth(TestCase):
 
         # Consumption = 10 * 2.75 * 1.0 = 27.5
         self.assertEqual(27.5, result)
+        self.uut.factionData.getConsumption.assert_called_once()
+        self.uut.factionData.getDifficultyModifier.assert_called_once()
         self.uut.factionData.getConsumption \
             .assert_called_once_with(ConsumptionType.FOOD)
         self.uut.factionData.getDifficultyModifier \
@@ -116,6 +118,8 @@ class TestIronTeeth(TestCase):
 
         # Consumption = 10 * 2.25 * 1.0 = 22.5
         self.assertEqual(22.5, result)
+        self.uut.factionData.getConsumption.assert_called_once()
+        self.uut.factionData.getDifficultyModifier.assert_called_once()
         self.uut.factionData.getConsumption \
             .assert_called_once_with(ConsumptionType.WATER)
         self.uut.factionData.getDifficultyModifier \
@@ -267,6 +271,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 3 / 12 = 0.25
         # Tiles needed = ceil(10.0 / 0.25) = ceil(40) = 40
         self.assertEqual(40, result)
+        self.uut.factionData.getCropHarvestTime.assert_called_once()
+        self.uut.factionData.getCropHarvestYield.assert_called_once()
         self.uut.factionData.getCropHarvestTime \
             .assert_called_once_with(CropName.BERRY_BUSH)
         self.uut.factionData.getCropHarvestYield \
@@ -295,6 +301,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 1 / 3 = 0.333...
         # Tiles needed = ceil(10.0 / 0.333...) = ceil(30) = 30
         self.assertEqual(30, result)
+        self.uut.factionData.getCropHarvestTime.assert_called_once()
+        self.uut.factionData.getCropHarvestYield.assert_called_once()
         self.uut.factionData.getCropHarvestTime \
             .assert_called_once_with(CropName.COFFEE_BUSH)
         self.uut.factionData.getCropHarvestYield \
@@ -323,6 +331,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 2 / 3 = 0.666...
         # Tiles needed = ceil(10.0 / 0.666...) = ceil(15) = 15
         self.assertEqual(15, result)
+        self.uut.factionData.getCropHarvestTime.assert_called_once()
+        self.uut.factionData.getCropHarvestYield.assert_called_once()
         self.uut.factionData.getCropHarvestTime \
             .assert_called_once_with(CropName.KOHLRABI_CROP)
         self.uut.factionData.getCropHarvestYield \
@@ -352,6 +362,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 1 / 5 = 0.2
         # Tiles needed = ceil(10.0 / 0.2) = ceil(50) = 50
         self.assertEqual(50, result)
+        self.uut.factionData.getCropHarvestTime.assert_called_once()
+        self.uut.factionData.getCropHarvestYield.assert_called_once()
         self.uut.factionData.getCropHarvestTime \
             .assert_called_once_with(CropName.CASSAVA_CROP)
         self.uut.factionData.getCropHarvestYield \
@@ -380,6 +392,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 2 / 8 = 0.25
         # Tiles needed = ceil(10.0 / 0.25) = ceil(40) = 40
         self.assertEqual(40, result)
+        self.uut.factionData.getCropHarvestTime.assert_called_once()
+        self.uut.factionData.getCropHarvestYield.assert_called_once()
         self.uut.factionData.getCropHarvestTime \
             .assert_called_once_with(CropName.SOYBEAN_CROP)
         self.uut.factionData.getCropHarvestYield \
@@ -408,6 +422,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 3 / 9 = 0.333...
         # Tiles needed = ceil(10.0 / 0.333...) = ceil(30) = 30
         self.assertEqual(30, result)
+        self.uut.factionData.getCropHarvestTime.assert_called_once()
+        self.uut.factionData.getCropHarvestYield.assert_called_once()
         self.uut.factionData.getCropHarvestTime \
             .assert_called_once_with(CropName.CANOLA_CROP)
         self.uut.factionData.getCropHarvestYield \
@@ -436,6 +452,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 2 / 10 = 0.2
         # Tiles needed = ceil(10.0 / 0.2) = ceil(50) = 50
         self.assertEqual(50, result)
+        self.uut.factionData.getCropHarvestTime.assert_called_once()
+        self.uut.factionData.getCropHarvestYield.assert_called_once()
         self.uut.factionData.getCropHarvestTime \
             .assert_called_once_with(CropName.CORN_CROP)
         self.uut.factionData.getCropHarvestYield \
@@ -464,6 +482,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 2 / 12 = 0.166...
         # Tiles needed = ceil(10.0 / 0.166...) = ceil(60) = 60
         self.assertEqual(60, result)
+        self.uut.factionData.getCropHarvestTime.assert_called_once()
+        self.uut.factionData.getCropHarvestYield.assert_called_once()
         self.uut.factionData.getCropHarvestTime \
             .assert_called_once_with(CropName.EGGPLANT_CROP)
         self.uut.factionData.getCropHarvestYield \
@@ -493,6 +513,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 1 / 7 = 0.142...
         # Tiles needed = ceil(10.0 / 0.142...) = ceil(70) = 70
         self.assertEqual(70, result)
+        self.uut.factionData.getTreeGrowthTime.assert_called_once()
+        self.uut.factionData.getTreeLogOutput.assert_called_once()
         self.uut.factionData.getTreeGrowthTime \
             .assert_called_once_with(TreeName.BIRCH)
         self.uut.factionData.getTreeLogOutput \
@@ -521,6 +543,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 2 / 12 = 0.166...
         # Tiles needed = ceil(10.0 / 0.166...) = ceil(60) = 60
         self.assertEqual(60, result)
+        self.uut.factionData.getTreeGrowthTime.assert_called_once()
+        self.uut.factionData.getTreeLogOutput.assert_called_once()
         self.uut.factionData.getTreeGrowthTime \
             .assert_called_once_with(TreeName.PINE)
         self.uut.factionData.getTreeLogOutput \
@@ -549,6 +573,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 2 / 7 = 0.285...
         # Tiles needed = ceil(10.0 / 0.285...) = ceil(35) = 35
         self.assertEqual(35, result)
+        self.uut.factionData.getTreeHarvestTime.assert_called_once()
+        self.uut.factionData.getTreeHarvestYield.assert_called_once()
         self.uut.factionData.getTreeHarvestTime \
             .assert_called_once_with(TreeName.PINE)
         self.uut.factionData.getTreeHarvestYield \
@@ -577,6 +603,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 2 / 10 = 0.2
         # Tiles needed = ceil(10.0 / 0.2) = ceil(50) = 50
         self.assertEqual(50, result)
+        self.uut.factionData.getTreeGrowthTime.assert_called_once()
+        self.uut.factionData.getTreeLogOutput.assert_called_once()
         self.uut.factionData.getTreeGrowthTime \
             .assert_called_once_with(TreeName.MANGROVE_TREE)
         self.uut.factionData.getTreeLogOutput \
@@ -605,6 +633,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 8 / 30 = 0.266...
         # Tiles needed = ceil(10.0 / 0.266...) = ceil(37.5) = 38
         self.assertEqual(38, result)
+        self.uut.factionData.getTreeGrowthTime.assert_called_once()
+        self.uut.factionData.getTreeLogOutput.assert_called_once()
         self.uut.factionData.getTreeGrowthTime \
             .assert_called_once_with(TreeName.OAK)
         self.uut.factionData.getTreeLogOutput \
@@ -634,6 +664,8 @@ class TestIronTeeth(TestCase):
         # Production per tile = 4 / 10 = 0.4
         # Tiles needed = ceil(10.0 / 0.4) = ceil(25) = 25
         self.assertEqual(25, result)
+        self.uut.factionData.getTreeHarvestTime.assert_called_once()
+        self.uut.factionData.getTreeHarvestYield.assert_called_once()
         self.uut.factionData.getTreeHarvestTime \
             .assert_called_once_with(TreeName.MANGROVE_TREE)
         self.uut.factionData.getTreeHarvestYield \
@@ -674,7 +706,7 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getFoodProcessingOutputQuantity \
             .assert_called_once()
 
-    def test_getCoffeeBeansNeededForCoffeeProductionNegativeCount(self) -> None:
+    def test_getCoffeeBeansNeededForCoffeeProductionNegativeCount(self) -> None:    # noqa: E501
         """
         The getCoffeeBeansNeededForCoffeeProduction method must raise
         ValueError if breweries count is negative.
@@ -808,6 +840,12 @@ class TestIronTeeth(TestCase):
         # Output per building = 10 * 12 * 1 = 120
         # Fermenters needed = 100 / 120 = 0.833... -> ceil = 1
         self.assertEqual(1, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingWorkers.assert_called_once()
 
     def test_getCassavasNeededForFermentedCassavaProductionNegativeCount(
             self) -> None:
@@ -836,6 +874,11 @@ class TestIronTeeth(TestCase):
         # Cassavas per fermenter per day = 4 * 12 = 48
         # Total cassavas = 3 * 48 = 144
         self.assertEqual(144, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     def test_getFermentersNeededForFermentedSoybeanNegativeAmount(
             self) -> None:
@@ -864,6 +907,12 @@ class TestIronTeeth(TestCase):
         # Output per building = 20 * 8 * 1 = 160
         # Fermenters needed = 150 / 160 = 0.9375 -> ceil = 1
         self.assertEqual(1, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingWorkers.assert_called_once()
 
     def test_getSoybeansNeededForFermentedSoybeanProductionNegativeCount(
             self) -> None:
@@ -892,6 +941,11 @@ class TestIronTeeth(TestCase):
         # Soybeans per fermenter per day = 6 * 8 = 48
         # Total soybeans = 2 * 48 = 96
         self.assertEqual(96, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     def test_getCanolaOilNeededForFermentedSoybeanProductionNegativeCount(
             self) -> None:
@@ -920,6 +974,11 @@ class TestIronTeeth(TestCase):
         # Canola oil per fermenter per day = 1 * 8 = 8
         # Total canola oil = 2 * 8 = 16
         self.assertEqual(16, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     def test_getFermentersNeededForFermentedMushroomNegativeAmount(
             self) -> None:
@@ -948,6 +1007,12 @@ class TestIronTeeth(TestCase):
         # Output per building = 16 * 12 * 1 = 192
         # Fermenters needed = 180 / 192 = 0.9375 -> ceil = 1
         self.assertEqual(1, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingWorkers.assert_called_once()
 
     def test_getMushroomsNeededForFermentedMushroomProductionNegativeCount(
             self) -> None:
@@ -976,6 +1041,11 @@ class TestIronTeeth(TestCase):
         # Mushrooms per fermenter per day = 4 * 12 = 48
         # Total mushrooms = 3 * 48 = 144
         self.assertEqual(144, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     # Test Cases for Food Factory
     def test_getFoodFactoriesNeededForCornRationsNegativeAmount(
@@ -1005,6 +1075,12 @@ class TestIronTeeth(TestCase):
         # Output per building = 5 * 48 * 1 = 240
         # Food factories needed = 200 / 240 = 0.833... -> ceil = 1
         self.assertEqual(1, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingWorkers.assert_called_once()
 
     def test_getCornNeededForCornRationsProductionNegativeCount(
             self) -> None:
@@ -1032,6 +1108,11 @@ class TestIronTeeth(TestCase):
         # Corn per factory per day = 1 * 48 = 48
         # Total corn = 2 * 48 = 96
         self.assertEqual(96, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     def test_getLogsNeededForCornRationsProductionNegativeCount(
             self) -> None:
@@ -1059,6 +1140,11 @@ class TestIronTeeth(TestCase):
         # Logs per factory per day = 0.1 * 48 = 4.8
         # Total logs = 2 * 4.8 = 9.6 -> ceil = 10
         self.assertEqual(10, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     def test_getFoodFactoriesNeededForEggplantRationsNegativeAmount(
             self) -> None:
@@ -1087,6 +1173,12 @@ class TestIronTeeth(TestCase):
         # Output per building = 6 * 48 * 1 = 288
         # Food factories needed = 250 / 288 = 0.868... -> ceil = 1
         self.assertEqual(1, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingWorkers.assert_called_once()
 
     def test_getEggplantsNeededForEggplantRationsProductionNegativeCount(
             self) -> None:
@@ -1115,6 +1207,11 @@ class TestIronTeeth(TestCase):
         # Eggplants per factory per day = 1 * 48 = 48
         # Total eggplants = 2 * 48 = 96
         self.assertEqual(96, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     def test_getCanolaOilNeededForEggplantRationsProductionNegativeCount(
             self) -> None:
@@ -1143,6 +1240,11 @@ class TestIronTeeth(TestCase):
         # Canola oil per factory per day = 1 * 48 = 48
         # Total canola oil = 2 * 48 = 96
         self.assertEqual(96, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     def test_getLogsNeededForEggplantRationsProductionNegativeCount(
             self) -> None:
@@ -1170,6 +1272,11 @@ class TestIronTeeth(TestCase):
         # Logs per factory per day = 0.1 * 48 = 4.8
         # Total logs = 2 * 4.8 = 9.6 -> ceil = 10
         self.assertEqual(10, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     def test_getFoodFactoriesNeededForAlgaeRationsNegativeAmount(
             self) -> None:
@@ -1188,7 +1295,8 @@ class TestIronTeeth(TestCase):
         calculate food factories needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
-        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.25
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .return_value = 0.25
         self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 6
         self.uut.factionData.getFoodProcessingWorkers.return_value = 1
 
@@ -1198,6 +1306,12 @@ class TestIronTeeth(TestCase):
         # Output per building = 6 * 96 * 1 = 576
         # Food factories needed = 500 / 576 = 0.868... -> ceil = 1
         self.assertEqual(1, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingWorkers.assert_called_once()
 
     def test_getAlgaeNeededForAlgaeRationsProductionNegativeCount(
             self) -> None:
@@ -1216,7 +1330,8 @@ class TestIronTeeth(TestCase):
         calculate algae needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
-        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.25
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .return_value = 0.25
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
 
         result = self.uut.getAlgaeNeededForAlgaeRationsProduction(2)
@@ -1225,6 +1340,11 @@ class TestIronTeeth(TestCase):
         # Algae per factory per day = 1 * 96 = 96
         # Total algae = 2 * 96 = 192
         self.assertEqual(192, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     def test_getCanolaOilNeededForAlgaeRationsProductionNegativeCount(
             self) -> None:
@@ -1244,7 +1364,8 @@ class TestIronTeeth(TestCase):
         correctly calculate canola oil needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
-        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.25
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .return_value = 0.25
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
 
         result = self.uut.getCanolaOilNeededForAlgaeRationsProduction(2)
@@ -1253,6 +1374,11 @@ class TestIronTeeth(TestCase):
         # Canola oil per factory per day = 1 * 96 = 96
         # Total canola oil = 2 * 96 = 192
         self.assertEqual(192, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     def test_getLogsNeededForAlgaeRationsProductionNegativeCount(
             self) -> None:
@@ -1271,7 +1397,8 @@ class TestIronTeeth(TestCase):
         calculate logs needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
-        self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.25
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .return_value = 0.25
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 0.1
 
         result = self.uut.getLogsNeededForAlgaeRationsProduction(2)
@@ -1280,6 +1407,11 @@ class TestIronTeeth(TestCase):
         # Logs per factory per day = 0.1 * 96 = 9.6
         # Total logs = 2 * 9.6 = 19.2 -> ceil = 20
         self.assertEqual(20, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     # Test Cases for Hydroponic Garden
     def test_getHydroponicGardensNeededForMushroomsNegativeAmount(
@@ -1299,7 +1431,8 @@ class TestIronTeeth(TestCase):
         calculate hydroponic gardens needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
-        self.uut.factionData.getFoodProcessingProductionTime.return_value = 192.0
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .return_value = 192.0
         self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 45
         self.uut.factionData.getFoodProcessingWorkers.return_value = 1
 
@@ -1309,6 +1442,12 @@ class TestIronTeeth(TestCase):
         # Output per building = 45 * 0.125 * 1 = 5.625
         # Gardens needed = 6.0 / 5.625 = 1.0666... -> ceil = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingWorkers.assert_called_once()
 
     def test_getWaterNeededForMushroomsProductionNegativeCount(
             self) -> None:
@@ -1327,7 +1466,8 @@ class TestIronTeeth(TestCase):
         calculate water needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
-        self.uut.factionData.getFoodProcessingProductionTime.return_value = 192.0
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .return_value = 192.0
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 40
 
         result = self.uut.getWaterNeededForMushroomsProduction(3)
@@ -1336,6 +1476,11 @@ class TestIronTeeth(TestCase):
         # Water per garden per day = 40 * 0.125 = 5
         # Total water = 3 * 5 = 15
         self.assertEqual(15, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     def test_getHydroponicGardensNeededForAlgaeNegativeAmount(
             self) -> None:
@@ -1354,7 +1499,8 @@ class TestIronTeeth(TestCase):
         calculate hydroponic gardens needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
-        self.uut.factionData.getFoodProcessingProductionTime.return_value = 288.0
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .return_value = 288.0
         self.uut.factionData.getFoodProcessingOutputQuantity.return_value = 70
         self.uut.factionData.getFoodProcessingWorkers.return_value = 1
 
@@ -1364,6 +1510,12 @@ class TestIronTeeth(TestCase):
         # Output per building = 70 * 0.083333... * 1 = 5.833333...
         # Gardens needed = 6.0 / 5.833333... = 1.0285... -> ceil = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingWorkers.assert_called_once()
 
     def test_getWaterNeededForAlgaeProductionNegativeCount(self) -> None:
         """
@@ -1381,7 +1533,8 @@ class TestIronTeeth(TestCase):
         calculate water needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
-        self.uut.factionData.getFoodProcessingProductionTime.return_value = 288.0
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .return_value = 288.0
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 60
 
         result = self.uut.getWaterNeededForAlgaeProduction(3)
@@ -1390,6 +1543,11 @@ class TestIronTeeth(TestCase):
         # Water per garden per day = 60 * 0.083333... = 5
         # Total water = 3 * 5 = 15
         self.assertEqual(15, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     # Test Cases for Oil Press
     def test_getOilPressesNeededForCanolaOilNegativeAmount(self) -> None:
@@ -1418,6 +1576,12 @@ class TestIronTeeth(TestCase):
         # Output per building = 1 * 18.461538... * 1 = 18.461538...
         # Oil presses needed = 20.0 / 18.461538... = 1.083... -> ceil = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingWorkers.assert_called_once()
 
     def test_getCanolaSeedsNeededForCanolaOilProductionNegativeCount(
             self) -> None:
@@ -1445,6 +1609,11 @@ class TestIronTeeth(TestCase):
         # Canola seeds per press per day = 1 * 18.461538... = 18.461538...
         # Total canola seeds = 2 * 18.461538... = 36.923... -> ceil = 37
         self.assertEqual(37, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex.assert_called_once()
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once()
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once()
 
     # Test Cases for Industrial Lumber Mill
     def test_getIndustrialLumberMillsNeededForPlanksNegativeAmount(
@@ -1505,6 +1674,207 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getGoodsProductionTime.assert_called_once()
         self.uut.factionData.getGoodsInputQuantity.assert_called_once()
 
+    # Test Cases for Gear Workshop
+    def test_getGearWorkshopsNeededForGearsNegativeAmount(self) -> None:
+        """
+        The getGearWorkshopsNeededForGears method must raise ValueError
+        if gears amount is negative.
+        """
+        errMsg = "Gears amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getGearWorkshopsNeededForGears(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getGearWorkshopsNeededForGearsSuccess(self) -> None:
+        """
+        The getGearWorkshopsNeededForGears method must correctly
+        calculate gear workshops needed.
+        """
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 3.0
+        self.uut.factionData.getGoodsOutputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getGearWorkshopsNeededForGears(10.0)
+
+        # Cycles per day = 24 / 3.0 = 8
+        # Output per building = 1 * 8 * 1 = 8
+        # Gear workshops needed = 10.0 / 8 = 1.25 -> ceil = 2
+        self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getPlanksNeededForGearsProductionNegativeCount(self) -> None:
+        """
+        The getPlanksNeededForGearsProduction method must raise ValueError
+        if gear workshops count is negative.
+        """
+        errMsg = "Gear workshops count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getPlanksNeededForGearsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getPlanksNeededForGearsProductionSuccess(self) -> None:
+        """
+        The getPlanksNeededForGearsProduction method must correctly
+        calculate planks needed.
+        """
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 3.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+
+        result = self.uut.getPlanksNeededForGearsProduction(3)
+
+        # Cycles per day = 24 / 3.0 = 8
+        # Planks per workshop per day = 1 * 8 = 8
+        # Total planks = 3 * 8 = 24
+        self.assertEqual(24, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+
+    # Test Cases for Wood Workshop
+    def test_getWoodWorkshopsNeededForTreatedPlanksNegativeAmount(self) -> None:    # noqa: E501
+        errMsg = "Treated planks amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getWoodWorkshopsNeededForTreatedPlanks(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getWoodWorkshopsNeededForTreatedPlanksSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 3.0
+        self.uut.factionData.getGoodsOutputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 2
+
+        result = self.uut.getWoodWorkshopsNeededForTreatedPlanks(20.0)
+
+        # Cycles per day = 24 / 3.0 = 8
+        # Output per building = 1 * 8 * 2 = 16
+        # Wood workshops needed = 20.0 / 16 = 1.25 -> ceil = 2
+        self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getPineResinNeededForTreatedPlanksProductionNegativeCount(self) -> None:   # noqa: E501
+        errMsg = "Wood workshops count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getPineResinNeededForTreatedPlanksProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getPineResinNeededForTreatedPlanksProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 3.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 2
+
+        result = self.uut.getPineResinNeededForTreatedPlanksProduction(3)
+
+        # Cycles per day = 24 / 3.0 = 8
+        # Pine resin per workshop per day = 1 * 8 * 2 = 16
+        # Total pine resin = 3 * 16 = 48
+        self.assertEqual(48, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getPlanksNeededForTreatedPlanksProductionNegativeCount(self) -> None:  # noqa: E501
+        errMsg = "Wood workshops count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getPlanksNeededForTreatedPlanksProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getPlanksNeededForTreatedPlanksProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 3.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 2
+
+        result = self.uut.getPlanksNeededForTreatedPlanksProduction(3)
+
+        # Cycles per day = 24 / 3.0 = 8
+        # Planks per workshop per day = 1 * 8 * 2 = 16
+        # Total planks = 3 * 16 = 48
+        self.assertEqual(48, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    # Test Cases for Smelter
+    def test_getSmeltersNeededForMetalBlocksNegativeAmount(self) -> None:
+        errMsg = "Metal blocks amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getSmeltersNeededForMetalBlocks(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getSmeltersNeededForMetalBlocksSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 2.0
+        self.uut.factionData.getGoodsOutputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getSmeltersNeededForMetalBlocks(15.0)
+
+        # Cycles per day = 24 / 2.0 = 12
+        # Output per building = 1 * 12 * 1 = 12
+        # Smelters needed = 15.0 / 12 = 1.25 -> ceil = 2
+        self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getScrapMetalNeededForMetalBlocksProductionNegativeCount(self) -> None:    # noqa: E501
+        errMsg = "Smelters count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getScrapMetalNeededForMetalBlocksProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getScrapMetalNeededForMetalBlocksProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 2.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getScrapMetalNeededForMetalBlocksProduction(3)
+
+        # Cycles per day = 24 / 2.0 = 12
+        # Scrap metal per smelter per day = 1 * 12 * 1 = 12
+        # Total scrap metal = 3 * 12 = 36
+        self.assertEqual(36, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getLogsNeededForMetalBlocksProductionNegativeCount(self) -> None:
+        errMsg = "Smelters count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getLogsNeededForMetalBlocksProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getLogsNeededForMetalBlocksProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 2.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 0.2
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getLogsNeededForMetalBlocksProduction(3)
+
+        # Cycles per day = 24 / 2.0 = 12
+        # Logs per smelter per day = 0.2 * 12 * 1 = 2.4
+        # Total logs = 3 * 2.4 = 7.2 -> ceil = 8
+        self.assertEqual(8, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
     # Test Cases for Efficient Mine
     def test_getEfficientMinesNeededForScrapMetalNegativeAmount(self) -> None:
         """
@@ -1545,7 +1915,7 @@ class TestIronTeeth(TestCase):
             self.uut.getTreatedPlanksNeededForScrapMetalProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getTreatedPlanksNeededForScrapMetalProductionSuccess(self) -> None:
+    def test_getTreatedPlanksNeededForScrapMetalProductionSuccess(self) -> None:    # noqa: E501
         """
         The getTreatedPlanksNeededForScrapMetalProduction method must correctly
         calculate treated planks needed.
@@ -1563,3 +1933,539 @@ class TestIronTeeth(TestCase):
         self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
         self.uut.factionData.getGoodsProductionTime.assert_called_once()
         self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+
+    # Test Cases for Grease Factory
+    def test_getGreaseFactoriesNeededForGreaseNegativeAmount(self) -> None:
+        errMsg = "Grease amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getGreaseFactoriesNeededForGrease(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getGreaseFactoriesNeededForGreaseSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 2.0
+        self.uut.factionData.getGoodsOutputQuantity.return_value = 2
+        self.uut.factionData.getGoodsWorkers.return_value = 2
+
+        result = self.uut.getGreaseFactoriesNeededForGrease(50.0)
+
+        # Cycles per day = 24 / 2.0 = 12
+        # Output per building = 2 * 12 * 2 = 48
+        # Grease factories needed = 50.0 / 48 = 1.042 -> ceil = 2
+        self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getExtractNeededForGreaseProductionNegativeCount(self) -> None:
+        errMsg = "Grease factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getExtractNeededForGreaseProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getExtractNeededForGreaseProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 2.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 2
+
+        result = self.uut.getExtractNeededForGreaseProduction(3)
+
+        # Cycles per day = 24 / 2.0 = 12
+        # Extract per factory per day = 1 * 12 * 2 = 24
+        # Total extract = 3 * 24 = 72
+        self.assertEqual(72, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getCanolaOilNeededForGreaseProductionNegativeCount(self) -> None:
+        errMsg = "Grease factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getCanolaOilNeededForGreaseProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getCanolaOilNeededForGreaseProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 2.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 2
+
+        result = self.uut.getCanolaOilNeededForGreaseProduction(3)
+
+        # Cycles per day = 24 / 2.0 = 12
+        # Canola oil per factory per day = 1 * 12 * 2 = 24
+        # Total canola oil = 3 * 24 = 72
+        self.assertEqual(72, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    # Test Cases for Bot Part Factory - Bot Chassis
+    def test_getBotPartFactoriesNeededForBotChassisNegativeAmount(self) -> None:    # noqa: E501
+        errMsg = "Bot chassis amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getBotPartFactoriesNeededForBotChassis(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getBotPartFactoriesNeededForBotChassisSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 18.0
+        self.uut.factionData.getGoodsOutputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getBotPartFactoriesNeededForBotChassis(2.0)
+
+        # Cycles per day = 24 / 18.0 = 1.333...
+        # Output per building = 1 * 1.333... * 1 = 1.333...
+        # Bot part factories needed = 2.0 / 1.333... = 1.5 -> ceil = 2
+        self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getPlanksNeededForBotChassisProductionNegativeCount(self) -> None:
+        errMsg = "Bot part factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getPlanksNeededForBotChassisProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getPlanksNeededForBotChassisProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 18.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 5
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getPlanksNeededForBotChassisProduction(2)
+
+        # Cycles per day = 24 / 18.0 = 1.333...
+        # Planks per factory per day = 5 * 1.333... * 1 = 6.666... -> ceil = 7
+        # Total planks = 2 * 7 = 14
+        self.assertEqual(14, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getMetalBlocksNeededForBotChassisProductionNegativeCount(self) -> None:    # noqa: E501
+        errMsg = "Bot part factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getMetalBlocksNeededForBotChassisProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getMetalBlocksNeededForBotChassisProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 18.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getMetalBlocksNeededForBotChassisProduction(2)
+
+        # Cycles per day = 24 / 18.0 = 1.333...
+        # Metal blocks per factory per day = 1 * 1.333... * 1 = 1.333...
+        # Total metal blocks = 2 * 1.333... = 2.666... -> ceil = 3
+        self.assertEqual(3, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getBiofuelNeededForBotChassisProductionNegativeCount(self) -> None:    # noqa: E501
+        errMsg = "Bot part factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getBiofuelNeededForBotChassisProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getBiofuelNeededForBotChassisProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 18.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getBiofuelNeededForBotChassisProduction(2)
+
+        # Cycles per day = 24 / 18.0 = 1.333...
+        # Biofuel per factory per day = 1 * 1.333... * 1 = 1.333...
+        # Total biofuel = 2 * 1.333... = 2.666... -> ceil = 3
+        self.assertEqual(3, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    # Test Cases for Bot Part Factory - Bot Heads
+    def test_getBotPartFactoriesNeededForBotHeadsNegativeAmount(self) -> None:
+        errMsg = "Bot heads amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getBotPartFactoriesNeededForBotHeads(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getBotPartFactoriesNeededForBotHeadsSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 1
+        self.uut.factionData.getGoodsProductionTime.return_value = 18.0
+        self.uut.factionData.getGoodsOutputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getBotPartFactoriesNeededForBotHeads(2.0)
+
+        # Cycles per day = 24 / 18.0 = 1.333...
+        # Output per building = 1 * 1.333... * 1 = 1.333...
+        # Bot part factories needed = 2.0 / 1.333... = 1.5 -> ceil = 2
+        self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getGearsNeededForBotHeadsProductionNegativeCount(self) -> None:
+        errMsg = "Bot part factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getGearsNeededForBotHeadsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getGearsNeededForBotHeadsProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 1
+        self.uut.factionData.getGoodsProductionTime.return_value = 18.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 3
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getGearsNeededForBotHeadsProduction(2)
+
+        # Cycles per day = 24 / 18.0 = 1.333...
+        # Gears per factory per day = 3 * 1.333... * 1 = 4
+        # Total gears = 2 * 4 = 8
+        self.assertEqual(8, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getMetalBlocksNeededForBotHeadsProductionNegativeCount(self) -> None:  # noqa: E501
+        errMsg = "Bot part factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getMetalBlocksNeededForBotHeadsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getMetalBlocksNeededForBotHeadsProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 1
+        self.uut.factionData.getGoodsProductionTime.return_value = 18.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getMetalBlocksNeededForBotHeadsProduction(2)
+
+        # Cycles per day = 24 / 18.0 = 1.333...
+        # Metal blocks per factory per day = 1 * 1.333... * 1 = 1.333...
+        # Total metal blocks = 2 * 1.333... = 2.666... -> ceil = 3
+        self.assertEqual(3, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getPlanksNeededForBotHeadsProductionNegativeCount(self) -> None:
+        errMsg = "Bot part factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getPlanksNeededForBotHeadsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getPlanksNeededForBotHeadsProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 1
+        self.uut.factionData.getGoodsProductionTime.return_value = 18.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getPlanksNeededForBotHeadsProduction(2)
+
+        # Cycles per day = 24 / 18.0 = 1.333...
+        # Planks per factory per day = 1 * 1.333... * 1 = 1.333...
+        # Total planks = 2 * 1.333... = 2.666... -> ceil = 3
+        self.assertEqual(3, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    # Test Cases for Bot Part Factory - Bot Limbs
+    def test_getBotPartFactoriesNeededForBotLimbsNegativeAmount(self) -> None:
+        errMsg = "Bot limbs amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getBotPartFactoriesNeededForBotLimbs(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getBotPartFactoriesNeededForBotLimbsSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 2
+        self.uut.factionData.getGoodsProductionTime.return_value = 18.0
+        self.uut.factionData.getGoodsOutputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getBotPartFactoriesNeededForBotLimbs(2.0)
+
+        # Cycles per day = 24 / 18.0 = 1.333...
+        # Output per building = 1 * 1.333... * 1 = 1.333...
+        # Bot part factories needed = 2.0 / 1.333... = 1.5 -> ceil = 2
+        self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getGearsNeededForBotLimbsProductionNegativeCount(self) -> None:
+        errMsg = "Bot part factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getGearsNeededForBotLimbsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getGearsNeededForBotLimbsProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 2
+        self.uut.factionData.getGoodsProductionTime.return_value = 18.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 3
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getGearsNeededForBotLimbsProduction(2)
+
+        # Cycles per day = 24 / 18.0 = 1.333...
+        # Gears per factory per day = 3 * 1.333... * 1 = 4
+        # Total gears = 2 * 4 = 8
+        self.assertEqual(8, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getPlanksNeededForBotLimbsProductionNegativeCount(self) -> None:
+        errMsg = "Bot part factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getPlanksNeededForBotLimbsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getPlanksNeededForBotLimbsProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 2
+        self.uut.factionData.getGoodsProductionTime.return_value = 18.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getPlanksNeededForBotLimbsProduction(2)
+
+        # Cycles per day = 24 / 18.0 = 1.333...
+        # Planks per factory per day = 1 * 1.333... * 1 = 1.333...
+        # Total planks = 2 * 1.333... = 2.666... -> ceil = 3
+        self.assertEqual(3, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    # Test Cases for Bot Assembler
+    def test_getBotAssemblersNeededForBotsNegativeAmount(self) -> None:
+        errMsg = "Bots amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getBotAssemblersNeededForBots(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getBotAssemblersNeededForBotsSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 36.0
+        self.uut.factionData.getGoodsOutputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 2
+
+        result = self.uut.getBotAssemblersNeededForBots(2.0)
+
+        # Cycles per day = 24 / 36.0 = 0.666...
+        # Output per building = 1 * 0.666... * 2 = 1.333...
+        # Bot assemblers needed = 2.0 / 1.333... = 1.5 -> ceil = 2
+        self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getBotChassisNeededForBotsProductionNegativeCount(self) -> None:
+        errMsg = "Bot assemblers count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getBotChassisNeededForBotsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getBotChassisNeededForBotsProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 36.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 2
+
+        result = self.uut.getBotChassisNeededForBotsProduction(2)
+
+        # Cycles per day = 24 / 36.0 = 0.666...
+        # Bot chassis per assembler per day = 1 * 0.666... * 2 = 1.333...
+        # Total bot chassis = 2 * 1.333... = 2.666... -> ceil = 3
+        self.assertEqual(3, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getBotHeadsNeededForBotsProductionNegativeCount(self) -> None:
+        errMsg = "Bot assemblers count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getBotHeadsNeededForBotsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getBotHeadsNeededForBotsProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 36.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 2
+
+        result = self.uut.getBotHeadsNeededForBotsProduction(2)
+
+        # Cycles per day = 24 / 36.0 = 0.666...
+        # Bot heads per assembler per day = 1 * 0.666... * 2 = 1.333...
+        # Total bot heads = 2 * 1.333... = 2.666... -> ceil = 3
+        self.assertEqual(3, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getBotLimbsNeededForBotsProductionNegativeCount(self) -> None:
+        errMsg = "Bot assemblers count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getBotLimbsNeededForBotsProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getBotLimbsNeededForBotsProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 36.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 4
+        self.uut.factionData.getGoodsWorkers.return_value = 2
+
+        result = self.uut.getBotLimbsNeededForBotsProduction(2)
+
+        # Cycles per day = 24 / 36.0 = 0.666...
+        # Bot limbs per assembler per day = 4 * 0.666... * 2 = 5.333...
+        # Total bot limbs = 2 * 5.333... = 10.666... -> ceil = 11
+        self.assertEqual(11, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    # Test Cases for Explosives Factory
+    def test_getExplosivesFactoriesNeededForExplosivesNegativeAmount(self) -> None:     # noqa: E501
+        errMsg = "Explosives amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getExplosivesFactoriesNeededForExplosives(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getExplosivesFactoriesNeededForExplosivesSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 3.0
+        self.uut.factionData.getGoodsOutputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getExplosivesFactoriesNeededForExplosives(10.0)
+
+        # Cycles per day = 24 / 3.0 = 8
+        # Output per building = 1 * 8 * 1 = 8
+        # Explosives factories needed = 10.0 / 8 = 1.25 -> ceil = 2
+        self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getBadwaterNeededForExplosivesProductionNegativeCount(self) -> None:   # noqa: E501
+        errMsg = "Explosives factories count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getBadwaterNeededForExplosivesProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getBadwaterNeededForExplosivesProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 3.0
+        self.uut.factionData.getGoodsInputQuantity.return_value = 5
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getBadwaterNeededForExplosivesProduction(3)
+
+        # Cycles per day = 24 / 3.0 = 8
+        # Badwater per factory per day = 5 * 8 * 1 = 40
+        # Total badwater = 3 * 40 = 120
+        self.assertEqual(120, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    # Test Cases for Centrifuge
+    def test_getCentrifugesNeededForExtractNegativeAmount(self) -> None:
+        errMsg = "Extract amount cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getCentrifugesNeededForExtract(-10.0)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getCentrifugesNeededForExtractSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 0.75
+        self.uut.factionData.getGoodsOutputQuantity.return_value = 1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getCentrifugesNeededForExtract(40.0)
+
+        # Cycles per day = 24 / 0.75 = 32
+        # Output per building = 1 * 32 * 1 = 32
+        # Centrifuges needed = 40.0 / 32 = 1.25 -> ceil = 2
+        self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getBadwaterNeededForExtractProductionNegativeCount(self) -> None:
+        errMsg = "Centrifuges count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getBadwaterNeededForExtractProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getBadwaterNeededForExtractProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 0.75
+        self.uut.factionData.getGoodsInputQuantity.return_value = 4
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getBadwaterNeededForExtractProduction(3)
+
+        # Cycles per day = 24 / 0.75 = 32
+        # Badwater per centrifuge per day = 4 * 32 * 1 = 128
+        # Total badwater = 3 * 128 = 384
+        self.assertEqual(384, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()
+
+    def test_getLogsNeededForExtractProductionNegativeCount(self) -> None:
+        errMsg = "Centrifuges count cannot be negative."
+        with self.assertRaises(ValueError) as context:
+            self.uut.getLogsNeededForExtractProduction(-1)
+        self.assertEqual(errMsg, str(context.exception))
+
+    def test_getLogsNeededForExtractProductionSuccess(self) -> None:
+        self.uut.factionData.getGoodsRecipeIndex.return_value = 0
+        self.uut.factionData.getGoodsProductionTime.return_value = 0.75
+        self.uut.factionData.getGoodsInputQuantity.return_value = 0.1
+        self.uut.factionData.getGoodsWorkers.return_value = 1
+
+        result = self.uut.getLogsNeededForExtractProduction(3)
+
+        # Cycles per day = 24 / 0.75 = 32
+        # Logs per centrifuge per day = 0.1 * 32 * 1 = 3.2
+        # Total logs = 3 * 3.2 = 9.6 -> ceil = 10
+        self.assertEqual(10, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
+        self.uut.factionData.getGoodsProductionTime.assert_called_once()
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once()
+        self.uut.factionData.getGoodsWorkers.assert_called_once()

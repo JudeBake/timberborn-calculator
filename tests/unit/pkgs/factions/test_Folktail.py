@@ -924,19 +924,19 @@ class TestFolktail(TestCase):
         # Grills needed = ceil(200.0 / 184.615...) = ceil(1.083...) = 2
         self.assertEqual(2, result)
 
-    def test_getPotatoesNeededForGrillsNegativeCount(self) -> None:
+    def test_getPotatoesNeededForGrilledPotatoesProductionNegativeCount(self) -> None:
         """
-        The getPotatoesNeededForGrills method must raise ValueError if
+        The getPotatoesNeededForGrilledPotatoesProduction method must raise ValueError if
         grills count is negative.
         """
         errMsg = "Grills count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPotatoesNeededForGrills(-1)
+            self.uut.getPotatoesNeededForGrilledPotatoesProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPotatoesNeededForGrillsSuccess(self) -> None:
+    def test_getPotatoesNeededForGrilledPotatoesProductionSuccess(self) -> None:
         """
-        The getPotatoesNeededForGrills method must correctly calculate
+        The getPotatoesNeededForGrilledPotatoesProduction method must correctly calculate
         potatoes needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
@@ -944,7 +944,7 @@ class TestFolktail(TestCase):
             .return_value = 0.52
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
 
-        result = self.uut.getPotatoesNeededForGrills(3)
+        result = self.uut.getPotatoesNeededForGrilledPotatoesProduction(3)
 
         # Cycles per day = 24 / 0.52 = 46.153...
         # Potatoes per grill per day = 1 * 46.153... = 46.153...
@@ -952,19 +952,19 @@ class TestFolktail(TestCase):
         # Ceiling = 139
         self.assertEqual(139, result)
 
-    def test_getLogsNeededForGrillsWithPotatoesNegativeCount(self) -> None:
+    def test_getLogsNeededForGrilledPotatoesProductionNegativeCount(self) -> None:
         """
-        The getLogsNeededForGrillsWithPotatoes method must raise ValueError
+        The getLogsNeededForGrilledPotatoesProduction method must raise ValueError
         if grills count is negative.
         """
         errMsg = "Grills count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForGrillsWithPotatoes(-1)
+            self.uut.getLogsNeededForGrilledPotatoesProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForGrillsWithPotatoesSuccess(self) -> None:
+    def test_getLogsNeededForGrilledPotatoesProductionSuccess(self) -> None:
         """
-        The getLogsNeededForGrillsWithPotatoes method must correctly
+        The getLogsNeededForGrilledPotatoesProduction method must correctly
         calculate logs needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
@@ -972,7 +972,7 @@ class TestFolktail(TestCase):
             .return_value = 0.52
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 0.1
 
-        result = self.uut.getLogsNeededForGrillsWithPotatoes(3)
+        result = self.uut.getLogsNeededForGrilledPotatoesProduction(3)
 
         # Cycles per day = 24 / 0.52 = 46.153...
         # Logs per grill per day = 0.1 * 46.153... = 4.615...
@@ -1005,19 +1005,19 @@ class TestFolktail(TestCase):
         # Grills needed = ceil(400.0 / 363.636...) = ceil(1.1) = 2
         self.assertEqual(2, result)
 
-    def test_getChestnutsNeededForGrillsNegativeCount(self) -> None:
+    def test_getChestnutsNeededForGrilledChestnutsProductionNegativeCount(self) -> None:
         """
-        The getChestnutsNeededForGrills method must raise ValueError if
+        The getChestnutsNeededForGrilledChestnutsProduction method must raise ValueError if
         grills count is negative.
         """
         errMsg = "Grills count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getChestnutsNeededForGrills(-1)
+            self.uut.getChestnutsNeededForGrilledChestnutsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getChestnutsNeededForGrillsSuccess(self) -> None:
+    def test_getChestnutsNeededForGrilledChestnutsProductionSuccess(self) -> None:
         """
-        The getChestnutsNeededForGrills method must correctly calculate
+        The getChestnutsNeededForGrilledChestnutsProduction method must correctly calculate
         chestnuts needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
@@ -1025,7 +1025,7 @@ class TestFolktail(TestCase):
             .return_value = 0.33
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
 
-        result = self.uut.getChestnutsNeededForGrills(3)
+        result = self.uut.getChestnutsNeededForGrilledChestnutsProduction(3)
 
         # Cycles per day = 24 / 0.33 = 72.727...
         # Chestnuts per grill per day = 1 * 72.727... = 72.727...
@@ -1033,19 +1033,19 @@ class TestFolktail(TestCase):
         # Ceiling = 219
         self.assertEqual(219, result)
 
-    def test_getLogsNeededForGrillsWithChestnutsNegativeCount(self) -> None:
+    def test_getLogsNeededForGrilledChestnutsProductionNegativeCount(self) -> None:
         """
-        The getLogsNeededForGrillsWithChestnuts method must raise ValueError
+        The getLogsNeededForGrilledChestnutsProduction method must raise ValueError
         if grills count is negative.
         """
         errMsg = "Grills count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForGrillsWithChestnuts(-1)
+            self.uut.getLogsNeededForGrilledChestnutsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForGrillsWithChestnutsSuccess(self) -> None:
+    def test_getLogsNeededForGrilledChestnutsProductionSuccess(self) -> None:
         """
-        The getLogsNeededForGrillsWithChestnuts method must correctly
+        The getLogsNeededForGrilledChestnutsProduction method must correctly
         calculate logs needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
@@ -1053,7 +1053,7 @@ class TestFolktail(TestCase):
             .return_value = 0.33
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 0.1
 
-        result = self.uut.getLogsNeededForGrillsWithChestnuts(3)
+        result = self.uut.getLogsNeededForGrilledChestnutsProduction(3)
 
         # Cycles per day = 24 / 0.33 = 72.727...
         # Logs per grill per day = 0.1 * 72.727... = 7.272...
@@ -1086,19 +1086,19 @@ class TestFolktail(TestCase):
         # Grills needed = ceil(300.0 / 288.0) = ceil(1.041...) = 2
         self.assertEqual(2, result)
 
-    def test_getSpadderdocksNeededForGrillsNegativeCount(self) -> None:
+    def test_getSpadderdocksNeededForGrilledSpadderdocksProductionNegativeCount(self) -> None:
         """
-        The getSpadderdocksNeededForGrills method must raise ValueError if
+        The getSpadderdocksNeededForGrilledSpadderdocksProduction method must raise ValueError if
         grills count is negative.
         """
         errMsg = "Grills count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getSpadderdocksNeededForGrills(-1)
+            self.uut.getSpadderdocksNeededForGrilledSpadderdocksProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getSpadderdocksNeededForGrillsSuccess(self) -> None:
+    def test_getSpadderdocksNeededForGrilledSpadderdocksProductionSuccess(self) -> None:
         """
-        The getSpadderdocksNeededForGrills method must correctly calculate
+        The getSpadderdocksNeededForGrilledSpadderdocksProduction method must correctly calculate
         spadderdocks needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
@@ -1106,7 +1106,7 @@ class TestFolktail(TestCase):
             .return_value = 0.25
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 2
 
-        result = self.uut.getSpadderdocksNeededForGrills(3)
+        result = self.uut.getSpadderdocksNeededForGrilledSpadderdocksProduction(3)
 
         # Cycles per day = 24 / 0.25 = 96.0
         # Spadderdocks per grill per day = 2 * 96.0 = 192.0
@@ -1114,19 +1114,19 @@ class TestFolktail(TestCase):
         # Ceiling = 576
         self.assertEqual(576, result)
 
-    def test_getLogsNeededForGrillsWithSpadderdocksNegativeCount(self) -> None:
+    def test_getLogsNeededForGrilledSpadderdocksProductionNegativeCount(self) -> None:
         """
-        The getLogsNeededForGrillsWithSpadderdocks method must raise
+        The getLogsNeededForGrilledSpadderdocksProduction method must raise
         ValueError if grills count is negative.
         """
         errMsg = "Grills count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForGrillsWithSpadderdocks(-1)
+            self.uut.getLogsNeededForGrilledSpadderdocksProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForGrillsWithSpadderdocksSuccess(self) -> None:
+    def test_getLogsNeededForGrilledSpadderdocksProductionSuccess(self) -> None:
         """
-        The getLogsNeededForGrillsWithSpadderdocks method must correctly
+        The getLogsNeededForGrilledSpadderdocksProduction method must correctly
         calculate logs needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
@@ -1134,7 +1134,7 @@ class TestFolktail(TestCase):
             .return_value = 0.25
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 0.15
 
-        result = self.uut.getLogsNeededForGrillsWithSpadderdocks(3)
+        result = self.uut.getLogsNeededForGrilledSpadderdocksProduction(3)
 
         # Cycles per day = 24 / 0.25 = 96.0
         # Logs per grill per day = 0.15 * 96.0 = 14.4
@@ -1166,26 +1166,26 @@ class TestFolktail(TestCase):
         # Gristmills needed = ceil(50.0 / 48.0) = ceil(1.041...) = 2
         self.assertEqual(2, result)
 
-    def test_getWheatNeededForGristmillsNegativeCount(self) -> None:
+    def test_getWheatNeededForWheatFlourProductionNegativeCount(self) -> None:
         """
-        The getWheatNeededForGristmills method must raise ValueError if
+        The getWheatNeededForWheatFlourProduction method must raise ValueError if
         gristmills count is negative.
         """
         errMsg = "Gristmills count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getWheatNeededForGristmills(-1)
+            self.uut.getWheatNeededForWheatFlourProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getWheatNeededForGristmillsSuccess(self) -> None:
+    def test_getWheatNeededForWheatFlourProductionSuccess(self) -> None:
         """
-        The getWheatNeededForGristmills method must correctly calculate wheat
+        The getWheatNeededForWheatFlourProduction method must correctly calculate wheat
         needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
         self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.5
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
 
-        result = self.uut.getWheatNeededForGristmills(3)
+        result = self.uut.getWheatNeededForWheatFlourProduction(3)
 
         # Cycles per day = 24 / 0.5 = 48.0
         # Wheat per gristmill per day = 1 * 48.0 = 48.0
@@ -1219,19 +1219,19 @@ class TestFolktail(TestCase):
         # Gristmills needed = ceil(100.0 / 96.0) = ceil(1.041...) = 2
         self.assertEqual(2, result)
 
-    def test_getCattailRootsNeededForGristmillsNegativeCount(self) -> None:
+    def test_getCattailRootsNeededForCattailFlourProductionNegativeCount(self) -> None:
         """
-        The getCattailRootsNeededForGristmills method must raise ValueError if
+        The getCattailRootsNeededForCattailFlourProduction method must raise ValueError if
         gristmills count is negative.
         """
         errMsg = "Gristmills count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getCattailRootsNeededForGristmills(-1)
+            self.uut.getCattailRootsNeededForCattailFlourProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getCattailRootsNeededForGristmillsSuccess(self) -> None:
+    def test_getCattailRootsNeededForCattailFlourProductionSuccess(self) -> None:
         """
-        The getCattailRootsNeededForGristmills method must correctly calculate
+        The getCattailRootsNeededForCattailFlourProduction method must correctly calculate
         cattail roots needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
@@ -1239,7 +1239,7 @@ class TestFolktail(TestCase):
             .return_value = 0.25
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
 
-        result = self.uut.getCattailRootsNeededForGristmills(3)
+        result = self.uut.getCattailRootsNeededForCattailFlourProduction(3)
 
         # Cycles per day = 24 / 0.25 = 96.0
         # Cattail roots per gristmill per day = 1 * 96.0 = 96.0
@@ -1273,19 +1273,19 @@ class TestFolktail(TestCase):
         # Bakeries needed = ceil(300.0 / 285.714...) = ceil(1.05) = 2
         self.assertEqual(2, result)
 
-    def test_getWheatFlourNeededForBakeriesWithBreadsNegativeCount(self) -> None:   # noqa: E501
+    def test_getWheatFlourNeededForBreadsProductionNegativeCount(self) -> None:   # noqa: E501
         """
-        The getWheatFlourNeededForBakeriesWithBreads method must raise
+        The getWheatFlourNeededForBreadsProduction method must raise
         ValueError if bakeries count is negative.
         """
         errMsg = "Bakeries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getWheatFlourNeededForBakeriesWithBreads(-1)
+            self.uut.getWheatFlourNeededForBreadsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getWheatFlourNeededForBakeriesWithBreadsSuccess(self) -> None:
+    def test_getWheatFlourNeededForBreadsProductionSuccess(self) -> None:
         """
-        The getWheatFlourNeededForBakeriesWithBreads method must correctly
+        The getWheatFlourNeededForBreadsProduction method must correctly
         calculate wheat flour needed.
         """
 
@@ -1294,7 +1294,7 @@ class TestFolktail(TestCase):
             .return_value = 0.42
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
 
-        result = self.uut.getWheatFlourNeededForBakeriesWithBreads(3)
+        result = self.uut.getWheatFlourNeededForBreadsProduction(3)
 
         # Cycles per day = 24 / 0.42 = 57.142...
         # Wheat flour per bakery per day = 1 * 57.142... = 57.142...
@@ -1302,19 +1302,19 @@ class TestFolktail(TestCase):
         # Ceiling = 172
         self.assertEqual(172, result)
 
-    def test_getLogsNeededForBakeriesWithBreadsNegativeCount(self) -> None:
+    def test_getLogsNeededForBreadsProductionNegativeCount(self) -> None:
         """
-        The getLogsNeededForBakeriesWithBreads method must raise ValueError
+        The getLogsNeededForBreadsProduction method must raise ValueError
         if bakeries count is negative.
         """
         errMsg = "Bakeries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForBakeriesWithBreads(-1)
+            self.uut.getLogsNeededForBreadsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForBakeriesWithBreadsSuccess(self) -> None:
+    def test_getLogsNeededForBreadsProductionSuccess(self) -> None:
         """
-        The getLogsNeededForBakeriesWithBreads method must correctly calculate
+        The getLogsNeededForBreadsProduction method must correctly calculate
         logs needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 0
@@ -1322,7 +1322,7 @@ class TestFolktail(TestCase):
             .return_value = 0.42
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 0.1
 
-        result = self.uut.getLogsNeededForBakeriesWithBreads(3)
+        result = self.uut.getLogsNeededForBreadsProduction(3)
 
         # Cycles per day = 24 / 0.42 = 57.142...
         # Logs per bakery per day = 0.1 * 57.142... = 5.714...
@@ -1354,19 +1354,19 @@ class TestFolktail(TestCase):
         # Bakeries needed = ceil(200.0 / 192.0) = ceil(1.041...) = 2
         self.assertEqual(2, result)
 
-    def test_getCattailFlourNeededForBakeriesWithCattailCrackersNegativeCount(self) -> None:    # noqa: E501
+    def test_getCattailFlourNeededForCattailCrackersProductionNegativeCount(self) -> None:    # noqa: E501
         """
-        The getCattailFlourNeededForBakeriesWithCattailCrackers method must
+        The getCattailFlourNeededForCattailCrackersProduction method must
         raise ValueError if bakeries count is negative.
         """
         errMsg = "Bakeries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getCattailFlourNeededForBakeriesWithCattailCrackers(-1)
+            self.uut.getCattailFlourNeededForCattailCrackersProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getCattailFlourNeededForBakeriesWithCattailCrackersSuccess(self) -> None:  # noqa: E501
+    def test_getCattailFlourNeededForCattailCrackersProductionSuccess(self) -> None:  # noqa: E501
         """
-        The getCattailFlourNeededForBakeriesWithCattailCrackers method must
+        The getCattailFlourNeededForCattailCrackersProduction method must
         correctly calculate cattail flour needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
@@ -1374,7 +1374,7 @@ class TestFolktail(TestCase):
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
 
         result = self.uut \
-            .getCattailFlourNeededForBakeriesWithCattailCrackers(3)
+            .getCattailFlourNeededForCattailCrackersProduction(3)
 
         # Cycles per day = 24 / 0.5 = 48.0
         # Cattail flour per bakery per day = 1 * 48.0 = 48.0
@@ -1382,26 +1382,26 @@ class TestFolktail(TestCase):
         # Ceiling = 144
         self.assertEqual(144, result)
 
-    def test_getLogsNeededForBakeriesWithCattailCrackersNegativeCount(self) -> None:    # noqa: E501
+    def test_getLogsNeededForCattailCrackersProductionNegativeCount(self) -> None:    # noqa: E501
         """
-        The getLogsNeededForBakeriesWithCattailCrackers method must raise
+        The getLogsNeededForCattailCrackersProduction method must raise
         ValueError if bakeries count is negative.
         """
         errMsg = "Bakeries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForBakeriesWithCattailCrackers(-1)
+            self.uut.getLogsNeededForCattailCrackersProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForBakeriesWithCattailCrackersSuccess(self) -> None:
+    def test_getLogsNeededForCattailCrackersProductionSuccess(self) -> None:
         """
-        The getLogsNeededForBakeriesWithCattailCrackers method must correctly
+        The getLogsNeededForCattailCrackersProduction method must correctly
         calculate logs needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 1
         self.uut.factionData.getFoodProcessingProductionTime.return_value = 0.5
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 0.1
 
-        result = self.uut.getLogsNeededForBakeriesWithCattailCrackers(3)
+        result = self.uut.getLogsNeededForCattailCrackersProduction(3)
 
         # Cycles per day = 24 / 0.5 = 48.0
         # Logs per bakery per day = 0.1 * 48.0 = 4.8
@@ -1434,19 +1434,19 @@ class TestFolktail(TestCase):
         # Bakeries needed = ceil(140.0 / 130.909...) = ceil(1.069...) = 2
         self.assertEqual(2, result)
 
-    def test_getWheatFlourNeededForBakeriesWithMaplePastriesNegativeCount(self) -> None:    # noqa: E501
+    def test_getWheatFlourNeededForMaplePastriesProductionNegativeCount(self) -> None:    # noqa: E501
         """
-        The getWheatFlourNeededForBakeriesWithMaplePastries method must raise
+        The getWheatFlourNeededForMaplePastriesProduction method must raise
         ValueError if bakeries count is negative.
         """
         errMsg = "Bakeries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getWheatFlourNeededForBakeriesWithMaplePastries(-1)
+            self.uut.getWheatFlourNeededForMaplePastriesProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getWheatFlourNeededForBakeriesWithMaplePastriesSuccess(self) -> None:  # noqa: E501
+    def test_getWheatFlourNeededForMaplePastriesProductionSuccess(self) -> None:  # noqa: E501
         """
-        The getWheatFlourNeededForBakeriesWithMaplePastries method must
+        The getWheatFlourNeededForMaplePastriesProduction method must
         correctly calculate wheat flour needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
@@ -1454,7 +1454,7 @@ class TestFolktail(TestCase):
             .return_value = 0.55
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
 
-        result = self.uut.getWheatFlourNeededForBakeriesWithMaplePastries(3)
+        result = self.uut.getWheatFlourNeededForMaplePastriesProduction(3)
 
         # Cycles per day = 24 / 0.55 = 43.636...
         # Wheat flour per bakery per day = 1 * 43.636... = 43.636...
@@ -1462,19 +1462,19 @@ class TestFolktail(TestCase):
         # Ceiling = 131
         self.assertEqual(131, result)
 
-    def test_getMapleSyrupNeededForBakeriesWithMaplePastriesNegativeCount(self) -> None:    # noqa: E501
+    def test_getMapleSyrupNeededForMaplePastriesProductionNegativeCount(self) -> None:    # noqa: E501
         """
-        The getMapleSyrupNeededForBakeriesWithMaplePastries method must raise
+        The getMapleSyrupNeededForMaplePastriesProduction method must raise
         ValueError if bakeries count is negative.
         """
         errMsg = "Bakeries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getMapleSyrupNeededForBakeriesWithMaplePastries(-1)
+            self.uut.getMapleSyrupNeededForMaplePastriesProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getMapleSyrupNeededForBakeriesWithMaplePastriesSuccess(self) -> None:  # noqa: E501
+    def test_getMapleSyrupNeededForMaplePastriesProductionSuccess(self) -> None:  # noqa: E501
         """
-        The getMapleSyrupNeededForBakeriesWithMaplePastries method must
+        The getMapleSyrupNeededForMaplePastriesProduction method must
         correctly calculate maple syrup needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
@@ -1482,7 +1482,7 @@ class TestFolktail(TestCase):
             .return_value = 0.55
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 1
 
-        result = self.uut.getMapleSyrupNeededForBakeriesWithMaplePastries(3)
+        result = self.uut.getMapleSyrupNeededForMaplePastriesProduction(3)
 
         # Cycles per day = 24 / 0.55 = 43.636...
         # Maple syrup per bakery per day = 1 * 43.636... = 43.636...
@@ -1490,19 +1490,19 @@ class TestFolktail(TestCase):
         # Ceiling = 131
         self.assertEqual(131, result)
 
-    def test_getLogsNeededForBakeriesWithMaplePastriesNegativeCount(self) -> None:  # noqa: E501
+    def test_getLogsNeededForMaplePastriesProductionNegativeCount(self) -> None:  # noqa: E501
         """
-        The getLogsNeededForBakeriesWithMaplePastries method must raise
+        The getLogsNeededForMaplePastriesProduction method must raise
         ValueError if bakeries count is negative.
         """
         errMsg = "Bakeries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForBakeriesWithMaplePastries(-1)
+            self.uut.getLogsNeededForMaplePastriesProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForBakeriesWithMaplePastriesSuccess(self) -> None:
+    def test_getLogsNeededForMaplePastriesProductionSuccess(self) -> None:
         """
-        The getLogsNeededForBakeriesWithMaplePastries method must correctly
+        The getLogsNeededForMaplePastriesProduction method must correctly
         calculate logs needed.
         """
         self.uut.factionData.getFoodProcessingRecipeIndex.return_value = 2
@@ -1510,7 +1510,7 @@ class TestFolktail(TestCase):
             .return_value = 0.55
         self.uut.factionData.getFoodProcessingInputQuantity.return_value = 0.1
 
-        result = self.uut.getLogsNeededForBakeriesWithMaplePastries(3)
+        result = self.uut.getLogsNeededForMaplePastriesProduction(3)
 
         # Cycles per day = 24 / 0.55 = 43.636...
         # Logs per bakery per day = 0.1 * 43.636... = 4.363...
@@ -1542,26 +1542,26 @@ class TestFolktail(TestCase):
         # Lumber mills needed = ceil(20.0 / 18.461...) = ceil(1.083...) = 2
         self.assertEqual(2, result)
 
-    def test_getLogsNeededForLumberMillsNegativeCount(self) -> None:
+    def test_getLogsNeededForPlanksProductionNegativeCount(self) -> None:
         """
-        The getLogsNeededForLumberMills method must raise ValueError if
+        The getLogsNeededForPlanksProduction method must raise ValueError if
         lumber mills count is negative.
         """
         errMsg = "Lumber mills count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForLumberMills(-1)
+            self.uut.getLogsNeededForPlanksProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForLumberMillsSuccess(self) -> None:
+    def test_getLogsNeededForPlanksProductionSuccess(self) -> None:
         """
-        The getLogsNeededForLumberMills method must correctly calculate logs
+        The getLogsNeededForPlanksProduction method must correctly calculate logs
         needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 1.3
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getLogsNeededForLumberMills(3)
+        result = self.uut.getLogsNeededForPlanksProduction(3)
 
         # Cycles per day = 24 / 1.3 = 18.461...
         # Logs per lumber mill per day = 1 * 18.461... = 18.461...
@@ -1595,26 +1595,26 @@ class TestFolktail(TestCase):
         # Gear workshops needed = ceil(50.0 / 8) = ceil(6.25) = 7
         self.assertEqual(7, result)
 
-    def test_getPlanksNeededForGearWorkshopsNegativeCount(self) -> None:
+    def test_getPlanksNeededForGearsProductionNegativeCount(self) -> None:
         """
-        The getPlanksNeededForGearWorkshops method must raise ValueError if
+        The getPlanksNeededForGearsProduction method must raise ValueError if
         gear workshops count is negative.
         """
         errMsg = "Gear workshops count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPlanksNeededForGearWorkshops(-1)
+            self.uut.getPlanksNeededForGearsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPlanksNeededForGearWorkshopsSuccess(self) -> None:
+    def test_getPlanksNeededForGearsProductionSuccess(self) -> None:
         """
-        The getPlanksNeededForGearWorkshops method must correctly calculate
+        The getPlanksNeededForGearsProduction method must correctly calculate
         planks needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getPlanksNeededForGearWorkshops(3)
+        result = self.uut.getPlanksNeededForGearsProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Planks per gear workshop per day = 1 * 8 = 8
@@ -1647,26 +1647,26 @@ class TestFolktail(TestCase):
         # Paper mills needed = ceil(100.0 / 30) = ceil(3.333...) = 4
         self.assertEqual(4, result)
 
-    def test_getLogsNeededForPaperMillsNegativeCount(self) -> None:
+    def test_getLogsNeededForPaperProductionNegativeCount(self) -> None:
         """
-        The getLogsNeededForPaperMills method must raise ValueError if
+        The getLogsNeededForPaperProduction method must raise ValueError if
         paper mills count is negative.
         """
         errMsg = "Paper mills count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForPaperMills(-1)
+            self.uut.getLogsNeededForPaperProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForPaperMillsSuccess(self) -> None:
+    def test_getLogsNeededForPaperProductionSuccess(self) -> None:
         """
-        The getLogsNeededForPaperMills method must correctly calculate
+        The getLogsNeededForPaperProduction method must correctly calculate
         logs needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 1.6
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getLogsNeededForPaperMills(2)
+        result = self.uut.getLogsNeededForPaperProduction(2)
 
         # Cycles per day = 24 / 1.6 = 15
         # Logs per paper mill per day = 1 * 15 = 15
@@ -1699,26 +1699,26 @@ class TestFolktail(TestCase):
         # Printing presses needed = ceil(20.0 / 16) = ceil(1.25) = 2
         self.assertEqual(2, result)
 
-    def test_getPaperNeededForPrintingPressesWithBooksNegativeCount(self) -> None:  # noqa: E501
+    def test_getPaperNeededForBooksProductionNegativeCount(self) -> None:  # noqa: E501
         """
-        The getPaperNeededForPrintingPressesWithBooks method must raise
+        The getPaperNeededForBooksProduction method must raise
         ValueError if printing presses count is negative.
         """
         errMsg = "Printing presses count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPaperNeededForPrintingPressesWithBooks(-1)
+            self.uut.getPaperNeededForBooksProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPaperNeededForPrintingPressesWithBooksSuccess(self) -> None:
+    def test_getPaperNeededForBooksProductionSuccess(self) -> None:
         """
-        The getPaperNeededForPrintingPressesWithBooks method must correctly
+        The getPaperNeededForBooksProduction method must correctly
         calculate paper needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 1.5
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
-        result = self.uut.getPaperNeededForPrintingPressesWithBooks(2)
+        result = self.uut.getPaperNeededForBooksProduction(2)
 
         # Cycles per day = 24 / 1.5 = 16
         # Paper per printing press per day = 2 * 16 = 32
@@ -1751,52 +1751,52 @@ class TestFolktail(TestCase):
         # Printing presses needed = ceil(50.0 / 64) = ceil(0.78125) = 1
         self.assertEqual(1, result)
 
-    def test_getPaperNeededForPrintingPressesWithPunchcardsNegativeCount(self) -> None:     # noqa: E501
+    def test_getPaperNeededForPunchcardsProductionNegativeCount(self) -> None:     # noqa: E501
         """
-        The getPaperNeededForPrintingPressesWithPunchcards method must raise
+        The getPaperNeededForPunchcardsProduction method must raise
         ValueError if printing presses count is negative.
         """
         errMsg = "Printing presses count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPaperNeededForPrintingPressesWithPunchcards(-1)
+            self.uut.getPaperNeededForPunchcardsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPaperNeededForPrintingPressesWithPunchcardsSuccess(self) -> None:   # noqa: E501
+    def test_getPaperNeededForPunchcardsProductionSuccess(self) -> None:   # noqa: E501
         """
-        The getPaperNeededForPrintingPressesWithPunchcards method must
+        The getPaperNeededForPunchcardsProduction method must
         correctly calculate paper needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 1
         self.uut.factionData.getGoodsProductionTime.return_value = 0.75
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
-        result = self.uut.getPaperNeededForPrintingPressesWithPunchcards(2)
+        result = self.uut.getPaperNeededForPunchcardsProduction(2)
 
         # Cycles per day = 24 / 0.75 = 32
         # Paper per printing press per day = 2 * 32 = 64
         # Total paper = 2 * 64 = 128
         self.assertEqual(128, result)
 
-    def test_getPlanksNeededForPrintingPressesWithPunchcardsNegativeCount(self) -> None:    # noqa: E501
+    def test_getPlanksNeededForPunchcardsProductionNegativeCount(self) -> None:    # noqa: E501
         """
-        The getPlanksNeededForPrintingPressesWithPunchcards method must raise
+        The getPlanksNeededForPunchcardsProduction method must raise
         ValueError if printing presses count is negative.
         """
         errMsg = "Printing presses count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPlanksNeededForPrintingPressesWithPunchcards(-1)
+            self.uut.getPlanksNeededForPunchcardsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPlanksNeededForPrintingPressesWithPunchcardsSuccess(self) -> None:  # noqa: E501
+    def test_getPlanksNeededForPunchcardsProductionSuccess(self) -> None:  # noqa: E501
         """
-        The getPlanksNeededForPrintingPressesWithPunchcards method must
+        The getPlanksNeededForPunchcardsProduction method must
         correctly calculate planks needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 1
         self.uut.factionData.getGoodsProductionTime.return_value = 0.75
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getPlanksNeededForPrintingPressesWithPunchcards(2)
+        result = self.uut.getPlanksNeededForPunchcardsProduction(2)
 
         # Cycles per day = 24 / 0.75 = 32
         # Planks per printing press per day = 1 * 32 = 32
@@ -1829,52 +1829,52 @@ class TestFolktail(TestCase):
         # Wood workshops needed = ceil(30.0 / 8) = ceil(3.75) = 4
         self.assertEqual(4, result)
 
-    def test_getPineResinNeededForWoodWorkshopsNegativeCount(self) -> None:
+    def test_getPineResinNeededForTreatedPlanksProductionNegativeCount(self) -> None:
         """
-        The getPineResinNeededForWoodWorkshops method must raise ValueError if
+        The getPineResinNeededForTreatedPlanksProduction method must raise ValueError if
         wood workshops count is negative.
         """
         errMsg = "Wood workshops count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPineResinNeededForWoodWorkshops(-1)
+            self.uut.getPineResinNeededForTreatedPlanksProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPineResinNeededForWoodWorkshopsSuccess(self) -> None:
+    def test_getPineResinNeededForTreatedPlanksProductionSuccess(self) -> None:
         """
-        The getPineResinNeededForWoodWorkshops method must correctly calculate
+        The getPineResinNeededForTreatedPlanksProduction method must correctly calculate
         pine resin needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getPineResinNeededForWoodWorkshops(3)
+        result = self.uut.getPineResinNeededForTreatedPlanksProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Pine resin per wood workshop per day = 1 * 8 = 8
         # Total pine resin = 3 * 8 = 24
         self.assertEqual(24, result)
 
-    def test_getPlanksNeededForWoodWorkshopsNegativeCount(self) -> None:
+    def test_getPlanksNeededForTreatedPlanksProductionNegativeCount(self) -> None:
         """
-        The getPlanksNeededForWoodWorkshops method must raise ValueError if
+        The getPlanksNeededForTreatedPlanksProduction method must raise ValueError if
         wood workshops count is negative.
         """
         errMsg = "Wood workshops count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPlanksNeededForWoodWorkshops(-1)
+            self.uut.getPlanksNeededForTreatedPlanksProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPlanksNeededForWoodWorkshopsSuccess(self) -> None:
+    def test_getPlanksNeededForTreatedPlanksProductionSuccess(self) -> None:
         """
-        The getPlanksNeededForWoodWorkshops method must correctly calculate
+        The getPlanksNeededForTreatedPlanksProduction method must correctly calculate
         planks needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getPlanksNeededForWoodWorkshops(3)
+        result = self.uut.getPlanksNeededForTreatedPlanksProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Planks per wood workshop per day = 1 * 8 = 8
@@ -1907,52 +1907,52 @@ class TestFolktail(TestCase):
         # Smelters needed = ceil(15.0 / 12) = ceil(1.25) = 2
         self.assertEqual(2, result)
 
-    def test_getScrapMetalNeededForSmeltersNegativeCount(self) -> None:
+    def test_getScrapMetalNeededForMetalBlocksProductionNegativeCount(self) -> None:
         """
-        The getScrapMetalNeededForSmelters method must raise ValueError if
+        The getScrapMetalNeededForMetalBlocksProduction method must raise ValueError if
         smelters count is negative.
         """
         errMsg = "Smelters count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getScrapMetalNeededForSmelters(-1)
+            self.uut.getScrapMetalNeededForMetalBlocksProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getScrapMetalNeededForSmeltersSuccess(self) -> None:
+    def test_getScrapMetalNeededForMetalBlocksProductionSuccess(self) -> None:
         """
-        The getScrapMetalNeededForSmelters method must correctly calculate
+        The getScrapMetalNeededForMetalBlocksProduction method must correctly calculate
         scrap metal needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 2.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getScrapMetalNeededForSmelters(2)
+        result = self.uut.getScrapMetalNeededForMetalBlocksProduction(2)
 
         # Cycles per day = 24 / 2.0 = 12
         # Scrap metal per smelter per day = 1 * 12 = 12
         # Total scrap metal = 2 * 12 = 24
         self.assertEqual(24, result)
 
-    def test_getLogsNeededForSmeltersNegativeCount(self) -> None:
+    def test_getLogsNeededForMetalBlocksProductionNegativeCount(self) -> None:
         """
-        The getLogsNeededForSmelters method must raise ValueError if
+        The getLogsNeededForMetalBlocksProduction method must raise ValueError if
         smelters count is negative.
         """
         errMsg = "Smelters count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForSmelters(-1)
+            self.uut.getLogsNeededForMetalBlocksProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForSmeltersSuccess(self) -> None:
+    def test_getLogsNeededForMetalBlocksProductionSuccess(self) -> None:
         """
-        The getLogsNeededForSmelters method must correctly calculate
+        The getLogsNeededForMetalBlocksProduction method must correctly calculate
         logs needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 2.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 0.2
 
-        result = self.uut.getLogsNeededForSmelters(2)
+        result = self.uut.getLogsNeededForMetalBlocksProduction(2)
 
         # Cycles per day = 24 / 2.0 = 12
         # Logs per smelter per day = 0.2 * 12 = 2.4
@@ -1985,26 +1985,26 @@ class TestFolktail(TestCase):
         # Mines needed = ceil(100.0 / 66.666...) = ceil(1.5) = 2
         self.assertEqual(2, result)
 
-    def test_getTreatedPlanksNeededForMinesNegativeCount(self) -> None:
+    def test_getTreatedPlanksNeededForScrapMetalProductionNegativeCount(self) -> None:
         """
-        The getTreatedPlanksNeededForMines method must raise ValueError if
+        The getTreatedPlanksNeededForScrapMetalProduction method must raise ValueError if
         mines count is negative.
         """
         errMsg = "Mines count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getTreatedPlanksNeededForMines(-1)
+            self.uut.getTreatedPlanksNeededForScrapMetalProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getTreatedPlanksNeededForMinesSuccess(self) -> None:
+    def test_getTreatedPlanksNeededForScrapMetalProductionSuccess(self) -> None:
         """
-        The getTreatedPlanksNeededForMines method must correctly calculate
+        The getTreatedPlanksNeededForScrapMetalProduction method must correctly calculate
         treated planks needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 1.8
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getTreatedPlanksNeededForMines(3)
+        result = self.uut.getTreatedPlanksNeededForScrapMetalProduction(3)
 
         # Cycles per day = 24 / 1.8 = 13.333...
         # Treated planks per mine per day = 1 * 13.333... = 13.333...
@@ -2036,52 +2036,52 @@ class TestFolktail(TestCase):
         # Refineries needed = ceil(100.0 / 40) = ceil(2.5) = 3
         self.assertEqual(3, result)
 
-    def test_getCarrotsNeededForRefineriesWithBiofuelCarrotsNegativeCount(self) -> None:    # noqa: E501
+    def test_getCarrotsNeededForBiofuelCarrotsProductionNegativeCount(self) -> None:    # noqa: E501
         """
-        The getCarrotsNeededForRefineriesWithBiofuelCarrots method must raise
+        The getCarrotsNeededForBiofuelCarrotsProduction method must raise
         ValueError if refineries count is negative.
         """
         errMsg = "Refineries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getCarrotsNeededForRefineriesWithBiofuelCarrots(-1)
+            self.uut.getCarrotsNeededForBiofuelCarrotsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getCarrotsNeededForRefineriesWithBiofuelCarrotsSuccess(self) -> None:  # noqa: E501
+    def test_getCarrotsNeededForBiofuelCarrotsProductionSuccess(self) -> None:  # noqa: E501
         """
-        The getCarrotsNeededForRefineriesWithBiofuelCarrots method must
+        The getCarrotsNeededForBiofuelCarrotsProduction method must
         correctly calculate carrots needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
-        result = self.uut.getCarrotsNeededForRefineriesWithBiofuelCarrots(3)
+        result = self.uut.getCarrotsNeededForBiofuelCarrotsProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Carrots per refinery per day = 2 * 8 = 16
         # Total carrots = 3 * 16 = 48
         self.assertEqual(48, result)
 
-    def test_getWaterNeededForRefineriesWithBiofuelCarrotsNegativeCount(self) -> None:  # noqa: E501
+    def test_getWaterNeededForBiofuelCarrotsProductionNegativeCount(self) -> None:  # noqa: E501
         """
-        The getWaterNeededForRefineriesWithBiofuelCarrots method must raise
+        The getWaterNeededForBiofuelCarrotsProduction method must raise
         ValueError if refineries count is negative.
         """
         errMsg = "Refineries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getWaterNeededForRefineriesWithBiofuelCarrots(-1)
+            self.uut.getWaterNeededForBiofuelCarrotsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getWaterNeededForRefineriesWithBiofuelCarrotsSuccess(self) -> None:    # noqa: E501
+    def test_getWaterNeededForBiofuelCarrotsProductionSuccess(self) -> None:    # noqa: E501
         """
-        The getWaterNeededForRefineriesWithBiofuelCarrots method must
+        The getWaterNeededForBiofuelCarrotsProduction method must
         correctly calculate water needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
-        result = self.uut.getWaterNeededForRefineriesWithBiofuelCarrots(3)
+        result = self.uut.getWaterNeededForBiofuelCarrotsProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Water per refinery per day = 2 * 8 = 16
@@ -2113,52 +2113,52 @@ class TestFolktail(TestCase):
         # Refineries needed = ceil(250.0 / 240) = ceil(1.0416...) = 2
         self.assertEqual(2, result)
 
-    def test_getPotatoesNeededForRefineriesWithBiofuelPotatoesNegativeCount(self) -> None:  # noqa: E501
+    def test_getPotatoesNeededForBiofuelPotatoesProductionNegativeCount(self) -> None:  # noqa: E501
         """
-        The getPotatoesNeededForRefineriesWithBiofuelPotatoes method must
+        The getPotatoesNeededForBiofuelPotatoesProduction method must
         raise ValueError if refineries count is negative.
         """
         errMsg = "Refineries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPotatoesNeededForRefineriesWithBiofuelPotatoes(-1)
+            self.uut.getPotatoesNeededForBiofuelPotatoesProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPotatoesNeededForRefineriesWithBiofuelPotatoesSuccess(self) -> None:    # noqa: E501
+    def test_getPotatoesNeededForBiofuelPotatoesProductionSuccess(self) -> None:    # noqa: E501
         """
-        The getPotatoesNeededForRefineriesWithBiofuelPotatoes method must
+        The getPotatoesNeededForBiofuelPotatoesProduction method must
         correctly calculate potatoes needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 1
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
-        result = self.uut.getPotatoesNeededForRefineriesWithBiofuelPotatoes(3)
+        result = self.uut.getPotatoesNeededForBiofuelPotatoesProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Potatoes per refinery per day = 2 * 8 = 16
         # Total potatoes = 3 * 16 = 48
         self.assertEqual(48, result)
 
-    def test_getWaterNeededForRefineriesWithBiofuelPotatoesNegativeCount(self) -> None:     # noqa: E501
+    def test_getWaterNeededForBiofuelPotatoesProductionNegativeCount(self) -> None:     # noqa: E501
         """
-        The getWaterNeededForRefineriesWithBiofuelPotatoes method must raise
+        The getWaterNeededForBiofuelPotatoesProduction method must raise
         ValueError if refineries count is negative.
         """
         errMsg = "Refineries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getWaterNeededForRefineriesWithBiofuelPotatoes(-1)
+            self.uut.getWaterNeededForBiofuelPotatoesProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getWaterNeededForRefineriesWithBiofuelPotatoesSuccess(self) -> None:   # noqa: E501
+    def test_getWaterNeededForBiofuelPotatoesProductionSuccess(self) -> None:   # noqa: E501
         """
-        The getWaterNeededForRefineriesWithBiofuelPotatoes method must
+        The getWaterNeededForBiofuelPotatoesProduction method must
         correctly calculate water needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 1
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
-        result = self.uut.getWaterNeededForRefineriesWithBiofuelPotatoes(3)
+        result = self.uut.getWaterNeededForBiofuelPotatoesProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Water per refinery per day = 2 * 8 = 16
@@ -2190,20 +2190,20 @@ class TestFolktail(TestCase):
         # Refineries needed = ceil(220.0 / 200) = ceil(1.1) = 2
         self.assertEqual(2, result)
 
-    def test_getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocksNegativeCount(self) -> None:      # noqa: E501
+    def test_getSpadderdocksNeededForBiofuelSpadderdocksProductionNegativeCount(self) -> None:      # noqa: E501
         """
-        The getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks method
+        The getSpadderdocksNeededForBiofuelSpadderdocksProduction method
         must raise ValueError if refineries count is negative.
         """
         errMsg = "Refineries count cannot be negative."
         with self.assertRaises(ValueError) as context:
             self.uut \
-                .getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks(-1)
+                .getSpadderdocksNeededForBiofuelSpadderdocksProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocksSuccess(self) -> None:    # noqa: E501
+    def test_getSpadderdocksNeededForBiofuelSpadderdocksProductionSuccess(self) -> None:    # noqa: E501
         """
-        The getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks method
+        The getSpadderdocksNeededForBiofuelSpadderdocksProduction method
         must correctly calculate spadderdocks needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 2
@@ -2211,33 +2211,33 @@ class TestFolktail(TestCase):
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
         result = self.uut \
-            .getSpadderdocksNeededForRefineriesWithBiofuelSpadderdocks(3)
+            .getSpadderdocksNeededForBiofuelSpadderdocksProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Spadderdocks per refinery per day = 2 * 8 = 16
         # Total spadderdocks = 3 * 16 = 48
         self.assertEqual(48, result)
 
-    def test_getWaterNeededForRefineriesWithBiofuelSpadderdocksNegativeCount(self) -> None:     # noqa: E501
+    def test_getWaterNeededForBiofuelSpadderdocksProductionNegativeCount(self) -> None:     # noqa: E501
         """
-        The getWaterNeededForRefineriesWithBiofuelSpadderdocks method must
+        The getWaterNeededForBiofuelSpadderdocksProduction method must
         raise ValueError if refineries count is negative.
         """
         errMsg = "Refineries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getWaterNeededForRefineriesWithBiofuelSpadderdocks(-1)
+            self.uut.getWaterNeededForBiofuelSpadderdocksProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getWaterNeededForRefineriesWithBiofuelSpadderdocksSuccess(self) -> None:   # noqa: E501
+    def test_getWaterNeededForBiofuelSpadderdocksProductionSuccess(self) -> None:   # noqa: E501
         """
-        The getWaterNeededForRefineriesWithBiofuelSpadderdocks method must
+        The getWaterNeededForBiofuelSpadderdocksProduction method must
         correctly calculate water needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 2
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
-        result = self.uut.getWaterNeededForRefineriesWithBiofuelSpadderdocks(3)
+        result = self.uut.getWaterNeededForBiofuelSpadderdocksProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Water per refinery per day = 2 * 8 = 16
@@ -2269,52 +2269,52 @@ class TestFolktail(TestCase):
         # Refineries needed = ceil(15.0 / 12) = ceil(1.25) = 2
         self.assertEqual(2, result)
 
-    def test_getMapleSyrupNeededForRefineriesWithCatalystNegativeCount(self) -> None:   # noqa: E501
+    def test_getMapleSyrupNeededForCatalystProductionNegativeCount(self) -> None:   # noqa: E501
         """
-        The getMapleSyrupNeededForRefineriesWithCatalyst method must raise
+        The getMapleSyrupNeededForCatalystProduction method must raise
         ValueError if refineries count is negative.
         """
         errMsg = "Refineries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getMapleSyrupNeededForRefineriesWithCatalyst(-1)
+            self.uut.getMapleSyrupNeededForCatalystProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getMapleSyrupNeededForRefineriesWithCatalystSuccess(self) -> None:
+    def test_getMapleSyrupNeededForCatalystProductionSuccess(self) -> None:
         """
-        The getMapleSyrupNeededForRefineriesWithCatalyst method must correctly
+        The getMapleSyrupNeededForCatalystProduction method must correctly
         calculate maple syrup needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 3
         self.uut.factionData.getGoodsProductionTime.return_value = 2.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getMapleSyrupNeededForRefineriesWithCatalyst(3)
+        result = self.uut.getMapleSyrupNeededForCatalystProduction(3)
 
         # Cycles per day = 24 / 2.0 = 12
         # Maple syrup per refinery per day = 1 * 12 = 12
         # Total maple syrup = 3 * 12 = 36
         self.assertEqual(36, result)
 
-    def test_getExtractNeededForRefineriesWithCatalystNegativeCount(self) -> None:  # noqa: E501
+    def test_getExtractNeededForCatalystProductionNegativeCount(self) -> None:  # noqa: E501
         """
-        The getExtractNeededForRefineriesWithCatalyst method must raise
+        The getExtractNeededForCatalystProduction method must raise
         ValueError if refineries count is negative.
         """
         errMsg = "Refineries count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getExtractNeededForRefineriesWithCatalyst(-1)
+            self.uut.getExtractNeededForCatalystProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getExtractNeededForRefineriesWithCatalystSuccess(self) -> None:
+    def test_getExtractNeededForCatalystProductionSuccess(self) -> None:
         """
-        The getExtractNeededForRefineriesWithCatalyst method must correctly
+        The getExtractNeededForCatalystProduction method must correctly
         calculate extract needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 3
         self.uut.factionData.getGoodsProductionTime.return_value = 2.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getExtractNeededForRefineriesWithCatalyst(3)
+        result = self.uut.getExtractNeededForCatalystProduction(3)
 
         # Cycles per day = 24 / 2.0 = 12
         # Extract per refinery per day = 1 * 12 = 12
@@ -2347,45 +2347,45 @@ class TestFolktail(TestCase):
         # Bot part factories needed = ceil(8.0 / 6) = ceil(1.333...) = 2
         self.assertEqual(2, result)
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotChassisNegativeCount(self) -> None:   # noqa: E501
+    def test_getPlanksNeededForBotChassisProductionNegativeCount(self) -> None:   # noqa: E501
         """
-        The getPlanksNeededForBotPartFactoriesWithBotChassis method must raise
+        The getPlanksNeededForBotChassisProduction method must raise
         ValueError if bot part factories count is negative.
         """
         errMsg = "Bot part factories count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPlanksNeededForBotPartFactoriesWithBotChassis(-1)
+            self.uut.getPlanksNeededForBotChassisProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotChassisSuccess(self) -> None:     # noqa: E501
+    def test_getPlanksNeededForBotChassisProductionSuccess(self) -> None:     # noqa: E501
         """
-        The getPlanksNeededForBotPartFactoriesWithBotChassis method must
+        The getPlanksNeededForBotChassisProduction method must
         correctly calculate planks needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 4.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
-        result = self.uut.getPlanksNeededForBotPartFactoriesWithBotChassis(3)
+        result = self.uut.getPlanksNeededForBotChassisProduction(3)
 
         # Cycles per day = 24 / 4.0 = 6
         # Planks per bot part factory per day = 2 * 6 = 12
         # Total planks = 3 * 12 = 36
         self.assertEqual(36, result)
 
-    def test_getMetalBlocksNeededForBotPartFactoriesWithBotChassisNegativeCount(self) -> None:  # noqa: E501
+    def test_getMetalBlocksNeededForBotChassisProductionNegativeCount(self) -> None:  # noqa: E501
         """
-        The getMetalBlocksNeededForBotPartFactoriesWithBotChassis method must
+        The getMetalBlocksNeededForBotChassisProduction method must
         raise ValueError if bot part factories count is negative.
         """
         errMsg = "Bot part factories count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getMetalBlocksNeededForBotPartFactoriesWithBotChassis(-1)
+            self.uut.getMetalBlocksNeededForBotChassisProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getMetalBlocksNeededForBotPartFactoriesWithBotChassisSuccess(self) -> None:    # noqa: E501
+    def test_getMetalBlocksNeededForBotChassisProductionSuccess(self) -> None:    # noqa: E501
         """
-        The getMetalBlocksNeededForBotPartFactoriesWithBotChassis method must
+        The getMetalBlocksNeededForBotChassisProduction method must
         correctly calculate metal blocks needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
@@ -2393,33 +2393,33 @@ class TestFolktail(TestCase):
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
         result = self.uut \
-            .getMetalBlocksNeededForBotPartFactoriesWithBotChassis(3)
+            .getMetalBlocksNeededForBotChassisProduction(3)
 
         # Cycles per day = 24 / 4.0 = 6
         # Metal blocks per bot part factory per day = 1 * 6 = 6
         # Total metal blocks = 3 * 6 = 18
         self.assertEqual(18, result)
 
-    def test_getBiofuelNeededForBotPartFactoriesWithBotChassisNegativeCount(self) -> None:  # noqa: E501
+    def test_getBiofuelNeededForBotChassisProductionNegativeCount(self) -> None:  # noqa: E501
         """
-        The getBiofuelNeededForBotPartFactoriesWithBotChassis method must
+        The getBiofuelNeededForBotChassisProduction method must
         raise ValueError if bot part factories count is negative.
         """
         errMsg = "Bot part factories count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getBiofuelNeededForBotPartFactoriesWithBotChassis(-1)
+            self.uut.getBiofuelNeededForBotChassisProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getBiofuelNeededForBotPartFactoriesWithBotChassisSuccess(self) -> None:    # noqa: E501
+    def test_getBiofuelNeededForBotChassisProductionSuccess(self) -> None:    # noqa: E501
         """
-        The getBiofuelNeededForBotPartFactoriesWithBotChassis method must
+        The getBiofuelNeededForBotChassisProduction method must
         correctly calculate biofuel needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 4.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getBiofuelNeededForBotPartFactoriesWithBotChassis(3)
+        result = self.uut.getBiofuelNeededForBotChassisProduction(3)
 
         # Cycles per day = 24 / 4.0 = 6
         # Biofuel per bot part factory per day = 1 * 6 = 6
@@ -2451,45 +2451,45 @@ class TestFolktail(TestCase):
         # Bot part factories needed = ceil(10.0 / 8) = ceil(1.25) = 2
         self.assertEqual(2, result)
 
-    def test_getGearsNeededForBotPartFactoriesWithBotHeadsNegativeCount(self) -> None:  # noqa: E501
+    def test_getGearsNeededForBotHeadsProductionNegativeCount(self) -> None:  # noqa: E501
         """
-        The getGearsNeededForBotPartFactoriesWithBotHeads method must raise
+        The getGearsNeededForBotHeadsProduction method must raise
         ValueError if bot part factories count is negative.
         """
         errMsg = "Bot part factories count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getGearsNeededForBotPartFactoriesWithBotHeads(-1)
+            self.uut.getGearsNeededForBotHeadsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getGearsNeededForBotPartFactoriesWithBotHeadsSuccess(self) -> None:    # noqa: E501
+    def test_getGearsNeededForBotHeadsProductionSuccess(self) -> None:    # noqa: E501
         """
-        The getGearsNeededForBotPartFactoriesWithBotHeads method must
+        The getGearsNeededForBotHeadsProduction method must
         correctly calculate gears needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 1
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getGearsNeededForBotPartFactoriesWithBotHeads(3)
+        result = self.uut.getGearsNeededForBotHeadsProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Gears per bot part factory per day = 1 * 8 = 8
         # Total gears = 3 * 8 = 24
         self.assertEqual(24, result)
 
-    def test_getMetalBlocksNeededForBotPartFactoriesWithBotHeadsNegativeCount(self) -> None:    # noqa: E501
+    def test_getMetalBlocksNeededForBotHeadsProductionNegativeCount(self) -> None:    # noqa: E501
         """
-        The getMetalBlocksNeededForBotPartFactoriesWithBotHeads method must
+        The getMetalBlocksNeededForBotHeadsProduction method must
         raise ValueError if bot part factories count is negative.
         """
         errMsg = "Bot part factories count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getMetalBlocksNeededForBotPartFactoriesWithBotHeads(-1)
+            self.uut.getMetalBlocksNeededForBotHeadsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getMetalBlocksNeededForBotPartFactoriesWithBotHeadsSuccess(self) -> None:  # noqa: E501
+    def test_getMetalBlocksNeededForBotHeadsProductionSuccess(self) -> None:  # noqa: E501
         """
-        The getMetalBlocksNeededForBotPartFactoriesWithBotHeads method must
+        The getMetalBlocksNeededForBotHeadsProduction method must
         correctly calculate metal blocks needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 1
@@ -2497,33 +2497,33 @@ class TestFolktail(TestCase):
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
         result = self.uut \
-            .getMetalBlocksNeededForBotPartFactoriesWithBotHeads(3)
+            .getMetalBlocksNeededForBotHeadsProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Metal blocks per bot part factory per day = 1 * 8 = 8
         # Total metal blocks = 3 * 8 = 24
         self.assertEqual(24, result)
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotHeadsNegativeCount(self) -> None:     # noqa: E501
+    def test_getPlanksNeededForBotHeadsProductionNegativeCount(self) -> None:     # noqa: E501
         """
-        The getPlanksNeededForBotPartFactoriesWithBotHeads method must raise
+        The getPlanksNeededForBotHeadsProduction method must raise
         ValueError if bot part factories count is negative.
         """
         errMsg = "Bot part factories count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPlanksNeededForBotPartFactoriesWithBotHeads(-1)
+            self.uut.getPlanksNeededForBotHeadsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotHeadsSuccess(self) -> None:   # noqa: E501
+    def test_getPlanksNeededForBotHeadsProductionSuccess(self) -> None:   # noqa: E501
         """
-        The getPlanksNeededForBotPartFactoriesWithBotHeads method must
+        The getPlanksNeededForBotHeadsProduction method must
         correctly calculate planks needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 1
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getPlanksNeededForBotPartFactoriesWithBotHeads(3)
+        result = self.uut.getPlanksNeededForBotHeadsProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Planks per bot part factory per day = 1 * 8 = 8
@@ -2555,52 +2555,52 @@ class TestFolktail(TestCase):
         # Bot part factories needed = ceil(20.0 / 16) = ceil(1.25) = 2
         self.assertEqual(2, result)
 
-    def test_getGearsNeededForBotPartFactoriesWithBotLimbsNegativeCount(self) -> None:  # noqa: E501
+    def test_getGearsNeededForBotLimbsProductionNegativeCount(self) -> None:  # noqa: E501
         """
-        The getGearsNeededForBotPartFactoriesWithBotLimbs method must raise
+        The getGearsNeededForBotLimbsProduction method must raise
         ValueError if bot part factories count is negative.
         """
         errMsg = "Bot part factories count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getGearsNeededForBotPartFactoriesWithBotLimbs(-1)
+            self.uut.getGearsNeededForBotLimbsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getGearsNeededForBotPartFactoriesWithBotLimbsSuccess(self) -> None:    # noqa: E501
+    def test_getGearsNeededForBotLimbsProductionSuccess(self) -> None:    # noqa: E501
         """
-        The getGearsNeededForBotPartFactoriesWithBotLimbs method must
+        The getGearsNeededForBotLimbsProduction method must
         correctly calculate gears needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 2
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
-        result = self.uut.getGearsNeededForBotPartFactoriesWithBotLimbs(3)
+        result = self.uut.getGearsNeededForBotLimbsProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Gears per bot part factory per day = 2 * 8 = 16
         # Total gears = 3 * 16 = 48
         self.assertEqual(48, result)
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotLimbsNegativeCount(self) -> None:     # noqa: E501
+    def test_getPlanksNeededForBotLimbsProductionNegativeCount(self) -> None:     # noqa: E501
         """
-        The getPlanksNeededForBotPartFactoriesWithBotLimbs method must raise
+        The getPlanksNeededForBotLimbsProduction method must raise
         ValueError if bot part factories count is negative.
         """
         errMsg = "Bot part factories count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPlanksNeededForBotPartFactoriesWithBotLimbs(-1)
+            self.uut.getPlanksNeededForBotLimbsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPlanksNeededForBotPartFactoriesWithBotLimbsSuccess(self) -> None:   # noqa: E501
+    def test_getPlanksNeededForBotLimbsProductionSuccess(self) -> None:   # noqa: E501
         """
-        The getPlanksNeededForBotPartFactoriesWithBotLimbs method must
+        The getPlanksNeededForBotLimbsProduction method must
         correctly calculate planks needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 2
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getPlanksNeededForBotPartFactoriesWithBotLimbs(3)
+        result = self.uut.getPlanksNeededForBotLimbsProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Planks per bot part factory per day = 1 * 8 = 8
@@ -2633,78 +2633,78 @@ class TestFolktail(TestCase):
         # Bot assemblers needed = ceil(5.0 / 4) = ceil(1.25) = 2
         self.assertEqual(2, result)
 
-    def test_getBotChassisNeededForBotAssemblersNegativeCount(self) -> None:
+    def test_getBotChassisNeededForBotsProductionNegativeCount(self) -> None:
         """
-        The getBotChassisNeededForBotAssemblers method must raise ValueError
+        The getBotChassisNeededForBotsProduction method must raise ValueError
         if bot assemblers count is negative.
         """
         errMsg = "Bot assemblers count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getBotChassisNeededForBotAssemblers(-1)
+            self.uut.getBotChassisNeededForBotsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getBotChassisNeededForBotAssemblersSuccess(self) -> None:
+    def test_getBotChassisNeededForBotsProductionSuccess(self) -> None:
         """
-        The getBotChassisNeededForBotAssemblers method must correctly
+        The getBotChassisNeededForBotsProduction method must correctly
         calculate bot chassis needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 6.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getBotChassisNeededForBotAssemblers(3)
+        result = self.uut.getBotChassisNeededForBotsProduction(3)
 
         # Cycles per day = 24 / 6.0 = 4
         # Bot chassis per bot assembler per day = 1 * 4 = 4
         # Total bot chassis = 3 * 4 = 12
         self.assertEqual(12, result)
 
-    def test_getBotHeadsNeededForBotAssemblersNegativeCount(self) -> None:
+    def test_getBotHeadsNeededForBotsProductionNegativeCount(self) -> None:
         """
-        The getBotHeadsNeededForBotAssemblers method must raise ValueError
+        The getBotHeadsNeededForBotsProduction method must raise ValueError
         if bot assemblers count is negative.
         """
         errMsg = "Bot assemblers count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getBotHeadsNeededForBotAssemblers(-1)
+            self.uut.getBotHeadsNeededForBotsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getBotHeadsNeededForBotAssemblersSuccess(self) -> None:
+    def test_getBotHeadsNeededForBotsProductionSuccess(self) -> None:
         """
-        The getBotHeadsNeededForBotAssemblers method must correctly calculate
+        The getBotHeadsNeededForBotsProduction method must correctly calculate
         bot heads needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 6.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getBotHeadsNeededForBotAssemblers(3)
+        result = self.uut.getBotHeadsNeededForBotsProduction(3)
 
         # Cycles per day = 24 / 6.0 = 4
         # Bot heads per bot assembler per day = 1 * 4 = 4
         # Total bot heads = 3 * 4 = 12
         self.assertEqual(12, result)
 
-    def test_getBotLimbsNeededForBotAssemblersNegativeCount(self) -> None:
+    def test_getBotLimbsNeededForBotsProductionNegativeCount(self) -> None:
         """
-        The getBotLimbsNeededForBotAssemblers method must raise ValueError
+        The getBotLimbsNeededForBotsProduction method must raise ValueError
         if bot assemblers count is negative.
         """
         errMsg = "Bot assemblers count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getBotLimbsNeededForBotAssemblers(-1)
+            self.uut.getBotLimbsNeededForBotsProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getBotLimbsNeededForBotAssemblersSuccess(self) -> None:
+    def test_getBotLimbsNeededForBotsProductionSuccess(self) -> None:
         """
-        The getBotLimbsNeededForBotAssemblers method must correctly calculate
+        The getBotLimbsNeededForBotsProduction method must correctly calculate
         bot limbs needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 6.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getBotLimbsNeededForBotAssemblers(3)
+        result = self.uut.getBotLimbsNeededForBotsProduction(3)
 
         # Cycles per day = 24 / 6.0 = 4
         # Bot limbs per bot assembler per day = 1 * 4 = 4
@@ -2737,26 +2737,26 @@ class TestFolktail(TestCase):
         # Explosives factories needed = ceil(15.0 / 12) = ceil(1.25) = 2
         self.assertEqual(2, result)
 
-    def test_getBadwaterNeededForExplosivesFactoriesNegativeCount(self) -> None:    # noqa: E501
+    def test_getBadwaterNeededForExplosivesProductionNegativeCount(self) -> None:    # noqa: E501
         """
-        The getBadwaterNeededForExplosivesFactories method must raise
+        The getBadwaterNeededForExplosivesProduction method must raise
         ValueError if explosives factories count is negative.
         """
         errMsg = "Explosives factories count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getBadwaterNeededForExplosivesFactories(-1)
+            self.uut.getBadwaterNeededForExplosivesProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getBadwaterNeededForExplosivesFactoriesSuccess(self) -> None:
+    def test_getBadwaterNeededForExplosivesProductionSuccess(self) -> None:
         """
-        The getBadwaterNeededForExplosivesFactories method must correctly
+        The getBadwaterNeededForExplosivesProduction method must correctly
         calculate badwater needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 2.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 5
 
-        result = self.uut.getBadwaterNeededForExplosivesFactories(3)
+        result = self.uut.getBadwaterNeededForExplosivesProduction(3)
 
         # Cycles per day = 24 / 2.0 = 12
         # Badwater per explosives factory per day = 5 * 12 = 60
@@ -2789,52 +2789,52 @@ class TestFolktail(TestCase):
         # Centrifuges needed = ceil(10.0 / 8) = ceil(1.25) = 2
         self.assertEqual(2, result)
 
-    def test_getBadwaterNeededForCentrifugesNegativeCount(self) -> None:
+    def test_getBadwaterNeededForExtractProductionNegativeCount(self) -> None:
         """
-        The getBadwaterNeededForCentrifuges method must raise ValueError if
+        The getBadwaterNeededForExtractProduction method must raise ValueError if
         centrifuges count is negative.
         """
         errMsg = "Centrifuges count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getBadwaterNeededForCentrifuges(-1)
+            self.uut.getBadwaterNeededForExtractProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getBadwaterNeededForCentrifugesSuccess(self) -> None:
+    def test_getBadwaterNeededForExtractProductionSuccess(self) -> None:
         """
-        The getBadwaterNeededForCentrifuges method must correctly calculate
+        The getBadwaterNeededForExtractProduction method must correctly calculate
         badwater needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 5
 
-        result = self.uut.getBadwaterNeededForCentrifuges(3)
+        result = self.uut.getBadwaterNeededForExtractProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Badwater per centrifuge per day = 5 * 8 = 40
         # Total badwater = 3 * 40 = 120
         self.assertEqual(120, result)
 
-    def test_getLogsNeededForCentrifugesNegativeCount(self) -> None:
+    def test_getLogsNeededForExtractProductionNegativeCount(self) -> None:
         """
-        The getLogsNeededForCentrifuges method must raise ValueError if
+        The getLogsNeededForExtractProduction method must raise ValueError if
         centrifuges count is negative.
         """
         errMsg = "Centrifuges count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getLogsNeededForCentrifuges(-1)
+            self.uut.getLogsNeededForExtractProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getLogsNeededForCentrifugesSuccess(self) -> None:
+    def test_getLogsNeededForExtractProductionSuccess(self) -> None:
         """
-        The getLogsNeededForCentrifuges method must correctly calculate logs
+        The getLogsNeededForExtractProduction method must correctly calculate logs
         needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 3.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
-        result = self.uut.getLogsNeededForCentrifuges(3)
+        result = self.uut.getLogsNeededForExtractProduction(3)
 
         # Cycles per day = 24 / 3.0 = 8
         # Logs per centrifuge per day = 2 * 8 = 16
@@ -2867,78 +2867,78 @@ class TestFolktail(TestCase):
         # Herbalists needed = ceil(15.0 / 12) = ceil(1.25) = 2
         self.assertEqual(2, result)
 
-    def test_getDandelionsNeededForHerbalistsNegativeCount(self) -> None:
+    def test_getDandelionsNeededForAntidoteProductionNegativeCount(self) -> None:
         """
-        The getDandelionsNeededForHerbalists method must raise ValueError if
+        The getDandelionsNeededForAntidoteProduction method must raise ValueError if
         herbalists count is negative.
         """
         errMsg = "Herbalists count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getDandelionsNeededForHerbalists(-1)
+            self.uut.getDandelionsNeededForAntidoteProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getDandelionsNeededForHerbalistsSuccess(self) -> None:
+    def test_getDandelionsNeededForAntidoteProductionSuccess(self) -> None:
         """
-        The getDandelionsNeededForHerbalists method must correctly calculate
+        The getDandelionsNeededForAntidoteProduction method must correctly calculate
         dandelions needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 2.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 2
 
-        result = self.uut.getDandelionsNeededForHerbalists(3)
+        result = self.uut.getDandelionsNeededForAntidoteProduction(3)
 
         # Cycles per day = 24 / 2.0 = 12
         # Dandelions per herbalist per day = 2 * 12 = 24
         # Total dandelions = 3 * 24 = 72
         self.assertEqual(72, result)
 
-    def test_getBerriesNeededForHerbalistsNegativeCount(self) -> None:
+    def test_getBerriesNeededForAntidoteProductionNegativeCount(self) -> None:
         """
-        The getBerriesNeededForHerbalists method must raise ValueError if
+        The getBerriesNeededForAntidoteProduction method must raise ValueError if
         herbalists count is negative.
         """
         errMsg = "Herbalists count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getBerriesNeededForHerbalists(-1)
+            self.uut.getBerriesNeededForAntidoteProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getBerriesNeededForHerbalistsSuccess(self) -> None:
+    def test_getBerriesNeededForAntidoteProductionSuccess(self) -> None:
         """
-        The getBerriesNeededForHerbalists method must correctly calculate
+        The getBerriesNeededForAntidoteProduction method must correctly calculate
         berries needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 2.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 3
 
-        result = self.uut.getBerriesNeededForHerbalists(3)
+        result = self.uut.getBerriesNeededForAntidoteProduction(3)
 
         # Cycles per day = 24 / 2.0 = 12
         # Berries per herbalist per day = 3 * 12 = 36
         # Total berries = 3 * 36 = 108
         self.assertEqual(108, result)
 
-    def test_getPapersNeededForHerbalistsNegativeCount(self) -> None:
+    def test_getPapersNeededForAntidoteProductionNegativeCount(self) -> None:
         """
-        The getPapersNeededForHerbalists method must raise ValueError if
+        The getPapersNeededForAntidoteProduction method must raise ValueError if
         herbalists count is negative.
         """
         errMsg = "Herbalists count cannot be negative."
         with self.assertRaises(ValueError) as context:
-            self.uut.getPapersNeededForHerbalists(-1)
+            self.uut.getPapersNeededForAntidoteProduction(-1)
         self.assertEqual(errMsg, str(context.exception))
 
-    def test_getPapersNeededForHerbalistsSuccess(self) -> None:
+    def test_getPapersNeededForAntidoteProductionSuccess(self) -> None:
         """
-        The getPapersNeededForHerbalists method must correctly calculate logs
+        The getPapersNeededForAntidoteProduction method must correctly calculate logs
         needed.
         """
         self.uut.factionData.getGoodsRecipeIndex.return_value = 0
         self.uut.factionData.getGoodsProductionTime.return_value = 2.0
         self.uut.factionData.getGoodsInputQuantity.return_value = 1
 
-        result = self.uut.getPapersNeededForHerbalists(3)
+        result = self.uut.getPapersNeededForAntidoteProduction(3)
 
         # Cycles per day = 24 / 2.0 = 12
         # Logs per herbalist per day = 1 * 12 = 12

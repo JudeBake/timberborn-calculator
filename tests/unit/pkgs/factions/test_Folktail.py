@@ -3967,6 +3967,19 @@ class TestFolktail(TestCase):
         # Berries per herbalist per day = 3 * 12 = 36
         # Total berries = 3 * 36 = 108
         self.assertEqual(108, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.HERBALIST,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE,
+            HarvestName.BERRIES
+        )
 
     def test_getPapersNeededForAntidoteProductionNegativeCount(self) -> None:
         """
@@ -3993,3 +4006,15 @@ class TestFolktail(TestCase):
         # Logs per herbalist per day = 1 * 12 = 12
         # Total logs = 3 * 12 = 36
         self.assertAlmostEqual(36.0, result, places=5)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.HERBALIST,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity \
+            .assert_called_once_with(GoodsBuildingName.HERBALIST,
+                                     GoodsRecipeName.ANTIDOTE,
+                                     GoodsRecipeName.PAPER)

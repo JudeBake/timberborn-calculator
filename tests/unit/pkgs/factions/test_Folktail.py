@@ -842,6 +842,8 @@ class TestFolktail(TestCase):
         with self.assertRaises(ValueError) as context:
             self.uut.getLargeWaterPumpsNeeded(50.0, 5)
         self.assertEqual(errMsg, str(context.exception))
+        self.uut.factionData.getWaterWorkers \
+            .assert_called_once_with(WaterBuildingName.LARGE_WATER_PUMP)
 
     def test_getLargeWaterPumpsNeededSuccessFullWorkers(self) -> None:
         """
@@ -940,6 +942,21 @@ class TestFolktail(TestCase):
         # Production per grill per day = (4 / 0.52) * 24 = 184.615...
         # Grills needed = ceil(200.0 / 184.615...) = ceil(1.083...) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                FoodRecipeName.GRILLED_POTATOES
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                0
+            )
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                0
+            )
 
     def test_getPotatoesNeededForGrilledPotatoesProductionNegativeCount(self) -> None:
         """
@@ -968,6 +985,22 @@ class TestFolktail(TestCase):
         # Total potatoes = 3 * 46.153... = 138.461...
         # Ceiling = 139
         self.assertEqual(139, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                FoodRecipeName.GRILLED_POTATOES
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                0
+            )
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                FoodRecipeName.GRILLED_POTATOES,
+                HarvestName.POTATOES
+            )
 
     def test_getLogsNeededForGrilledPotatoesProductionNegativeCount(self) -> None:
         """
@@ -1037,6 +1070,21 @@ class TestFolktail(TestCase):
         # Production per grill per day = (5 / 0.33) * 24 = 363.636...
         # Grills needed = ceil(400.0 / 363.636...) = ceil(1.1) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                FoodRecipeName.GRILLED_CHESTNUTS
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                1
+            )
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                1
+            )
 
     def test_getChestnutsNeededForGrilledChestnutsProductionNegativeCount(self) -> None:
         """
@@ -1065,6 +1113,22 @@ class TestFolktail(TestCase):
         # Total chestnuts = 3 * 72.727... = 218.181...
         # Ceiling = 219
         self.assertEqual(219, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                FoodRecipeName.GRILLED_CHESTNUTS
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                1
+            )
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                FoodRecipeName.GRILLED_CHESTNUTS,
+                HarvestName.CHESTNUTS
+            )
 
     def test_getLogsNeededForGrilledChestnutsProductionNegativeCount(self) -> None:
         """
@@ -1134,6 +1198,21 @@ class TestFolktail(TestCase):
         # Production per grill per day = (3 / 0.25) * 24 = 288.0
         # Grills needed = ceil(300.0 / 288.0) = ceil(1.041...) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                FoodRecipeName.GRILLED_SPADDERDOCKS
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                2
+            )
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                2
+            )
 
     def test_getSpadderdocksNeededForGrilledSpadderdocksProductionNegativeCount(self) -> None:
         """
@@ -1162,6 +1241,22 @@ class TestFolktail(TestCase):
         # Total spadderdocks = 3 * 192.0 = 576.0
         # Ceiling = 576
         self.assertEqual(576, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                FoodRecipeName.GRILLED_SPADDERDOCKS
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                2
+            )
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRILL,
+                FoodRecipeName.GRILLED_SPADDERDOCKS,
+                HarvestName.SPADDERDOCKS
+            )
 
     def test_getLogsNeededForGrilledSpadderdocksProductionNegativeCount(self) -> None:
         """
@@ -1230,6 +1325,21 @@ class TestFolktail(TestCase):
         # Production per gristmill per day = (1 / 0.5) * 24 = 48.0
         # Gristmills needed = ceil(50.0 / 48.0) = ceil(1.041...) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                FoodRecipeName.WHEAT_FLOUR
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                0
+            )
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                0
+            )
 
     def test_getWheatNeededForWheatFlourProductionNegativeCount(self) -> None:
         """
@@ -1257,6 +1367,22 @@ class TestFolktail(TestCase):
         # Total wheat = 3 * 48.0 = 144.0
         # Ceiling = 144
         self.assertEqual(144, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                FoodRecipeName.WHEAT_FLOUR
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                0
+            )
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                FoodRecipeName.WHEAT_FLOUR,
+                HarvestName.WHEAT
+            )
 
     def test_getGristmillsNeededForCattailFlourNegativeAmount(self) -> None:
         """
@@ -1283,6 +1409,21 @@ class TestFolktail(TestCase):
         # Production per gristmill per day = (1 / 0.25) * 24 = 96.0
         # Gristmills needed = ceil(100.0 / 96.0) = ceil(1.041...) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                FoodRecipeName.CATTAIL_FLOUR
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                1
+            )
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                1
+            )
 
     def test_getCattailRootsNeededForCattailFlourProductionNegativeCount(self) -> None:
         """
@@ -1311,6 +1452,22 @@ class TestFolktail(TestCase):
         # Total cattail roots = 3 * 96.0 = 288.0
         # Ceiling = 288
         self.assertEqual(288, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                FoodRecipeName.CATTAIL_FLOUR
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                1
+            )
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.GRISTMILL,
+                FoodRecipeName.CATTAIL_FLOUR,
+                HarvestName.CATTAIL_ROOTS
+            )
 
     def test_getBakeriesNeededForBreadsNegativeAmount(self) -> None:
         """
@@ -1337,6 +1494,21 @@ class TestFolktail(TestCase):
         # Production per bakery per day = (5 / 0.42) * 24 = 285.714...
         # Bakeries needed = ceil(300.0 / 285.714...) = ceil(1.05) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                FoodRecipeName.BREADS
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                0
+            )
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                0
+            )
 
     def test_getWheatFlourNeededForBreadsProductionNegativeCount(self) -> None:   # noqa: E501
         """
@@ -1366,6 +1538,22 @@ class TestFolktail(TestCase):
         # Total wheat flour = 3 * 57.142... = 171.428...
         # Ceiling = 172
         self.assertEqual(172, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                FoodRecipeName.BREADS
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                0
+            )
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                FoodRecipeName.BREADS,
+                FoodRecipeName.WHEAT_FLOUR
+            )
 
     def test_getLogsNeededForBreadsProductionNegativeCount(self) -> None:
         """
@@ -1434,6 +1622,21 @@ class TestFolktail(TestCase):
         # Production per bakery per day = (4 / 0.5) * 24 = 192.0
         # Bakeries needed = ceil(200.0 / 192.0) = ceil(1.041...) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                FoodRecipeName.CATTAIL_CRACKERS
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                1
+            )
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                1
+            )
 
     def test_getCattailFlourNeededForCattailCrackersProductionNegativeCount(self) -> None:    # noqa: E501
         """
@@ -1462,6 +1665,22 @@ class TestFolktail(TestCase):
         # Total cattail flour = 3 * 48.0 = 144.0
         # Ceiling = 144
         self.assertEqual(144, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                FoodRecipeName.CATTAIL_CRACKERS
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                1
+            )
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                FoodRecipeName.CATTAIL_CRACKERS,
+                FoodRecipeName.CATTAIL_FLOUR
+            )
 
     def test_getLogsNeededForCattailCrackersProductionNegativeCount(self) -> None:    # noqa: E501
         """
@@ -1530,6 +1749,21 @@ class TestFolktail(TestCase):
         # Production per bakery per day = (3 / 0.55) * 24 = 130.909...
         # Bakeries needed = ceil(140.0 / 130.909...) = ceil(1.069...) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                FoodRecipeName.MAPLE_PASTRIES
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                2
+            )
+        self.uut.factionData.getFoodProcessingOutputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                2
+            )
 
     def test_getWheatFlourNeededForMaplePastriesProductionNegativeCount(self) -> None:    # noqa: E501
         """
@@ -1558,6 +1792,22 @@ class TestFolktail(TestCase):
         # Total wheat flour = 3 * 43.636... = 130.909...
         # Ceiling = 131
         self.assertEqual(131, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                FoodRecipeName.MAPLE_PASTRIES
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                2
+            )
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                FoodRecipeName.MAPLE_PASTRIES,
+                FoodRecipeName.WHEAT_FLOUR
+            )
 
     def test_getMapleSyrupNeededForMaplePastriesProductionNegativeCount(self) -> None:    # noqa: E501
         """
@@ -1586,6 +1836,22 @@ class TestFolktail(TestCase):
         # Total maple syrup = 3 * 43.636... = 130.909...
         # Ceiling = 131
         self.assertEqual(131, result)
+        self.uut.factionData.getFoodProcessingRecipeIndex \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                FoodRecipeName.MAPLE_PASTRIES
+            )
+        self.uut.factionData.getFoodProcessingProductionTime \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                2
+            )
+        self.uut.factionData.getFoodProcessingInputQuantity \
+            .assert_called_once_with(
+                FoodProcessingBuildingName.BAKERY,
+                FoodRecipeName.MAPLE_PASTRIES,
+                HarvestName.MAPLE_SYRUP
+            )
 
     def test_getLogsNeededForMaplePastriesProductionNegativeCount(self) -> None:  # noqa: E501
         """
@@ -1654,6 +1920,18 @@ class TestFolktail(TestCase):
         # Production per lumber mill per day = (1 / 1.3) * 24 = 18.461...
         # Lumber mills needed = ceil(20.0 / 18.461...) = ceil(1.083...) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.LUMBER_MILL,
+            GoodsRecipeName.PLANKS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.LUMBER_MILL,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.LUMBER_MILL,
+            0
+        )
 
     def test_getLogsNeededForPlanksProductionNegativeCount(self) -> None:
         """
@@ -1720,6 +1998,18 @@ class TestFolktail(TestCase):
         # Production per gear workshop per day = (1 / 3.0) * 24 = 8
         # Gear workshops needed = ceil(50.0 / 8) = ceil(6.25) = 7
         self.assertEqual(7, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.GEAR_WORKSHOP,
+            GoodsRecipeName.GEARS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.GEAR_WORKSHOP,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.GEAR_WORKSHOP,
+            0
+        )
 
     def test_getPlanksNeededForGearsProductionNegativeCount(self) -> None:
         """
@@ -1746,6 +2036,19 @@ class TestFolktail(TestCase):
         # Planks per gear workshop per day = 1 * 8 = 8
         # Total planks = 3 * 8 = 24
         self.assertEqual(24, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.GEAR_WORKSHOP,
+            GoodsRecipeName.GEARS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.GEAR_WORKSHOP,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.GEAR_WORKSHOP,
+            GoodsRecipeName.GEARS,
+            GoodsRecipeName.PLANKS
+        )
 
     # Test Cases for Paper Mill
     def test_getPaperMillsNeededForPaperNegativeAmount(self) -> None:
@@ -1772,6 +2075,18 @@ class TestFolktail(TestCase):
         # Production per paper mill per day = (2 / 1.6) * 24 = 30
         # Paper mills needed = ceil(100.0 / 30) = ceil(3.333...) = 4
         self.assertEqual(4, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.PAPER_MILL,
+            GoodsRecipeName.PAPER
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.PAPER_MILL,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.PAPER_MILL,
+            0
+        )
 
     def test_getLogsNeededForPaperProductionNegativeCount(self) -> None:
         """
@@ -1837,6 +2152,18 @@ class TestFolktail(TestCase):
         # Production per printing press per day = (1 / 1.5) * 24 = 16
         # Printing presses needed = ceil(20.0 / 16) = ceil(1.25) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.BOOKS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            0
+        )
 
     def test_getPaperNeededForBooksProductionNegativeCount(self) -> None:  # noqa: E501
         """
@@ -1863,6 +2190,19 @@ class TestFolktail(TestCase):
         # Paper per printing press per day = 2 * 16 = 32
         # Total paper = 2 * 32 = 64
         self.assertEqual(64, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.BOOKS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.BOOKS,
+            GoodsRecipeName.PAPER
+        )
 
     # Test Cases for Printing Press - Punchcards
     def test_getPrintingPressesNeededForPunchcardsNegativeAmount(self) -> None:     # noqa: E501
@@ -1889,6 +2229,18 @@ class TestFolktail(TestCase):
         # Production per printing press per day = (2 / 0.75) * 24 = 64
         # Printing presses needed = ceil(50.0 / 64) = ceil(0.78125) = 1
         self.assertEqual(1, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.PUNCHCARDS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            1
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            1
+        )
 
     def test_getPaperNeededForPunchcardsProductionNegativeCount(self) -> None:     # noqa: E501
         """
@@ -1915,6 +2267,19 @@ class TestFolktail(TestCase):
         # Paper per printing press per day = 2 * 32 = 64
         # Total paper = 2 * 64 = 128
         self.assertEqual(128, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.PUNCHCARDS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            1
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.PUNCHCARDS,
+            GoodsRecipeName.PAPER
+        )
 
     def test_getPlanksNeededForPunchcardsProductionNegativeCount(self) -> None:    # noqa: E501
         """
@@ -1941,6 +2306,19 @@ class TestFolktail(TestCase):
         # Planks per printing press per day = 1 * 32 = 32
         # Total planks = 2 * 32 = 64
         self.assertEqual(64, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.PUNCHCARDS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            1
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.PRINTING_PRESS,
+            GoodsRecipeName.PUNCHCARDS,
+            GoodsRecipeName.PLANKS
+        )
 
     # Test Cases for Wood Workshop
     def test_getWoodWorkshopsNeededForTreatedPlanksNegativeAmount(self) -> None:    # noqa: E501
@@ -1967,6 +2345,18 @@ class TestFolktail(TestCase):
         # Production per wood workshop per day = (1 / 3.0) * 24 = 8
         # Wood workshops needed = ceil(30.0 / 8) = ceil(3.75) = 4
         self.assertEqual(4, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            GoodsRecipeName.TREATED_PLANKS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            0
+        )
 
     def test_getPineResinNeededForTreatedPlanksProductionNegativeCount(self) -> None:
         """
@@ -1993,6 +2383,19 @@ class TestFolktail(TestCase):
         # Pine resin per wood workshop per day = 1 * 8 = 8
         # Total pine resin = 3 * 8 = 24
         self.assertEqual(24, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            GoodsRecipeName.TREATED_PLANKS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            GoodsRecipeName.TREATED_PLANKS,
+            HarvestName.PINE_RESIN
+        )
 
     def test_getPlanksNeededForTreatedPlanksProductionNegativeCount(self) -> None:
         """
@@ -2019,6 +2422,19 @@ class TestFolktail(TestCase):
         # Planks per wood workshop per day = 1 * 8 = 8
         # Total planks = 3 * 8 = 24
         self.assertEqual(24, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            GoodsRecipeName.TREATED_PLANKS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.WOOD_WORKSHOP,
+            GoodsRecipeName.TREATED_PLANKS,
+            GoodsRecipeName.PLANKS
+        )
 
     # Test Cases for Smelter
     def test_getSmeltersNeededForMetalBlocksNegativeAmount(self) -> None:
@@ -2045,6 +2461,18 @@ class TestFolktail(TestCase):
         # Production per smelter per day = (1 / 2.0) * 24 = 12
         # Smelters needed = ceil(15.0 / 12) = ceil(1.25) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.SMELTER,
+            GoodsRecipeName.METAL_BLOCKS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.SMELTER,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.SMELTER,
+            0
+        )
 
     def test_getScrapMetalNeededForMetalBlocksProductionNegativeCount(self) -> None:
         """
@@ -2071,6 +2499,19 @@ class TestFolktail(TestCase):
         # Scrap metal per smelter per day = 1 * 12 = 12
         # Total scrap metal = 2 * 12 = 24
         self.assertEqual(24, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.SMELTER,
+            GoodsRecipeName.METAL_BLOCKS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.SMELTER,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.SMELTER,
+            GoodsRecipeName.METAL_BLOCKS,
+            GoodsRecipeName.SCRAP_METAL
+        )
 
     def test_getLogsNeededForMetalBlocksProductionNegativeCount(self) -> None:
         """
@@ -2136,6 +2577,18 @@ class TestFolktail(TestCase):
         # Production per mine per day = (5 / 1.8) * 24 = 66.666...
         # Mines needed = ceil(100.0 / 66.666...) = ceil(1.5) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.MINE,
+            GoodsRecipeName.SCRAP_METAL
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.MINE,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.MINE,
+            0
+        )
 
     def test_getTreatedPlanksNeededForScrapMetalProductionNegativeCount(self) -> None:
         """
@@ -2162,6 +2615,19 @@ class TestFolktail(TestCase):
         # Treated planks per mine per day = 1 * 13.333... = 13.333...
         # Total treated planks = 3 * 13.333... = 40
         self.assertEqual(40, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.MINE,
+            GoodsRecipeName.SCRAP_METAL
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.MINE,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.MINE,
+            GoodsRecipeName.SCRAP_METAL,
+            GoodsRecipeName.TREATED_PLANKS
+        )
 
     def test_getRefineriesNeededForBiofuelCarrotsNegativeAmount(self) -> None:
         """
@@ -2187,6 +2653,18 @@ class TestFolktail(TestCase):
         # Production per refinery per day = (5 / 3.0) * 24 = 40
         # Refineries needed = ceil(100.0 / 40) = ceil(2.5) = 3
         self.assertEqual(3, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_CARROTS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            0
+        )
 
     def test_getCarrotsNeededForBiofuelCarrotsProductionNegativeCount(self) -> None:    # noqa: E501
         """
@@ -2213,6 +2691,19 @@ class TestFolktail(TestCase):
         # Carrots per refinery per day = 2 * 8 = 16
         # Total carrots = 3 * 16 = 48
         self.assertEqual(48, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_CARROTS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_CARROTS,
+            HarvestName.CARROTS
+        )
 
     def test_getWaterNeededForBiofuelCarrotsProductionNegativeCount(self) -> None:  # noqa: E501
         """
@@ -2239,6 +2730,19 @@ class TestFolktail(TestCase):
         # Water per refinery per day = 2 * 8 = 16
         # Total water = 3 * 16 = 48
         self.assertEqual(48, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_CARROTS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_CARROTS,
+            HarvestName.WATER
+        )
 
     def test_getRefineriesNeededForBiofuelPotatoesNegativeAmount(self) -> None:     # noqa: E501
         """
@@ -2264,6 +2768,18 @@ class TestFolktail(TestCase):
         # Production per refinery per day = (30 / 3.0) * 24 = 240
         # Refineries needed = ceil(250.0 / 240) = ceil(1.0416...) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_POTATOES
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            1
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            1
+        )
 
     def test_getPotatoesNeededForBiofuelPotatoesProductionNegativeCount(self) -> None:  # noqa: E501
         """
@@ -2290,6 +2806,19 @@ class TestFolktail(TestCase):
         # Potatoes per refinery per day = 2 * 8 = 16
         # Total potatoes = 3 * 16 = 48
         self.assertEqual(48, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_POTATOES
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            1
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_POTATOES,
+            HarvestName.POTATOES
+        )
 
     def test_getWaterNeededForBiofuelPotatoesProductionNegativeCount(self) -> None:     # noqa: E501
         """
@@ -2316,6 +2845,19 @@ class TestFolktail(TestCase):
         # Water per refinery per day = 2 * 8 = 16
         # Total water = 3 * 16 = 48
         self.assertEqual(48, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_POTATOES
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            1
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_POTATOES,
+            HarvestName.WATER
+        )
 
     def test_getRefineriesNeededForBiofuelSpadderdocksNegativeAmount(self) -> None:     # noqa: E501
         """
@@ -2341,6 +2883,18 @@ class TestFolktail(TestCase):
         # Production per refinery per day = (25 / 3.0) * 24 = 200
         # Refineries needed = ceil(220.0 / 200) = ceil(1.1) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_SPADDERDOCKS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            2
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            2
+        )
 
     def test_getSpadderdocksNeededForBiofuelSpadderdocksProductionNegativeCount(self) -> None:      # noqa: E501
         """
@@ -2369,6 +2923,19 @@ class TestFolktail(TestCase):
         # Spadderdocks per refinery per day = 2 * 8 = 16
         # Total spadderdocks = 3 * 16 = 48
         self.assertEqual(48, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_SPADDERDOCKS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            2
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_SPADDERDOCKS,
+            HarvestName.SPADDERDOCKS
+        )
 
     def test_getWaterNeededForBiofuelSpadderdocksProductionNegativeCount(self) -> None:     # noqa: E501
         """
@@ -2395,6 +2962,19 @@ class TestFolktail(TestCase):
         # Water per refinery per day = 2 * 8 = 16
         # Total water = 3 * 16 = 48
         self.assertEqual(48, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_SPADDERDOCKS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            2
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.BIOFUEL_SPADDERDOCKS,
+            HarvestName.WATER
+        )
 
     def test_getRefineriesNeededForCatalystNegativeAmount(self) -> None:
         """
@@ -2420,6 +3000,18 @@ class TestFolktail(TestCase):
         # Production per refinery per day = (1 / 2.0) * 24 = 12
         # Refineries needed = ceil(15.0 / 12) = ceil(1.25) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.CATALYST
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            3
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            3
+        )
 
     def test_getMapleSyrupNeededForCatalystProductionNegativeCount(self) -> None:   # noqa: E501
         """
@@ -2446,6 +3038,19 @@ class TestFolktail(TestCase):
         # Maple syrup per refinery per day = 1 * 12 = 12
         # Total maple syrup = 3 * 12 = 36
         self.assertEqual(36, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.CATALYST
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            3
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.CATALYST,
+            HarvestName.MAPLE_SYRUP
+        )
 
     def test_getExtractNeededForCatalystProductionNegativeCount(self) -> None:  # noqa: E501
         """
@@ -2472,6 +3077,19 @@ class TestFolktail(TestCase):
         # Extract per refinery per day = 1 * 12 = 12
         # Total extract = 3 * 12 = 36
         self.assertEqual(36, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.CATALYST
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            3
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.REFINERY,
+            GoodsRecipeName.CATALYST,
+            GoodsRecipeName.EXTRACT
+        )
 
     # Test Cases for Bot Part Factory
     def test_getBotPartFactoriesNeededForBotChassisNegativeAmount(self) -> None:    # noqa: E501
@@ -2498,6 +3116,18 @@ class TestFolktail(TestCase):
         # Production per bot part factory per day = (1 / 4.0) * 24 = 6
         # Bot part factories needed = ceil(8.0 / 6) = ceil(1.333...) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            0
+        )
 
     def test_getPlanksNeededForBotChassisProductionNegativeCount(self) -> None:   # noqa: E501
         """
@@ -2524,6 +3154,19 @@ class TestFolktail(TestCase):
         # Planks per bot part factory per day = 2 * 6 = 12
         # Total planks = 3 * 12 = 36
         self.assertEqual(36, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS,
+            GoodsRecipeName.PLANKS
+        )
 
     def test_getMetalBlocksNeededForBotChassisProductionNegativeCount(self) -> None:  # noqa: E501
         """
@@ -2551,6 +3194,19 @@ class TestFolktail(TestCase):
         # Metal blocks per bot part factory per day = 1 * 6 = 6
         # Total metal blocks = 3 * 6 = 18
         self.assertEqual(18, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS,
+            GoodsRecipeName.METAL_BLOCKS
+        )
 
     def test_getBiofuelNeededForBotChassisProductionNegativeCount(self) -> None:  # noqa: E501
         """
@@ -2577,6 +3233,19 @@ class TestFolktail(TestCase):
         # Biofuel per bot part factory per day = 1 * 6 = 6
         # Total biofuel = 3 * 6 = 18
         self.assertEqual(18, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_CHASSIS,
+            GoodsRecipeName.BIOFUEL
+        )
 
     def test_getBotPartFactoriesNeededForBotHeadsNegativeAmount(self) -> None:
         """
@@ -2602,6 +3271,18 @@ class TestFolktail(TestCase):
         # Production per bot part factory per day = (1 / 3.0) * 24 = 8
         # Bot part factories needed = ceil(10.0 / 8) = ceil(1.25) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            1
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            1
+        )
 
     def test_getGearsNeededForBotHeadsProductionNegativeCount(self) -> None:  # noqa: E501
         """
@@ -2628,6 +3309,19 @@ class TestFolktail(TestCase):
         # Gears per bot part factory per day = 1 * 8 = 8
         # Total gears = 3 * 8 = 24
         self.assertEqual(24, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            1
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS,
+            GoodsRecipeName.GEARS
+        )
 
     def test_getMetalBlocksNeededForBotHeadsProductionNegativeCount(self) -> None:    # noqa: E501
         """
@@ -2655,6 +3349,19 @@ class TestFolktail(TestCase):
         # Metal blocks per bot part factory per day = 1 * 8 = 8
         # Total metal blocks = 3 * 8 = 24
         self.assertEqual(24, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            1
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS,
+            GoodsRecipeName.METAL_BLOCKS
+        )
 
     def test_getPlanksNeededForBotHeadsProductionNegativeCount(self) -> None:     # noqa: E501
         """
@@ -2681,6 +3388,19 @@ class TestFolktail(TestCase):
         # Planks per bot part factory per day = 1 * 8 = 8
         # Total planks = 3 * 8 = 24
         self.assertEqual(24, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            1
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_HEADS,
+            GoodsRecipeName.PLANKS
+        )
 
     def test_getBotPartFactoriesNeededForBotLimbsNegativeAmount(self) -> None:
         """
@@ -2706,6 +3426,18 @@ class TestFolktail(TestCase):
         # Production per bot part factory per day = (2 / 3.0) * 24 = 16
         # Bot part factories needed = ceil(20.0 / 16) = ceil(1.25) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_LIMBS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            2
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            2
+        )
 
     def test_getGearsNeededForBotLimbsProductionNegativeCount(self) -> None:  # noqa: E501
         """
@@ -2732,6 +3464,19 @@ class TestFolktail(TestCase):
         # Gears per bot part factory per day = 2 * 8 = 16
         # Total gears = 3 * 16 = 48
         self.assertEqual(48, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_LIMBS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            2
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_LIMBS,
+            GoodsRecipeName.GEARS
+        )
 
     def test_getPlanksNeededForBotLimbsProductionNegativeCount(self) -> None:     # noqa: E501
         """
@@ -2758,6 +3503,19 @@ class TestFolktail(TestCase):
         # Planks per bot part factory per day = 1 * 8 = 8
         # Total planks = 3 * 8 = 24
         self.assertEqual(24, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_LIMBS
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            2
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_PART_FACTORY,
+            GoodsRecipeName.BOT_LIMBS,
+            GoodsRecipeName.PLANKS
+        )
 
     # Test Cases for Bot Assembler
     def test_getBotAssemblersNeededForBotsNegativeAmount(self) -> None:
@@ -2784,6 +3542,18 @@ class TestFolktail(TestCase):
         # Production per bot assembler per day = (1 / 6.0) * 24 = 4
         # Bot assemblers needed = ceil(5.0 / 4) = ceil(1.25) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            0
+        )
 
     def test_getBotChassisNeededForBotsProductionNegativeCount(self) -> None:
         """
@@ -2810,6 +3580,19 @@ class TestFolktail(TestCase):
         # Bot chassis per bot assembler per day = 1 * 4 = 4
         # Total bot chassis = 3 * 4 = 12
         self.assertEqual(12, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT,
+            GoodsRecipeName.BOT_CHASSIS
+        )
 
     def test_getBotHeadsNeededForBotsProductionNegativeCount(self) -> None:
         """
@@ -2836,6 +3619,19 @@ class TestFolktail(TestCase):
         # Bot heads per bot assembler per day = 1 * 4 = 4
         # Total bot heads = 3 * 4 = 12
         self.assertEqual(12, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT,
+            GoodsRecipeName.BOT_HEADS
+        )
 
     def test_getBotLimbsNeededForBotsProductionNegativeCount(self) -> None:
         """
@@ -2862,6 +3658,19 @@ class TestFolktail(TestCase):
         # Bot limbs per bot assembler per day = 1 * 4 = 4
         # Total bot limbs = 3 * 4 = 12
         self.assertEqual(12, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.BOT_ASSEMBLER,
+            GoodsRecipeName.BOT,
+            GoodsRecipeName.BOT_LIMBS
+        )
 
     # Test Cases for Explosives Factory
     def test_getExplosivesFactoriesNeededForExplosivesNegativeAmount(self) -> None:     # noqa: E501
@@ -2888,6 +3697,18 @@ class TestFolktail(TestCase):
         # Production per explosives factory per day = (1 / 2.0) * 24 = 12
         # Explosives factories needed = ceil(15.0 / 12) = ceil(1.25) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.EXPLOSIVES_FACTORY,
+            GoodsRecipeName.EXPLOSIVES
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.EXPLOSIVES_FACTORY,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.EXPLOSIVES_FACTORY,
+            0
+        )
 
     def test_getBadwaterNeededForExplosivesProductionNegativeCount(self) -> None:    # noqa: E501
         """
@@ -2914,6 +3735,19 @@ class TestFolktail(TestCase):
         # Badwater per explosives factory per day = 5 * 12 = 60
         # Total badwater = 3 * 60 = 180
         self.assertEqual(180, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.EXPLOSIVES_FACTORY,
+            GoodsRecipeName.EXPLOSIVES
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.EXPLOSIVES_FACTORY,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.EXPLOSIVES_FACTORY,
+            GoodsRecipeName.EXPLOSIVES,
+            HarvestName.BADWATER
+        )
 
     # Test Cases for Centrifuge
     def test_getCentrifugesNeededForExtractNegativeAmount(self) -> None:
@@ -2940,6 +3774,18 @@ class TestFolktail(TestCase):
         # Production per centrifuge per day = (1 / 3.0) * 24 = 8
         # Centrifuges needed = ceil(10.0 / 8) = ceil(1.25) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.CENTRIFUGE,
+            GoodsRecipeName.EXTRACT
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.CENTRIFUGE,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.CENTRIFUGE,
+            0
+        )
 
     def test_getBadwaterNeededForExtractProductionNegativeCount(self) -> None:
         """
@@ -2966,6 +3812,19 @@ class TestFolktail(TestCase):
         # Badwater per centrifuge per day = 5 * 8 = 40
         # Total badwater = 3 * 40 = 120
         self.assertEqual(120, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.CENTRIFUGE,
+            GoodsRecipeName.EXTRACT
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.CENTRIFUGE,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.CENTRIFUGE,
+            GoodsRecipeName.EXTRACT,
+            HarvestName.BADWATER
+        )
 
     def test_getLogsNeededForExtractProductionNegativeCount(self) -> None:
         """
@@ -2992,6 +3851,19 @@ class TestFolktail(TestCase):
         # Logs per centrifuge per day = 2 * 8 = 16
         # Total logs = 3 * 16 = 48
         self.assertAlmostEqual(48.0, result, places=5)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.CENTRIFUGE,
+            GoodsRecipeName.EXTRACT
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.CENTRIFUGE,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.CENTRIFUGE,
+            GoodsRecipeName.EXTRACT,
+            HarvestName.LOGS
+        )
 
     # Test Cases for Herbalist
     def test_getHerbalistsNeededForAntidoteNegativeAmount(self) -> None:
@@ -3018,6 +3890,18 @@ class TestFolktail(TestCase):
         # Production per herbalist per day = (1 / 2.0) * 24 = 12
         # Herbalists needed = ceil(15.0 / 12) = ceil(1.25) = 2
         self.assertEqual(2, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.HERBALIST,
+            0
+        )
+        self.uut.factionData.getGoodsOutputQuantity.assert_called_once_with(
+            GoodsBuildingName.HERBALIST,
+            0
+        )
 
     def test_getDandelionsNeededForAntidoteProductionNegativeCount(self) -> None:
         """
@@ -3044,6 +3928,19 @@ class TestFolktail(TestCase):
         # Dandelions per herbalist per day = 2 * 12 = 24
         # Total dandelions = 3 * 24 = 72
         self.assertEqual(72, result)
+        self.uut.factionData.getGoodsRecipeIndex.assert_called_once_with(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE
+        )
+        self.uut.factionData.getGoodsProductionTime.assert_called_once_with(
+            GoodsBuildingName.HERBALIST,
+            0
+        )
+        self.uut.factionData.getGoodsInputQuantity.assert_called_once_with(
+            GoodsBuildingName.HERBALIST,
+            GoodsRecipeName.ANTIDOTE,
+            HarvestName.DANDELIONS
+        )
 
     def test_getBerriesNeededForAntidoteProductionNegativeCount(self) -> None:
         """

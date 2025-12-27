@@ -89,7 +89,8 @@ class TestFolktail(TestCase):
 
         result = self.uut.getDailyFoodConsumption(100, DifficultyLevel.NORMAL)
 
-        self.assertEqual(275.0, result)
+        # Consumption = 100 * 2.75 * 1.0 = 275.0, ceiling = 275
+        self.assertEqual(275, result)
         self.uut.factionData.getConsumption \
             .assert_called_once_with(ConsumptionType.FOOD)
         self.uut.factionData.getDifficultyModifier \
@@ -115,7 +116,8 @@ class TestFolktail(TestCase):
 
         result = self.uut.getDailyWaterConsumption(100, DifficultyLevel.NORMAL)
 
-        self.assertEqual(225.0, result)
+        # Consumption = 100 * 2.25 * 1.0 = 225.0, ceiling = 225
+        self.assertEqual(225, result)
         self.uut.factionData.getConsumption \
             .assert_called_once_with(ConsumptionType.WATER)
         self.uut.factionData.getDifficultyModifier \
@@ -1021,7 +1023,7 @@ class TestFolktail(TestCase):
         # Cycles per day = 24 / 0.52 = 46.153...
         # Logs per grill per day = 0.1 * 46.153... = 4.615...
         # Total logs = 3 * 4.615... = 13.846...
-        self.assertAlmostEqual(13.846153846153847, result, places=10)
+        self.assertEqual(14, result)
         self.uut.factionData.getFoodProcessingRecipeIndex \
             .assert_called_once_with(FoodProcessingBuildingName.GRILL,
                                      FoodRecipeName.GRILLED_POTATOES)
@@ -1137,7 +1139,7 @@ class TestFolktail(TestCase):
         # Cycles per day = 24 / 0.33 = 72.727...
         # Logs per grill per day = 0.1 * 72.727... = 7.272...
         # Total logs = 3 * 7.272... = 21.818...
-        self.assertAlmostEqual(21.818181818181817, result, places=10)
+        self.assertEqual(22, result)
         self.uut.factionData.getFoodProcessingRecipeIndex \
             .assert_called_once_with(FoodProcessingBuildingName.GRILL,
                                      FoodRecipeName.GRILLED_CHESTNUTS)
@@ -1254,7 +1256,7 @@ class TestFolktail(TestCase):
         # Cycles per day = 24 / 0.25 = 96.0
         # Logs per grill per day = 0.15 * 96.0 = 14.4
         # Total logs = 3 * 14.4 = 43.2
-        self.assertAlmostEqual(43.2, result, places=10)
+        self.assertEqual(44, result)
         self.uut.factionData.getFoodProcessingRecipeIndex \
             .assert_called_once_with(FoodProcessingBuildingName.GRILL,
                                      FoodRecipeName.GRILLED_SPADDERDOCKS)
@@ -1523,7 +1525,7 @@ class TestFolktail(TestCase):
         # Cycles per day = 24 / 0.42 = 57.142...
         # Logs per bakery per day = 0.1 * 57.142... = 5.714...
         # Total logs = 3 * 5.714... = 17.142...
-        self.assertAlmostEqual(17.142857142857142, result, places=10)
+        self.assertEqual(18, result)
         self.uut.factionData.getFoodProcessingRecipeIndex \
             .assert_called_once_with(FoodProcessingBuildingName.BAKERY,
                                      FoodRecipeName.BREADS)
@@ -1637,7 +1639,7 @@ class TestFolktail(TestCase):
         # Cycles per day = 24 / 0.5 = 48.0
         # Logs per bakery per day = 0.1 * 48.0 = 4.8
         # Total logs = 3 * 4.8 = 14.4
-        self.assertAlmostEqual(14.4, result, places=10)
+        self.assertEqual(15, result)
         self.uut.factionData.getFoodProcessingRecipeIndex \
             .assert_called_once_with(FoodProcessingBuildingName.BAKERY,
                                      FoodRecipeName.CATTAIL_CRACKERS)
@@ -1793,7 +1795,7 @@ class TestFolktail(TestCase):
         # Cycles per day = 24 / 0.55 = 43.636...
         # Logs per bakery per day = 0.1 * 43.636... = 4.363...
         # Total logs = 3 * 4.363... = 13.090...
-        self.assertAlmostEqual(13.090909090909092, result, places=10)
+        self.assertEqual(14, result)
         self.uut.factionData.getFoodProcessingRecipeIndex \
             .assert_called_once_with(FoodProcessingBuildingName.BAKERY,
                                      FoodRecipeName.MAPLE_PASTRIES)
@@ -2415,7 +2417,7 @@ class TestFolktail(TestCase):
         # Cycles per day = 24 / 2.0 = 12
         # Logs per smelter per day = 0.2 * 12 = 2.4
         # Total logs = 2 * 2.4 = 4.8
-        self.assertAlmostEqual(4.8, result, places=5)
+        self.assertEqual(5, result)
         self.uut.factionData.getGoodsRecipeIndex \
             .assert_called_once_with(GoodsBuildingName.SMELTER,
                                      GoodsRecipeName.METAL_BLOCKS)
@@ -3660,7 +3662,7 @@ class TestFolktail(TestCase):
         # Cycles per day = 24 / 3.0 = 8
         # Logs per centrifuge per day = 2 * 8 = 16
         # Total logs = 3 * 16 = 48
-        self.assertAlmostEqual(48.0, result, places=5)
+        self.assertEqual(48, result)
         self.uut.factionData.getGoodsRecipeIndex \
             .assert_called_once_with(GoodsBuildingName.CENTRIFUGE,
                                      GoodsRecipeName.EXTRACT)
@@ -3807,7 +3809,7 @@ class TestFolktail(TestCase):
         # Cycles per day = 24 / 2.0 = 12
         # Logs per herbalist per day = 1 * 12 = 12
         # Total logs = 3 * 12 = 36
-        self.assertAlmostEqual(36.0, result, places=5)
+        self.assertEqual(36, result)
         self.uut.factionData.getGoodsRecipeIndex \
             .assert_called_once_with(GoodsBuildingName.HERBALIST,
                                      GoodsRecipeName.ANTIDOTE)

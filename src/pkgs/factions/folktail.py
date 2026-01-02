@@ -22,7 +22,7 @@ class Folktail:
         self.factionData = FactionData('./data/folktails.yml')
 
     def getDailyFoodConsumption(self, population: int,
-                                difficulty: DifficultyLevel) -> float:
+                                difficulty: DifficultyLevel) -> int:
         """
         Calculate the daily food consumption for a given population at a
         given difficulty level.
@@ -33,19 +33,18 @@ class Folktail:
         :type difficulty: DifficultyLevel
 
         :return: Daily food consumption.
-        :rtype: float
-
-        :raises ValueError: If population is negative.
+        :rtype: int
+ :raises ValueError: If population is negative.
         """
         if population < 0:
             raise ValueError("Population cannot be negative.")
 
         baseConsumption = self.factionData.getConsumption(ConsumptionType.FOOD)
         difficultyModifier = self.factionData.getDifficultyModifier(difficulty)
-        return population * baseConsumption * difficultyModifier
+        return math.ceil(population * baseConsumption * difficultyModifier)
 
     def getDailyWaterConsumption(self, population: int,
-                                 difficulty: DifficultyLevel) -> float:
+                                 difficulty: DifficultyLevel) -> int:
         """
         Calculate the daily water consumption for a given population at a
         given difficulty level.
@@ -56,9 +55,8 @@ class Folktail:
         :type difficulty: DifficultyLevel
 
         :return: Daily water consumption.
-        :rtype: float
-
-        :raises ValueError: If population is negative.
+        :rtype: int
+ :raises ValueError: If population is negative.
         """
         if population < 0:
             raise ValueError("Population cannot be negative.")
@@ -66,7 +64,7 @@ class Folktail:
         baseConsumption = self.factionData \
             .getConsumption(ConsumptionType.WATER)
         difficultyModifier = self.factionData.getDifficultyModifier(difficulty)
-        return population * baseConsumption * difficultyModifier
+        return math.ceil(population * baseConsumption * difficultyModifier)
 
     def getFoodPerType(self, population: int, foodTypeCount: int,
                        difficulty: DifficultyLevel) -> int:
@@ -682,7 +680,7 @@ class Folktail:
         return math.ceil(grillsCount * potatoesPerGrillPerDay)
 
     def getLogsNeededForGrilledPotatoesProduction(self,
-                                                  grillsCount: int) -> float:
+                                                  grillsCount: int) -> int:
         """
         Calculate the number of logs needed per day to keep a given number
         of grills running producing grilled potatoes.
@@ -691,7 +689,7 @@ class Folktail:
         :type grillsCount: int
 
         :return: Daily amount of logs needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If grills count is negative.
         """
@@ -713,7 +711,7 @@ class Folktail:
         cyclesPerDay = 24 / productionTime
         logsPerGrillPerDay = logInput * cyclesPerDay
 
-        return grillsCount * logsPerGrillPerDay
+        return math.ceil(grillsCount * logsPerGrillPerDay)
 
     def getGrillsNeededForChestnuts(self, grilledChestnutAmount: float) -> int:
         """
@@ -781,7 +779,7 @@ class Folktail:
         return math.ceil(grillsCount * chestnutsPerGrillPerDay)
 
     def getLogsNeededForGrilledChestnutsProduction(self,
-                                                   grillsCount: int) -> float:
+                                                   grillsCount: int) -> int:
         """
         Calculate the number of logs needed per day to keep a given number
         of grills running producing grilled chestnuts.
@@ -790,7 +788,7 @@ class Folktail:
         :type grillsCount: int
 
         :return: Daily amount of logs needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If grills count is negative.
         """
@@ -812,7 +810,7 @@ class Folktail:
         cyclesPerDay = 24 / productionTime
         logsPerGrillPerDay = logInput * cyclesPerDay
 
-        return grillsCount * logsPerGrillPerDay
+        return math.ceil(grillsCount * logsPerGrillPerDay)
 
     def getGrillsNeededForSpadderdocks(self,
                                        grilledSpadderdockAmount: float) -> int:
@@ -883,7 +881,7 @@ class Folktail:
 
     def getLogsNeededForGrilledSpadderdocksProduction(self,
                                                       grillsCount: int
-                                                      ) -> float:
+                                                      ) -> int:
         """
         Calculate the number of logs needed per day to keep a given number
         of grills running producing grilled spadderdocks.
@@ -892,7 +890,7 @@ class Folktail:
         :type grillsCount: int
 
         :return: Daily amount of logs needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If grills count is negative.
         """
@@ -914,7 +912,7 @@ class Folktail:
         cyclesPerDay = 24 / productionTime
         logsPerGrillPerDay = logInput * cyclesPerDay
 
-        return grillsCount * logsPerGrillPerDay
+        return math.ceil(grillsCount * logsPerGrillPerDay)
 
     def getGristmillsNeededForWheatFlour(self, wheatFlourAmount: float) -> int:
         """
@@ -1110,7 +1108,7 @@ class Folktail:
 
         return math.ceil(bakeriesCount * wheatFlourPerBakeryPerDay)
 
-    def getLogsNeededForBreadsProduction(self, bakeriesCount: int) -> float:
+    def getLogsNeededForBreadsProduction(self, bakeriesCount: int) -> int:
         """
         Calculate the number of logs needed per day to keep a given number
         of bakeries running producing breads.
@@ -1119,9 +1117,8 @@ class Folktail:
         :type bakeriesCount: int
 
         :return: Daily amount of logs needed.
-        :rtype: float
-
-        :raises ValueError: If bakeries count is negative.
+        :rtype: int
+ :raises ValueError: If bakeries count is negative.
         """
         if bakeriesCount < 0:
             raise ValueError("Bakeries count cannot be negative.")
@@ -1141,7 +1138,7 @@ class Folktail:
         cyclesPerDay = 24 / productionTime
         logsPerBakeryPerDay = logInput * cyclesPerDay
 
-        return bakeriesCount * logsPerBakeryPerDay
+        return math.ceil(bakeriesCount * logsPerBakeryPerDay)
 
     def getBakeriesNeededForCattailCrackers(self,
                                             cattailCrackersAmount: float
@@ -1212,7 +1209,7 @@ class Folktail:
 
     def getLogsNeededForCattailCrackersProduction(self,
                                                   bakeriesCount: int
-                                                  ) -> float:
+                                                  ) -> int:
         """
         Calculate the number of logs needed per day to keep a given number
         of bakeries running producing cattail crackers.
@@ -1221,9 +1218,8 @@ class Folktail:
         :type bakeriesCount: int
 
         :return: Daily amount of logs needed.
-        :rtype: float
-
-        :raises ValueError: If bakeries count is negative.
+        :rtype: int
+ :raises ValueError: If bakeries count is negative.
         """
         if bakeriesCount < 0:
             raise ValueError("Bakeries count cannot be negative.")
@@ -1243,7 +1239,7 @@ class Folktail:
         cyclesPerDay = 24 / productionTime
         logsPerBakeryPerDay = logInput * cyclesPerDay
 
-        return bakeriesCount * logsPerBakeryPerDay
+        return math.ceil(bakeriesCount * logsPerBakeryPerDay)
 
     def getBakeriesNeededForMaplePastries(self,
                                           maplePastriesAmount: float) -> int:
@@ -1346,7 +1342,7 @@ class Folktail:
         return math.ceil(bakeriesCount * mapleSyrupPerBakeryPerDay)
 
     def getLogsNeededForMaplePastriesProduction(self,
-                                                bakeriesCount: int) -> float:
+                                                bakeriesCount: int) -> int:
         """
         Calculate the number of logs needed per day to keep a given number
         of bakeries running producing maple pastries.
@@ -1355,9 +1351,8 @@ class Folktail:
         :type bakeriesCount: int
 
         :return: Daily amount of logs needed.
-        :rtype: float
-
-        :raises ValueError: If bakeries count is negative.
+        :rtype: int
+ :raises ValueError: If bakeries count is negative.
         """
         if bakeriesCount < 0:
             raise ValueError("Bakeries count cannot be negative.")
@@ -1377,7 +1372,7 @@ class Folktail:
         cyclesPerDay = 24 / productionTime
         logsPerBakeryPerDay = logInput * cyclesPerDay
 
-        return bakeriesCount * logsPerBakeryPerDay
+        return math.ceil(bakeriesCount * logsPerBakeryPerDay)
 
     def getLumberMillsNeededForPlanks(self, planksAmount: float) -> int:
         """
@@ -1892,7 +1887,7 @@ class Folktail:
         return math.ceil(smeltersCount * scrapMetalPerSmelterPerDay)
 
     def getLogsNeededForMetalBlocksProduction(self,
-                                              smeltersCount: int) -> float:
+                                              smeltersCount: int) -> int:
         """
         Calculate the number of logs needed per day to keep a given number of
         smelters running producing metal blocks.
@@ -1901,9 +1896,8 @@ class Folktail:
         :type smeltersCount: int
 
         :return: Daily amount of logs needed.
-        :rtype: float
-
-        :raises ValueError: If smelters count is negative.
+        :rtype: int
+ :raises ValueError: If smelters count is negative.
         """
         if smeltersCount < 0:
             raise ValueError("Smelters count cannot be negative.")
@@ -1922,7 +1916,7 @@ class Folktail:
         cyclesPerDay = 24 / productionTime
         logsPerSmelterPerDay = logsInput * cyclesPerDay
 
-        return smeltersCount * logsPerSmelterPerDay
+        return math.ceil(smeltersCount * logsPerSmelterPerDay)
 
     def getMinesNeededForScrapMetal(self, scrapMetalAmount: float) -> int:
         """
@@ -3007,7 +3001,7 @@ class Folktail:
 
         return math.ceil(centrifugesCount * badwaterPerCentrifugePerDay)
 
-    def getLogsNeededForExtractProduction(self, centrifugesCount: int) -> float:
+    def getLogsNeededForExtractProduction(self, centrifugesCount: int) -> int:
         """
         Calculate the number of logs needed per day to keep a given number of
         centrifuges running.
@@ -3016,7 +3010,7 @@ class Folktail:
         :type centrifugesCount: int
 
         :return: Daily amount of logs needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If centrifuges count is negative.
         """
@@ -3037,7 +3031,7 @@ class Folktail:
         cyclesPerDay = 24 / productionTime
         logsPerCentrifugePerDay = logsInput * cyclesPerDay
 
-        return centrifugesCount * logsPerCentrifugePerDay
+        return math.ceil(centrifugesCount * logsPerCentrifugePerDay)
 
     def getHerbalistsNeededForAntidote(self, antidoteAmount: float) -> int:
         """
@@ -3134,7 +3128,7 @@ class Folktail:
         return math.ceil(herbalistsCount * berriesPerHerbalistPerDay)
 
     def getPapersNeededForAntidoteProduction(self,
-                                             herbalistsCount: int) -> float:
+                                             herbalistsCount: int) -> int:
         """
         Calculate the number of papers needed per day to keep a given number of
         herbalists running.
@@ -3143,7 +3137,7 @@ class Folktail:
         :type herbalistsCount: int
 
         :return: Daily amount of papers needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If herbalists count is negative.
         """
@@ -3164,4 +3158,4 @@ class Folktail:
         cyclesPerDay = 24 / productionTime
         logsPerHerbalistPerDay = logsInput * cyclesPerDay
 
-        return herbalistsCount * logsPerHerbalistPerDay
+        return math.ceil(herbalistsCount * logsPerHerbalistPerDay)

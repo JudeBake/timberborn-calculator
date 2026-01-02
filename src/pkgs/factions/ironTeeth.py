@@ -22,7 +22,7 @@ class IronTeeth:
         self.factionData = FactionData('./data/ironTeeth.yml')
 
     def getDailyFoodConsumption(self, population: int,
-                                difficulty: DifficultyLevel) -> float:
+                                difficulty: DifficultyLevel) -> int:
         """
         Calculate the daily food consumption for a given population at a
         given difficulty level.
@@ -33,9 +33,8 @@ class IronTeeth:
         :type difficulty: DifficultyLevel
 
         :return: Daily food consumption.
-        :rtype: float
-
-        :raises ValueError: If population is negative.
+        :rtype: int
+ :raises ValueError: If population is negative.
         """
         if population < 0:
             raise ValueError("Population cannot be negative.")
@@ -43,10 +42,10 @@ class IronTeeth:
         baseConsumption = self.factionData.getConsumption(
             ConsumptionType.FOOD)
         difficultyModifier = self.factionData.getDifficultyModifier(difficulty)
-        return population * baseConsumption * difficultyModifier
+        return math.ceil(population * baseConsumption * difficultyModifier)
 
     def getDailyWaterConsumption(self, population: int,
-                                 difficulty: DifficultyLevel) -> float:
+                                 difficulty: DifficultyLevel) -> int:
         """
         Calculate the daily water consumption for a given population at a
         given difficulty level.
@@ -57,9 +56,8 @@ class IronTeeth:
         :type difficulty: DifficultyLevel
 
         :return: Daily water consumption.
-        :rtype: float
-
-        :raises ValueError: If population is negative.
+        :rtype: int
+ :raises ValueError: If population is negative.
         """
         if population < 0:
             raise ValueError("Population cannot be negative.")
@@ -67,7 +65,7 @@ class IronTeeth:
         baseConsumption = self.factionData \
             .getConsumption(ConsumptionType.WATER)
         difficultyModifier = self.factionData.getDifficultyModifier(difficulty)
-        return population * baseConsumption * difficultyModifier
+        return math.ceil(population * baseConsumption * difficultyModifier)
 
     def getFoodPerType(self, population: int, foodTypeCount: int,
                        difficulty: DifficultyLevel) -> int:
@@ -100,7 +98,7 @@ class IronTeeth:
         return math.ceil(totalFoodConsumption / foodTypeCount)
 
     def getLogPerType(self, totalLogAmount: float,
-                      treeTypeCount: int) -> float:
+                      treeTypeCount: int) -> int:
         """
         Calculate the amount of logs needed per tree type, assuming equal
         distribution across the specified number of tree types.
@@ -112,7 +110,7 @@ class IronTeeth:
         :type treeTypeCount: int
 
         :return: Daily log amount needed per tree type.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If totalLogAmount is negative or treeTypeCount
                             is not positive.
@@ -122,7 +120,7 @@ class IronTeeth:
         if treeTypeCount <= 0:
             raise ValueError("Tree type count must be positive.")
 
-        return totalLogAmount / treeTypeCount
+        return math.ceil(totalLogAmount / treeTypeCount)
 
     def getDeepWaterPumpsNeeded(self, waterAmount: float) -> int:
         """
@@ -1511,7 +1509,7 @@ class IronTeeth:
 
     def getLogsNeededForPlanksProduction(self,
                                          industrialLumberMillsCount: int
-                                         ) -> float:
+                                         ) -> int:
         """
         Calculate the number of logs needed per day to keep a given number
         of industrial lumber mills running.
@@ -1520,7 +1518,7 @@ class IronTeeth:
         :type industrialLumberMillsCount: int
 
         :return: Daily amount of logs needed.
-        :rtype: float
+        :rtype: int
 
         :raises ValueError: If industrial lumber mills count is negative.
         """
@@ -1543,7 +1541,7 @@ class IronTeeth:
         cyclesPerDay = 24 / productionTime
         logsPerMillPerDay = logsInput * cyclesPerDay
 
-        return industrialLumberMillsCount * logsPerMillPerDay
+        return math.ceil(industrialLumberMillsCount * logsPerMillPerDay)
 
     # Goods Production Methods - Gear Workshop
     def getGearWorkshopsNeededForGears(self, gearsAmount: float) -> int:

@@ -86,8 +86,8 @@ class TestIronTeeth(TestCase):
         result = self.uut.getDailyFoodConsumption(10,
                                                   DifficultyLevel.NORMAL)
 
-        # Consumption = 10 * 2.75 * 1.0 = 27.5
-        self.assertEqual(27.5, result)
+        # Consumption = 10 * 2.75 * 1.0 = 27.5, ceiling = 28
+        self.assertEqual(28, result)
         self.uut.factionData.getConsumption.assert_called_once()
         self.uut.factionData.getDifficultyModifier.assert_called_once()
         self.uut.factionData.getConsumption \
@@ -116,8 +116,8 @@ class TestIronTeeth(TestCase):
         result = self.uut.getDailyWaterConsumption(10,
                                                    DifficultyLevel.NORMAL)
 
-        # Consumption = 10 * 2.25 * 1.0 = 22.5
-        self.assertEqual(22.5, result)
+        # Consumption = 10 * 2.25 * 1.0 = 22.5, ceiling = 23
+        self.assertEqual(23, result)
         self.uut.factionData.getConsumption.assert_called_once()
         self.uut.factionData.getDifficultyModifier.assert_called_once()
         self.uut.factionData.getConsumption \
@@ -1669,7 +1669,7 @@ class TestIronTeeth(TestCase):
         # Cycles per day = 24 / 0.63 = 38.095...
         # Logs per mill per day = 1 * 38.095... = 38.095...
         # Total logs = 3 * 38.095... = 114.285...
-        self.assertAlmostEqual(114.285714285714, result, places=10)
+        self.assertEqual(115, result)
         self.uut.factionData.getGoodsRecipeIndex.assert_called_once()
         self.uut.factionData.getGoodsProductionTime.assert_called_once()
         self.uut.factionData.getGoodsInputQuantity.assert_called_once()

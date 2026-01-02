@@ -4,7 +4,7 @@ Main application window.
 
 from logging import getLogger
 from pathlib import Path
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QMainWindow, QTabWidget
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice
 
@@ -70,10 +70,60 @@ class MainWindow(QMainWindow):
             # Store reference to the central widget to access UI elements
             self._ui = central_widget
 
+            # Load the folktail tab content
+            self._load_folktail_tab(loader)
+
             self._logger.debug('UI loaded successfully')
 
         finally:
             ui_file.close()
+
+    def _load_folktail_tab(self, loader: QUiLoader) -> None:
+        """
+        Load the Folktail tab content from its UI file.
+
+        :param loader: The QUiLoader instance to use for loading
+        :type loader: QUiLoader
+        """
+        folktail_tab_path = Path(__file__).parent.parent / "designer" / "folktailTab.ui"
+
+        self._logger.debug(f'Loading Folktail tab from: {folktail_tab_path}')
+
+        if not folktail_tab_path.exists():
+            error_msg = f"Folktail tab UI file not found: {folktail_tab_path}"
+            self._logger.error(error_msg)
+            raise FileNotFoundError(error_msg)
+
+        # Load the folktail tab UI file
+        folktail_file = QFile(str(folktail_tab_path))
+        if not folktail_file.open(QIODevice.ReadOnly):
+            error_msg = f"Cannot open Folktail tab UI file: {folktail_tab_path}"
+            self._logger.error(error_msg)
+            raise IOError(error_msg)
+
+        try:
+            # Load the widget
+            folktail_widget = loader.load(folktail_file, self)
+
+            if not folktail_widget:
+                error_msg = f"Failed to load Folktail tab UI from: {folktail_tab_path}"
+                self._logger.error(error_msg)
+                raise RuntimeError(error_msg)
+
+            # Find the tab widget in the main window
+            tab_widget = self._ui.findChild(QTabWidget, "tabWidget")
+            if tab_widget:
+                # Remove the empty placeholder tab and insert the loaded widget
+                tab_widget.removeTab(0)  # Remove the empty folktail tab
+                tab_widget.insertTab(0, folktail_widget, "Folktail")
+                self._logger.debug('Folktail tab loaded successfully')
+            else:
+                error_msg = "Could not find QTabWidget in main window"
+                self._logger.error(error_msg)
+                raise RuntimeError(error_msg)
+
+        finally:
+            folktail_file.close()
 
     def _setup_connections(self) -> None:
         """

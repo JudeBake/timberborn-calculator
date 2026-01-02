@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1458</width>
-    <height>998</height>
+    <height>1945</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1345,10 +1345,132 @@
       <string>Goods</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_5">
-      <item row="30" column="4">
-       <widget class="QComboBox" name="scrapMetalTreeSlct">
+      <item row="71" column="5">
+       <widget class="QLabel" name="extractCentrifugeLbl">
+        <property name="text">
+         <string>Centrifuge Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="32" column="5">
+       <widget class="QLabel" name="biofuelCarrotsRefineryLbl">
+        <property name="text">
+         <string>Refinery Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="78" column="6">
+       <widget class="QLabel" name="antidoteTreeTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="25" column="4">
+       <widget class="QComboBox" name="metalBlockTreeSlct">
         <property name="maxVisibleItems">
          <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="19" column="0" rowspan="2">
+       <widget class="QCheckBox" name="treatedPlankCb">
+        <property name="text">
+         <string>Treated Planks</string>
+        </property>
+       </widget>
+      </item>
+      <item row="58" column="5">
+       <widget class="QLabel" name="botHeadsTreeTileLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2" rowspan="2">
+       <widget class="QLabel" name="paperProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="6">
+       <widget class="QLabel" name="plankTreeTilecountLbl">
+        <property name="minimumSize">
+         <size>
+          <width>28</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="38" column="5">
+       <widget class="QLabel" name="biofuelPotatoesTileLbl">
+        <property name="text">
+         <string>Potato Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="3">
+       <widget class="QLabel" name="bookWorkersLbl">
+        <property name="text">
+         <string>Workers Per:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="47" column="6">
+       <widget class="QLabel" name="catalystExtractTreeTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="35" column="6">
+       <widget class="QLabel" name="biofuelCarrotsTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -1362,6 +1484,365 @@
         </property>
        </widget>
       </item>
+      <item row="19" column="5">
+       <widget class="QLabel" name="treatedPlankLumberMillLbl">
+        <property name="text">
+         <string>Lumber Mill Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="44" column="0">
+       <widget class="QCheckBox" name="catalystCb">
+        <property name="text">
+         <string>Catalyst</string>
+        </property>
+       </widget>
+      </item>
+      <item row="29" column="6">
+       <widget class="QLabel" name="scrapMetalLumberMillCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLabel" name="gearProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="55" column="5">
+       <widget class="QLabel" name="botHeadsFactoryLbl">
+        <property name="text">
+         <string>Bot Part Factory Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="5">
+       <widget class="QLabel" name="bookPaperMillLbl">
+        <property name="text">
+         <string>Paper Mill Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="64" column="5">
+       <widget class="QLabel" name="botLimbsTreeTileLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" rowspan="2">
+       <widget class="QCheckBox" name="planksCb">
+        <property name="text">
+         <string>Planks</string>
+        </property>
+       </widget>
+      </item>
+      <item row="53" column="6">
+       <widget class="QLabel" name="botChassisRefineryCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="59" column="6">
+       <widget class="QLabel" name="botHeadsSmelterCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="25" column="3">
+       <widget class="QLabel" name="metalBlockLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="6">
+       <widget class="QLabel" name="paperMillCountLbl">
+        <property name="minimumSize">
+         <size>
+          <width>28</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="33" column="6">
+       <widget class="QLabel" name="biofuelCarrotsPumpCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="28" column="5">
+       <widget class="QLabel" name="scrapMetalWoodWorkshopLbl">
+        <property name="text">
+         <string>Wood Workshop Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="49" column="0">
+       <widget class="QCheckBox" name="botChassisCb">
+        <property name="text">
+         <string>Bot Chassis</string>
+        </property>
+       </widget>
+      </item>
+      <item row="75" column="5">
+       <widget class="QLabel" name="antidoteDandelionTileLbl">
+        <property name="text">
+         <string>Dandelion Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="77" column="5">
+       <widget class="QLabel" name="antidotePaperMillLbl">
+        <property name="text">
+         <string>Paper Mill Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="6">
+       <widget class="QLabel" name="paperTreeTileCountLbl">
+        <property name="minimumSize">
+         <size>
+          <width>28</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="66" column="0">
+       <widget class="QCheckBox" name="botCb">
+        <property name="text">
+         <string>Bot</string>
+        </property>
+       </widget>
+      </item>
+      <item row="49" column="6">
+       <widget class="QLabel" name="botChassisFactoryCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="47" column="4">
+       <widget class="QComboBox" name="catalystExtractTreeSlct">
+        <property name="maxVisibleItems">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="57" column="6">
+       <widget class="QLabel" name="botHeadsLumberMillCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="20" column="5">
+       <widget class="QLabel" name="treatedPlankPineResinTileLbl">
+        <property name="text">
+         <string>Pine Resin Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="30" column="5">
+       <widget class="QLabel" name="scrapMetalTreeTileLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="61" column="5">
+       <widget class="QLabel" name="botLimbsFactoryLbl">
+        <property name="text">
+         <string>Bot Part Factory Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="15" column="6">
+       <widget class="QLabel" name="punchcardPaperMillCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="14" column="5">
+       <widget class="QLabel" name="punchcardPrintingPressLbl">
+        <property name="text">
+         <string>Printing Press Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="5">
+       <widget class="QLabel" name="bookTreeTileLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="18" column="5">
+       <widget class="QLabel" name="treatedPlankWorkshopLbl">
+        <property name="text">
+         <string>Wood Workshop Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <widget class="QCheckBox" name="bookCb">
+        <property name="text">
+         <string>Books</string>
+        </property>
+       </widget>
+      </item>
+      <item row="69" column="5">
+       <widget class="QLabel" name="explosivesFactoryLbl">
+        <property name="text">
+         <string>Explosives Factory Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="32" column="2">
+       <widget class="QLabel" name="biofuelCarrotsProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="44" column="2">
+       <widget class="QLabel" name="catalystProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="5">
+       <widget class="QLabel" name="gearWorkshopLbl">
+        <property name="text">
+         <string>Gear Workshop Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="78" column="4">
+       <widget class="QComboBox" name="antidoteTreeSlct">
+        <property name="maxVisibleItems">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
       <item row="21" column="3">
        <widget class="QLabel" name="treatedPlankLogTypeLbl">
         <property name="text">
@@ -1372,8 +1853,69 @@
         </property>
        </widget>
       </item>
-      <item row="10" column="6">
-       <widget class="QLabel" name="bookPrintigPressCountLbl">
+      <item row="28" column="2" rowspan="2">
+       <widget class="QLabel" name="scrapMetalProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="24" column="3">
+       <widget class="QLabel" name="metalBlockMineWorkersLbl">
+        <property name="text">
+         <string>Workers Per:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="32" column="0">
+       <widget class="QCheckBox" name="biofuelCarrotsCb">
+        <property name="text">
+         <string>Biofuel Carrots</string>
+        </property>
+       </widget>
+      </item>
+      <item row="51" column="3">
+       <widget class="QLabel" name="botChassisLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="4">
+       <widget class="QComboBox" name="paperTreeSlct">
+        <property name="maxVisibleItems">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="47" column="3">
+       <widget class="QLabel" name="catalystExtractLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="76" column="5">
+       <widget class="QLabel" name="antidoteBerryTileLbl">
+        <property name="text">
+         <string>Berry Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="20" column="6">
+       <widget class="QLabel" name="treatedPlankPineResinTileCountLbl">
         <property name="minimumSize">
          <size>
           <width>28</width>
@@ -1414,75 +1956,8 @@
         </property>
        </widget>
       </item>
-      <item row="29" column="6">
-       <widget class="QLabel" name="scrapMetalLumberMillCountLbl">
-        <property name="frameShape">
-         <enum>QFrame::Shape::Box</enum>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="23" column="6">
-       <widget class="QLabel" name="metalBlockSmelterCountLbl">
-        <property name="frameShape">
-         <enum>QFrame::Shape::Box</enum>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="4">
-       <widget class="QComboBox" name="gearTreeSlct">
-        <property name="maxVisibleItems">
-         <number>4</number>
-        </property>
-       </widget>
-      </item>
-      <item row="19" column="2" rowspan="2">
-       <widget class="QLabel" name="treatedPlankProdUnitLbl">
-        <property name="text">
-         <string>/Day</string>
-        </property>
-       </widget>
-      </item>
-      <item row="20" column="5">
-       <widget class="QLabel" name="treatedPlankPineResinTileLbl">
-        <property name="text">
-         <string>Pine Resin Tile Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="12" column="3">
-       <widget class="QLabel" name="bookLogTypeLbl">
-        <property name="text">
-         <string>Log Type:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="22" column="0" colspan="7">
-       <widget class="Line" name="line_16">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="21" column="6">
-       <widget class="QLabel" name="treatedPlankTreeTileCountLbl">
+      <item row="12" column="6">
+       <widget class="QLabel" name="bookTreeTileCountLbl">
         <property name="minimumSize">
          <size>
           <width>28</width>
@@ -1500,128 +1975,10 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="1" rowspan="2">
-       <widget class="QSpinBox" name="paperProdSb">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>999</number>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="6">
-       <widget class="QLabel" name="paperMillCountLbl">
-        <property name="minimumSize">
-         <size>
-          <width>28</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::Shape::Box</enum>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="12" column="4">
-       <widget class="QComboBox" name="bookTreeSlct">
-        <property name="maxVisibleItems">
-         <number>4</number>
-        </property>
-       </widget>
-      </item>
-      <item row="18" column="4">
-       <widget class="QSpinBox" name="treatedPlankWorkersSb">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>2</number>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="6">
-       <widget class="QLabel" name="gearTreeTileCount">
-        <property name="frameShape">
-         <enum>QFrame::Shape::Box</enum>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="24" column="3">
-       <widget class="QLabel" name="metalBlockMineWorkersLbl">
-        <property name="text">
-         <string>Workers Per:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="18" column="5">
-       <widget class="QLabel" name="treatedPlankWorkshopLbl">
-        <property name="text">
-         <string>Wood Workshop Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="25" column="5">
-       <widget class="QLabel" name="metalBlockTreeTileLbl">
-        <property name="text">
-         <string>Tile needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="6">
-       <widget class="QLabel" name="plankTreeTilecountLbl">
-        <property name="minimumSize">
-         <size>
-          <width>28</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::Shape::Box</enum>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="23" column="5">
-       <widget class="QLabel" name="metalblockSmelterLbl">
+      <item row="52" column="5">
+       <widget class="QLabel" name="botChassisSmelterLbl">
         <property name="text">
          <string>Smelter Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="3">
-       <widget class="QLabel" name="gearLogTypeLbl">
-        <property name="text">
-         <string>Log Type:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -1635,8 +1992,25 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QSpinBox" name="gearProdSb">
+      <item row="69" column="2">
+       <widget class="QLabel" name="explosivesProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="49" column="5">
+       <widget class="QLabel" name="botChassisFactoryLbl">
+        <property name="text">
+         <string>Bot Part Factory Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="66" column="1">
+       <widget class="QSpinBox" name="botProdSb">
         <property name="minimum">
          <number>1</number>
         </property>
@@ -1645,18 +2019,8 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="5">
-       <widget class="QLabel" name="gearWorkshopLbl">
-        <property name="text">
-         <string>Gear Workshop Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="15" column="6">
-       <widget class="QLabel" name="punchcardPaperMillCountLbl">
+      <item row="69" column="6">
+       <widget class="QLabel" name="explosivesFactoryCountLbl">
         <property name="frameShape">
          <enum>QFrame::Shape::Box</enum>
         </property>
@@ -1668,8 +2032,34 @@
         </property>
        </widget>
       </item>
-      <item row="19" column="1" rowspan="2">
-       <widget class="QSpinBox" name="treatedPlankProdSb">
+      <item row="67" column="6">
+       <widget class="QLabel" name="botPartFactoryCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="32" column="6">
+       <widget class="QLabel" name="biofuelCarrotsRefineryCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="61" column="1">
+       <widget class="QSpinBox" name="botLimbsProdSb">
         <property name="minimum">
          <number>1</number>
         </property>
@@ -1678,58 +2068,149 @@
         </property>
        </widget>
       </item>
-      <item row="8" column="3">
-       <widget class="QLabel" name="paperLogTypeLbl">
+      <item row="27" column="3">
+       <widget class="QLabel" name="scrapMetalMineWokersLbl">
         <property name="text">
-         <string>Log Type:</string>
+         <string>Workers Per:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="25" column="4">
-       <widget class="QComboBox" name="metalBlockTreeSlct">
+      <item row="46" column="6">
+       <widget class="QLabel" name="catalystCentrifugeCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="40" column="0">
+       <widget class="QCheckBox" name="biofuelSpadderdocksCb">
+        <property name="text">
+         <string>Biofuel Spadderdocks</string>
+        </property>
+       </widget>
+      </item>
+      <item row="44" column="6">
+       <widget class="QLabel" name="catalystRefineryCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="33" column="5">
+       <widget class="QLabel" name="biofuelCarrotsPumpLbl">
+        <property name="text">
+         <string>Pump Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="24" column="0">
+       <widget class="QCheckBox" name="metalBlockCb">
+        <property name="text">
+         <string>Metal Blocks</string>
+        </property>
+       </widget>
+      </item>
+      <item row="31" column="0" colspan="7">
+       <widget class="Line" name="line_18">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="49" column="1">
+       <widget class="QSpinBox" name="botChassisProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="71" column="0">
+       <widget class="QCheckBox" name="extractCb">
+        <property name="text">
+         <string>Extract</string>
+        </property>
+       </widget>
+      </item>
+      <item row="74" column="0">
+       <widget class="QCheckBox" name="antidoteCb">
+        <property name="text">
+         <string>Antidote</string>
+        </property>
+       </widget>
+      </item>
+      <item row="42" column="6">
+       <widget class="QLabel" name="biofuelSpadderdocksTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="70" column="0" colspan="7">
+       <widget class="Line" name="line_27">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="44" column="1">
+       <widget class="QSpinBox" name="catalystProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="77" column="6">
+       <widget class="QLabel" name="antidotePaperMillCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="30" column="4">
+       <widget class="QComboBox" name="scrapMetalTreeSlct">
         <property name="maxVisibleItems">
          <number>4</number>
         </property>
        </widget>
       </item>
-      <item row="8" column="5">
-       <widget class="QLabel" name="paperTreeTileLbl">
-        <property name="text">
-         <string>Tile Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="15" column="2">
-       <widget class="QLabel" name="punchcardProdUnitLbl">
-        <property name="text">
-         <string>/Day</string>
-        </property>
-       </widget>
-      </item>
-      <item row="24" column="1">
-       <widget class="QSpinBox" name="metalBlockProdSb">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>999</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="6">
-       <widget class="QLabel" name="plankLumberMillCountLbl">
-        <property name="minimumSize">
-         <size>
-          <width>28</width>
-          <height>20</height>
-         </size>
-        </property>
+      <item row="45" column="6">
+       <widget class="QLabel" name="catalystMapleSyrupTileCountLbl">
         <property name="frameShape">
          <enum>QFrame::Shape::Box</enum>
         </property>
@@ -1741,191 +2222,10 @@
         </property>
        </widget>
       </item>
-      <item row="30" column="5">
-       <widget class="QLabel" name="scrapMetalTreeTileLbl">
-        <property name="text">
-         <string>Tile Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="21" column="5">
-       <widget class="QLabel" name="treatedPlankTreeTileLbl">
-        <property name="text">
-         <string>Tile Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="24" column="4">
-       <widget class="QSpinBox" name="metalBlockMineWorkersSb">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>10</number>
-        </property>
-       </widget>
-      </item>
-      <item row="28" column="0" rowspan="2">
-       <widget class="QCheckBox" name="scrapMetalCb">
-        <property name="text">
-         <string>Scrap Metals</string>
-        </property>
-       </widget>
-      </item>
-      <item row="26" column="0" colspan="7">
-       <widget class="Line" name="line_17">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" rowspan="2">
-       <widget class="QSpinBox" name="plankProdSb">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>999</number>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="2" rowspan="2">
-       <widget class="QLabel" name="paperProdUnitLbl">
+      <item row="74" column="2">
+       <widget class="QLabel" name="antidoteProdUnitLbl">
         <property name="text">
          <string>/Day</string>
-        </property>
-       </widget>
-      </item>
-      <item row="16" column="3">
-       <widget class="QLabel" name="punchcardLogTypeLbl">
-        <property name="text">
-         <string>Log Type:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QLabel" name="plankLogTypeLbl">
-        <property name="text">
-         <string>Log Type:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="25" column="3">
-       <widget class="QLabel" name="metalBlockLogTypeLbl">
-        <property name="text">
-         <string>Log Type:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="5">
-       <widget class="QLabel" name="bookPaperMillLbl">
-        <property name="text">
-         <string>Paper Mill Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="5">
-       <widget class="QLabel" name="gearLumberMillLbl">
-        <property name="text">
-         <string>Lumber Mill Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="28" column="3">
-       <widget class="QLabel" name="scrapMetalWoodWorkshopWorkersLbl">
-        <property name="text">
-         <string>Workers Per:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QCheckBox" name="gearCb">
-        <property name="text">
-         <string>Gears</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="6">
-       <widget class="QLabel" name="gearWokshopCountLbl">
-        <property name="minimumSize">
-         <size>
-          <width>28</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::Shape::Box</enum>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="5">
-       <widget class="QLabel" name="gearTreeLbl">
-        <property name="text">
-         <string>Tile Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="15" column="0">
-       <widget class="QCheckBox" name="punshcardCb">
-        <property name="text">
-         <string>Punchcards</string>
-        </property>
-       </widget>
-      </item>
-      <item row="28" column="2" rowspan="2">
-       <widget class="QLabel" name="scrapMetalProdUnitLbl">
-        <property name="text">
-         <string>/Day</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="3">
-       <widget class="QLabel" name="bookWorkersLbl">
-        <property name="text">
-         <string>Workers Per:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0" colspan="7">
-       <widget class="Line" name="line_12">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
         </property>
        </widget>
       </item>
@@ -1933,63 +2233,6 @@
        <widget class="QLabel" name="punchcardTreeTileLbl">
         <property name="text">
          <string>Tile Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="24" column="2">
-       <widget class="QLabel" name="metalBlockProdUnitLbl">
-        <property name="text">
-         <string>/Day</string>
-        </property>
-       </widget>
-      </item>
-      <item row="28" column="6">
-       <widget class="QLabel" name="scrapMetalWoodWorkshopCountLbl">
-        <property name="frameShape">
-         <enum>QFrame::Shape::Box</enum>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="0">
-       <widget class="QCheckBox" name="bookCb">
-        <property name="text">
-         <string>Books</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="7">
-       <widget class="Line" name="line_9">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="24" column="6">
-       <widget class="QLabel" name="metalBlockScrapMineCountLbl">
-        <property name="frameShape">
-         <enum>QFrame::Shape::Box</enum>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="14" column="3">
-       <widget class="QLabel" name="punchcardWorkersLbl">
-        <property name="text">
-         <string>Worker Per:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -2006,20 +2249,94 @@
         </property>
        </widget>
       </item>
-      <item row="10" column="5">
-       <widget class="QLabel" name="bookPrintigPressLbl">
+      <item row="37" column="2">
+       <widget class="QLabel" name="biofuelPotatoesProdUnitLbl">
         <property name="text">
-         <string>Printing Press Needed:</string>
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="67" column="5">
+       <widget class="QLabel" name="botPartFactoryLbl">
+        <property name="text">
+         <string>Bot Part Factory Needed:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="9" column="0" colspan="7">
-       <widget class="Line" name="line_13">
+      <item row="48" column="0" colspan="7">
+       <widget class="Line" name="line_22">
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="58" column="4">
+       <widget class="QComboBox" name="botHeadsTreeSlct">
+        <property name="maxVisibleItems">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="64" column="6">
+       <widget class="QLabel" name="botLimbsTreeTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="37" column="5">
+       <widget class="QLabel" name="biofuelPotatoesRefineryLbl">
+        <property name="text">
+         <string>Refinery Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="55" column="0">
+       <widget class="QCheckBox" name="botHeadsCb">
+        <property name="text">
+         <string>Bot Heads</string>
+        </property>
+       </widget>
+      </item>
+      <item row="78" column="3">
+       <widget class="QLabel" name="antidoteLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="19" column="1" rowspan="2">
+       <widget class="QSpinBox" name="treatedPlankProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="1">
+       <widget class="QSpinBox" name="bookProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
         </property>
        </widget>
       </item>
@@ -2030,13 +2347,535 @@
         </property>
        </widget>
       </item>
-      <item row="24" column="5">
-       <widget class="QLabel" name="metalBlockMineLbl">
+      <item row="7" column="0" rowspan="2">
+       <widget class="QCheckBox" name="paperCb">
         <property name="text">
-         <string>Mine Needed:</string>
+         <string>Papers</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="gearProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="49" column="2">
+       <widget class="QLabel" name="botChassisProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="38" column="6">
+       <widget class="QLabel" name="biofuelPotatoesTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="52" column="6">
+       <widget class="QLabel" name="botChassisSmelterCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="66" column="5">
+       <widget class="QLabel" name="botAssemblerLbl">
+        <property name="text">
+         <string>Bot Assembler Needed:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="3">
+       <widget class="QLabel" name="paperLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="25" column="6">
+       <widget class="QLabel" name="metalBlockTreeTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="28" column="6">
+       <widget class="QLabel" name="scrapMetalWoodWorkshopCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="32" column="1">
+       <widget class="QSpinBox" name="biofuelCarrotsProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="6">
+       <widget class="QLabel" name="gearTreeTileCount">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="61" column="6">
+       <widget class="QLabel" name="botLimbsFactoryCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" colspan="7">
+       <widget class="Line" name="line_12">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="51" column="4">
+       <widget class="QComboBox" name="botChassisTreeSlct">
+        <property name="maxVisibleItems">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1" rowspan="2">
+       <widget class="QSpinBox" name="paperProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="4">
+       <widget class="QComboBox" name="gearTreeSlct">
+        <property name="maxVisibleItems">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="3">
+       <widget class="QLabel" name="bookLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="15" column="0">
+       <widget class="QCheckBox" name="punshcardCb">
+        <property name="text">
+         <string>Punchcards</string>
+        </property>
+       </widget>
+      </item>
+      <item row="26" column="0" colspan="7">
+       <widget class="Line" name="line_17">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="61" column="0">
+       <widget class="QCheckBox" name="botLimbsCb">
+        <property name="text">
+         <string>Bot Limbs</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="plankLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="76" column="6">
+       <widget class="QLabel" name="antidoteBerryTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="41" column="5">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="74" column="5">
+       <widget class="QLabel" name="antidoteHerbalistLbl">
+        <property name="text">
+         <string>Herbalist Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="gearCb">
+        <property name="text">
+         <string>Gears</string>
+        </property>
+       </widget>
+      </item>
+      <item row="60" column="0" colspan="7">
+       <widget class="Line" name="line_24">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="40" column="6">
+       <widget class="QLabel" name="biofuelSpadderdocksRefineryCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="56" column="6">
+       <widget class="QLabel" name="botHeadsGearWorkshopCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="24" column="2">
+       <widget class="QLabel" name="metalBlockProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="27" column="4">
+       <widget class="QSpinBox" name="scrapMetalMineWorkersSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="6">
+       <widget class="QLabel" name="gearLumberMillCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="46" column="5">
+       <widget class="QLabel" name="catalystCentrifugeLbl">
+        <property name="text">
+         <string>Centrifuge Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="28" column="0" rowspan="2">
+       <widget class="QCheckBox" name="scrapMetalCb">
+        <property name="text">
+         <string>Scrap Metals</string>
+        </property>
+       </widget>
+      </item>
+      <item row="66" column="6">
+       <widget class="QLabel" name="botAssemblerCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="63" column="5">
+       <widget class="QLabel" name="botLimbsLumberMillLbl">
+        <property name="text">
+         <string>Lumber Mill Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="5">
+       <widget class="QLabel" name="gearLumberMillLbl">
+        <property name="text">
+         <string>Lumber Mill Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="40" column="1">
+       <widget class="QSpinBox" name="biofuelSpadderdocksProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="14" column="6">
+       <widget class="QLabel" name="punchcardPrintingPressCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="17" column="0" colspan="7">
+       <widget class="Line" name="line_15">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="54" column="0" colspan="7">
+       <widget class="Line" name="line_23">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="78" column="5">
+       <widget class="QLabel" name="antidoteTreeTileLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="18" column="3">
+       <widget class="QLabel" name="treatedPlankWorkersLbl">
+        <property name="text">
+         <string>Workers Per:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="71" column="6">
+       <widget class="QLabel" name="extractCentrifugeCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="44" column="5">
+       <widget class="QLabel" name="catalystRefineryLbl">
+        <property name="text">
+         <string>Refinery Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="21" column="5">
+       <widget class="QLabel" name="treatedPlankTreeTileLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="57" column="5">
+       <widget class="QLabel" name="botHeadsLumberMillLbl">
+        <property name="text">
+         <string>Lumber Mill Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="50" column="5">
+       <widget class="QLabel" name="botChassisLumberMillLbl">
+        <property name="text">
+         <string>Lumber Mill Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="65" column="0" colspan="7">
+       <widget class="Line" name="line_25">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0" colspan="7">
+       <widget class="Line" name="line_13">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="55" column="2">
+       <widget class="QLabel" name="botHeadsProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="45" column="5">
+       <widget class="QLabel" name="catalystMapleSyrupTileLbl">
+        <property name="text">
+         <string>Maple Syrup Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="24" column="4">
+       <widget class="QSpinBox" name="metalBlockMineWorkersSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="14" column="3">
+       <widget class="QLabel" name="punchcardWorkersLbl">
+        <property name="text">
+         <string>Worker Per:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="7">
+       <widget class="Line" name="line_9">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="14" column="4">
+       <widget class="QSpinBox" name="puchcardWorkersSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>2</number>
         </property>
        </widget>
       </item>
@@ -2060,40 +2899,43 @@
         </property>
        </widget>
       </item>
-      <item row="14" column="5">
-       <widget class="QLabel" name="punchcardPrintingPressLbl">
+      <item row="18" column="4">
+       <widget class="QSpinBox" name="treatedPlankWorkersSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>2</number>
+        </property>
+       </widget>
+      </item>
+      <item row="23" column="5">
+       <widget class="QLabel" name="metalblockSmelterLbl">
         <property name="text">
-         <string>Printing Press Needed:</string>
+         <string>Smelter Needed:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="28" column="5">
-       <widget class="QLabel" name="scrapMetalWoodWorkshopLbl">
+      <item row="58" column="6">
+       <widget class="QLabel" name="botHeadsTreeTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
         <property name="text">
-         <string>Wood Workshop Needed:</string>
+         <string>0</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </item>
-      <item row="19" column="5">
-       <widget class="QLabel" name="treatedPlankLumberMillLbl">
+      <item row="0" column="5">
+       <widget class="QLabel" name="plankLumberMillLbl">
         <property name="text">
          <string>Lumber Mill Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="5">
-       <widget class="QLabel" name="paperMillLbl">
-        <property name="text">
-         <string>Paper Mill Needed:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -2110,24 +2952,45 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="5">
-       <widget class="QLabel" name="plankLumberMillLbl">
+      <item row="59" column="5">
+       <widget class="QLabel" name="botHeadsSmelterLbl">
         <property name="text">
-         <string>Lumber Mill Needed:</string>
+         <string>Smelter Needed:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="12" column="6">
-       <widget class="QLabel" name="bookTreeTileCountLbl">
-        <property name="minimumSize">
-         <size>
-          <width>28</width>
-          <height>20</height>
-         </size>
+      <item row="5" column="5">
+       <widget class="QLabel" name="gearTreeLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="71" column="3">
+       <widget class="QLabel" name="extractLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="43" column="0" colspan="7">
+       <widget class="Line" name="line_21">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="23" column="6">
+       <widget class="QLabel" name="metalBlockSmelterCountLbl">
         <property name="frameShape">
          <enum>QFrame::Shape::Box</enum>
         </property>
@@ -2139,14 +3002,42 @@
         </property>
        </widget>
       </item>
-      <item row="8" column="6">
-       <widget class="QLabel" name="paperTreeTileCountLbl">
-        <property name="minimumSize">
-         <size>
-          <width>28</width>
-          <height>20</height>
-         </size>
+      <item row="40" column="2">
+       <widget class="QLabel" name="biofuelSpadderdocksProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
         </property>
+       </widget>
+      </item>
+      <item row="56" column="5">
+       <widget class="QLabel" name="botHeadsGearWorkshopLbl">
+        <property name="text">
+         <string>Gear Workshop Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="4">
+       <widget class="QComboBox" name="bookTreeSlct">
+        <property name="maxVisibleItems">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="16" column="3">
+       <widget class="QLabel" name="punchcardLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="74" column="6">
+       <widget class="QLabel" name="antidoteHerbalistCountLbl">
         <property name="frameShape">
          <enum>QFrame::Shape::Box</enum>
         </property>
@@ -2158,8 +3049,8 @@
         </property>
        </widget>
       </item>
-      <item row="15" column="1">
-       <widget class="QSpinBox" name="punchcardProdSb">
+      <item row="24" column="1">
+       <widget class="QSpinBox" name="metalBlockProdSb">
         <property name="minimum">
          <number>1</number>
         </property>
@@ -2168,8 +3059,31 @@
         </property>
        </widget>
       </item>
-      <item row="25" column="6">
-       <widget class="QLabel" name="metalBlockTreeTileCountLbl">
+      <item row="64" column="4">
+       <widget class="QComboBox" name="botLimbsTreeSlct">
+        <property name="maxVisibleItems">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="62" column="5">
+       <widget class="QLabel" name="botLimbsGearWorkshopLbl">
+        <property name="text">
+         <string>Gear Workshop Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="21" column="6">
+       <widget class="QLabel" name="treatedPlankTreeTileCountLbl">
+        <property name="minimumSize">
+         <size>
+          <width>28</width>
+          <height>20</height>
+         </size>
+        </property>
         <property name="frameShape">
          <enum>QFrame::Shape::Box</enum>
         </property>
@@ -2181,38 +3095,22 @@
         </property>
        </widget>
       </item>
-      <item row="27" column="3">
-       <widget class="QLabel" name="scrapMetalMineWokersLbl">
+      <item row="66" column="2">
+       <widget class="QLabel" name="botProdUnitLbl">
         <property name="text">
-         <string>Workers Per:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         <string>/Day</string>
         </property>
        </widget>
       </item>
-      <item row="27" column="4">
-       <widget class="QSpinBox" name="scrapMetalMineWorkersSb">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>10</number>
-        </property>
-       </widget>
-      </item>
-      <item row="15" column="5">
-       <widget class="QLabel" name="punchcardPaperMillLbl">
+      <item row="69" column="0">
+       <widget class="QCheckBox" name="explosivesCb">
         <property name="text">
-         <string>Paper Mill Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         <string>Explosives</string>
         </property>
        </widget>
       </item>
-      <item row="14" column="6">
-       <widget class="QLabel" name="punchcardPrintingPressCountLbl">
+      <item row="50" column="6">
+       <widget class="QLabel" name="botChassisLumberMillCountLbl">
         <property name="frameShape">
          <enum>QFrame::Shape::Box</enum>
         </property>
@@ -2224,23 +3122,70 @@
         </property>
        </widget>
       </item>
-      <item row="18" column="3">
-       <widget class="QLabel" name="treatedPlankWorkersLbl">
+      <item row="53" column="5">
+       <widget class="QLabel" name="botChassisRefineryLbl">
         <property name="text">
-         <string>Workers Per:</string>
+         <string>Refinery Needed:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="28" column="4">
-       <widget class="QSpinBox" name="scrapMetalWoodWorkshopWorkersSb">
+      <item row="69" column="1">
+       <widget class="QSpinBox" name="explosivesProdSb">
         <property name="minimum">
          <number>1</number>
         </property>
         <property name="maximum">
-         <number>2</number>
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="15" column="2">
+       <widget class="QLabel" name="punchcardProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="25" column="5">
+       <widget class="QLabel" name="metalBlockTreeTileLbl">
+        <property name="text">
+         <string>Tile needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="30" column="6">
+       <widget class="QLabel" name="scrapMetalTreeTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="74" column="1">
+       <widget class="QSpinBox" name="antidoteProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="19" column="2" rowspan="2">
+       <widget class="QLabel" name="treatedPlankProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
         </property>
        </widget>
       </item>
@@ -2263,106 +3208,8 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="2">
-       <widget class="QLabel" name="gearProdUnitLbl">
-        <property name="text">
-         <string>/Day</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" rowspan="2">
-       <widget class="QCheckBox" name="planksCb">
-        <property name="text">
-         <string>Planks</string>
-        </property>
-       </widget>
-      </item>
-      <item row="24" column="0">
-       <widget class="QCheckBox" name="metalBlockCb">
-        <property name="text">
-         <string>Metal Blocks</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="4">
-       <widget class="QComboBox" name="paperTreeSlct">
-        <property name="maxVisibleItems">
-         <number>4</number>
-        </property>
-       </widget>
-      </item>
-      <item row="18" column="6">
-       <widget class="QLabel" name="treatedPlankWorkshopCountLbl">
-        <property name="frameShape">
-         <enum>QFrame::Shape::Box</enum>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="6">
-       <widget class="QLabel" name="gearLumberMillCountLbl">
-        <property name="frameShape">
-         <enum>QFrame::Shape::Box</enum>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="19" column="0" rowspan="2">
-       <widget class="QCheckBox" name="treatedPlankCb">
-        <property name="text">
-         <string>Treated Planks</string>
-        </property>
-       </widget>
-      </item>
-      <item row="14" column="4">
-       <widget class="QSpinBox" name="puchcardWorkersSb">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>2</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="5">
-       <widget class="QLabel" name="PlankTreeTileLbl">
-        <property name="text">
-         <string>Tile Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2" rowspan="2">
-       <widget class="QLabel" name="plankProdUnitLbl">
-        <property name="text">
-         <string>/Day</string>
-        </property>
-       </widget>
-      </item>
-      <item row="12" column="5">
-       <widget class="QLabel" name="bookTreeTileLbl">
-        <property name="text">
-         <string>Tile Needed:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="1">
-       <widget class="QSpinBox" name="bookProdSb">
+      <item row="55" column="1">
+       <widget class="QSpinBox" name="botHeadsProdSb">
         <property name="minimum">
          <number>1</number>
         </property>
@@ -2371,21 +3218,28 @@
         </property>
        </widget>
       </item>
-      <item row="17" column="0" colspan="7">
-       <widget class="Line" name="line_15">
+      <item row="51" column="6">
+       <widget class="QLabel" name="botChassisTreeTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="68" column="0" colspan="7">
+       <widget class="Line" name="line_26">
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
         </property>
        </widget>
       </item>
-      <item row="20" column="6">
-       <widget class="QLabel" name="treatedPlankPineResinTileCountLbl">
-        <property name="minimumSize">
-         <size>
-          <width>28</width>
-          <height>20</height>
-         </size>
-        </property>
+      <item row="63" column="6">
+       <widget class="QLabel" name="botLimbsLumberMillCountLbl">
         <property name="frameShape">
          <enum>QFrame::Shape::Box</enum>
         </property>
@@ -2397,8 +3251,18 @@
         </property>
        </widget>
       </item>
-      <item row="30" column="6">
-       <widget class="QLabel" name="scrapMetalTreeTileCountLbl">
+      <item row="64" column="3">
+       <widget class="QLabel" name="botLimbsLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="62" column="6">
+       <widget class="QLabel" name="botLimbsGearWorkshopCountLbl">
         <property name="frameShape">
          <enum>QFrame::Shape::Box</enum>
         </property>
@@ -2410,18 +3274,18 @@
         </property>
        </widget>
       </item>
-      <item row="28" column="1" rowspan="2">
-       <widget class="QSpinBox" name="scrapMetalProdSb">
-        <property name="minimum">
-         <number>1</number>
+      <item row="7" column="5">
+       <widget class="QLabel" name="paperMillLbl">
+        <property name="text">
+         <string>Paper Mill Needed:</string>
         </property>
-        <property name="maximum">
-         <number>999</number>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="19" column="6">
-       <widget class="QLabel" name="treatedPlankLumberMillCountLbl">
+      <item row="55" column="6">
+       <widget class="QLabel" name="botHeadsFactoryCountLbl">
         <property name="frameShape">
          <enum>QFrame::Shape::Box</enum>
         </property>
@@ -2443,6 +3307,135 @@
         </property>
        </widget>
       </item>
+      <item row="35" column="5">
+       <widget class="QLabel" name="biofuelCarrotsTileLbl">
+        <property name="text">
+         <string>Carrot Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="72" column="6">
+       <widget class="QLabel" name="extractTreeTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="19" column="6">
+       <widget class="QLabel" name="treatedPlankLumberMillCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="39" column="0" colspan="7">
+       <widget class="Line" name="line_20">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="24" column="6">
+       <widget class="QLabel" name="metalBlockScrapMineCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="6">
+       <widget class="QLabel" name="bookPrintigPressCountLbl">
+        <property name="minimumSize">
+         <size>
+          <width>28</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="28" column="4">
+       <widget class="QSpinBox" name="scrapMetalWoodWorkshopWorkersSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>2</number>
+        </property>
+       </widget>
+      </item>
+      <item row="61" column="2">
+       <widget class="QLabel" name="botLimbsProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="3">
+       <widget class="QLabel" name="gearLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="42" column="5">
+       <widget class="QLabel" name="biofuelSpadderdocksTileLbl">
+        <property name="text">
+         <string>Spadderdock Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="28" column="3">
+       <widget class="QLabel" name="scrapMetalWoodWorkshopWorkersLbl">
+        <property name="text">
+         <string>Workers Per:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2" rowspan="2">
+       <widget class="QLabel" name="plankProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
       <item row="11" column="2">
        <widget class="QLabel" name="bookProdUnitLbl">
         <property name="text">
@@ -2450,17 +3443,329 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="0" rowspan="2">
-       <widget class="QCheckBox" name="paperCb">
+      <item row="10" column="5">
+       <widget class="QLabel" name="bookPrintigPressLbl">
         <property name="text">
-         <string>Papers</string>
+         <string>Printing Press Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="31" column="0" colspan="7">
-       <widget class="Line" name="line_18">
+      <item row="36" column="0" colspan="7">
+       <widget class="Line" name="line_19">
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="24" column="5">
+       <widget class="QLabel" name="metalBlockMineLbl">
+        <property name="text">
+         <string>Mine Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="37" column="0">
+       <widget class="QCheckBox" name="biofuelPotatoesCb">
+        <property name="text">
+         <string>Biofuel Potatoes</string>
+        </property>
+       </widget>
+      </item>
+      <item row="22" column="0" colspan="7">
+       <widget class="Line" name="line_16">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QLabel" name="plankLumberMillCountLbl">
+        <property name="minimumSize">
+         <size>
+          <width>28</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="37" column="1">
+       <widget class="QSpinBox" name="biofuelPotatoesProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="58" column="3">
+       <widget class="QLabel" name="botHeadsLogTypeLbl">
+        <property name="text">
+         <string>Log Type:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" rowspan="2">
+       <widget class="QSpinBox" name="plankProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QLabel" name="PlankTreeTileLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="40" column="5">
+       <widget class="QLabel" name="biofuelSpadderdocksRefineryLbl">
+        <property name="text">
+         <string>Refinery Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="73" column="0" colspan="7">
+       <widget class="Line" name="line_28">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="37" column="6">
+       <widget class="QLabel" name="biofuelPotatoesRefineryCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="28" column="1" rowspan="2">
+       <widget class="QSpinBox" name="scrapMetalProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="51" column="5">
+       <widget class="QLabel" name="botChassisTreeTileLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="71" column="4">
+       <widget class="QComboBox" name="extractTreeSlct">
+        <property name="maxVisibleItems">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="18" column="6">
+       <widget class="QLabel" name="treatedPlankWorkshopCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="15" column="5">
+       <widget class="QLabel" name="punchcardPaperMillLbl">
+        <property name="text">
+         <string>Paper Mill Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="71" column="2">
+       <widget class="QLabel" name="extractProdUnitLbl">
+        <property name="text">
+         <string>/Day</string>
+        </property>
+       </widget>
+      </item>
+      <item row="72" column="5">
+       <widget class="QLabel" name="extractTreeTileLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="15" column="1">
+       <widget class="QSpinBox" name="punchcardProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="47" column="5">
+       <widget class="QLabel" name="catalystExtractTreeTileLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="75" column="6">
+       <widget class="QLabel" name="antidoteDandelionTileCountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="6">
+       <widget class="QLabel" name="gearWokshopCountLbl">
+        <property name="minimumSize">
+         <size>
+          <width>28</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="71" column="1">
+       <widget class="QSpinBox" name="extractProdSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="5">
+       <widget class="QLabel" name="paperTreeTileLbl">
+        <property name="text">
+         <string>Tile Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="34" column="5">
+       <widget class="QLabel" name="biofuelCarrotsLargePumpLbl">
+        <property name="text">
+         <string>Large Pump Needed:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="34" column="6">
+       <widget class="QLabel" name="biofuelCarrotsLargePumpcountLbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::Box</enum>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="34" column="3">
+       <widget class="QLabel" name="biofuleCarrotsLargePumpWorkersLbl">
+        <property name="text">
+         <string>Workers Per:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="34" column="4">
+       <widget class="QSpinBox" name="biofuelCarrotsLargePumpWorkersSb">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>3</number>
+        </property>
+       </widget>
+      </item>
+      <item row="33" column="2" alignment="Qt::AlignmentFlag::AlignRight">
+       <widget class="QRadioButton" name="biofuelCarrotsPumpRb">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="34" column="2" alignment="Qt::AlignmentFlag::AlignRight">
+       <widget class="QRadioButton" name="biofuelCarrotsLargePumpRb">
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
